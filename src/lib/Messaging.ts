@@ -25,7 +25,12 @@ enum MessagingType {
 }
 
 /**
- * A class that provides ability to send and receive window messages.
+ * A class that provides ability to interact with the `window.postMessage` API.
+ *
+ * Under the hood, Remixer is appending an HTML iFrame to the body of a client's
+ * page. The main purpose of this Message class is to simply wrap the
+ * `window.postMessage` API to simplify passing messages between the root window
+ * and the Remixer iFrame.
  */
 export class Messaging {
 
