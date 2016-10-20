@@ -21,7 +21,7 @@ import { Variable, VariableListType, VariableCallback } from "./Variable";
 /**
  * Interface for a class that represents a type of Variable for color values.
  * @interface
- * @extends VariableType
+ * @extends VariableListType
  */
 interface ColorVariableType extends VariableListType {
   defaultValue: string;
