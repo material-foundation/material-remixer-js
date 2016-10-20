@@ -1,0 +1,7 @@
+.page-content { padding: 40px; }
+
+#box {
+	width: 200px;
+	height: 200px;
+	background-color: lightGray;
+}
