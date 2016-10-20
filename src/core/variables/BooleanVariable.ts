@@ -41,8 +41,7 @@ export class BooleanVariable extends Variable implements BooleanVariableType {
    * @constructor
    * @param  {string}           key          A unique key for the Variable.
    * @param  {boolean}          defaultValue The default value.
-   * @param  {VariableCallback} callback     The callback method to be invoked
-   *                                         when the Variable is updated.
+   * @param  {VariableCallback} callback     The callback to invoke when updated.
    * @return {BooleanVariable}
    */
   constructor(key: string, defaultValue: boolean, callback?: VariableCallback) {
@@ -56,8 +55,8 @@ export class BooleanVariable extends Variable implements BooleanVariableType {
    */
   serialize(): SerializableData {
     let data = super.serialize();
-    data.defaultValue = this.defaultValue ? "true" : "false";
-    data.selectedValue = this.selectedValue ? "true" : "false";
+    data.defaultValue = this.defaultValue;
+    data.selectedValue = this.selectedValue;
     return data;
   }
 
@@ -68,7 +67,6 @@ export class BooleanVariable extends Variable implements BooleanVariableType {
    * @return {BooleanVariable}       A new initialized BooleanVariable.
    */
   static deserialize(data: SerializableData): BooleanVariable {
-    let selectedValue: boolean = (data.selectedValue === "true");
-    return new BooleanVariable(data.key, selectedValue);
+    return new BooleanVariable(data.key, data.selectedValue);
   }
 }

@@ -46,14 +46,14 @@ export class RangeVariable extends Variable implements RangeVariableType {
    * @param  {number}           defaultValue The default value.
    * @param  {number}           minValue     The minimum value allowed.
    * @param  {number}           maxValue     The maximum value allowed.
-   * @param  {VariableCallback} callback     The callback method to be invoked
-   *                                         when the Variable is updated.
+   * @param  {VariableCallback} callback     The callback to invoke when updated.
    * @return {RangeVariable}
    */
-  constructor(key: string, defaultValue: number, minValue: number, maxValue: number, callback?: VariableCallback) {
+  constructor(key: string, defaultValue: number, minValue: number, maxValue: number, increment: number, callback?: VariableCallback) {
     super(key, CONST.VARIABLE_TYPE_RANGE, defaultValue, callback);
     this.minValue = minValue;
     this.maxValue = maxValue;
+    this.increment = increment;
   }
 
   /**
@@ -75,7 +75,7 @@ export class RangeVariable extends Variable implements RangeVariableType {
    * @override
    * @type {number}
    */
-  increment: number = 0.1;
+  increment: number;
 
   /**
    * Returns a serialized representation of this object.
@@ -85,6 +85,9 @@ export class RangeVariable extends Variable implements RangeVariableType {
   serialize(): SerializableData {
     let data = super.serialize();
     data.selectedValue = this.selectedValue.toString();
+    data.minValue = this.minValue;
+    data.maxValue = this.maxValue;
+    data.increment = this.increment;
     return data;
   }
 
@@ -98,6 +101,7 @@ export class RangeVariable extends Variable implements RangeVariableType {
     let selectedValue: number = parseFloat(data.selectedValue);
     let minValue: number = data.minValue;
     let maxValue: number = data.maxValue;
-    return new RangeVariable(data.key, selectedValue, minValue, maxValue);
+    let increment: number = data.increment;
+    return new RangeVariable(data.key, selectedValue, minValue, maxValue, increment);
   }
 }

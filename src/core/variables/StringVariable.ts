@@ -16,14 +16,14 @@
 
 import { Constants as CONST } from "../../lib/Constants";
 import { SerializableData } from "../../lib/LocalStorage";
-import { Variable, VariableType, VariableCallback } from "./Variable";
+import { Variable, VariableListType, VariableCallback } from "./Variable";
 
 /**
  * Interface for a class that represents a type of Variable for string values.
  * @interface
  * @extends VariableType
  */
-interface StringVariableType extends VariableType {
+interface StringVariableType extends VariableListType {
   defaultValue: string;
   selectedValue: string;
   possibleValues?: Array<string>;
@@ -43,8 +43,7 @@ export class StringVariable extends Variable implements StringVariableType {
    * @param  {string}           key            [A unique key for the Variable.
    * @param  {string}           defaultValue   The default value.
    * @param  {Array<string>}    possibleValues The array of possible values.
-   * @param  {VariableCallback} callback       The callback method to be invoked
-   *                                           when the Variable is updated.
+   * @param  {VariableCallback} callback       The callback to invoke when updated.
    * @return {StringVariable}
    */
   constructor(key: string, defaultValue: string, possibleValues?: Array<string>, callback?: VariableCallback) {
@@ -57,7 +56,7 @@ export class StringVariable extends Variable implements StringVariableType {
    * @override
    * @type {Array<string>}
    */
-  possibleValues: Array<string>;
+  possibleValues?: Array<string>;
 
   /**
    * Returns a serialized representation of this object.
@@ -77,7 +76,7 @@ export class StringVariable extends Variable implements StringVariableType {
    * @param  {SerializableData} data The serialized data.
    * @return {StringVariable}        A new initialized StringVariable.
    */
-  static deserialize(data: SerializableData): Variable {
-    return new StringVariable(data.key, data.selectedValue);
+  static deserialize(data: SerializableData): StringVariable {
+    return new StringVariable(data.key, data.selectedValue, data.possibleValues);
   }
 }

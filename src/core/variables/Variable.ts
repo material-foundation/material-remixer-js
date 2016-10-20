@@ -28,8 +28,15 @@ export interface VariableType {
   dataType: string;
   defaultValue: any;
   selectedValue: any;
-  possibleValues?: Array<any>;
   callbacks?: Array<VariableCallback>;
+}
+
+/**
+ * Interface for a class that represents a type a Variable with possible values.
+ * @interface
+ */
+export interface VariableListType extends VariableType {
+  possibleValues?: Array<any>;
 }
 
 /**
@@ -61,8 +68,7 @@ export class Variable implements VariableType {
    * @param  {string}           key          A unique key for the Variable.
    * @param  {string}           dataType     The data type of this Variable.
    * @param  {any}              defaultValue The default value.
-   * @param  {VariableCallback} callback     The callback method to be invoked
-   *                                         when the Variable is updated.
+   * @param  {VariableCallback} callback     The callback to invoke when updated.
    * @return {Variable}
    */
   constructor(key: string, dataType: string, defaultValue: any, callback?: VariableCallback) {
@@ -119,18 +125,14 @@ export class Variable implements VariableType {
   }
 
   set selectedValue(value: any) {
+    // TODO(cjcox): For cloud mode, determine when to save to avoid multiple
+    // calls when using slider, etc.
     this._selectedValue = value;
     this.save();
     if (this._initialized) {
       this.executeCallbacks();
     }
   }
-
-  /**
-   * The array of possible values for this Variable.
-   * @type {Array<any>}
-   */
-  possibleValues: Array<any>;
 
   private _callbacks: Array<VariableCallback> = new Array<VariableCallback>();
 

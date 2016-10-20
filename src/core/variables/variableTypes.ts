@@ -14,7 +14,7 @@
  *  under the License.
  */
 
-/** Convenience export all variable classes. */
+/** Convenience export of all variable classes. */
 export * from "./BooleanVariable"
 export * from "./ColorVariable";
 export * from "./NumberVariable";

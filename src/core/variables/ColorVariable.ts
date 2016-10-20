@@ -16,14 +16,14 @@
 
 import { Constants as CONST } from "../../lib/Constants";
 import { SerializableData } from "../../lib/LocalStorage";
-import { Variable, VariableType, VariableCallback } from "./Variable";
+import { Variable, VariableListType, VariableCallback } from "./Variable";
 
 /**
  * Interface for a class that represents a type of Variable for color values.
  * @interface
  * @extends VariableType
  */
-interface ColorVariableType extends VariableType {
+interface ColorVariableType extends VariableListType {
   defaultValue: string;
   selectedValue: string;
   possibleValues?: Array<string>;
@@ -43,12 +43,10 @@ export class ColorVariable extends Variable implements ColorVariableType {
    * @param  {string}           key            A unique key for the Variable.
    * @param  {string}           defaultValue   The default value.
    * @param  {Array<string>}    possibleValues The array of possible values.
-   * @param  {VariableCallback} callback       The callback method to be invoked
-   *                                           when the Variable is updated.
+   * @param  {VariableCallback} callback       The callback to invoke when updated.
    * @return {ColorVariable}
    */
-  constructor(key: string, defaultValue: string, possibleValues?: Array<string>,
-      callback?: VariableCallback) {
+  constructor(key: string, defaultValue: string, possibleValues?: Array<string>, callback?: VariableCallback) {
     super(key, CONST.VARIABLE_TYPE_COLOR, defaultValue, callback);
     this.possibleValues = possibleValues;
   }
@@ -58,7 +56,7 @@ export class ColorVariable extends Variable implements ColorVariableType {
    * @override
    * @type {Array<string>}
    */
-  possibleValues: Array<string>;
+  possibleValues?: Array<string>;
 
   /**
    * Returns a serialized representation of this object.
@@ -79,6 +77,6 @@ export class ColorVariable extends Variable implements ColorVariableType {
    * @return {ColorVariable}         A new initialized ColorVariable.
    */
   static deserialize(data: SerializableData): Variable {
-    return new ColorVariable(data.key, data.selectedValue);
+    return new ColorVariable(data.key, data.selectedValue, data.possibleValues);
   }
 }

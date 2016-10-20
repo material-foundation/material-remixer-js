@@ -16,14 +16,14 @@
 
 import { Constants as CONST } from "../../lib/Constants";
 import { SerializableData } from "../../lib/LocalStorage";
-import { Variable, VariableType, VariableCallback } from "./Variable";
+import { Variable, VariableListType, VariableCallback } from "./Variable";
 
 /**
  * Interface for a class that represents a type of Variable for number values.
  * @interface
  * @extends VariableType
  */
-interface NumberVariableType extends VariableType {
+interface NumberVariableType extends VariableListType {
   defaultValue: number;
   selectedValue: number;
   possibleValues?: Array<number>;
@@ -43,8 +43,7 @@ export class NumberVariable extends Variable implements NumberVariableType {
    * @param  {string}           key            A unique key for the Variable.
    * @param  {number}           defaultValue   The default value.
    * @param  {Array<number>}    possibleValues The array of possible values.
-   * @param  {VariableCallback} callback       The callback method to be invoked
-   *                                           when the Variable is updated.
+   * @param  {VariableCallback} callback       The callback to invoke when updated.
    * @return {[NumberVariable]}
    */
   constructor(key: string, defaultValue: number, possibleValues?: Array<number>, callback?: VariableCallback) {
@@ -57,7 +56,7 @@ export class NumberVariable extends Variable implements NumberVariableType {
    * @override
    * @type {Array<number>}
    */
-  possibleValues: Array<number>;
+  possibleValues?: Array<number>;
 
   /**
    * Returns a serialized representation of this object.
@@ -78,6 +77,6 @@ export class NumberVariable extends Variable implements NumberVariableType {
    * @return {NumberVariable}        A new initialized NumberVariable.
    */
   static deserialize(data: SerializableData): Variable {
-    return new NumberVariable(data.key, data.selectedValue);
+    return new NumberVariable(data.key, data.selectedValue, data.possibleValues);
   }
 }
