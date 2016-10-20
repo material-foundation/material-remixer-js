@@ -31,6 +31,7 @@ export interface SerializableData {
   possibleValues?: Array<any>;
   minValue?: number;
   maxValue?: number;
+  increment?: number;
 }
 
 /**
