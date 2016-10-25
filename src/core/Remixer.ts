@@ -120,12 +120,13 @@ class Remixer {
    * @param  {number}             defaultValue The initial default value of the variable.
    * @param  {number}             minValue     The allowed minimum value of the variable.
    * @param  {number}             maxValue     The allowed maximum value of the variable.
+   * @param  {number}             increment    The amount to increment the value.
    * @param  {VariableCallback}   callback     The callback method to be invoked
    *                                           when the Variable is updated.
    * @return {RangeVariable}
    */
-  static addRangeVariable(key: string, defaultValue: number, minValue: number, maxValue: number, callback?: VariableCallback): vars.RangeVariable {
-    let variable = new vars.RangeVariable(key, defaultValue, minValue, maxValue, callback);
+  static addRangeVariable(key: string, defaultValue: number, minValue: number, maxValue: number, increment: number, callback?: VariableCallback): vars.RangeVariable {
+    let variable = new vars.RangeVariable(key, defaultValue, minValue, maxValue, increment, callback);
     this.addVariable(variable);
     return variable;
   }
