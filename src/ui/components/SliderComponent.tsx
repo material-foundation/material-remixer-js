@@ -33,18 +33,6 @@ export class SliderComponent extends Component {
     return `rmx-slider-${this.props.variable.key}`;
   }
 
-  /** @override */
-  componentWillReceiveProps() {
-    // We will manually need to update the MDL component here to new state
-    // when receiving new props.
-    let selectedValue = this.props.variable.selectedValue;
-    let component = this.refs[this.id]["MaterialSlider"];
-    this.state = {selectedValue: selectedValue};
-    if (component) {
-      component.change(selectedValue);
-    }
-  }
-
   /**
    * Handles a change event on this component.
    * @param {Event} event The change event.

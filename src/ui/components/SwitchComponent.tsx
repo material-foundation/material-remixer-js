@@ -29,18 +29,6 @@ export class SwitchComponent extends Component {
     return `rmx-switch-${this.props.variable.key}`;
   }
 
-  /** @override */
-  componentWillReceiveProps() {
-    // We will manually need to update the MDL component here to new state
-    // when receiving new props.
-    let selectedValue = this.props.variable.selectedValue;
-    let component = this.refs[this.id]["MaterialSwitch"];
-    this.state = {selectedValue: selectedValue};
-    if (component) {
-      selectedValue ? component.on() : component.off();
-    }
-  }
-
   /**
    * Handles a click event on this component.
    * @param {Event} event The click event.

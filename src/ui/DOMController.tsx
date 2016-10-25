@@ -25,7 +25,7 @@ import { Variable } from "../core/variables/Variable";
 import { remixer } from "../core/Remixer";
 
 /**
- * Interface for the properties assigned to a React class.
+ * Interface for the properties assigned to the DOMController component.
  * @interface
  */
 interface ControllerProps {
@@ -33,19 +33,26 @@ interface ControllerProps {
 }
 
 /**
- * Interface for the state of a React class.
+ * Interface for the state of the DOMController component.
  * @interface
  */
 interface ControllerState {
-  /** An array of Variables. */
-  variables: Array<Variable>;
+  /**
+   * The DOMController will render a control component for each of the variables
+   * of this array.
+   * @type {Array<Variable>}
+   */
+  variables?: Array<Variable>;
 
-  /** The current route to render. */
-  route: Route;
+  /**
+   * The current route to render.
+   * @type {Route}
+   */
+  route?: Route;
 }
 
 /**
- * Avaialble routes to render.
+ * Available routes to render.
  */
 enum Route {
   Variables,
@@ -54,9 +61,9 @@ enum Route {
 
 /**
  * A React component class that renders an MDL-styled card containing child
- * components detemrined by its current Route.
+ * components determined by its current Route.
  *
- * As determined by the Route, the card content can be either:
+ * Depending on the Route, the card content can be either:
  *   1) The overlay with configurable control components per assigned Variables.
  *   2) An options page used to configure Remixer session properties.
  *
@@ -99,7 +106,7 @@ export class DOMController extends React.Component<ControllerProps, ControllerSt
    */
   onMessageReceived(event: MessageEvent): void {
     if (event.data === Messaging.type.ToggleVisibility) {
-      this.toggleVisiblity();
+      this.toggleVisibility();
     }
   }
 
@@ -107,7 +114,7 @@ export class DOMController extends React.Component<ControllerProps, ControllerSt
   addKeyListener(): void {
     document.addEventListener(CONST.KEY_EVENT_DOWN, (e: KeyboardEvent) => {
       if (e.keyCode === CONST.KEY_CODE_ESC) {
-        this.toggleVisiblity();
+        this.toggleVisibility();
       }
     });
   }
@@ -118,7 +125,7 @@ export class DOMController extends React.Component<ControllerProps, ControllerSt
   }
 
   /** Toggles the Remixer overlay visibility. */
-  toggleVisiblity() {
+  toggleVisibility() {
     this.props.wrapperElement.classList.toggle(CONST.CSS_CLASS_VISIBLE);
   }
 
@@ -127,8 +134,12 @@ export class DOMController extends React.Component<ControllerProps, ControllerSt
    * @param {Event} event The route to update to.
    */
   updateRoute(event: Event) {
-    let newRoute: Route = (this.state.route === Route.Options) ? Route.Variables : Route.Options;
-    this.setState({variables: this.state.variables, route: newRoute});
+    const currentRoute = this.state.route;
+    this.setState({
+        route: currentRoute === Route.Variables
+          ? Route.Options
+          : Route.Variables
+    });
   }
 
   /**

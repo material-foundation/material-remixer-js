@@ -28,7 +28,7 @@ import { Variable, VariableListType } from "../../core/variables/Variable";
  * Interface for the properties of a Component class.
  * @interface
  */
-export interface ComponentProps { variable: Variable | Variable; }
+export interface ComponentProps { variable: Variable; }
 
 /**
  * A React component class that generates control components.

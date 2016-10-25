@@ -34,13 +34,6 @@ export class TextFieldComponent extends Component {
     return `rmx-textfield-${this.props.variable.key}`;
   }
 
-  /** @override */
-  componentWillReceiveProps() {
-    // We will manually need to update the MDL component here to new state
-    // when receiving new props.
-    this.state = {selectedValue: this.props.variable.selectedValue};
-  }
-
   /**
    * Handles a change event on this component.
    * @param {Event} event The change event.

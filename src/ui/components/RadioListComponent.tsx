@@ -29,16 +29,6 @@ export class RadioListComponent extends Component {
     return `rmx-radio-${this.props.variable.key}`;
   }
 
-  /** @override */
-  componentWillReceiveProps() {
-    // We will manually need to update the MDL component here to new state
-    // when receiving new props.
-    let selectedValue = this.props.variable.selectedValue;
-    let component = this.refs[this.id + "-" + selectedValue]["MaterialRadio"];
-    this.state = {selectedValue: selectedValue};
-    component.check();
-  }
-
   /**
    * Handles a change event on this component.
    * @param {Event} event The change event.

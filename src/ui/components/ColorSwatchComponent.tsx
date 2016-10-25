@@ -32,13 +32,6 @@ export class ColorSwatchComponent extends Component {
     return `rmx-swatch-${this.props.variable.key}`;
   }
 
-  /** @override */
-  componentWillReceiveProps() {
-    // We will manually need to update the MDL component here to new state
-    // when receiving new props.
-    this.state = {selectedValue: this.props.variable.selectedValue};
-  }
-
   /**
    * Handles a click event on this component.
    * @param {string} value The new selectedValue.
