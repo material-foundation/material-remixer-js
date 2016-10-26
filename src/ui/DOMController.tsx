@@ -147,6 +147,7 @@ export class DOMController extends React.Component<ControllerProps, ControllerSt
    * @override
    */
   render() {
+    const CurrentRoute = this.state.route === Route.Options ? Options : Overlay;
     return (
       <div className="rmx-card-wide mdl-card mdl-shadow--6dp">
         <div className="mdl-card__title" ref="myInput">
@@ -160,15 +161,7 @@ export class DOMController extends React.Component<ControllerProps, ControllerSt
           </button>
         </div>
         <div className="mdl-card__supporting-text mdl-card__actions mdl-card--border">
-          {(() => {
-            switch (this.state.route) {
-              case Route.Variables:
-                return <Overlay variables={this.state.variables} />;
-              case Route.Options:
-                return <Options variables={this.state.variables} />;
-             }
-            })()
-           }
+          <CurrentRoute variables={this.state.variables} />
         </div>
       </div>
     );

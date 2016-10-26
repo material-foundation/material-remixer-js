@@ -17,6 +17,29 @@
 import * as React from "react";
 import { Component } from "./Component";
 
+interface ColorSwatchProps {
+  color: string;
+  isSelected: boolean;
+  onClick: any;
+}
+
+/**
+ * A React component class that renders a single color swatch.
+ * @class
+ * @extends React.Component
+ */
+class ColorSwatch extends React.Component<ColorSwatchProps, void>  {
+  render() {
+    let { color, isSelected } = this.props;
+    return (
+      <div className="rmx-color-item" style={{backgroundColor: color}}
+        value={color} onClick={this.props.onClick}>
+        { isSelected ? <i className="material-icons">check</i> : "" }
+      </div>
+    );
+  }
+}
+
 /**
  * A React component class that renders a color swatch picker component.
  * @class
@@ -33,17 +56,17 @@ export class ColorSwatchComponent extends Component {
   }
 
   /**
-   * Handles a click event on this component.
-   * @param {string} value The new selectedValue.
+   * Handles updating the selected color when swatch is selected.
+   * @param {string} value The new selected color value.
    */
-  handleClick(value: string) {
-    this.updateSelectedValue(value);
+  updateSelectedColor(color: string) {
+    this.updateSelectedValue(color);
   }
 
   /** @override */
   render() {
     let possibleValues: Array<string> = this.props.variable["possibleValues"];
-    let selectedValue: string = this.state.selectedValue;
+    let { selectedValue } = this.state;
 
     // Ensure selected value is choosable from possible values.
     if (possibleValues.indexOf(selectedValue) === -1) {
@@ -53,11 +76,9 @@ export class ColorSwatchComponent extends Component {
     return (
       <div>
         {possibleValues.map((value: string, i: number) => (
-          <div className="rmx-color-item" style={ {backgroundColor: value} }
-            value={value} key={this.id + "-" + i} ref={value}
-            onClick={this.handleClick.bind(this, value)} data={value}>
-              { (selectedValue === value) ? <i className="material-icons">check</i> : "" }
-          </div>
+          <ColorSwatch color={value} key={value}
+            isSelected={selectedValue === value}
+            onClick={this.updateSelectedColor.bind(this, value)} />
         ))}
       </div>
     );
