@@ -21,12 +21,10 @@ export class Constants {
   static KEY_EVENT_DOWN        = "keydown";
   static KEY_CODE_ESC          = 27;
 
-  /** CSS Classes. */
-  static CSS_CLASS_VISIBLE     = "visible";
-
   /** HTML IDs. */
   static ID_OVERLAY_FRAME      = "rmx-overlay-frame";
   static ID_OVERLAY_WRAPPER    = "rmx-overlay-wrapper";
+  static ID_CONTROL_SWITCH     = "rmx-switch";
 
   /** Remixer storage key. */
   static STORAGE_KEY_REMIXER   = "__Remixer__";
@@ -38,3 +36,11 @@ export class Constants {
   static VARIABLE_TYPE_RANGE   = "range";
   static VARIABLE_TYPE_STRING  = "string";
 }
+
+export const CSS = {
+  VISIBLE:        "visible",
+  MDL_LIST_ITEM:  "mdl-list__item",
+  MDL_PRIMARY:    "mdl-list__item-primary-content",
+  MDL_SECONDARY:  "mdl-list__item-secondary-content",
+  RMX_SWITCH:     "rmx-switch"
+};

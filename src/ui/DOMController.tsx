@@ -17,7 +17,7 @@
 import "./overlay/styles.less";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { Constants as CONST } from "../lib/Constants";
+import { Constants as CONST, CSS } from "../lib/Constants";
 import { Messaging } from "../lib/Messaging";
 import { Options } from "./overlay/Options";
 import { Overlay } from "./overlay/Overlay";
@@ -72,15 +72,10 @@ enum Route {
  */
 export class DOMController extends React.Component<ControllerProps, ControllerState> {
 
-  /**
-   * Default constructor.
-   * @constructor
-   * @type {DOMController}
-   */
-  constructor(props: ControllerProps) {
-    super(props);
-    this.state = {variables: remixer.attachedInstance.variablesArray, route: Route.Variables};
-  }
+  state = {
+    variables: remixer.attachedInstance.variablesArray,
+    route: Route.Variables
+  };
 
   /**
    * The component will mount. Lets register for messaging and key events.
@@ -126,7 +121,7 @@ export class DOMController extends React.Component<ControllerProps, ControllerSt
 
   /** Toggles the Remixer overlay visibility. */
   toggleVisibility() {
-    this.props.wrapperElement.classList.toggle(CONST.CSS_CLASS_VISIBLE);
+    this.props.wrapperElement.classList.toggle(CSS.VISIBLE);
   }
 
   /**
@@ -161,7 +156,8 @@ export class DOMController extends React.Component<ControllerProps, ControllerSt
           </button>
         </div>
         <div className="mdl-card__supporting-text mdl-card__actions mdl-card--border">
-          <CurrentRoute variables={this.state.variables} />
+          {/*}<CurrentRoute variables={this.state.variables} />*/}
+          <Overlay variables={this.state.variables} />
         </div>
       </div>
     );

@@ -20,7 +20,10 @@ import { ColorSwatchComponent } from "./ColorSwatchComponent";
 import { DropdownComponent } from "./DropdownComponent";
 import { RadioListComponent } from "./RadioListComponent";
 import { SliderComponent } from "./SliderComponent";
-import { SwitchComponent } from "./SwitchComponent";
+
+// import { SwitchComponent } from "./SwitchComponent";
+import { SwitchControl } from "./SwitchControl";
+
 import { TextFieldComponent } from "./TextFieldComponent";
 import { Variable, VariableListType } from "../../core/variables/Variable";
 
@@ -49,7 +52,7 @@ export class ComponentFactory extends React.Component<ComponentProps, void>  {
     // Determine which type of component to render based on data type and content.
     switch (variable.dataType) {
       case CONST.VARIABLE_TYPE_BOOLEAN:
-        controlComponent = <SwitchComponent variable={variable} />;
+        controlComponent = <SwitchControl variable={variable} />;
         break;
       case CONST.VARIABLE_TYPE_RANGE:
         controlComponent = <SliderComponent variable={variable} />;

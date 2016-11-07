@@ -15,14 +15,19 @@
  */
 
 import * as React from "react";
-import { ComponentFactory } from "../components/componentFactory";
+
+// import { ComponentFactory } from "../controls/componentFactory";
+import { ControlInterface } from "./ControlInterface";
 import { Variable } from "../../core/variables/Variable";
+import { SwitchControl } from "../controls/SwitchControl";
 
 /**
  * Interface for a React class that requires an array of Variables.
  * @interface
  */
-export interface OverlayVariables { variables: Array<Variable>; }
+export interface OverlayVariables {
+  variables: Array<Variable>;
+}
 
 /**
  * A React component class that renders a list of inner components.
@@ -34,15 +39,12 @@ export interface OverlayVariables { variables: Array<Variable>; }
  * @extends React.Component
  */
 export class Overlay extends React.Component<OverlayVariables, OverlayVariables> {
+  state = {
+    variables: this.props.variables,
+  };
 
-  /**
-   * Default constructor.
-   * @constructor
-   * @type {Overlay}
-   */
-  constructor(props: OverlayVariables) {
-    super(props);
-    this.state = {variables: props.variables};
+  controlForVariable(variable: Variable): ControlInterface {
+    return SwitchControl;
   }
 
   /**
@@ -50,10 +52,19 @@ export class Overlay extends React.Component<OverlayVariables, OverlayVariables>
    * @override
    */
   render() {
+
+    // let classNames: string = `mdl-list__item ${(controlLineCount > 1) ? "mdl-list__item--two-line" : ""}`;
+
     return (
       <ul className="rmx-list-control mdl-list">
         {this.state.variables.map((variable) => (
-          <ComponentFactory variable={variable} key={variable.key} />
+          /*<ComponentFactory variable={variable} key={variable.key} />*/
+          /*<li><VariableControl variable={variable} key={variable.key} /></li>*/
+          /*<li className="mdl-list__item" key={variable.key}>{this.controlForVariable(variable)}</li>*/
+          console.log("ok")
+          let RemixerControl = this.controlForVariable(variable);
+          <RemixerControl variable={variable} key={variable.key} />
+          /*this.controlForVariable(variable)*/
         ))}
       </ul>
     );

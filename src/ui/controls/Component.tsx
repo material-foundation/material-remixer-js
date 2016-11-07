@@ -35,6 +35,15 @@ interface ComponentState {
 }
 
 /**
+ * Provides a declaration to upgrade MDL elements when created dynamically.
+ */
+interface ComponentHandler {
+  upgradeElement(element: any): void;
+}
+
+declare const componentHandler: ComponentHandler;
+
+/**
  * A React component class that Remixer control components should subclass.
  * @class
  * @extends React.Component
@@ -72,7 +81,7 @@ export class Component extends React.Component<ComponentProps, ComponentState> i
    */
   componentDidMount() {
     for (let key in this.refs) {
-      window["componentHandler"].upgradeElement(this.refs[key]);
+      componentHandler.upgradeElement(this.refs[key]);
     }
   }
 
