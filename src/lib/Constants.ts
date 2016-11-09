@@ -14,17 +14,6 @@
  *  under the License.
  */
 
-/** A set of Constants. */
-export class Constants {
-
-  // /** Keyboard constants. */
-  // static KEY_EVENT_DOWN        = "keydown";
-  // static KEY_CODE_ESC          = 27;
-
-  /** HTML IDs. */
-
-}
-
 /** Keycode constants. */
 export const KeyCode = {
   ESC: 27
