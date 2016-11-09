@@ -19,6 +19,11 @@ import { ControlInterface } from "./ControlInterface";
 import { CSS, VariableType } from "../../lib/Constants";
 import { StringVariable } from "../../core/variables/StringVariable";
 
+/**
+ * A radio list control.
+ * @class
+ * @extends React.Component
+ */
 export class RadioListControl extends React.Component<ControlInterface, ControlInterface> {
   state = {
     variable: this.props.variable,

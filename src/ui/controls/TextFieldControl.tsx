@@ -17,20 +17,20 @@
 import * as React from "react";
 import { ControlInterface } from "./ControlInterface";
 import { CSS, VariableType } from "../../lib/Constants";
-import { RangeVariable } from "../../core/variables/RangeVariable";
+import { StringVariable } from "../../core/variables/StringVariable";
 
 /**
- * A slider control.
+ * A textfield control.
  * @class
  * @extends React.Component
  */
-export class SliderControl extends React.Component<ControlInterface, ControlInterface> {
+export class TextFieldControl extends React.Component<ControlInterface, ControlInterface> {
   state = {
     variable: this.props.variable,
   };
 
   /**
-   * Handles a change event for the slider.
+   * Handles a change event for the textfield.
    * @param {Event} event The change event.
    */
   handleChange(event: Event) {
@@ -44,25 +44,24 @@ export class SliderControl extends React.Component<ControlInterface, ControlInte
     const {
       title,
       key,
-      selectedValue,
-      minValue,
-      maxValue,
-      increment,
-    } = this.state.variable as RangeVariable;
-    const id = `${CSS.RMX_SLIDER}-${key}`;
+      dataType,
+      selectedValue
+    } = this.state.variable as StringVariable;
+    const id = `${CSS.RMX_TEXTFIELD}-${key}`;
+    const isNumber: boolean = dataType === VariableType.NUMBER;
+    const pattern = isNumber ? "-?[0-9]*(\.[0-9]+)?" : ".*";
 
     return (
-      <div className={`${CSS.RMX_SLIDER} ${CSS.MDL_LIST_ITEM} ${CSS.MDL_TWO_LINE}`}>
-        <span className={CSS.MDL_PRIMARY}>
-          <span>{title}
-            <span className={CSS.RMX_SELECTED_VALUE}>{`(${selectedValue})`}</span>
-          </span>
-          <span className={CSS.MDL_SECONDARY}>
-            <span className={CSS.RMX_SLIDER_MIN}>{minValue}</span>
-            <input id={id} type="range" className="mdl-slider mdl-js-slider"
-              min={minValue} max={maxValue} step={increment} value={selectedValue}
+      <div className={`${CSS.RMX_TEXTFIELD} ${CSS.MDL_LIST_ITEM} ${CSS.MDL_TWO_LINE}`}>
+        <span className={CSS.MDL_PRIMARY}>{title}
+          <span className={`${CSS.MDL_SECONDARY} mdl-textfield mdl-js-textfield`}>
+            <input className="mdl-textfield__input" type="text" id={id}
+              pattern={pattern}
+              value={selectedValue}
               onChange={this.handleChange.bind(this)} />
-            <span className={CSS.RMX_SLIDER_MAX}>{maxValue}</span>
+            <label className="mdl-textfield__label"
+              htmlFor={id}>{`Enter ${isNumber ? "number" : "text"}...`}</label>
+            <span className="mdl-textfield__error">Input is not a number!</span>
           </span>
         </span>
       </div>

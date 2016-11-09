@@ -18,6 +18,11 @@ import * as React from "react";
 import { ControlInterface } from "./ControlInterface";
 import { CSS } from "../../lib/Constants";
 
+/**
+ * A switch control.
+ * @class
+ * @extends React.Component
+ */
 export class SwitchControl extends React.Component<ControlInterface, ControlInterface> {
   state = {
     variable: this.props.variable,

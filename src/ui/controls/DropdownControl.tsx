@@ -19,6 +19,11 @@ import { ControlInterface } from "./ControlInterface";
 import { CSS } from "../../lib/Constants";
 import { StringVariable } from "../../core/variables/StringVariable";
 
+/**
+ * A dropdown control.
+ * @class
+ * @extends React.Component
+ */
 export class DropdownControl extends React.Component<ControlInterface, ControlInterface> {
   state = {
     variable: this.props.variable,
