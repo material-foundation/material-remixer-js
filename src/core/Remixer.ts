@@ -14,11 +14,15 @@
  *  under the License.
  */
 
-import * as vars from "./variables/variableTypes";
-import { Constants as CONST } from "../lib/Constants";
+import { KeyCode, KeyEvent, CSS } from "../lib/Constants";
+import { BooleanVariable } from "./variables/BooleanVariable";
+import { ColorVariable } from "./variables/ColorVariable";
 import { LocalStorage } from "../lib/LocalStorage";
 import { Messaging } from "../lib/Messaging";
-import { VariableCallback, VariableKeyMap } from "./variables/Variable";
+import { NumberVariable } from "./variables/NumberVariable";
+import { RangeVariable } from "./variables/RangeVariable";
+import { StringVariable } from "./variables/StringVariable";
+import { Variable, VariableCallback, VariableKeyMap } from "./variables/Variable";
 
 /**
  * The Remixer class is a singleton class that keeps track of all the Variables
@@ -61,7 +65,7 @@ class Remixer {
   private appendFrameToBody(): void {
     if (!this._frameElement) {
       let frame = document.createElement("IFRAME") as HTMLFrameElement;
-      frame.id = CONST.ID_OVERLAY_FRAME;
+      frame.id = CSS.RMX_OVERLAY_FRAME;
       frame.setAttribute("src", "../dist/overlay.html");
       frame.setAttribute("style", "position:fixed; border:0; width:400px; height:100%; top:0; right:0; z-index:999999;");
       frame.setAttribute("sandbox", "allow-scripts allow-same-origin");
@@ -75,8 +79,8 @@ class Remixer {
    * @private
    */
   private addKeyListener(): void {
-    document.addEventListener(CONST.KEY_EVENT_DOWN, (e: KeyboardEvent) => {
-      if (e.keyCode === CONST.KEY_CODE_ESC) {
+    document.addEventListener(KeyEvent.DOWN, (e: KeyboardEvent) => {
+      if (e.keyCode === KeyCode.ESC) {
         Messaging.postToFrame(Messaging.type.ToggleVisibility);
       }
     });
@@ -108,8 +112,8 @@ class Remixer {
    *                                             when the Variable is updated.
    * @return {BooleanVariable}
    */
-  static addBooleanVariable(key: string, defaultValue: boolean, callback?: VariableCallback): vars.BooleanVariable {
-    let variable = new vars.BooleanVariable(key, defaultValue, callback);
+  static addBooleanVariable(key: string, defaultValue: boolean, callback?: VariableCallback): BooleanVariable {
+    let variable = new BooleanVariable(key, defaultValue, callback);
     this.addVariable(variable);
     return variable;
   }
@@ -125,8 +129,8 @@ class Remixer {
    *                                           when the Variable is updated.
    * @return {RangeVariable}
    */
-  static addRangeVariable(key: string, defaultValue: number, minValue: number, maxValue: number, increment: number, callback?: VariableCallback): vars.RangeVariable {
-    let variable = new vars.RangeVariable(key, defaultValue, minValue, maxValue, increment, callback);
+  static addRangeVariable(key: string, defaultValue: number, minValue: number, maxValue: number, increment: number, callback?: VariableCallback): RangeVariable {
+    let variable = new RangeVariable(key, defaultValue, minValue, maxValue, increment, callback);
     this.addVariable(variable);
     return variable;
   }
@@ -140,8 +144,8 @@ class Remixer {
    *                                              when the Variable is updated.
    * @return {StringVariable}
    */
-  static addStringVariable(key: string, defaultValue: string, possibleValues?: Array<string>, callback?: VariableCallback): vars.StringVariable {
-    let variable = new vars.StringVariable(key, defaultValue, possibleValues, callback);
+  static addStringVariable(key: string, defaultValue: string, possibleValues?: Array<string>, callback?: VariableCallback): StringVariable {
+    let variable = new StringVariable(key, defaultValue, possibleValues, callback);
     this.addVariable(variable);
     return variable;
   }
@@ -155,8 +159,8 @@ class Remixer {
    *                                              when the Variable is updated.
    * @return {NumberVariable}
    */
-  static addNumberVariable(key: string, defaultValue: number, possibleValues?: Array<number>, callback?: VariableCallback): vars.NumberVariable {
-    let variable = new vars.NumberVariable(key, defaultValue, possibleValues, callback);
+  static addNumberVariable(key: string, defaultValue: number, possibleValues?: Array<number>, callback?: VariableCallback): NumberVariable {
+    let variable = new NumberVariable(key, defaultValue, possibleValues, callback);
     this.addVariable(variable);
     return variable;
   }
@@ -170,8 +174,8 @@ class Remixer {
    *                                             when the Variable is updated.
    * @return {ColorVariable}
    */
-  static addColorVariable(key: string, defaultValue: string, possibleValues?: Array<string>, callback?: VariableCallback): vars.ColorVariable {
-    let variable = new vars.ColorVariable(key, defaultValue, possibleValues, callback);
+  static addColorVariable(key: string, defaultValue: string, possibleValues?: Array<string>, callback?: VariableCallback): ColorVariable {
+    let variable = new ColorVariable(key, defaultValue, possibleValues, callback);
     this.addVariable(variable);
     return variable;
   }
@@ -183,7 +187,7 @@ class Remixer {
    * @static
    * @param {Variable} variable The variable to add.
    */
-  private static addVariable(variable: vars.Variable): void {
+  private static addVariable(variable: Variable): void {
     let key: string = variable.key;
     let existingVariable = this.getVariable(key);
     if (existingVariable) {
@@ -217,16 +221,16 @@ class Remixer {
    * Returns an array of Variables from the Remixer shared instance.
    * @return {Array<Variable>} Array of Variables.
    */
-  get variablesArray(): Array<vars.Variable> {
+  get variablesArray(): Array<Variable> {
     return Object.keys(this._variables).map(key => this._variables[key]);
   }
 
   /**
    * Returns an Variable for a given key from the Remixer shared instance.
    * @static
-   * @return {Array<vars.Variable>} Array of Variables.
+   * @return {Array<Variable>} Array of Variables.
    */
-  static getVariable(key: string): vars.Variable {
+  static getVariable(key: string): Variable {
     return this._sharedInstance._variables[key];
   }
 
@@ -236,7 +240,7 @@ class Remixer {
    * @param {Variable} variable      The Variable to update.
    * @param {any}      selectedValue The new selected value.
    */
-  static updateVariable(variable: vars.Variable, selectedValue: any): void {
+  static updateVariable(variable: Variable, selectedValue: any): void {
     variable.selectedValue = selectedValue;
   }
 
@@ -244,7 +248,7 @@ class Remixer {
    * Saves the Variable to local storage.
    * @param {Variable} variable The Variable to save.
    */
-  static saveVariable(variable: vars.Variable): void {
+  static saveVariable(variable: Variable): void {
     LocalStorage.saveVariable(variable);
   }
 }

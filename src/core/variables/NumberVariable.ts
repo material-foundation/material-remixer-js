@@ -14,16 +14,16 @@
  *  under the License.
  */
 
-import { Constants as CONST } from "../../lib/Constants";
 import { SerializableData } from "../../lib/LocalStorage";
-import { Variable, VariableListType, VariableCallback } from "./Variable";
+import { Variable, VariableListParams, VariableCallback } from "./Variable";
+import { VariableType } from "../../lib/Constants";
 
 /**
  * Interface for a class that represents a type of Variable for number values.
  * @interface
- * @extends VariableListType
+ * @extends VariableListParams
  */
-interface NumberVariableType extends VariableListType {
+interface NumberVariableParams extends VariableListParams {
   defaultValue: number;
   selectedValue: number;
   possibleValues?: Array<number>;
@@ -33,9 +33,9 @@ interface NumberVariableType extends VariableListType {
  * A class representing a type of Variable for number values.
  * @class
  * @extends Variable
- * @implements {NumberVariableType}
+ * @implements {NumberVariableParams}
  */
-export class NumberVariable extends Variable implements NumberVariableType {
+export class NumberVariable extends Variable implements NumberVariableParams {
 
   /**
    * Creates an instance of a ColorVariable.
@@ -47,7 +47,7 @@ export class NumberVariable extends Variable implements NumberVariableType {
    * @return {[NumberVariable]}
    */
   constructor(key: string, defaultValue: number, possibleValues?: Array<number>, callback?: VariableCallback) {
-    super(key, CONST.VARIABLE_TYPE_NUMBER, defaultValue, callback);
+    super(key, VariableType.NUMBER, defaultValue, callback);
     this.possibleValues = possibleValues;
   }
 

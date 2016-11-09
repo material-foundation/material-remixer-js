@@ -14,9 +14,14 @@
  *  under the License.
  */
 
-import * as vars from "../core/variables/variableTypes";
-import { Constants as CONST } from "../lib/Constants";
 import { remixer } from "../core/Remixer";
+import { BooleanVariable } from "../core/variables/BooleanVariable";
+import { ColorVariable } from "../core/variables/ColorVariable";
+import { NumberVariable } from "../core/variables/NumberVariable";
+import { RangeVariable } from "../core/variables/RangeVariable";
+import { StringVariable } from "../core/variables/StringVariable";
+import { Variable } from "../core/variables/Variable";
+import { StorageKey, VariableType } from "../lib/Constants";
 
 /**
  * Interface for a class that represents serialized data.
@@ -51,10 +56,10 @@ export class LocalStorage {
   /**
    * Retrieves a single Variable from local storage.
    * @static
-   * @param  {string}        key The key if the Variable to retrieve.
+   * @param  {string} key The key if the Variable to retrieve.
    * @return {Variable}
    */
-  static getVariable(key: string): vars.Variable {
+  static getVariable(key: string): Variable {
     let remixerData = this.getRawData();
     let variableData = remixerData[key] as SerializableData;
     if (variableData) {
@@ -68,7 +73,7 @@ export class LocalStorage {
    * @static
    * @param {Variable} variable The variable to save.
    */
-  static saveVariable(variable: vars.Variable): void {
+  static saveVariable(variable: Variable): void {
     let remixerData = this.getRawData();
     remixerData[variable.key] = variable.serialize();
     this.saveRawData(remixerData);
@@ -81,18 +86,18 @@ export class LocalStorage {
    * @param  {SerializableData} data The serialized data.
    * @return {Variable}
    */
-  private static deserialize(data: SerializableData): vars.Variable {
+  private static deserialize(data: SerializableData): Variable {
     switch (data.dataType) {
-      case CONST.VARIABLE_TYPE_BOOLEAN:
-        return vars.BooleanVariable.deserialize(data);
-      case CONST.VARIABLE_TYPE_COLOR:
-        return vars.ColorVariable.deserialize(data);
-      case CONST.VARIABLE_TYPE_NUMBER:
-        return vars.NumberVariable.deserialize(data);
-      case CONST.VARIABLE_TYPE_RANGE:
-        return vars.RangeVariable.deserialize(data);
-      case CONST.VARIABLE_TYPE_STRING:
-        return vars.StringVariable.deserialize(data);
+      case VariableType.BOOLEAN:
+        return BooleanVariable.deserialize(data);
+      case VariableType.COLOR:
+        return ColorVariable.deserialize(data);
+      case VariableType.NUMBER:
+        return NumberVariable.deserialize(data);
+      case VariableType.RANGE:
+        return RangeVariable.deserialize(data);
+      case VariableType.STRING:
+        return StringVariable.deserialize(data);
       default:
         return null;
     }
@@ -105,7 +110,7 @@ export class LocalStorage {
    * @return {SerializableDataMap} The json data from local storage.
    */
   private static getRawData(): SerializableDataMap {
-    let data: SerializableDataMap = JSON.parse(localStorage.getItem(CONST.STORAGE_KEY_REMIXER));
+    let data: SerializableDataMap = JSON.parse(localStorage.getItem(StorageKey.REMIXER));
     return data || {};
   }
 
@@ -116,6 +121,6 @@ export class LocalStorage {
    * @param {SerializableDataMap} data The serialized data to save.
    */
   private static saveRawData(data: SerializableDataMap): void {
-    localStorage.setItem(CONST.STORAGE_KEY_REMIXER, JSON.stringify(data));
+    localStorage.setItem(StorageKey.REMIXER, JSON.stringify(data));
   }
 }

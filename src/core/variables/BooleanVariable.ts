@@ -14,16 +14,16 @@
  *  under the License.
  */
 
-import { Constants as CONST } from "../../lib/Constants";
 import { SerializableData } from "../../lib/LocalStorage";
-import { Variable, VariableType, VariableCallback } from "./Variable";
+import { Variable, VariableParams, VariableCallback } from "./Variable";
+import { VariableType } from "../../lib/Constants";
 
 /**
  * Interface for a class that represents a type of Variable for boolean values.
  * @interface
- * @extends VariableType
+ * @extends VariableParams
  */
-interface BooleanVariableType extends VariableType {
+interface BooleanVariableParams extends VariableParams {
   defaultValue: boolean;
   selectedValue: boolean;
 }
@@ -32,9 +32,9 @@ interface BooleanVariableType extends VariableType {
  * A class representing a type of Variable for boolean values.
  * @class
  * @extends Variable
- * @implements {BooleanVariableType}
+ * @implements {BooleanVariableParams}
  */
-export class BooleanVariable extends Variable implements BooleanVariableType {
+export class BooleanVariable extends Variable implements BooleanVariableParams {
 
   /**
    * Creates an instance of a BooleanVariable.
@@ -45,7 +45,7 @@ export class BooleanVariable extends Variable implements BooleanVariableType {
    * @return {BooleanVariable}
    */
   constructor(key: string, defaultValue: boolean, callback?: VariableCallback) {
-    super(key, CONST.VARIABLE_TYPE_BOOLEAN, defaultValue, callback);
+    super(key, VariableType.BOOLEAN, defaultValue, callback);
   }
 
   /**
