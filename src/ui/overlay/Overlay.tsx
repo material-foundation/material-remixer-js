@@ -15,25 +15,23 @@
  */
 
 import * as React from "react";
-
-// import { ComponentFactory } from "../controls/componentFactory";
-import { ControlInterface } from "./ControlInterface";
-import { Variable } from "../../core/variables/Variable";
+import { ColorSwatchControl } from "../controls/ColorSwatchControl";
+import { DropdownControl } from "../controls/DropdownControl";
+import { RadioListControl } from "../controls/RadioListControl";
+import { SliderControl } from "../controls/SliderControl";
 import { SwitchControl } from "../controls/SwitchControl";
+import { TextFieldControl } from "../controls/TextFieldControl";
+import { Variable } from "../../core/variables/Variable";
+import { VariableType } from "../../lib/Constants";
 
 /**
  * Interface for a React class that requires an array of Variables.
  * @interface
  */
-export interface OverlayVariables {
-  variables: Array<Variable>;
-}
+export interface OverlayVariables { variables: Array<Variable>; }
 
 /**
- * A React component class that renders a list of inner components.
- *
- * Consists of a `ul` element containing a list of remixer control components
- * generated from the ComponentFactory.
+ * Renders a list of remixer controls for each variable in an overlay card.
  *
  * @class
  * @extends React.Component
@@ -43,30 +41,47 @@ export class Overlay extends React.Component<OverlayVariables, OverlayVariables>
     variables: this.props.variables,
   };
 
-  controlForVariable(variable: Variable): ControlInterface {
-    return SwitchControl;
+  /**
+   * Returns a control as determined by the variable `dataType` property.
+   * @param  {Variable} variable The variable to provide the control for.
+   * @return {any} A control component.
+   */
+  controlForVariable(variable: Variable): any {
+    let Control: any = null;
+    switch (variable.dataType) {
+      case VariableType.BOOLEAN:
+        Control = SwitchControl;
+        break;
+      case VariableType.RANGE:
+        Control = SliderControl;
+        break;
+      case VariableType.STRING:
+        if (!variable["possibleValues"]) {
+          Control = TextFieldControl;
+        } else if (variable["possibleValues"].length <= 2) {
+          Control = RadioListControl;
+        } else {
+          Control = DropdownControl;
+        }
+        break;
+      case VariableType.NUMBER:
+        Control = TextFieldControl;
+        break;
+      case VariableType.COLOR:
+        Control = ColorSwatchControl;
+        break;
+    }
+    return <Control variable={variable} key={variable.key} />;
   }
 
-  /**
-   * Renders the component via React.
-   * @override
-   */
+  /** @override */
   render() {
-
-    // let classNames: string = `mdl-list__item ${(controlLineCount > 1) ? "mdl-list__item--two-line" : ""}`;
-
     return (
-      <ul className="rmx-list-control mdl-list">
+      <div className="rmx-list-control mdl-list">
         {this.state.variables.map((variable) => (
-          /*<ComponentFactory variable={variable} key={variable.key} />*/
-          /*<li><VariableControl variable={variable} key={variable.key} /></li>*/
-          /*<li className="mdl-list__item" key={variable.key}>{this.controlForVariable(variable)}</li>*/
-          console.log("ok")
-          let RemixerControl = this.controlForVariable(variable);
-          <RemixerControl variable={variable} key={variable.key} />
-          /*this.controlForVariable(variable)*/
+          this.controlForVariable(variable)
         ))}
-      </ul>
+      </div>
     );
   }
 }

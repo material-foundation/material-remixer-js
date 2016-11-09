@@ -15,8 +15,8 @@
  */
 
 import * as React from "react";
-import { CSS } from "../../lib/Constants";
 import { ControlInterface } from "./ControlInterface";
+import { CSS } from "../../lib/Constants";
 
 export class SwitchControl extends React.Component<ControlInterface, ControlInterface> {
   state = {
@@ -24,34 +24,37 @@ export class SwitchControl extends React.Component<ControlInterface, ControlInte
   };
 
   /**
-   * Handles a click event on this component.
+   * Handles a click event on the switch.
    * @param {Event} event The click event.
    */
   handleClick(event: Event) {
-    let variable = this.state.variable;
-    variable.selectedValue = !this.state.variable.selectedValue;
+    const { variable } = this.state;
+    variable.selectedValue = !variable.selectedValue;
     this.setState({variable: variable});
   }
 
   /** @override */
   render() {
-    let id = `${CSS.RMX_SWITCH}-${this.props.variable.key}`;
-    let selectedValue = this.state.variable.selectedValue as boolean;
+    const {
+      title,
+      key,
+      selectedValue,
+    } = this.state.variable;
+    const id = `${CSS.RMX_SWITCH}-${key}`;
 
     return (
-      <li className={`${CSS.MDL_LIST_ITEM} ${CSS.RMX_SWITCH}`}>
-        <span className={CSS.MDL_PRIMARY}>
-          {this.props.variable.title}
-        </span>
+      <div className={`${CSS.RMX_SWITCH} ${CSS.MDL_LIST_ITEM}`}>
+        <span className={CSS.MDL_PRIMARY}>{title}</span>
         <span className={CSS.MDL_SECONDARY}>
-          <label className="mdl-switch mdl-js-switch mdl-js-ripple-effect" htmlFor={id}>
+          <label className="mdl-switch mdl-js-switch mdl-js-ripple-effect"
+              htmlFor={id}>
             <input id={id} type="checkbox" className="mdl-switch__input"
               checked={selectedValue}
               onChange={this.handleClick.bind(this)} />
             <span className="mdl-switch__label"></span>
           </label>
         </span>
-      </li>
+      </div>
     );
   }
 }

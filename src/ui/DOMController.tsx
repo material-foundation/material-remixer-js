@@ -17,9 +17,8 @@
 import "./overlay/styles.less";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { Constants as CONST, CSS } from "../lib/Constants";
+import { KeyCode, KeyEvent, CSS } from "../lib/Constants";
 import { Messaging } from "../lib/Messaging";
-import { Options } from "./overlay/Options";
 import { Overlay } from "./overlay/Overlay";
 import { Variable } from "../core/variables/Variable";
 import { remixer } from "../core/Remixer";
@@ -28,69 +27,35 @@ import { remixer } from "../core/Remixer";
  * Interface for the properties assigned to the DOMController component.
  * @interface
  */
-interface ControllerProps {
-  wrapperElement: HTMLElement;
-}
+interface ControllerProps { wrapperElement: HTMLElement; }
 
 /**
  * Interface for the state of the DOMController component.
  * @interface
  */
-interface ControllerState {
-  /**
-   * The DOMController will render a control component for each of the variables
-   * of this array.
-   * @type {Array<Variable>}
-   */
-  variables?: Array<Variable>;
-
-  /**
-   * The current route to render.
-   * @type {Route}
-   */
-  route?: Route;
-}
+interface ControllerState { variables?: Array<Variable>; }
 
 /**
- * Available routes to render.
- */
-enum Route {
-  Variables,
-  Options
-}
-
-/**
- * A React component class that renders an MDL-styled card containing child
- * components determined by its current Route.
- *
- * Depending on the Route, the card content can be either:
- *   1) The overlay with configurable control components per assigned Variables.
- *   2) An options page used to configure Remixer session properties.
- *
+ * Renders an MDL card-styled overlay containing a child control for each
+ * variable.
  * @class
  * @extends React.Component
  */
 export class DOMController extends React.Component<ControllerProps, ControllerState> {
-
   state = {
     variables: remixer.attachedInstance.variablesArray,
-    route: Route.Variables
   };
 
-  /**
-   * The component will mount. Lets register for messaging and key events.
-   * @override
-   */
+  /** @override */
   componentDidMount() {
+    // Register for messaging and key events.
     Messaging.register(this.onMessageReceived.bind(this));
     this.addKeyListener();
   }
 
-  /**
-   * The component will unmount. Lets unregister.
-   * @override
-   */
+  /** @override */
   componentWillUnmount() {
+    // Unregister for messaging and key events.
     Messaging.unregister();
     this.removeKeyListener();
   }
@@ -107,8 +72,8 @@ export class DOMController extends React.Component<ControllerProps, ControllerSt
 
   /** Adds a key listener. */
   addKeyListener(): void {
-    document.addEventListener(CONST.KEY_EVENT_DOWN, (e: KeyboardEvent) => {
-      if (e.keyCode === CONST.KEY_CODE_ESC) {
+    document.addEventListener(KeyEvent.DOWN, (e: KeyboardEvent) => {
+      if (e.keyCode === KeyCode.ESC) {
         this.toggleVisibility();
       }
     });
@@ -116,47 +81,22 @@ export class DOMController extends React.Component<ControllerProps, ControllerSt
 
   /** Removes a key listener. */
   removeKeyListener(): void {
-    document.removeEventListener(CONST.KEY_EVENT_DOWN);
+    document.removeEventListener(KeyEvent.DOWN);
   }
 
   /** Toggles the Remixer overlay visibility. */
   toggleVisibility() {
-    this.props.wrapperElement.classList.toggle(CSS.VISIBLE);
+    this.props.wrapperElement.classList.toggle(CSS.RMX_VISIBLE);
   }
 
-  /**
-   * Updates the state to new route.
-   * @param {Event} event The route to update to.
-   */
-  updateRoute(event: Event) {
-    const currentRoute = this.state.route;
-    this.setState({
-        route: currentRoute === Route.Variables
-          ? Route.Options
-          : Route.Variables
-    });
-  }
-
-  /**
-   * Renders the component via React.
-   * @override
-   */
+  /** @override */
   render() {
-    const CurrentRoute = this.state.route === Route.Options ? Options : Overlay;
     return (
-      <div className="rmx-card-wide mdl-card mdl-shadow--6dp">
+      <div className="mdl-card mdl-shadow--6dp">
         <div className="mdl-card__title" ref="myInput">
           <h2 className="mdl-card__title-text">Remixer</h2>
-
-        </div>
-        <div className="mdl-card__menu">
-          <button className="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"
-            onClick={this.updateRoute.bind(this)}>
-              <i className="material-icons">menu</i>
-          </button>
         </div>
         <div className="mdl-card__supporting-text mdl-card__actions mdl-card--border">
-          {/*}<CurrentRoute variables={this.state.variables} />*/}
           <Overlay variables={this.state.variables} />
         </div>
       </div>
@@ -167,5 +107,5 @@ export class DOMController extends React.Component<ControllerProps, ControllerSt
 /**
  * Renders the DOMController component to the overlay wrapper element.
  */
-let element = document.getElementById(CONST.ID_OVERLAY_WRAPPER);
+let element = document.getElementById(CSS.RMX_OVERLAY_WRAPPER);
 ReactDOM.render(<div><DOMController wrapperElement={element} /></div>, element);

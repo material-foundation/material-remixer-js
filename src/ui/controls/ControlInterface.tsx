@@ -16,6 +16,8 @@
 
 import { Variable } from "../../core/variables/Variable";
 
-export interface ControlInterface {
-  variable: Variable;
-}
+/**
+ * Interface for variable controls properties and state.
+ * @interface
+ */
+export interface ControlInterface { variable: Variable; }
