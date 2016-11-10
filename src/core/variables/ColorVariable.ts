@@ -14,16 +14,16 @@
  *  under the License.
  */
 
-import { Constants as CONST } from "../../lib/Constants";
 import { SerializableData } from "../../lib/LocalStorage";
-import { Variable, VariableListType, VariableCallback } from "./Variable";
+import { Variable, VariableListParams, VariableCallback } from "./Variable";
+import { VariableType } from "../../lib/Constants";
 
 /**
  * Interface for a class that represents a type of Variable for color values.
  * @interface
- * @extends VariableListType
+ * @extends VariableListParams
  */
-interface ColorVariableType extends VariableListType {
+interface ColorVariableParams extends VariableListParams {
   defaultValue: string;
   selectedValue: string;
   possibleValues?: Array<string>;
@@ -33,9 +33,9 @@ interface ColorVariableType extends VariableListType {
  * A class representing a type of Variable for color values.
  * @class
  * @extends Variable
- * @implements {ColorVariableType}
+ * @implements {ColorVariableParams}
  */
-export class ColorVariable extends Variable implements ColorVariableType {
+export class ColorVariable extends Variable implements ColorVariableParams {
 
   /**
    * Creates an instance of a ColorVariable.
@@ -47,7 +47,7 @@ export class ColorVariable extends Variable implements ColorVariableType {
    * @return {ColorVariable}
    */
   constructor(key: string, defaultValue: string, possibleValues?: Array<string>, callback?: VariableCallback) {
-    super(key, CONST.VARIABLE_TYPE_COLOR, defaultValue, callback);
+    super(key, VariableType.COLOR, defaultValue, callback);
     this.possibleValues = possibleValues;
   }
 

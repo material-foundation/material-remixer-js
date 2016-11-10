@@ -14,7 +14,7 @@
  *  under the License.
  */
 
-import { Constants as CONST } from "../lib/Constants";
+import { CSS } from "../lib/Constants";
 
 /**
  * Available messaging types.
@@ -72,7 +72,7 @@ export class Messaging {
    * @param {MessagingType} message The message type to send.
    */
   static postToFrame(message: MessagingType): void {
-    const frame = document.getElementById(CONST.ID_OVERLAY_FRAME) as HTMLFrameElement;
+    const frame = document.getElementById(CSS.RMX_OVERLAY_FRAME) as HTMLFrameElement;
     frame.contentWindow.postMessage(message, "*");
   }
 }

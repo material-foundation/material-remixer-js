@@ -14,7 +14,6 @@
  *  under the License.
  */
 
-import { Constants as CONST } from "../../lib/Constants";
 import { SerializableData } from "../../lib/LocalStorage";
 import { remixer } from "../Remixer";
 
@@ -22,7 +21,7 @@ import { remixer } from "../Remixer";
  * Interface for a class that represents a type a Variable.
  * @interface
  */
-export interface VariableType {
+export interface VariableParams {
   key: string;
   title: string;
   dataType: string;
@@ -34,8 +33,9 @@ export interface VariableType {
 /**
  * Interface for a class that represents a type a Variable with possible values.
  * @interface
+ * @extends VariableParams
  */
-export interface VariableListType extends VariableType {
+export interface VariableListParams extends VariableParams {
   possibleValues?: Array<any>;
 }
 
@@ -59,9 +59,9 @@ export interface VariableKeyMap {
 /**
  * A class representing a type a Variable.
  * @class
- * @implements {VariableType}
+ * @implements {VariableParams}
  */
-export class Variable implements VariableType {
+export class Variable implements VariableParams {
 
   /**
    * Creates an instance of a Variable.
