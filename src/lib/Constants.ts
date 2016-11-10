@@ -14,27 +14,50 @@
  *  under the License.
  */
 
-/** A set of Constants. */
-export class Constants {
+/** Keycode constants. */
+export const KeyCode = {
+  ESC: 27
+};
 
-  /** Keyboard constants. */
-  static KEY_EVENT_DOWN        = "keydown";
-  static KEY_CODE_ESC          = 27;
+/** Key event constants. */
+export const KeyEvent = {
+  DOWN: "keydown"
+};
 
-  /** CSS Classes. */
-  static CSS_CLASS_VISIBLE     = "visible";
+/** Storage keys constants. */
+export const StorageKey = {
+  REMIXER:  "__Remixer__"
+};
 
-  /** HTML IDs. */
-  static ID_OVERLAY_FRAME      = "rmx-overlay-frame";
-  static ID_OVERLAY_WRAPPER    = "rmx-overlay-wrapper";
+/** Variable types constants. */
+export const VariableType = {
+  BOOLEAN:  "boolean",
+  COLOR:    "color",
+  NUMBER:   "number",
+  RANGE:    "range",
+  STRING:   "string",
+};
 
-  /** Remixer storage key. */
-  static STORAGE_KEY_REMIXER   = "__Remixer__";
+/** CSS class and id constants. */
+export const CSS = {
+  MDL_LIST:               "mdl-list",
+  MDL_LIST_ITEM:          "mdl-list__item",
+  MDL_PRIMARY:            "mdl-list__item-primary-content",
+  MDL_SECONDARY:          "mdl-list__item-secondary-content",
+  MDL_TWO_LINE:           "mdl-list__item--two-line",
 
-  /** Variable types. */
-  static VARIABLE_TYPE_BOOLEAN = "boolean";
-  static VARIABLE_TYPE_COLOR   = "color";
-  static VARIABLE_TYPE_NUMBER  = "number";
-  static VARIABLE_TYPE_RANGE   = "range";
-  static VARIABLE_TYPE_STRING  = "string";
-}
+  RMX_OVERLAY_FRAME:      "rmx-overlay-frame",
+  RMX_OVERLAY_WRAPPER:    "rmx-overlay-wrapper",
+  RMX_VISIBLE:            "rmx-visible",
+  RMX_SELECTED_VALUE:     "rmx-selected-value",
+  RMX_COLOR_SWATCH:       "rmx-color-swatch",
+  RMX_COLOR_SWATCH_ITEM:  "rmx-color-swatch-item",
+  RMX_DROPDOWN:           "rmx-dropdown",
+  RMX_RADIO_LIST:         "rmx-radio-list",
+  RMX_RADIO_LIST_ITEM:    "rmx-radio-list-item",
+  RMX_SLIDER:             "rmx-slider",
+  RMX_SLIDER_MIN:         "rmx-slider-min-value",
+  RMX_SLIDER_MAX:         "rmx-slider-max-value",
+  RMX_SWITCH:             "rmx-switch",
+  RMX_TEXTFIELD:          "rmx-textfield",
+};
