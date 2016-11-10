@@ -14,16 +14,16 @@
  *  under the License.
  */
 
-import { Constants as CONST } from "../../lib/Constants";
 import { SerializableData } from "../../lib/LocalStorage";
-import { Variable, VariableListType, VariableCallback } from "./Variable";
+import { Variable, VariableListParams, VariableCallback } from "./Variable";
+import { VariableType } from "../../lib/Constants";
 
 /**
  * Interface for a class that represents a type of Variable for string values.
  * @interface
- * @extends VariableListType
+ * @extends VariableListParams
  */
-interface StringVariableType extends VariableListType {
+interface StringVariableParams extends VariableListParams {
   defaultValue: string;
   selectedValue: string;
   possibleValues?: Array<string>;
@@ -33,9 +33,9 @@ interface StringVariableType extends VariableListType {
  * A class representing a type of Variable for string values.
  * @class
  * @extends Variable
- * @implements {StringVariableType}
+ * @implements {StringVariableParams}
  */
-export class StringVariable extends Variable implements StringVariableType {
+export class StringVariable extends Variable implements StringVariableParams {
 
   /**
    * Creates an instance of a StringVariable.
@@ -47,7 +47,7 @@ export class StringVariable extends Variable implements StringVariableType {
    * @return {StringVariable}
    */
   constructor(key: string, defaultValue: string, possibleValues?: Array<string>, callback?: VariableCallback) {
-    super(key, CONST.VARIABLE_TYPE_STRING, defaultValue, callback);
+    super(key, VariableType.STRING, defaultValue, callback);
     this.possibleValues = possibleValues;
   }
 

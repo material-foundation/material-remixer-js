@@ -14,16 +14,16 @@
  *  under the License.
  */
 
-import { Constants as CONST } from "../../lib/Constants";
 import { SerializableData } from "../../lib/LocalStorage";
-import { Variable, VariableType, VariableCallback } from "./Variable";
+import { Variable, VariableParams, VariableCallback } from "./Variable";
+import { VariableType } from "../../lib/Constants";
 
 /**
  * Interface for a class that represents a type of Variable for a range of values.
  * @interface
- * @extends VariableType
+ * @extends VariableParams
  */
-interface RangeVariableType extends VariableType {
+interface RangeVariableParams extends VariableParams {
   defaultValue: number;
   selectedValue: number;
   minValue: number;
@@ -35,9 +35,9 @@ interface RangeVariableType extends VariableType {
  * A class representing a type of Variable for a range of values.
  * @class
  * @extends Variable
- * @implements {RangeVariableType}
+ * @implements {RangeVariableParams}
  */
-export class RangeVariable extends Variable implements RangeVariableType {
+export class RangeVariable extends Variable implements RangeVariableParams {
 
   /**
    * Creates an instance of a RangeVariable.
@@ -50,7 +50,7 @@ export class RangeVariable extends Variable implements RangeVariableType {
    * @return {RangeVariable}
    */
   constructor(key: string, defaultValue: number, minValue: number, maxValue: number, increment: number, callback?: VariableCallback) {
-    super(key, CONST.VARIABLE_TYPE_RANGE, defaultValue, callback);
+    super(key, VariableType.RANGE, defaultValue, callback);
     this.minValue = minValue;
     this.maxValue = maxValue;
     this.increment = increment;
