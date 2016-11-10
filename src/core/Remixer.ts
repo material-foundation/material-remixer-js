@@ -14,9 +14,9 @@
  *  under the License.
  */
 
-import { KeyCode, KeyEvent, CSS } from "../lib/Constants";
 import { BooleanVariable } from "./variables/BooleanVariable";
 import { ColorVariable } from "./variables/ColorVariable";
+import { KeyCode, KeyEvent, CSS } from "../lib/Constants";
 import { LocalStorage } from "../lib/LocalStorage";
 import { Messaging } from "../lib/Messaging";
 import { NumberVariable } from "./variables/NumberVariable";

@@ -19,9 +19,9 @@ import { BooleanVariable } from "../core/variables/BooleanVariable";
 import { ColorVariable } from "../core/variables/ColorVariable";
 import { NumberVariable } from "../core/variables/NumberVariable";
 import { RangeVariable } from "../core/variables/RangeVariable";
+import { StorageKey, VariableType } from "../lib/Constants";
 import { StringVariable } from "../core/variables/StringVariable";
 import { Variable } from "../core/variables/Variable";
-import { StorageKey, VariableType } from "../lib/Constants";
 
 /**
  * Interface for a class that represents serialized data.
