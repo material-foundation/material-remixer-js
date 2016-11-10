@@ -57,7 +57,7 @@ export class ColorSwatchControl extends React.Component<ControlInterface, Contro
     variable: this.props.variable,
   };
 
-  // @override */
+  /** @override */
   componentWillMount() {
     // Add the selected value to possible values array if doesn't exsit.
     const {
@@ -93,10 +93,10 @@ export class ColorSwatchControl extends React.Component<ControlInterface, Contro
       <div className={`${CSS.RMX_COLOR_SWATCH} ${CSS.MDL_LIST_ITEM} ${CSS.MDL_TWO_LINE}`}>
         <span className={CSS.MDL_PRIMARY}>
           <span>{title}
-            <span className={CSS.RMX_SELECTED_VALUE}>{`(${selectedValue})`}</span>
+            <span className={CSS.RMX_SELECTED_VALUE}>{selectedValue}</span>
           </span>
           <span className={CSS.MDL_SECONDARY}>
-            {possibleValues.map((value: string, i: number) => (
+            {possibleValues.map((value: string) => (
               <ColorSwatch color={value} key={value}
                 isSelected={selectedValue === value}
                 onClick={this.updateSelectedColor.bind(this, value)} />

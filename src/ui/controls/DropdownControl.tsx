@@ -29,7 +29,7 @@ export class DropdownControl extends React.Component<ControlInterface, ControlIn
     variable: this.props.variable,
   };
 
-  // @override */
+  /** @override */
   componentWillMount() {
     // Add the selected value to possible values array if doesn't exsit.
     const {
@@ -72,8 +72,8 @@ export class DropdownControl extends React.Component<ControlInterface, ControlIn
           </button>
           <ul className="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
               htmlFor={id}>
-            {possibleValues.map((value: string, i: number) => (
-              <li className="mdl-menu__item" key={id + "-" + i}
+            {possibleValues.map((value: string) => (
+              <li className="mdl-menu__item" key={value}
                 onClick={this.updatedSelectedValue.bind(this, value)}
                 data={value}>{value}
               </li>

@@ -55,12 +55,13 @@ export class SliderControl extends React.Component<ControlInterface, ControlInte
       <div className={`${CSS.RMX_SLIDER} ${CSS.MDL_LIST_ITEM} ${CSS.MDL_TWO_LINE}`}>
         <span className={CSS.MDL_PRIMARY}>
           <span>{title}
-            <span className={CSS.RMX_SELECTED_VALUE}>{`(${selectedValue})`}</span>
+            <span className={CSS.RMX_SELECTED_VALUE}>{selectedValue}</span>
           </span>
           <span className={CSS.MDL_SECONDARY}>
             <span className={CSS.RMX_SLIDER_MIN}>{minValue}</span>
             <input id={id} type="range" className="mdl-slider mdl-js-slider"
-              min={minValue} max={maxValue} step={increment} value={selectedValue}
+              min={minValue} max={maxValue} step={increment}
+              value={selectedValue}
               onChange={this.handleChange.bind(this)} />
             <span className={CSS.RMX_SLIDER_MAX}>{maxValue}</span>
           </span>

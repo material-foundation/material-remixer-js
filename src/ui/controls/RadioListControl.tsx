@@ -29,7 +29,7 @@ export class RadioListControl extends React.Component<ControlInterface, ControlI
     variable: this.props.variable,
   };
 
-  // @override */
+  /** @override */
   componentWillMount() {
     // Add the selected value to possible values array if doesn't exsit.
     const {
