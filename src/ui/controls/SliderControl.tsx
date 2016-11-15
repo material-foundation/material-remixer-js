@@ -15,8 +15,8 @@
  */
 
 import * as React from "react";
-import { ControlInterface } from "./ControlInterface";
 import { CSS, VariableType } from "../../lib/Constants";
+import { RangeControlInterface } from "./controlInterfaces";
 import { RangeVariable } from "../../core/variables/RangeVariable";
 
 /**
@@ -24,7 +24,7 @@ import { RangeVariable } from "../../core/variables/RangeVariable";
  * @class
  * @extends React.Component
  */
-export class SliderControl extends React.Component<ControlInterface, ControlInterface> {
+export class SliderControl extends React.Component<RangeControlInterface, RangeControlInterface> {
   state = {
     variable: this.props.variable,
   };
@@ -48,7 +48,7 @@ export class SliderControl extends React.Component<ControlInterface, ControlInte
       minValue,
       maxValue,
       increment,
-    } = this.state.variable as RangeVariable;
+    } = this.state.variable;
     const id = `${CSS.RMX_SLIDER}-${key}`;
 
     return (

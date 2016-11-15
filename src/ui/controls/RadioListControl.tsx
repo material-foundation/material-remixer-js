@@ -15,8 +15,8 @@
  */
 
 import * as React from "react";
-import { ControlInterface } from "./ControlInterface";
 import { CSS, VariableType } from "../../lib/Constants";
+import { StringControlInterface } from "./controlInterfaces";
 import { StringVariable } from "../../core/variables/StringVariable";
 
 /**
@@ -24,7 +24,7 @@ import { StringVariable } from "../../core/variables/StringVariable";
  * @class
  * @extends React.Component
  */
-export class RadioListControl extends React.Component<ControlInterface, ControlInterface> {
+export class RadioListControl extends React.Component<StringControlInterface, StringControlInterface> {
   state = {
     variable: this.props.variable,
   };
@@ -35,7 +35,7 @@ export class RadioListControl extends React.Component<ControlInterface, ControlI
     const {
       possibleValues,
       selectedValue
-    } = this.state.variable as StringVariable;
+    } = this.state.variable;
 
     if (possibleValues.indexOf(selectedValue) === -1) {
       possibleValues.push(selectedValue);
@@ -60,7 +60,7 @@ export class RadioListControl extends React.Component<ControlInterface, ControlI
       key,
       possibleValues,
       selectedValue
-    } = this.state.variable as StringVariable;
+    } = this.state.variable;
     const id = `${CSS.RMX_RADIO_LIST_ITEM}-${key}`;
 
     return (

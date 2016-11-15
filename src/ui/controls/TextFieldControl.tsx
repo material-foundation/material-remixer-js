@@ -15,8 +15,8 @@
  */
 
 import * as React from "react";
-import { ControlInterface } from "./ControlInterface";
 import { CSS, VariableType } from "../../lib/Constants";
+import { StringControlInterface } from "./controlInterfaces";
 import { StringVariable } from "../../core/variables/StringVariable";
 
 /**
@@ -24,7 +24,7 @@ import { StringVariable } from "../../core/variables/StringVariable";
  * @class
  * @extends React.Component
  */
-export class TextFieldControl extends React.Component<ControlInterface, ControlInterface> {
+export class TextFieldControl extends React.Component<StringControlInterface, StringControlInterface> {
   state = {
     variable: this.props.variable,
   };
@@ -46,7 +46,7 @@ export class TextFieldControl extends React.Component<ControlInterface, ControlI
       key,
       dataType,
       selectedValue
-    } = this.state.variable as StringVariable;
+    } = this.state.variable;
     const id = `${CSS.RMX_TEXTFIELD}-${key}`;
     const isNumber: boolean = dataType === VariableType.NUMBER;
     const pattern = isNumber ? "-?[0-9]*(\.[0-9]+)?" : ".*";

@@ -15,8 +15,8 @@
  */
 
 import * as React from "react";
+import { ColorControlInterface } from "./controlInterfaces";
 import { ColorVariable } from "../../core/variables/ColorVariable";
-import { ControlInterface } from "./ControlInterface";
 import { CSS, VariableType } from "../../lib/Constants";
 
 /**
@@ -30,20 +30,17 @@ interface ColorSwatchProps {
 }
 
 /**
- * A single color swatch displayed within the `ColorSwatchControl`.
- * @class
- * @extends React.Component
+ * Returns a single color swatch displayed within the `ColorSwatchControl`.
+ * @param {ColorSwatchProps} props The color swath properties.
  */
-class ColorSwatch extends React.Component<ColorSwatchProps, void>  {
-  render() {
-    const { color, isSelected, onClick } = this.props;
-    return (
-      <div className={CSS.RMX_COLOR_SWATCH_ITEM} style={{backgroundColor: color}}
-        value={color} onClick={onClick}>
-        {isSelected ? <i className="material-icons">check</i> : ""}
-      </div>
-    );
-  }
+function ColorSwatch(props: ColorSwatchProps) {
+  const { color, isSelected, onClick } = props;
+  return (
+    <div className={CSS.RMX_COLOR_SWATCH_ITEM} style={{backgroundColor: color}}
+     value={color} onClick={onClick}>
+     {isSelected ? <i className="material-icons">check</i> : ""}
+   </div>
+ );
 }
 
 /**
@@ -52,7 +49,7 @@ class ColorSwatch extends React.Component<ColorSwatchProps, void>  {
  * @class
  * @extends React.Component
  */
-export class ColorSwatchControl extends React.Component<ControlInterface, ControlInterface> {
+export class ColorSwatchControl extends React.Component<ColorControlInterface, ColorControlInterface> {
   state = {
     variable: this.props.variable,
   };
@@ -63,7 +60,7 @@ export class ColorSwatchControl extends React.Component<ControlInterface, Contro
     const {
       possibleValues,
       selectedValue
-    } = this.state.variable as ColorVariable;
+    } = this.state.variable;
 
     if (possibleValues.indexOf(selectedValue) === -1) {
       possibleValues.push(selectedValue);
@@ -87,7 +84,7 @@ export class ColorSwatchControl extends React.Component<ControlInterface, Contro
       title,
       possibleValues,
       selectedValue
-    } = this.state.variable as ColorVariable;
+    } = this.state.variable;
 
     return (
       <div className={`${CSS.RMX_COLOR_SWATCH} ${CSS.MDL_LIST_ITEM} ${CSS.MDL_TWO_LINE}`}>

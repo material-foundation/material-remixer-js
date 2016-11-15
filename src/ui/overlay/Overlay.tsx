@@ -58,7 +58,7 @@ export class Overlay extends React.Component<OverlayVariables, OverlayVariables>
       case VariableType.STRING:
         if (!variable["possibleValues"]) {
           Control = TextFieldControl;
-        } else if (variable["possibleValues"].length <= 2) {
+        } else if (variable["possibleValues"].length === 2) {
           Control = RadioListControl;
         } else {
           Control = DropdownControl;

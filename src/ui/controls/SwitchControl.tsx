@@ -15,7 +15,7 @@
  */
 
 import * as React from "react";
-import { ControlInterface } from "./ControlInterface";
+import { BooleanControlInterface } from "./controlInterfaces";
 import { CSS } from "../../lib/Constants";
 
 /**
@@ -23,7 +23,7 @@ import { CSS } from "../../lib/Constants";
  * @class
  * @extends React.Component
  */
-export class SwitchControl extends React.Component<ControlInterface, ControlInterface> {
+export class SwitchControl extends React.Component<BooleanControlInterface, BooleanControlInterface> {
   state = {
     variable: this.props.variable,
   };
