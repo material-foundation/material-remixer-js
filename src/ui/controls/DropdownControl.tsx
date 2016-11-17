@@ -16,42 +16,26 @@
 
 import * as React from "react";
 import { CSS } from "../../lib/Constants";
-import { StringControlInterface } from "./controlInterfaces";
-import { StringVariable } from "../../core/variables/StringVariable";
+import { StringControlProps } from "./controlProps";
 
 /**
  * A dropdown control.
  * @class
  * @extends React.Component
  */
-export class DropdownControl extends React.Component<StringControlInterface, StringControlInterface> {
+export class DropdownControl
+    extends React.Component<StringControlProps, { selectedValue: string; }> {
+
   state = {
-    variable: this.props.variable,
+    selectedValue: this.props.variable.selectedValue,
   };
 
-  /** @override */
-  componentWillMount() {
-    // Add the selected value to possible values array if doesn't exsit.
-    const {
-      possibleValues,
-      selectedValue
-    } = this.state.variable;
-
-    if (possibleValues.indexOf(selectedValue) === -1) {
-      possibleValues.push(selectedValue);
-      this.updatedSelectedValue(selectedValue);
-    };
-  }
-
-  /**
-   * Updates the variable with new selectedValue.
-   * @param {string} value The new selectedValue.
-   */
-  updatedSelectedValue(value: string) {
-    const { variable } = this.state;
-    variable.selectedValue = value;
-    this.setState({variable: variable});
-  }
+  /** Handles the update event for this control. */
+  handleUpdate = (event: any) => {
+    const selectedValue = event.target.getAttribute("data");
+    this.props.onUpdate(this.props.variable, selectedValue);
+    this.setState({selectedValue: selectedValue});
+  };
 
   /** @override */
   render() {
@@ -60,7 +44,7 @@ export class DropdownControl extends React.Component<StringControlInterface, Str
       key,
       possibleValues,
       selectedValue
-    } = this.state.variable;
+    } = this.props.variable;
     const id = `${CSS.RMX_DROPDOWN}-${key}`;
 
     return (
@@ -68,13 +52,17 @@ export class DropdownControl extends React.Component<StringControlInterface, Str
         <span className={CSS.MDL_PRIMARY}>{title}</span>
         <span className={CSS.MDL_SECONDARY}>
           <button id={id} className="mdl-button mdl-js-button">
-            <span>{selectedValue}<i className="material-icons">arrow_drop_down</i></span>
+            <span>
+              {selectedValue}<i className="material-icons">arrow_drop_down</i>
+            </span>
           </button>
-          <ul className="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
-              htmlFor={id}>
+          <ul
+            className="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+            htmlFor={id}
+          >
             {possibleValues.map((value: string) => (
               <li className="mdl-menu__item" key={value}
-                onClick={this.updatedSelectedValue.bind(this, value)}
+                onClick={this.handleUpdate}
                 data={value}>{value}
               </li>
             ))}

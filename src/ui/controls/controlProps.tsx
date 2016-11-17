@@ -25,56 +25,59 @@ import { Variable } from "../../core/variables/Variable";
  * Interface for variable controls properties and state.
  * @interface
  */
-interface ControlInterface {
+export interface ControlUpdateProps {
+  onUpdate?(variable: Variable, selectedValue: any): void;
+}
+
+/**
+ * Interface for variable control properties.
+ * @interface
+ */
+interface ControlVariableProps extends ControlUpdateProps {
   variable: Variable;
 }
 
 /**
- * Interface for the properties and state of a control that implements a
- * Boolean variable.
+ * Interface for the properties of a control that implements a Boolean variable.
  * @interface
  * @extends ControlInterface
  */
-export interface BooleanControlInterface extends ControlInterface {
+export interface BooleanControlProps extends ControlVariableProps {
   variable: BooleanVariable;
 }
 
 /**
- * Interface for the properties and state of a control that implements a
- * Color variable.
+ * Interface for the properties of a control that implements a Color variable.
  * @interface
  * @extends ControlInterface
  */
-export interface ColorControlInterface extends ControlInterface {
+export interface ColorControlProps extends ControlVariableProps {
   variable: ColorVariable;
 }
 
 /**
- * Interface for the properties and state of a control that implements a
- * Number variable.
+ * Interface for the properties of a control that implements a Number variable.
  * @interface
  * @extends ControlInterface
  */
-export interface NumberControlInterface extends ControlInterface {
+export interface NumberControlProps extends ControlVariableProps {
   variable: NumberVariable;
 }
 
 /**
- * Interface for the properties and state of a control that implements a
- * Range variable.
+ * Interface for the properties of a control that implements a Range variable.
  * @interface
  * @extends ControlInterface
  */
-export interface RangeControlInterface extends ControlInterface {
+export interface RangeControlProps extends ControlVariableProps {
   variable: RangeVariable;
 }
 
 /**
- * Interface for the properties and state of a control that implements a
- * String variable.
+ * Interface for the properties of a control that implements a String variable.
  * @interface
  * @extends ControlInterface
  */
-export interface StringControlInterface extends ControlInterface {
+export interface StringControlProps extends ControlVariableProps {
   variable: StringVariable;
 }

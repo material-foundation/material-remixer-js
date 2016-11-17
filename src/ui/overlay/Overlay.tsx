@@ -16,19 +16,24 @@
 
 import * as React from "react";
 import { ColorSwatchControl } from "../controls/ColorSwatchControl";
+import { ControlUpdateProps } from "../controls/controlProps";
+import { CSS, VariableType } from "../../lib/Constants";
 import { DropdownControl } from "../controls/DropdownControl";
 import { RadioListControl } from "../controls/RadioListControl";
 import { SliderControl } from "../controls/SliderControl";
+import { StringVariable } from "../../core/variables/StringVariable";
 import { SwitchControl } from "../controls/SwitchControl";
 import { TextFieldControl } from "../controls/TextFieldControl";
 import { Variable } from "../../core/variables/Variable";
-import { VariableType } from "../../lib/Constants";
 
 /**
  * Interface for a React class that requires an array of Variables.
  * @interface
+ * @extends ControlUpdateProps
  */
-export interface OverlayVariables { variables: Array<Variable>; }
+export interface OverlayVariables extends ControlUpdateProps {
+  variables: Array<Variable>;
+}
 
 /**
  * Renders a list of remixer controls for each variable in an overlay card.
@@ -36,10 +41,7 @@ export interface OverlayVariables { variables: Array<Variable>; }
  * @class
  * @extends React.Component
  */
-export class Overlay extends React.Component<OverlayVariables, OverlayVariables> {
-  state = {
-    variables: this.props.variables,
-  };
+export class Overlay extends React.Component<OverlayVariables, void> {
 
   /**
    * Returns a control as determined by the variable `dataType` property.
@@ -47,40 +49,44 @@ export class Overlay extends React.Component<OverlayVariables, OverlayVariables>
    * @return {any} A control component.
    */
   controlForVariable(variable: Variable): any {
-    let Control: any = null;
     switch (variable.dataType) {
       case VariableType.BOOLEAN:
-        Control = SwitchControl;
-        break;
+        return SwitchControl;
       case VariableType.RANGE:
-        Control = SliderControl;
-        break;
+        return SliderControl;
       case VariableType.STRING:
-        if (!variable["possibleValues"]) {
-          Control = TextFieldControl;
-        } else if (variable["possibleValues"].length === 2) {
-          Control = RadioListControl;
+        const { possibleValues } = variable as StringVariable;
+        if (!possibleValues) {
+          return TextFieldControl;
+        } else if (possibleValues.length === 2) {
+          return RadioListControl;
         } else {
-          Control = DropdownControl;
+          return DropdownControl;
         }
-        break;
       case VariableType.NUMBER:
-        Control = TextFieldControl;
-        break;
+        return TextFieldControl;
       case VariableType.COLOR:
-        Control = ColorSwatchControl;
-        break;
+        return ColorSwatchControl;
     }
-    return <Control variable={variable} key={variable.key} />;
+    return null;
   }
 
   /** @override */
   render() {
+    let controls: Array<any> = new Array();
+    for (let variable of this.props.variables) {
+      let Control = this.controlForVariable(variable);
+      controls.push(
+        <Control
+          variable={variable}
+          onUpdate={this.props.onUpdate}
+          key={variable.key} />
+      );
+    }
+
     return (
-      <div className="rmx-list-control mdl-list">
-        {this.state.variables.map((variable) => (
-          this.controlForVariable(variable)
-        ))}
+      <div className={CSS.MDL_LIST}>
+        {controls}
       </div>
     );
   }

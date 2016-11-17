@@ -16,28 +16,26 @@
 
 import * as React from "react";
 import { CSS, VariableType } from "../../lib/Constants";
-import { RangeControlInterface } from "./controlInterfaces";
-import { RangeVariable } from "../../core/variables/RangeVariable";
+import { RangeControlProps } from "./controlProps";
 
 /**
  * A slider control.
  * @class
  * @extends React.Component
  */
-export class SliderControl extends React.Component<RangeControlInterface, RangeControlInterface> {
+export class SliderControl
+    extends React.Component<RangeControlProps, { selectedValue: number; }> {
+
   state = {
-    variable: this.props.variable,
+    selectedValue: this.props.variable.selectedValue,
   };
 
-  /**
-   * Handles a change event for the slider.
-   * @param {Event} event The change event.
-   */
-  handleChange(event: Event) {
-    const { variable } = this.state;
-    variable.selectedValue = (event.target as any).value;
-    this.setState({variable: variable});
-  }
+  /** Handles the update event for this control. */
+  handleUpdate = (event: any) => {
+    const selectedValue = event.target.value;
+    this.props.onUpdate(this.props.variable, selectedValue);
+    this.setState({selectedValue: selectedValue});
+  };
 
   /** @override */
   render() {
@@ -48,7 +46,7 @@ export class SliderControl extends React.Component<RangeControlInterface, RangeC
       minValue,
       maxValue,
       increment,
-    } = this.state.variable;
+    } = this.props.variable;
     const id = `${CSS.RMX_SLIDER}-${key}`;
 
     return (
@@ -62,7 +60,8 @@ export class SliderControl extends React.Component<RangeControlInterface, RangeC
             <input id={id} type="range" className="mdl-slider mdl-js-slider"
               min={minValue} max={maxValue} step={increment}
               value={selectedValue}
-              onChange={this.handleChange.bind(this)} />
+              onChange={this.handleUpdate}
+            />
             <span className={CSS.RMX_SLIDER_MAX}>{maxValue}</span>
           </span>
         </span>

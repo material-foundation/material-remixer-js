@@ -16,28 +16,26 @@
 
 import * as React from "react";
 import { CSS, VariableType } from "../../lib/Constants";
-import { StringControlInterface } from "./controlInterfaces";
-import { StringVariable } from "../../core/variables/StringVariable";
+import { StringControlProps } from "./controlProps";
 
 /**
  * A textfield control.
  * @class
  * @extends React.Component
  */
-export class TextFieldControl extends React.Component<StringControlInterface, StringControlInterface> {
+export class TextFieldControl
+    extends React.Component<StringControlProps, { selectedValue: string | number; }> {
+
   state = {
-    variable: this.props.variable,
+    selectedValue: this.props.variable.selectedValue,
   };
 
-  /**
-   * Handles a change event for the textfield.
-   * @param {Event} event The change event.
-   */
-  handleChange(event: Event) {
-    const { variable } = this.state;
-    variable.selectedValue = (event.target as any).value;
-    this.setState({variable: variable});
-  }
+  /** Handles the update event for this control. */
+  handleUpdate = (event: any) => {
+    const selectedValue = event.target.value;
+    this.props.onUpdate(this.props.variable, selectedValue);
+    this.setState({selectedValue: selectedValue});
+  };
 
   /** @override */
   render() {
@@ -46,7 +44,7 @@ export class TextFieldControl extends React.Component<StringControlInterface, St
       key,
       dataType,
       selectedValue
-    } = this.state.variable;
+    } = this.props.variable;
     const id = `${CSS.RMX_TEXTFIELD}-${key}`;
     const isNumber: boolean = dataType === VariableType.NUMBER;
     const pattern = isNumber ? "-?[0-9]*(\.[0-9]+)?" : ".*";
@@ -55,12 +53,15 @@ export class TextFieldControl extends React.Component<StringControlInterface, St
       <div className={`${CSS.RMX_TEXTFIELD} ${CSS.MDL_LIST_ITEM} ${CSS.MDL_TWO_LINE}`}>
         <span className={CSS.MDL_PRIMARY}>{title}
           <span className={`${CSS.MDL_SECONDARY} mdl-textfield mdl-js-textfield`}>
-            <input className="mdl-textfield__input" type="text" id={id}
+            <input className="mdl-textfield__input" type="text"
+              id={id}
               pattern={pattern}
               value={selectedValue}
-              onChange={this.handleChange.bind(this)} />
-            <label className="mdl-textfield__label"
-              htmlFor={id}>{`Enter ${isNumber ? "number" : "text"}...`}</label>
+              onChange={this.handleUpdate}
+            />
+            <label className="mdl-textfield__label" htmlFor={id}>
+              {`Enter ${isNumber ? "number" : "text"}...`}
+            </label>
             <span className="mdl-textfield__error">Input is not a number!</span>
           </span>
         </span>

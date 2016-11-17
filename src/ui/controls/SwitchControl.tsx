@@ -15,7 +15,7 @@
  */
 
 import * as React from "react";
-import { BooleanControlInterface } from "./controlInterfaces";
+import { BooleanControlProps } from "./controlProps";
 import { CSS } from "../../lib/Constants";
 
 /**
@@ -23,20 +23,19 @@ import { CSS } from "../../lib/Constants";
  * @class
  * @extends React.Component
  */
-export class SwitchControl extends React.Component<BooleanControlInterface, BooleanControlInterface> {
+export class SwitchControl
+    extends React.Component<BooleanControlProps, { selectedValue: boolean; }> {
+
   state = {
-    variable: this.props.variable,
+    selectedValue: this.props.variable.selectedValue,
   };
 
-  /**
-   * Handles a click event on the switch.
-   * @param {Event} event The click event.
-   */
-  handleClick(event: Event) {
-    const { variable } = this.state;
-    variable.selectedValue = !variable.selectedValue;
-    this.setState({variable: variable});
-  }
+  /** Handles the update event for this control. */
+  handleUpdate = (event: any) => {
+    const selectedValue = !this.state.selectedValue;
+    this.props.onUpdate(this.props.variable, selectedValue);
+    this.setState({selectedValue: selectedValue});
+  };
 
   /** @override */
   render() {
@@ -44,19 +43,23 @@ export class SwitchControl extends React.Component<BooleanControlInterface, Bool
       title,
       key,
       selectedValue,
-    } = this.state.variable;
+    } = this.props.variable;
     const id = `${CSS.RMX_SWITCH}-${key}`;
 
     return (
       <div className={`${CSS.RMX_SWITCH} ${CSS.MDL_LIST_ITEM}`}>
         <span className={CSS.MDL_PRIMARY}>{title}</span>
         <span className={CSS.MDL_SECONDARY}>
-          <label className="mdl-switch mdl-js-switch mdl-js-ripple-effect"
-              htmlFor={id}>
-            <input id={id} type="checkbox" className="mdl-switch__input"
+          <label
+            className="mdl-switch mdl-js-switch mdl-js-ripple-effect"
+            htmlFor={id}
+          >
+            <input
+              id={id} type="checkbox" className="mdl-switch__input"
               checked={selectedValue}
-              onChange={this.handleClick.bind(this)} />
-            <span className="mdl-switch__label"></span>
+              onChange={this.handleUpdate}
+            />
+            <span className="mdl-switch__label" />
           </label>
         </span>
       </div>

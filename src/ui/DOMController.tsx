@@ -27,13 +27,10 @@ import { remixer } from "../core/Remixer";
  * Interface for the properties assigned to the DOMController component.
  * @interface
  */
-interface ControllerProps { wrapperElement: HTMLElement; }
-
-/**
- * Interface for the state of the DOMController component.
- * @interface
- */
-interface ControllerState { variables?: Array<Variable>; }
+interface ControllerProps {
+  wrapperElement: HTMLElement;
+  variables: Array<Variable>;
+}
 
 /**
  * Renders an MDL card-styled overlay containing a child control for each
@@ -41,10 +38,7 @@ interface ControllerState { variables?: Array<Variable>; }
  * @class
  * @extends React.Component
  */
-export class DOMController extends React.Component<ControllerProps, ControllerState> {
-  state = {
-    variables: remixer.attachedInstance.variablesArray,
-  };
+export class DOMController extends React.Component<ControllerProps, void> {
 
   /** @override */
   componentDidMount() {
@@ -89,6 +83,16 @@ export class DOMController extends React.Component<ControllerProps, ControllerSt
     this.props.wrapperElement.classList.toggle(CSS.RMX_VISIBLE);
   }
 
+  /**
+   * Handles all control updates by setting a new selected value for the
+   * variable.
+   * @param {Variable} variable The variable to update.
+   * @param {any} selectedValue The new selected value.
+   */
+  onUpdate = (variable: Variable, selectedValue: any): void => {
+    variable.selectedValue = selectedValue;
+  }
+
   /** @override */
   render() {
     return (
@@ -97,7 +101,7 @@ export class DOMController extends React.Component<ControllerProps, ControllerSt
           <h2 className="mdl-card__title-text">Remixer</h2>
         </div>
         <div className="mdl-card__supporting-text mdl-card__actions mdl-card--border">
-          <Overlay variables={this.state.variables} />
+          <Overlay variables={this.props.variables} onUpdate={this.onUpdate} />
         </div>
       </div>
     );
@@ -108,4 +112,10 @@ export class DOMController extends React.Component<ControllerProps, ControllerSt
  * Renders the DOMController component to the overlay wrapper element.
  */
 let element = document.getElementById(CSS.RMX_OVERLAY_WRAPPER);
-ReactDOM.render(<div><DOMController wrapperElement={element} /></div>, element);
+ReactDOM.render(
+  <div>
+    <DOMController
+      wrapperElement={element}
+      variables={remixer.attachedInstance.variablesArray}>
+    </DOMController>
+  </div>, element);

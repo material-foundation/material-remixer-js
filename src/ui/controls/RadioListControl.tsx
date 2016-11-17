@@ -16,42 +16,26 @@
 
 import * as React from "react";
 import { CSS, VariableType } from "../../lib/Constants";
-import { StringControlInterface } from "./controlInterfaces";
-import { StringVariable } from "../../core/variables/StringVariable";
+import { StringControlProps } from "./controlProps";
 
 /**
  * A radio list control.
  * @class
  * @extends React.Component
  */
-export class RadioListControl extends React.Component<StringControlInterface, StringControlInterface> {
+export class RadioListControl
+    extends React.Component<StringControlProps, { selectedValue: string; }> {
+
   state = {
-    variable: this.props.variable,
+    selectedValue: this.props.variable.selectedValue,
   };
 
-  /** @override */
-  componentWillMount() {
-    // Add the selected value to possible values array if doesn't exsit.
-    const {
-      possibleValues,
-      selectedValue
-    } = this.state.variable;
-
-    if (possibleValues.indexOf(selectedValue) === -1) {
-      possibleValues.push(selectedValue);
-      this.updatedSelectedValue(selectedValue);
-    };
-  }
-
-  /**
-   * Updates the variable with new selectedValue.
-   * @param {string} value The new selectedValue.
-   */
-  updatedSelectedValue(value: string) {
-    const { variable } = this.state;
-    variable.selectedValue = value;
-    this.setState({variable: variable});
-  }
+  /** Handles the update event for this control. */
+  handleUpdate = (event: any) => {
+    const selectedValue = event.target.value;
+    this.props.onUpdate(this.props.variable, selectedValue);
+    this.setState({selectedValue: selectedValue});
+  };
 
   /** @override */
   render() {
@@ -60,7 +44,7 @@ export class RadioListControl extends React.Component<StringControlInterface, St
       key,
       possibleValues,
       selectedValue
-    } = this.state.variable;
+    } = this.props.variable;
     const id = `${CSS.RMX_RADIO_LIST_ITEM}-${key}`;
 
     return (
@@ -69,12 +53,13 @@ export class RadioListControl extends React.Component<StringControlInterface, St
         <span className={CSS.MDL_SECONDARY}>
           {possibleValues.map((value: string, i: number) => (
             <label className={`${CSS.RMX_RADIO_LIST_ITEM} mdl-radio mdl-js-radio mdl-js-ripple-effect`}
-                htmlFor={`${id}-${i}`} key={`${id}-${i}`}>
+                htmlFor={`${id}-${i}`} key={value}>
               <input type="radio" id={`${id}-${i}`}
                 className="mdl-radio__button"
                 name="options" value={value}
                 checked={selectedValue === value}
-                onChange={this.updatedSelectedValue.bind(this, value)} />
+                onChange={this.handleUpdate}
+              />
               <span className="mdl-radio__label">{value}</span>
             </label>
           ))}
