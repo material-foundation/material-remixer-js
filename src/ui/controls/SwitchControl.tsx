@@ -23,19 +23,18 @@ import { CSS } from "../../lib/Constants";
  * @class
  * @extends React.Component
  */
-export class SwitchControl
-    extends React.Component<BooleanControlProps, { selectedValue: boolean; }> {
-
-  state = {
-    selectedValue: this.props.variable.selectedValue,
-  };
+export class SwitchControl extends React.Component<BooleanControlProps, void> {
 
   /** Handles the update event for this control. */
-  handleUpdate = (event: any) => {
-    const selectedValue = !this.state.selectedValue;
-    this.props.onUpdate(this.props.variable, selectedValue);
-    this.setState({selectedValue: selectedValue});
-  };
+  onChange = (event: React.FormEvent<HTMLInputElement>): void => {
+    const { selectedValue } = this.props.variable;
+    this.props.updateVariable(this.props.variable, !selectedValue);
+  }
+
+  // /** @override */
+  // shouldComponentUpdate(nextProps: BooleanControlProps) {
+  //   return nextProps.variable !== this.props.variable;
+  // }
 
   /** @override */
   render() {
@@ -45,7 +44,7 @@ export class SwitchControl
       selectedValue,
     } = this.props.variable;
     const id = `${CSS.RMX_SWITCH}-${key}`;
-
+    console.log("SwitchControl render");
     return (
       <div className={`${CSS.RMX_SWITCH} ${CSS.MDL_LIST_ITEM}`}>
         <span className={CSS.MDL_PRIMARY}>{title}</span>
@@ -57,7 +56,7 @@ export class SwitchControl
             <input
               id={id} type="checkbox" className="mdl-switch__input"
               checked={selectedValue}
-              onChange={this.handleUpdate}
+              onChange={this.onChange}
             />
             <span className="mdl-switch__label" />
           </label>

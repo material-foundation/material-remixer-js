@@ -71,22 +71,25 @@ export class Overlay extends React.Component<OverlayVariables, void> {
     return null;
   }
 
+  // /** @override */
+  // shouldComponentUpdate(nextProps: OverlayVariables) {
+  //   return nextProps.variables !== this.props.variables;
+  // }
+
   /** @override */
   render() {
-    let controls: Array<any> = new Array();
-    for (let variable of this.props.variables) {
-      let Control = this.controlForVariable(variable);
-      controls.push(
-        <Control
-          variable={variable}
-          onUpdate={this.props.onUpdate}
-          key={variable.key} />
-      );
-    }
-
     return (
       <div className={CSS.MDL_LIST}>
-        {controls}
+        {this.props.variables.map(variable => {
+          const Control = this.controlForVariable(variable);
+          return (
+            <Control
+              variable={variable}
+              updateVariable={this.props.updateVariable}
+              key={variable.key}
+            />
+          );
+        })}
       </div>
     );
   }

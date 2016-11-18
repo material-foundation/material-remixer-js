@@ -23,19 +23,16 @@ import { StringControlProps } from "./controlProps";
  * @class
  * @extends React.Component
  */
-export class RadioListControl
-    extends React.Component<StringControlProps, { selectedValue: string; }> {
-
-  state = {
-    selectedValue: this.props.variable.selectedValue,
-  };
+export class RadioListControl extends React.Component<StringControlProps, void> {
 
   /** Handles the update event for this control. */
-  handleUpdate = (event: any) => {
-    const selectedValue = event.target.value;
-    this.props.onUpdate(this.props.variable, selectedValue);
-    this.setState({selectedValue: selectedValue});
-  };
+  onChange = (event: React.FormEvent<HTMLInputElement>): void => {
+    this.props.updateVariable(
+      this.props.variable,
+      (event.target as HTMLInputElement).value
+    );
+    this.forceUpdate();
+  }
 
   /** @override */
   render() {
@@ -53,12 +50,13 @@ export class RadioListControl
         <span className={CSS.MDL_SECONDARY}>
           {possibleValues.map((value: string, i: number) => (
             <label className={`${CSS.RMX_RADIO_LIST_ITEM} mdl-radio mdl-js-radio mdl-js-ripple-effect`}
-                htmlFor={`${id}-${i}`} key={value}>
+              htmlFor={`${id}-${i}`} key={value}
+            >
               <input type="radio" id={`${id}-${i}`}
                 className="mdl-radio__button"
                 name="options" value={value}
                 checked={selectedValue === value}
-                onChange={this.handleUpdate}
+                onChange={this.onChange}
               />
               <span className="mdl-radio__label">{value}</span>
             </label>

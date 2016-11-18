@@ -23,19 +23,20 @@ import { StringControlProps } from "./controlProps";
  * @class
  * @extends React.Component
  */
-export class TextFieldControl
-    extends React.Component<StringControlProps, { selectedValue: string | number; }> {
-
-  state = {
-    selectedValue: this.props.variable.selectedValue,
-  };
+export class TextFieldControl extends React.Component<StringControlProps, void> {
 
   /** Handles the update event for this control. */
-  handleUpdate = (event: any) => {
-    const selectedValue = event.target.value;
-    this.props.onUpdate(this.props.variable, selectedValue);
-    this.setState({selectedValue: selectedValue});
-  };
+  onChange = (event: React.FormEvent<HTMLInputElement>): void => {
+    this.props.updateVariable(
+      this.props.variable,
+      (event.target as HTMLInputElement).value
+    );
+  }
+
+  /** @override */
+  shouldComponentUpdate(nextProps: StringControlProps) {
+    return nextProps.variable !== this.props.variable;
+  }
 
   /** @override */
   render() {
@@ -48,7 +49,7 @@ export class TextFieldControl
     const id = `${CSS.RMX_TEXTFIELD}-${key}`;
     const isNumber: boolean = dataType === VariableType.NUMBER;
     const pattern = isNumber ? "-?[0-9]*(\.[0-9]+)?" : ".*";
-
+    console.log("TextFieldControl render");
     return (
       <div className={`${CSS.RMX_TEXTFIELD} ${CSS.MDL_LIST_ITEM} ${CSS.MDL_TWO_LINE}`}>
         <span className={CSS.MDL_PRIMARY}>{title}
@@ -57,7 +58,7 @@ export class TextFieldControl
               id={id}
               pattern={pattern}
               value={selectedValue}
-              onChange={this.handleUpdate}
+              onChange={this.onChange}
             />
             <label className="mdl-textfield__label" htmlFor={id}>
               {`Enter ${isNumber ? "number" : "text"}...`}

@@ -23,19 +23,16 @@ import { StringControlProps } from "./controlProps";
  * @class
  * @extends React.Component
  */
-export class DropdownControl
-    extends React.Component<StringControlProps, { selectedValue: string; }> {
-
-  state = {
-    selectedValue: this.props.variable.selectedValue,
-  };
+export class DropdownControl extends React.Component<StringControlProps, void> {
 
   /** Handles the update event for this control. */
-  handleUpdate = (event: any) => {
-    const selectedValue = event.target.getAttribute("data");
-    this.props.onUpdate(this.props.variable, selectedValue);
-    this.setState({selectedValue: selectedValue});
-  };
+  onClick = (event: React.FormEvent<HTMLElement>): void => {
+    this.props.updateVariable(
+      this.props.variable,
+      (event.target as HTMLElement).dataset["value"]
+    );
+    this.forceUpdate();
+  }
 
   /** @override */
   render() {
@@ -62,8 +59,8 @@ export class DropdownControl
           >
             {possibleValues.map((value: string) => (
               <li className="mdl-menu__item" key={value}
-                onClick={this.handleUpdate}
-                data={value}>{value}
+                onClick={this.onClick}
+                data-value={value}>{value}
               </li>
             ))}
           </ul>

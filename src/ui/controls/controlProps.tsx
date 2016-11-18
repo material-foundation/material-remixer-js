@@ -26,7 +26,7 @@ import { Variable } from "../../core/variables/Variable";
  * @interface
  */
 export interface ControlUpdateProps {
-  onUpdate?(variable: Variable, selectedValue: any): void;
+  updateVariable(variable: Variable, selectedValue: any): void;
 }
 
 /**

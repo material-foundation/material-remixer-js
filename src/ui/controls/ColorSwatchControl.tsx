@@ -19,56 +19,21 @@ import { ColorControlProps } from "./controlProps";
 import { CSS, VariableType } from "../../lib/Constants";
 
 /**
- * Interface containing properties for a single color swatch.
- * @interface
- */
-interface ColorSwatchProps {
-  color: string;
-  isSelected: boolean;
-  onClick: any;
-}
-
-/**
- * Returns a single color swatch displayed within the `ColorSwatchControl`.
- * @param {ColorSwatchProps} props The color swatch properties.
- */
-function ColorSwatch(props: ColorSwatchProps) {
-  const {
-    color,
-    isSelected,
-    onClick
-  } = props;
-  return (
-    <div
-      className={CSS.RMX_COLOR_SWATCH_ITEM}
-      style={{backgroundColor: color}}
-      value={color}
-      onClick={onClick}
-    >
-      {isSelected ? <i className="material-icons">check</i> : ""}
-    </div>
-  );
-}
-
-/**
  * A color swatch picker control consisting of a single color swatch for each
  * possible value.
  * @class
  * @extends React.Component
  */
-export class ColorSwatchControl
-    extends React.Component<ColorControlProps, { selectedValue: string; }> {
-
-  state = {
-    selectedValue: this.props.variable.selectedValue,
-  };
+export class ColorSwatchControl extends React.Component<ColorControlProps, void> {
 
   /** Handles the update event for this control. */
-  handleUpdate = (event: any) => {
-    const selectedValue = event.target.getAttribute("value");
-    this.props.onUpdate(this.props.variable, selectedValue);
-    this.setState({selectedValue: selectedValue});
-  };
+  onClick = (event: React.FormEvent<HTMLElement>): void => {
+    this.props.updateVariable(
+      this.props.variable,
+      (event.target as HTMLElement).dataset["value"]
+    );
+    this.forceUpdate();
+  }
 
   /** @override */
   render() {
@@ -88,7 +53,7 @@ export class ColorSwatchControl
             {possibleValues.map((value: string) => (
               <ColorSwatch color={value} key={value}
                 isSelected={selectedValue === value}
-                onClick={this.handleUpdate}
+                onClick={this.onClick}
               />
             ))}
           </span>
@@ -96,4 +61,36 @@ export class ColorSwatchControl
       </div>
     );
   }
+}
+
+/**
+ * Interface containing properties for a single color swatch.
+ * @interface
+ */
+interface ColorSwatchProps {
+  color: string;
+  isSelected: boolean;
+  onClick: any;
+}
+
+/**
+ * Returns a single color swatch displayed within the `ColorSwatchControl`.
+ * @param {ColorSwatchProps} props The color swatch properties.
+ */
+function ColorSwatch(props: ColorSwatchProps) {
+  const {
+    color,
+    isSelected,
+    onClick,
+  } = props;
+  return (
+    <div
+      className={CSS.RMX_COLOR_SWATCH_ITEM}
+      style={{backgroundColor: color}}
+      data-value={color}
+      onClick={onClick}
+    >
+      {isSelected ? <i className="material-icons">check</i> : ""}
+    </div>
+  );
 }
