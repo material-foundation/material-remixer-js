@@ -33,10 +33,10 @@ export class SliderControl extends React.Component<RangeControlProps, void> {
     );
   }
 
-  // /** @override */
-  // shouldComponentUpdate(nextProps: RangeControlProps) {
-  //   return nextProps.variable !== this.props.variable;
-  // }
+  /** @override */
+  shouldComponentUpdate(nextProps: RangeControlProps) {
+    return nextProps.variable !== this.props.variable;
+  }
 
   /** @override */
   render() {
@@ -49,7 +49,7 @@ export class SliderControl extends React.Component<RangeControlProps, void> {
       increment,
     } = this.props.variable;
     const id = `${CSS.RMX_SLIDER}-${key}`;
-    console.log("SliderControl render");
+
     return (
       <div className={`${CSS.RMX_SLIDER} ${CSS.MDL_LIST_ITEM} ${CSS.MDL_TWO_LINE}`}>
         <span className={CSS.MDL_PRIMARY}>

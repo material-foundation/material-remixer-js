@@ -49,7 +49,7 @@ export class TextFieldControl extends React.Component<StringControlProps, void> 
     const id = `${CSS.RMX_TEXTFIELD}-${key}`;
     const isNumber: boolean = dataType === VariableType.NUMBER;
     const pattern = isNumber ? "-?[0-9]*(\.[0-9]+)?" : ".*";
-    console.log("TextFieldControl render");
+
     return (
       <div className={`${CSS.RMX_TEXTFIELD} ${CSS.MDL_LIST_ITEM} ${CSS.MDL_TWO_LINE}`}>
         <span className={CSS.MDL_PRIMARY}>{title}

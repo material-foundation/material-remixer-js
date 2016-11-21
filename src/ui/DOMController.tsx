@@ -89,66 +89,20 @@ export class DOMController extends React.Component<ControllerProps, void> {
   /**
    * Handles all control updates by setting a new selected value for the
    * variable.
+   *
+   * To maintain immutability for React, lets first clone the variable,
+   * update its selected value, then set it back to the variables array.
+   * Doing so allows each control to handle its own `shouldComponentUpdate`
+   * method to determine if it should be re-rendered.
+   *
    * @param {Variable} variable The variable to update.
    * @param {any} selectedValue The new selected value.
    */
   updateVariable = (variable: Variable, selectedValue: any): void => {
     const index = variables.indexOf(variable);
-    // variable.selectedValue = update(variable.selectedValue, {$set: selectedValue});
-    // variable.selectedValue = selectedValue;
-    //
-    // const newVariable = update(variable, {
-    //   selectedValue: {$set: "hello"}
-    // });
-
-    // const newVariable = update(variable, {
-    //   $merge: {selectedValue: "hello"}
-    // });
-    //
-    //
-    // console.log(variables);
-
-
-    // let newVariables = update(variables, {
-    //   0: {variable: { $set: { selectedValue: "hello" }}}
-    // });
-
-    const newVariable = update(variables, {
-      [index]: {selectedValue: {$set: "hello"}}
-    });
-
-    // update.extend("$yo", function(newValue, original) {
-    //   console.log(newValue, original);
-    //   let sv = "hello";
-    //   original.selectedValue = sv;
-    //   return original;
-    // });
-    //
-    // const newVariable = update(variable, {
-    //   $yo: {selectedValue: "hello"}
-    // });
-
-    // const myUpdate = newContext();
-    // myUpdate.extend(variable, function(value: any, original: any) {
-    //   return original;
-    // });
-
-
-    // const newVariable = update(variable.selectedValue, {$set: selectedValue});
-    console.log(newVariable);
-
-
-    // console.log("variable", variable.selectedValue);
-    // const updatedVariable = update(variable, {selectedValue: {$apply: function() {return selectedValue; }}});
-    // variable = update(selectedValue: {$set: selectedValue}});
-    // console.log("variable", variable.selectedValue);
-    // variables = update(variables, {index: {$set: variable}});
-    // variables = update(variables, {index: {$set: variable} selectedValue: {$set: selectedValue}}}});
-    // console.log(variable.selectedValue);
-    //
-    // variables
-
-    // this.forceUpdate();
+    let clonedVariable = variable.clone();
+    clonedVariable.selectedValue = selectedValue;
+    variables[index] = clonedVariable;
   }
 
   /** @override */
@@ -172,9 +126,8 @@ export class DOMController extends React.Component<ControllerProps, void> {
 let variables = remixer.attachedInstance.variablesArray;
 const overlayWrapper = document.getElementById(CSS.RMX_OVERLAY_WRAPPER);
 
-function redraw(variable?: Variable): void {
-  console.log("redraw");
-
+/** Renders the DOMController component to the overlay wrapper element. */
+function redraw(): void {
   ReactDOM.render(
     <DOMController
       wrapperElement={overlayWrapper}
@@ -184,20 +137,9 @@ function redraw(variable?: Variable): void {
   );
 }
 
+// Add `redraw()` as a callback when selected value changes on a variable.
 variables.forEach(variable => {
   variable.addCallback(redraw);
 });
 
-
 redraw();
-// /**
-//  * Renders the DOMController component to the overlay wrapper element.
-//  */
-// let element = document.getElementById(CSS.RMX_OVERLAY_WRAPPER);
-// ReactDOM.render(
-//   <div>
-//     <DOMController
-//       wrapperElement={element}
-//       variables={remixer.attachedInstance.variablesArray}>
-//     </DOMController>
-//   </div>, element);

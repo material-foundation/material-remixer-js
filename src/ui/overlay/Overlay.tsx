@@ -71,11 +71,6 @@ export class Overlay extends React.Component<OverlayVariables, void> {
     return null;
   }
 
-  // /** @override */
-  // shouldComponentUpdate(nextProps: OverlayVariables) {
-  //   return nextProps.variables !== this.props.variables;
-  // }
-
   /** @override */
   render() {
     return (

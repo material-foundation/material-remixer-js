@@ -32,7 +32,11 @@ export class ColorSwatchControl extends React.Component<ColorControlProps, void>
       this.props.variable,
       (event.target as HTMLElement).dataset["value"]
     );
-    this.forceUpdate();
+  }
+
+  /** @override */
+  shouldComponentUpdate(nextProps: ColorControlProps) {
+    return nextProps.variable !== this.props.variable;
   }
 
   /** @override */

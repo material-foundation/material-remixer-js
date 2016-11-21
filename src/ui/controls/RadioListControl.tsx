@@ -31,7 +31,11 @@ export class RadioListControl extends React.Component<StringControlProps, void> 
       this.props.variable,
       (event.target as HTMLInputElement).value
     );
-    this.forceUpdate();
+  }
+
+  /** @override */
+  shouldComponentUpdate(nextProps: StringControlProps) {
+    return nextProps.variable !== this.props.variable;
   }
 
   /** @override */

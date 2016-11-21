@@ -31,7 +31,11 @@ export class DropdownControl extends React.Component<StringControlProps, void> {
       this.props.variable,
       (event.target as HTMLElement).dataset["value"]
     );
-    this.forceUpdate();
+  }
+
+  /** @override */
+  shouldComponentUpdate(nextProps: StringControlProps) {
+    return nextProps.variable !== this.props.variable;
   }
 
   /** @override */

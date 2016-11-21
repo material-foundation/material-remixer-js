@@ -31,10 +31,10 @@ export class SwitchControl extends React.Component<BooleanControlProps, void> {
     this.props.updateVariable(this.props.variable, !selectedValue);
   }
 
-  // /** @override */
-  // shouldComponentUpdate(nextProps: BooleanControlProps) {
-  //   return nextProps.variable !== this.props.variable;
-  // }
+  /** @override */
+  shouldComponentUpdate(nextProps: BooleanControlProps) {
+    return nextProps.variable !== this.props.variable;
+  }
 
   /** @override */
   render() {
@@ -44,7 +44,7 @@ export class SwitchControl extends React.Component<BooleanControlProps, void> {
       selectedValue,
     } = this.props.variable;
     const id = `${CSS.RMX_SWITCH}-${key}`;
-    console.log("SwitchControl render");
+
     return (
       <div className={`${CSS.RMX_SWITCH} ${CSS.MDL_LIST_ITEM}`}>
         <span className={CSS.MDL_PRIMARY}>{title}</span>
