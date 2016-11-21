@@ -89,9 +89,8 @@ export class Variable implements VariableParams {
    */
   clone() {
     let cloned = new Variable(this.key, this.defaultValue, null);
-    for (let callback of this.callbacks) {
-      cloned._callbacks = this._callbacks.slice();
-    }
+    cloned.title = this.title;
+    cloned._callbacks = this._callbacks.slice();
     return cloned;
   }
 

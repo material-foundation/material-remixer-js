@@ -68,6 +68,7 @@ export class RangeVariable extends Variable implements RangeVariableParams {
       this.maxValue,
       this.increment
     );
+    cloned.title = this.title;
     cloned._callbacks = this._callbacks.slice();
     return cloned;
   }
