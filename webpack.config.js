@@ -1,7 +1,7 @@
 module.exports = {
   entry: {
     remixer: './src/core/Remixer.ts',
-    overlay: './src/ui/DOMController.tsx'
+    overlay: './src/ui/render.tsx'
   },
 
   output: {

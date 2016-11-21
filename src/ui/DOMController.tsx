@@ -14,17 +14,11 @@
  *  under the License.
  */
 
-import "./overlay/styles.less";
 import * as React from "react";
-import * as ReactDOM from "react-dom";
 import { KeyCode, KeyEvent, CSS } from "../lib/Constants";
 import { Messaging } from "../lib/Messaging";
 import { Overlay } from "./overlay/Overlay";
-import { Variable, VariableCallback } from "../core/variables/Variable";
-import { remixer } from "../core/Remixer";
-
-import * as update from "immutability-helper";
-// import { newContext } from "immutability-helper";
+import { Variable } from "../core/variables/Variable";
 
 /**
  * Interface for the properties assigned to the DOMController component.
@@ -33,6 +27,7 @@ import * as update from "immutability-helper";
 interface ControllerProps {
   wrapperElement: HTMLElement;
   variables: Array<Variable>;
+  updateVariable(variable: Variable, selectedValue: any): void;
 }
 
 /**
@@ -86,25 +81,6 @@ export class DOMController extends React.Component<ControllerProps, void> {
     this.props.wrapperElement.classList.toggle(CSS.RMX_VISIBLE);
   }
 
-  /**
-   * Handles all control updates by setting a new selected value for the
-   * variable.
-   *
-   * To maintain immutability for React, lets first clone the variable,
-   * update its selected value, then set it back to the variables array.
-   * Doing so allows each control to handle its own `shouldComponentUpdate`
-   * method to determine if it should be re-rendered.
-   *
-   * @param {Variable} variable The variable to update.
-   * @param {any} selectedValue The new selected value.
-   */
-  updateVariable = (variable: Variable, selectedValue: any): void => {
-    const index = variables.indexOf(variable);
-    let clonedVariable = variable.clone();
-    clonedVariable.selectedValue = selectedValue;
-    variables[index] = clonedVariable;
-  }
-
   /** @override */
   render() {
     return (
@@ -115,31 +91,10 @@ export class DOMController extends React.Component<ControllerProps, void> {
         <div className="mdl-card__supporting-text mdl-card__actions mdl-card--border">
           <Overlay
             variables={this.props.variables}
-            updateVariable={this.updateVariable}
+            updateVariable={this.props.updateVariable}
           />
         </div>
       </div>
     );
   }
 }
-
-let variables = remixer.attachedInstance.variablesArray;
-const overlayWrapper = document.getElementById(CSS.RMX_OVERLAY_WRAPPER);
-
-/** Renders the DOMController component to the overlay wrapper element. */
-function redraw(): void {
-  ReactDOM.render(
-    <DOMController
-      wrapperElement={overlayWrapper}
-      variables={variables}
-    />,
-    overlayWrapper
-  );
-}
-
-// Add `redraw()` as a callback when selected value changes on a variable.
-variables.forEach(variable => {
-  variable.addCallback(redraw);
-});
-
-redraw();
