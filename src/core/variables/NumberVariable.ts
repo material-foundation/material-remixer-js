@@ -52,6 +52,20 @@ export class NumberVariable extends Variable implements NumberVariableParams {
   }
 
   /**
+   * Clones the variable.
+   * @return {NumberVariable} Returns the cloned variable.
+   */
+  clone() {
+    let cloned = new NumberVariable(
+      this.key,
+      this.defaultValue,
+      this.possibleValues
+    );
+    cloned._callbacks = this._callbacks.slice();
+    return cloned;
+  }
+
+  /**
    * The array of possible values for this Variable.
    * @override
    * @type {Array<number>}
