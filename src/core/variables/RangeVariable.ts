@@ -57,6 +57,22 @@ export class RangeVariable extends Variable implements RangeVariableParams {
   }
 
   /**
+   * Clones the variable.
+   * @return {RangeVariable} Returns the cloned variable.
+   */
+  clone() {
+    let cloned = new RangeVariable(
+      this.key,
+      this.defaultValue,
+      this.minValue,
+      this.maxValue,
+      this.increment
+    );
+    cloned._callbacks = this._callbacks;
+    return cloned;
+  }
+
+  /**
    * The minimum value allowed for this Variable.
    * @override
    * @type {number}

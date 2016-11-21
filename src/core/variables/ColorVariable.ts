@@ -52,6 +52,20 @@ export class ColorVariable extends Variable implements ColorVariableParams {
   }
 
   /**
+   * Clones the variable.
+   * @return {ColorVariable} Returns the cloned variable.
+   */
+  clone() {
+    let cloned = new ColorVariable(
+      this.key,
+      this.defaultValue,
+      this.possibleValues
+    );
+    cloned._callbacks = this._callbacks;
+    return cloned;
+  }
+
+  /**
    * The array of possible values for this Variable.
    * @override
    * @type {Array<string>}

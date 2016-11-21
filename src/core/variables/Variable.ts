@@ -84,6 +84,18 @@ export class Variable implements VariableParams {
   }
 
   /**
+   * Clones the variable.
+   * @return {Variable} Returns the cloned variable.
+   */
+  clone() {
+    let cloned = new Variable(this.key, this.defaultValue, null);
+    for (let callback of this.callbacks) {
+      cloned.addCallback(callback);
+    }
+    return cloned;
+  }
+
+  /**
    * The data type represented by this Variable.
    * @type {string}
    */
@@ -134,7 +146,7 @@ export class Variable implements VariableParams {
     }
   }
 
-  private _callbacks: Array<VariableCallback> = new Array<VariableCallback>();
+  protected _callbacks: Array<VariableCallback> = new Array<VariableCallback>();
 
   /**
    * The callback method to be invoked when the Variable is updated.
