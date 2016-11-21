@@ -78,7 +78,7 @@ export class Variable implements VariableParams {
     this.defaultValue = defaultValue;
     this._selectedValue = defaultValue;
     if (callback) {
-      this.callbacks.push(callback);
+      this._callbacks.push(callback);
     }
     this._initialized = true;
   }
@@ -161,7 +161,7 @@ export class Variable implements VariableParams {
    * @param {VariableCallback} callback The callback to add.
    */
   addCallback(callback: VariableCallback): any {
-    this.callbacks.push(callback);
+    this._callbacks.push(callback);
   }
 
   /**
@@ -178,7 +178,7 @@ export class Variable implements VariableParams {
    * @param {VariableCallback} callback The callback to add and execute.
    */
   addAndExecuteCallback(callback: VariableCallback): void {
-    this.callbacks.push(callback);
+    this._callbacks.push(callback);
     callback(this);
   }
 
