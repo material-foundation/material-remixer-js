@@ -49,6 +49,16 @@ export class BooleanVariable extends Variable implements BooleanVariableParams {
   }
 
   /**
+   * Clones the variable.
+   * @return {BooleanVariable} Returns the cloned variable.
+   */
+  clone() {
+    let cloned = new BooleanVariable(this.key, this.defaultValue, null);
+    cloned._callbacks = this._callbacks.slice();
+    return cloned;
+  }
+
+  /**
    * Returns a serialized representation of this object.
    * @override
    * @return {SerializableData} The serialized data.

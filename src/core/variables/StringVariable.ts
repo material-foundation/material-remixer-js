@@ -52,6 +52,20 @@ export class StringVariable extends Variable implements StringVariableParams {
   }
 
   /**
+   * Clones the variable.
+   * @return {StringVariable} Returns the cloned variable.
+   */
+  clone() {
+    let cloned = new StringVariable(
+      this.key,
+      this.defaultValue,
+      this.possibleValues
+    );
+    cloned._callbacks = this._callbacks.slice();
+    return cloned;
+  }
+
+  /**
    * The array of possible values for this Variable.
    * @override
    * @type {Array<string>}
