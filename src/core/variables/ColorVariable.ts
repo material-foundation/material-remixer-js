@@ -61,7 +61,7 @@ export class ColorVariable extends Variable implements ColorVariableParams {
       this.defaultValue,
       this.possibleValues
     );
-    cloned._callbacks = this._callbacks;
+    cloned._callbacks = this._callbacks.slice();
     return cloned;
   }
 
