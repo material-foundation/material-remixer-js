@@ -45,7 +45,7 @@ export interface VariableListParams extends VariableParams {
  * @extends Function
  */
 export interface VariableCallback extends Function {
-  variable: Variable;
+  variable?: Variable;
 }
 
 /**
@@ -78,7 +78,7 @@ export class Variable implements VariableParams {
     this.defaultValue = defaultValue;
     this._selectedValue = defaultValue;
     if (callback) {
-      this.callbacks.push(callback);
+      this._callbacks.push(callback);
     }
     this._initialized = true;
   }
@@ -157,6 +157,14 @@ export class Variable implements VariableParams {
   }
 
   /**
+   * Adds a callback to array of callbacks.
+   * @param {VariableCallback} callback The callback to add.
+   */
+  addCallback(callback: VariableCallback): any {
+    this._callbacks.push(callback);
+  }
+
+  /**
    * Invokes each of the callback methods.
    */
   executeCallbacks(): void {
@@ -170,7 +178,7 @@ export class Variable implements VariableParams {
    * @param {VariableCallback} callback The callback to add and execute.
    */
   addAndExecuteCallback(callback: VariableCallback): void {
-    this.callbacks.push(callback);
+    this._callbacks.push(callback);
     callback(this);
   }
 

@@ -1,0 +1,131 @@
+/** @license
+ *  Copyright 2016 Google Inc. All Rights Reserved.
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ *  use this file except in compliance with the License. You may obtain a copy
+ *  of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ *  WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ *  License for the specific language governing permissions and limitations
+ *  under the License.
+ */
+
+@wrapper-width: 320px;
+@wrapper-padding: 10px;
+@wrapper-animation-duration: 200ms;
+@colorMdlBlue: #3f51b5;
+@colorSwatchSize: 40px;
+@colorSwatchIconSize: 24px;
+@fontSize: 14px;
+@fontSizeSmall: 12px;
+@fontLightWeight: 200;
+@fontBoldWeight: 500;
+
+.mdl-card {
+    width: @wrapper-width;
+    font-size: @fontSize;
+    overflow: visible;
+}
+
+.mdl-list {
+  margin: 0;
+}
+
+.mdl-list__item {
+  font-size: @fontSize;
+  font-weight: @fontLightWeight;
+}
+
+.mdl-list__item--two-line {
+  .mdl-list__item-primary-content { height: inherit; }
+  .mdl-list__item-secondary-content { position: relative; margin: 10px 0 0; }
+}
+
+#rmx-overlay-wrapper {
+  position: relative;
+  width: @wrapper-width;
+  float: right;
+  padding: @wrapper-padding;
+  transition: transform @wrapper-animation-duration ease-out,
+              opacity @wrapper-animation-duration linear;
+  transform: translateX(@wrapper-width / 2);
+  opacity: 0;
+}
+
+#rmx-overlay-wrapper.rmx-visible {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.rmx-selected-value {
+  font-weight: @fontBoldWeight;
+  margin-left: 5px;
+  color: @colorMdlBlue;
+}
+
+.rmx-color-swatch {
+  .mdl-list__item-secondary-content { flex-flow: inherit; }
+  .rmx-color-swatch-item {
+    width: @colorSwatchSize;
+    height: @colorSwatchSize;
+    float: left;
+    margin-right: 10px;
+    border-radius: @colorSwatchSize / 2;
+
+    .material-icons {
+      width: @colorSwatchIconSize;
+      height: @colorSwatchIconSize;
+      margin: (@colorSwatchSize - @colorSwatchIconSize) / 2;
+      color: white;
+    }
+  }
+}
+
+.rmx-radio-list {
+  .mdl-list__item-secondary-content { flex-flow: inherit; }
+  .rmx-radio-list-item {
+    width: inherit;
+    font-size: @fontSize;
+    font-weight: @fontBoldWeight;
+    margin-left: 20px;
+  }
+}
+
+.rmx-dropdown button {
+  margin-right: -20px;
+  text-transform: inherit;
+}
+
+.rmx-textfield {
+  .mdl-textfield {
+    width: 100%;
+    padding: 0;
+    font-size: @fontSize;
+    .mdl-textfield__input { padding: 0; margin-top:-5px;  }
+    .mdl-textfield__label { top: -5px; }
+  }
+}
+
+.mdl-switch.is-upgraded {
+  padding-left: 38px;
+}
+
+.mdl-menu__container {
+  right: 20px !important;
+}
+
+.rmx-slider{
+  .mdl-slider__container { width: 100%; }
+  .rmx-slider-min-value { left: 0; }
+  .rmx-slider-max-value { right: 0; }
+  .rmx-slider-min-value, .rmx-slider-max-value {
+     position: absolute;
+     top: 0;
+     font-weight: @fontBoldWeight;
+     font-size: @fontSizeSmall;
+  }
+}
