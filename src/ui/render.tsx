@@ -22,6 +22,9 @@ import { Variable } from "../core/variables/Variable";
 import { DOMController } from "./DOMController";
 import { remixer } from "../core/Remixer";
 
+// Get remixer variables from the current instance of remixer.
+let variables = remixer.attachedInstance.variablesArray;
+
 /**
  * Handles all control updates by setting a new selected value for the
  * variable.
@@ -41,10 +44,8 @@ function updateVariable(variable: Variable, selectedValue: any): void {
   variables[index] = clonedVariable;
 }
 
-let variables = remixer.attachedInstance.variablesArray;
+// Renders the DOMController component to the overlay wrapper element.
 const overlayWrapper = document.getElementById(CSS.RMX_OVERLAY_WRAPPER);
-
-/** Renders the DOMController component to the overlay wrapper element. */
 function redraw(): void {
   ReactDOM.render(
     <DOMController
