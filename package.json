@@ -1,9 +1,21 @@
 {
-  "name": "material-remixer-web",
-  "version": "1.0.0",
-  "description": "",
-  "author": "",
-  "license": "ISC",
+  "name": "material-remixer",
+  "version": "0.5.0",
+  "description": "A set of libraries and protocols to allow the sharing of design values and live refinement of apps during the development process.",
+  "homepage": "https://github.com/material-foundation/material-remixer",
+  "author": "The Material Remixer Authors (see AUTHORS)",
+  "license": "Apache-2.0",
+  "keywords": [
+    "material",
+    "remixer"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:material-foundation/material-remixer-web.git"
+  },
+  "bugs": {
+    "url": "https://github.com/material-foundation/material-remixer-web/issues/"
+  },
   "devDependencies": {
     "@types/react": "^0.14.41",
     "@types/react-dom": "^0.14.18",
@@ -12,7 +24,7 @@
     "gulp": "^3.9.1",
     "gulp-less": "^3.1.0",
     "gulp-rename": "^1.2.2",
-    "gulp-tslint": "^6.1.1",
+    "gulp-tslint": "^6.1.3",
     "gulp-watch": "^4.3.9",
     "gulp-webpack": "^1.5.0",
     "gulp-webserver": "^0.9.1",
@@ -22,7 +34,7 @@
     "style-loader": "^0.13.1",
     "ts-loader": "^0.8.2",
     "tslint": "^3.15.1",
-    "typescript": "^2.0.3",
+    "typescript": "^2.0.10",
     "webpack": "^2.1.0-beta.25"
   },
   "dependencies": {
