@@ -14,6 +14,7 @@
  *  under the License.
  */
 
+import "../ui/styles/iframe.less";
 import { BooleanVariable } from "./variables/BooleanVariable";
 import { ColorVariable } from "./variables/ColorVariable";
 import { KeyCode, KeyEvent, CSS } from "../lib/Constants";
@@ -23,6 +24,8 @@ import { NumberVariable } from "./variables/NumberVariable";
 import { RangeVariable } from "./variables/RangeVariable";
 import { StringVariable } from "./variables/StringVariable";
 import { Variable, VariableCallback, VariableKeyMap } from "./variables/Variable";
+
+declare function require(path: string): string;
 
 /**
  * The Remixer class is a singleton class that keeps track of all the Variables
@@ -66,10 +69,15 @@ class Remixer {
     if (!this._frameElement) {
       let frame = document.createElement("IFRAME") as HTMLFrameElement;
       frame.id = CSS.RMX_OVERLAY_FRAME;
-      frame.setAttribute("src", "../dist/overlay.html");
-      frame.setAttribute("style", "position:fixed; border:0; width:400px; height:100%; top:0; right:0; z-index:999999;");
       frame.setAttribute("sandbox", "allow-scripts allow-same-origin");
       document.getElementsByTagName("body")[0].appendChild(frame);
+
+      // Until `srcdoc` is fully compatible with all browsers, lets simply
+      // write the overlay html content to the iframe content window.
+      const iframeContent: string = require("../ui/templates/overlay_iframe.html");
+      frame.contentWindow.document.open();
+      frame.contentWindow.document.write(iframeContent);
+      frame.contentWindow.document.close();
       this._frameElement = frame;
     }
   }
