@@ -19,7 +19,7 @@ npm install
 
 ```html
 <head>
-  <script src="../dist/remixer.js"></script>
+  <script src="./node_modules/material-remixer/dist/remixer.js"></script>
 </head>
 ```
 
