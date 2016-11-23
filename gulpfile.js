@@ -13,13 +13,6 @@ gulp.task('clean:dist', () => {
   return del(['dist']);
 });
 
-gulp.task('copy-html', () => {
-  const rename = require('gulp-rename');
-  return gulp.src(paths.html)
-    .pipe(rename({dirname: ''}))
-    .pipe(gulp.dest('dist'));
-});
-
 gulp.task("tslint", () => {
   const tslint = require('gulp-tslint');
   return gulp.src(paths.ts)
@@ -34,7 +27,7 @@ gulp.task('watch', () => {
   gulp.watch([paths.ts, paths.less, paths.html], ['webpack']);
 });
 
-gulp.task('webpack', ['tslint', 'clean:dist', 'copy-html'], () => {
+gulp.task('webpack', ['tslint', 'clean:dist'], () => {
   var webpack = require('webpack');
   var gulpWebpack = require('gulp-webpack');
   return gulp.src('./src/core/remixer.ts')
