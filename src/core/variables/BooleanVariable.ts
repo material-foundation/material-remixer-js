@@ -54,6 +54,7 @@ export class BooleanVariable extends Variable implements BooleanVariableParams {
    */
   clone() {
     let cloned = new BooleanVariable(this.key, this.defaultValue, null);
+    cloned.title = this.title;
     cloned._callbacks = this._callbacks.slice();
     return cloned;
   }

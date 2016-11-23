@@ -61,6 +61,7 @@ export class StringVariable extends Variable implements StringVariableParams {
       this.defaultValue,
       this.possibleValues
     );
+    cloned.title = this.title;
     cloned._callbacks = this._callbacks.slice();
     return cloned;
   }
