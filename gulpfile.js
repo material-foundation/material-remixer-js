@@ -28,20 +28,20 @@ gulp.task('watch', () => {
 });
 
 gulp.task('webpack', ['tslint', 'clean:dist'], () => {
-  var webpack = require('webpack');
-  var gulpWebpack = require('gulp-webpack');
+  const webpack = require('webpack');
+  const gulpWebpack = require('gulp-webpack');
   return gulp.src('./src/core/remixer.ts')
     .pipe(gulpWebpack(require('./webpack.config.js'), webpack))
     .pipe(gulp.dest('dist/'));
 });
 
 gulp.task('serve', ['webpack', 'watch'], () => {
-  var webserver = require('gulp-webserver');
+  const webserver = require('gulp-webserver');
   gulp.src('./')
-  .pipe(webserver({
-    livereload: true,
-    directoryListing: true,
-  }));
+    .pipe(webserver({
+      livereload: true,
+      directoryListing: true,
+    }));
 });
 
 gulp.task('default', ['webpack']);

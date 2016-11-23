@@ -1,4 +1,4 @@
 .DS_STORE
+dist
 npm-debug.log
 node_modules
-typings
