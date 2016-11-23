@@ -11,9 +11,7 @@ This SDK for Web is currently in development.
 
 ### 1. Use [`npm`](https://www.npmjs.com/) or [`yarn`](https://yarnpkg.com/) to install dependencies.
 
-```bash
-npm install
-```
+`npm install` or `yarn`
 
 ### 2. Include the `remixer.js` script in your app.
 
@@ -41,7 +39,7 @@ remixer.addBooleanVariable("show", true, function(variable) {
 
 ## Example App
 
-- [Web example app](examples/index.html)
+- [Web example app](examples)
 
 ## Other Repositories
 
