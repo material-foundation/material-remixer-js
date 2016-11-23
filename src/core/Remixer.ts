@@ -25,6 +25,12 @@ import { RangeVariable } from "./variables/RangeVariable";
 import { StringVariable } from "./variables/StringVariable";
 import { Variable, VariableCallback, VariableKeyMap } from "./variables/Variable";
 
+/**
+ * A declaration used for the webpack `html-loader` module to load string
+ * content from a given path.
+ * @param  {string} path The url path of string to content to load.
+ * @return {string}      Returns the string at given path.
+ */
 declare function require(path: string): string;
 
 /**
