@@ -26,7 +26,7 @@ export const KeyEvent = {
 
 /** Storage keys constants. */
 export const StorageKey = {
-  REMIXER:  "__Remixer__"
+  REMIXER:  "__remixer__"
 };
 
 /** Variable types constants. */
@@ -46,7 +46,9 @@ export const CSS = {
   MDL_SECONDARY:          "mdl-list__item-secondary-content",
   MDL_TWO_LINE:           "mdl-list__item--two-line",
 
-  RMX_OVERLAY_FRAME:      "rmx-overlay-frame",
+  // iFrame ID must be unique within a client page.
+  RMX_OVERLAY_FRAME:      "__remixer-overlay-frame__",
+
   RMX_OVERLAY_WRAPPER:    "rmx-overlay-wrapper",
   RMX_VISIBLE:            "rmx-visible",
   RMX_SELECTED_VALUE:     "rmx-selected-value",
