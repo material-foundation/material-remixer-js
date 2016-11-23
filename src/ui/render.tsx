@@ -14,12 +14,12 @@
  *  under the License.
  */
 
-import "./overlay/styles.less";
+import "./styles/overlay.less";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { CSS } from "../lib/Constants";
+import { OverlayController } from "./OverlayController";
 import { Variable } from "../core/variables/Variable";
-import { DOMController } from "./DOMController";
 import { remixer } from "../core/Remixer";
 
 // Get remixer variables from the current instance of remixer.
@@ -44,11 +44,11 @@ function updateVariable(variable: Variable, selectedValue: any): void {
   variables[index] = clonedVariable;
 }
 
-// Renders the DOMController component to the overlay wrapper element.
+// Renders the OverlayController component to the overlay wrapper element.
 const overlayWrapper = document.getElementById(CSS.RMX_OVERLAY_WRAPPER);
 function redraw(): void {
   ReactDOM.render(
-    <DOMController
+    <OverlayController
       wrapperElement={overlayWrapper}
       variables={variables}
       updateVariable={updateVariable}

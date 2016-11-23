@@ -17,11 +17,11 @@
 import * as React from "react";
 import { KeyCode, KeyEvent, CSS } from "../lib/Constants";
 import { Messaging } from "../lib/Messaging";
-import { Overlay } from "./overlay/Overlay";
+import { OverlayVariables } from "./OverlayVariables";
 import { Variable } from "../core/variables/Variable";
 
 /**
- * Interface for the properties assigned to the DOMController component.
+ * Interface for the properties assigned to the OverlayController component.
  * @interface
  */
 interface ControllerProps {
@@ -36,7 +36,7 @@ interface ControllerProps {
  * @class
  * @extends React.Component
  */
-export class DOMController extends React.Component<ControllerProps, void> {
+export class OverlayController extends React.Component<ControllerProps, void> {
 
   /** @override */
   componentDidMount() {
@@ -89,7 +89,7 @@ export class DOMController extends React.Component<ControllerProps, void> {
           <h2 className="mdl-card__title-text">Remixer</h2>
         </div>
         <div className="mdl-card__supporting-text mdl-card__actions mdl-card--border">
-          <Overlay
+          <OverlayVariables
             variables={this.props.variables}
             updateVariable={this.props.updateVariable}
           />

@@ -15,33 +15,33 @@
  */
 
 import * as React from "react";
-import { ColorSwatchControl } from "../controls/ColorSwatchControl";
-import { ControlUpdateProps } from "../controls/controlProps";
-import { CSS, VariableType } from "../../lib/Constants";
-import { DropdownControl } from "../controls/DropdownControl";
-import { RadioListControl } from "../controls/RadioListControl";
-import { SliderControl } from "../controls/SliderControl";
-import { StringVariable } from "../../core/variables/StringVariable";
-import { SwitchControl } from "../controls/SwitchControl";
-import { TextFieldControl } from "../controls/TextFieldControl";
-import { Variable } from "../../core/variables/Variable";
+import { ColorSwatchControl } from "./controls/ColorSwatchControl";
+import { ControlUpdateProps } from "./controls/controlProps";
+import { CSS, VariableType } from "../lib/Constants";
+import { DropdownControl } from "./controls/DropdownControl";
+import { RadioListControl } from "./controls/RadioListControl";
+import { SliderControl } from "./controls/SliderControl";
+import { StringVariable } from "../core/variables/StringVariable";
+import { SwitchControl } from "./controls/SwitchControl";
+import { TextFieldControl } from "./controls/TextFieldControl";
+import { Variable } from "../core/variables/Variable";
 
 /**
  * Interface for a React class that requires an array of Variables.
  * @interface
  * @extends ControlUpdateProps
  */
-export interface OverlayVariables extends ControlUpdateProps {
+export interface OverlayVariableProps extends ControlUpdateProps {
   variables: Array<Variable>;
 }
 
 /**
- * Renders a list of remixer controls for each variable in an overlay card.
+ * Renders a list of remixer controls for each variable.
  *
  * @class
  * @extends React.Component
  */
-export class Overlay extends React.Component<OverlayVariables, void> {
+export class OverlayVariables extends React.Component<OverlayVariableProps, void> {
 
   /**
    * Returns a control as determined by the variable `dataType` property.
