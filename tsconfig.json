@@ -20,7 +20,7 @@
     "./src/**/*"
   ],
   "exclude": [
-    "node_modules"
+    "**/*_test.ts"
   ],
   "compileOnSave": false,
   "buildOnSave": false
