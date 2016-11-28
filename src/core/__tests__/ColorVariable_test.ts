@@ -1,6 +1,7 @@
 import * as chai from "chai";
 import * as sinon from "sinon";
 import * as sinonChai from "sinon-chai";
+
 import { remixer } from "../Remixer";
 import { ColorVariable } from "../variables/ColorVariable";
 import { Variable } from "../variables/Variable";
@@ -22,23 +23,23 @@ describe("ColorVariable", () => {
     variable = remixer.addColorVariable(key, defaultValue, possibleValues, callbackSpy);
   });
 
-  it("should create new variable", () => {
+  it("should create a new variable", () => {
     expect(variable).to.be.instanceof(Variable).and.instanceof(ColorVariable);
   });
 
-  it("should create a variable with correct datatype", () => {
+  it("have the correct datatype", () => {
     expect(variable.dataType).to.equal(VariableType.COLOR);
   });
 
-  it("should create a variable with correct title", () => {
+  it("have the correct title", () => {
     expect(variable.title).to.equal(key);
   });
 
-  it("should create a variable with correct sanitized key", () => {
+  it("have the correct sanitized key", () => {
     expect(variable.key).to.equal(sanitizedKey);
   });
 
-  it("should create a variable with correct possible values", () => {
+  it("have the correct possible values", () => {
     expect(variable.possibleValues).to.equal(possibleValues);
   });
 

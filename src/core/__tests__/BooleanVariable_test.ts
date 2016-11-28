@@ -1,6 +1,7 @@
 import * as chai from "chai";
 import * as sinon from "sinon";
 import * as sinonChai from "sinon-chai";
+
 import { remixer } from "../Remixer";
 import { BooleanVariable } from "../variables/BooleanVariable";
 import { Variable } from "../variables/Variable";
@@ -21,19 +22,19 @@ describe("BooleanVariable", () => {
     variable = remixer.addBooleanVariable(key, defaultValue, callbackSpy);
   });
 
-  it("should create new variable", () => {
+  it("should create a new variable", () => {
     expect(variable).to.be.instanceof(Variable).and.instanceof(BooleanVariable);
   });
 
-  it("should create a variable with correct datatype", () => {
+  it("have the correct datatype", () => {
     expect(variable.dataType).to.equal(VariableType.BOOLEAN);
   });
 
-  it("should create a variable with correct title", () => {
+  it("have the correct title", () => {
     expect(variable.title).to.equal(key);
   });
 
-  it("should create a variable with correct sanitized key", () => {
+  it("have the correct sanitized key", () => {
     expect(variable.key).to.equal(sanitizedKey);
   });
 
