@@ -4,7 +4,7 @@ module.exports = function(config) {
   config.set({
     basePath: '',
     frameworks: ['mocha'],
-    browsers: ['Chrome', 'ChromeCanary', 'Safari', 'Firefox'],
+    browsers: ['Chrome'],
     reporters: ['progress'],
     client: {
       mocha: {
@@ -34,7 +34,7 @@ module.exports = function(config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    singleRun: false,
+    singleRun: true,
     concurrency: Infinity,
   });
 };
