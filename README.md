@@ -9,9 +9,11 @@ This SDK for Web is currently in development.
 
 ## Quickstart
 
-### 1. Use [`npm`](https://www.npmjs.com/) or [`yarn`](https://yarnpkg.com/) to install dependencies.
+### 1. Use [`npm`](https://www.npmjs.com/) to install as dependency.
 
-`npm install` or `yarn`
+`npm install material-remixer --save`
+
+This will install the Remixer files in your project's node_modules folder.
 
 ### 2. Include the `remixer.js` script in your app.
 
