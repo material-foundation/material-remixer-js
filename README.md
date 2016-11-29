@@ -41,15 +41,19 @@ remixer.addBooleanVariable("show", true, function(variable) {
 
 - [Web example app](examples)
 
+## State of development
+
+Visit our [State of Development](https://github.com/material-foundation/material-remixer/wiki/State-of-Development) wiki for the current roadmap and status of development for each platform.
+
 ## Other Repositories
 
 Other platform specific libraries and tools can be found in the following GitHub repos:
 
 - [iOS](https://github.com/material-foundation/material-remixer-ios) - Remixer for iOS.
 - [Android](https://github.com/material-foundation/material-remixer-android) - Remixer for Android.
-- Dashboard - Remixer web dashboard for all platforms (available soon).
+- Web Remote - Remixer web remote controller for all platforms (available soon).
 
-## Is Material Foundation affiliated with Google?
+## Is material-foundation affiliated with Google?
 
 Yes, the [material-foundation](https://github.com/material-foundation) organization is one of Google's new homes for tools and frameworks related to our [Material Design](https://material.io) system. Please check out our blog post [Design is Never Done](https://design.google.com/articles/design-is-never-done/) for more information regarding Material Design and how Remixer integrates with the system.
 
