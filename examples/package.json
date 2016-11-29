@@ -1,0 +1,18 @@
+{
+  "name": "material-remixer-examples",
+  "version": "0.5.0",
+  "description": "Example app demonstrating usage of Remixer.",
+  "author": "The Material Remixer Authors (see AUTHORS)",
+  "license": "Apache-2.0",
+  "scripts": {
+    "start": "$( yarn bin )/gulp serve"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-webserver": "^0.9.1"
+  },
+  "dependencies": {
+    "material-design-lite": "^1.2.1",
+    "material-remixer": "file:../"
+  }
+}
