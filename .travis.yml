@@ -1,0 +1,11 @@
+language: node_js
+cache:
+  directories:
+    - node_modules
+sudo: false
+node_js:
+  - "stable"
+install:
+  - npm install
+notifications:
+  email: false
