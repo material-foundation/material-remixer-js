@@ -1,6 +1,6 @@
 ![remixer](https://cdn.rawgit.com/material-foundation/material-remixer/master/docs/assets/lockup_remixer_icon_horizontal_dark_small.svg)
 
-[![Build Status](https://travis-ci.org/material-foundation/material-remixer-web.svg?branch=develop)](https://travis-ci.org/material-foundation/material-remixer-web)
+[![Build Status](https://travis-ci.org/material-foundation/material-remixer-web.svg?branch=develop)](https://travis-ci.org/material-foundation/material-remixer-web) [![npm version](https://badge.fury.io/js/material-remixer.svg)](https://badge.fury.io/js/material-remixer)
 
 Remixer helps teams use and refine design specs by providing an abstraction for these values that is accessible and configurable from both inside and outside the app itself.
 
