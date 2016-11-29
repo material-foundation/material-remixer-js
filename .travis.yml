@@ -11,5 +11,7 @@ before_script:
   - "sh -e /etc/init.d/xvfb start"
 install:
   - npm install
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
 notifications:
   email: false
