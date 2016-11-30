@@ -13,6 +13,6 @@
   },
   "dependencies": {
     "material-design-lite": "^1.2.1",
-    "material-remixer": "file:../"
+    "material-remixer": "^0.5.1"
   }
 }
