@@ -12,6 +12,6 @@ before_script:
 install:
   - npm install
 after_success:
-  - bash <(curl -s https://codecov.io/bash)
+  - npm run codecov
 notifications:
   email: false

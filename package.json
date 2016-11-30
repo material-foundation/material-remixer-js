@@ -17,8 +17,9 @@
     "url": "https://github.com/material-foundation/material-remixer-web/issues/"
   },
   "scripts": {
-    "test": "karma start",
-    "prepublish": "gulp"
+    "codecov": "cat coverage/*/lcov.info | codecov",
+    "prepublish": "gulp",
+    "test": "karma start"
   },
   "devDependencies": {
     "@types/chai": "^3.4.34",
@@ -28,6 +29,7 @@
     "@types/sinon": "^1.16.32",
     "@types/sinon-chai": "^2.7.27",
     "chai": "^3.5.0",
+    "codecov.io": "^0.1.6",
     "css-loader": "^0.26.0",
     "del": "^2.2.2",
     "gulp": "^3.9.1",
@@ -42,6 +44,7 @@
     "karma": "^1.3.0",
     "karma-chai": "^0.1.0",
     "karma-chrome-launcher": "^2.0.0",
+    "karma-coverage": "^1.1.1",
     "karma-mocha": "^1.3.0",
     "karma-phantomjs-launcher": "^1.0.2",
     "karma-safari-launcher": "^1.0.0",
