@@ -23,8 +23,8 @@ module.exports = function(config) {
       '**/*.map',
     ],
     preprocessors: {
-      '**/*.ts': ['webpack'],
-      '**/*.js': ['webpack', 'coverage'],
+      './src/**/*.ts': ['webpack', 'coverage'],
+      './src/**/*.js': ['webpack', 'coverage'],
     },
     webpack: {
       devtool: webpackConfig.devtool,
