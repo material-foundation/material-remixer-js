@@ -5,11 +5,16 @@ module.exports = function(config) {
     basePath: '',
     frameworks: ['mocha'],
     browsers: ['PhantomJS'],
-    reporters: ['progress'],
+    reporters: ['progress', 'coverage'],
     client: {
       mocha: {
         reporter: 'html',
       },
+    },
+    coverageReporter: {
+      reporters: [{
+        type: 'lcov'
+      }]
     },
     files: [
       'src/**/__tests__/**',
@@ -18,8 +23,8 @@ module.exports = function(config) {
       '**/*.map',
     ],
     preprocessors: {
-      '**/*.ts': ['webpack'],
-      '**/*.js': ['webpack'],
+      './src/**/*.ts': ['webpack', 'coverage'],
+      './src/**/*.js': ['webpack', 'coverage'],
     },
     webpack: {
       devtool: webpackConfig.devtool,
