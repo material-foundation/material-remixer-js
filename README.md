@@ -15,23 +15,21 @@ This SDK for Web is currently in development.
 
 `npm install material-remixer --save`
 
-This will install the Remixer files in your project's node_modules folder.
+This will install the Remixer files in your project's `node_modules` folder.
 
-### 2. Include the `remixer.js` script in your app.
+### 2. Include the `remixer.js` script in your app (typically in `<head>`).
 
 ```html
-<head>
-  <script src="./node_modules/material-remixer/dist/remixer.js"></script>
-</head>
+<script src="./node_modules/material-remixer/dist/remixer.js"></script>
 ```
 
-### 3. Begin by starting Remixer
+### 3. Begin by starting Remixer.
 
 ```javascript
 remixer.start();
 ```
 
-### 4. Add variables
+### 4. Add variables.
 Now you can add any desired variables and use the callback method to assign the `selectedValue` property.
 
 ```javascript
