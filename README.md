@@ -17,7 +17,7 @@ This SDK for Web is currently in development.
 
 This will install the Remixer files in your project's `node_modules` folder.
 
-### 2. Include the `remixer.js` script in your app (typically in `<head>`).
+### 2. Include the `remixer.js` script in your app.
 
 ```html
 <script src="./node_modules/material-remixer/dist/remixer.js"></script>
