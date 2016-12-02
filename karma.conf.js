@@ -1,15 +1,36 @@
+/** @license
+ *  Copyright 2016 Google Inc. All Rights Reserved.
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ *  use this file except in compliance with the License. You may obtain a copy
+ *  of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ *  WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ *  License for the specific language governing permissions and limitations
+ *  under the License.
+ */
+ 
 const webpackConfig = require('./webpack.config.js');
 
 module.exports = function(config) {
   config.set({
     basePath: '',
     frameworks: ['mocha'],
-    browsers: ['Chrome', 'ChromeCanary', 'Safari', 'Firefox'],
-    reporters: ['progress'],
+    browsers: ['PhantomJS'],
+    reporters: ['progress', 'coverage'],
     client: {
       mocha: {
         reporter: 'html',
       },
+    },
+    coverageReporter: {
+      reporters: [{
+        type: 'lcov'
+      }]
     },
     files: [
       'src/**/__tests__/**',
@@ -18,8 +39,8 @@ module.exports = function(config) {
       '**/*.map',
     ],
     preprocessors: {
-      '**/*.ts': ['webpack'],
-      '**/*.js': ['webpack'],
+      './src/**/*.ts': ['webpack', 'coverage'],
+      './src/**/*.js': ['webpack', 'coverage'],
     },
     webpack: {
       devtool: webpackConfig.devtool,
@@ -34,7 +55,7 @@ module.exports = function(config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    singleRun: false,
+    singleRun: true,
     concurrency: Infinity,
   });
 };

@@ -1,5 +1,7 @@
 ![remixer](https://cdn.rawgit.com/material-foundation/material-remixer/master/docs/assets/lockup_remixer_icon_horizontal_dark_small.svg)
 
+[![Build Status](https://travis-ci.org/material-foundation/material-remixer-web.svg?branch=develop)](https://travis-ci.org/material-foundation/material-remixer-web) [![codecov](https://codecov.io/gh/material-foundation/material-remixer-web/branch/develop/graph/badge.svg)](https://codecov.io/gh/material-foundation/material-remixer-web) [![npm version](https://badge.fury.io/js/material-remixer.svg)](https://badge.fury.io/js/material-remixer)
+
 Remixer helps teams use and refine design specs by providing an abstraction for these values that is accessible and configurable from both inside and outside the app itself.
 
 This SDK for Web is currently in development.
@@ -13,23 +15,21 @@ This SDK for Web is currently in development.
 
 `npm install material-remixer --save`
 
-This will install the Remixer files in your project's node_modules folder.
+This will install the Remixer files in your project's `node_modules` folder.
 
 ### 2. Include the `remixer.js` script in your app.
 
 ```html
-<head>
-  <script src="./node_modules/material-remixer/dist/remixer.js"></script>
-</head>
+<script src="./node_modules/material-remixer/dist/remixer.js"></script>
 ```
 
-### 3. Begin by starting Remixer
+### 3. Begin by starting Remixer.
 
 ```javascript
 remixer.start();
 ```
 
-### 4. Add variables
+### 4. Add variables.
 Now you can add any desired variables and use the callback method to assign the `selectedValue` property.
 
 ```javascript
@@ -48,6 +48,9 @@ remixer.addBooleanVariable("show", true, function(variable) {
 Visit our [State of Development](https://github.com/material-foundation/material-remixer/wiki/State-of-Development) wiki for the current roadmap and status of development for each platform.
 
 ## Other Repositories
+
+The main Remixer GitHub repo for documentation, project tracking, and general information:
+- [Remixer docs](https://github.com/material-foundation/material-remixer)
 
 Other platform specific libraries and tools can be found in the following GitHub repos:
 
