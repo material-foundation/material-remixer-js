@@ -16,18 +16,34 @@
 
 'use strict';
 
+const path = require('path');
+const webpack = require('webpack');
+const PACKAGE = require('./package.json');
+const OUT_PATH = path.resolve('./build');
+// const PUBLIC_PATH = '/node_modules/';
+const IS_DEV = process.env.RMX_ENV === 'development';
+const IS_PROD = process.env.RMX_ENV === 'production';
+
 module.exports = {
   entry: {
     remixer: './src/core/Remixer.ts',
     overlay: './src/ui/render.tsx'
   },
   output: {
-    path: __dirname + '/dist',
-    filename: '[name].js',
+    path: OUT_PATH,
+    // publicPath: PUBLIC_PATH,
+    filename: '[name].' + (IS_PROD ? 'min.' : '') + 'js',
     libraryTarget: 'umd',
     umdNamedDefine: true
   },
-  devtool: 'inline-source-map',
+  devtool: IS_DEV ? 'cheap-module-eval-source-map' : 'cheap-module-source-map',
+  devServer: {
+    // contentBase: './examples',
+    // publicPath: '/node_modules/material-remixer/dist/',
+    open: true,
+    inline: true,
+    hot: true,
+  },
   resolve: {
     extensions: ['.webpack.js', '.web.js', '.ts', '.tsx', '.js']
   },
@@ -46,5 +62,13 @@ module.exports = {
   externals: {
     'react': 'React',
     'react-dom': 'ReactDOM',
-  }
+  },
+  plugins: [
+    new webpack.BannerPlugin(`${PACKAGE.name}
+@version v${PACKAGE.version}
+@license ${PACKAGE.license}
+@copyright 2016 Google, Inc.
+@link ${PACKAGE.repository.url}
+    `)
+  ],
 };
