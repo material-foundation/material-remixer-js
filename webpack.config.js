@@ -19,8 +19,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const PACKAGE = require('./package.json');
-const OUT_PATH = path.resolve('./build');
-// const PUBLIC_PATH = '/node_modules/';
+
 const IS_DEV = process.env.RMX_ENV === 'development';
 const IS_PROD = process.env.RMX_ENV === 'production';
 
@@ -30,16 +29,13 @@ module.exports = {
     overlay: './src/ui/render.tsx'
   },
   output: {
-    path: OUT_PATH,
-    // publicPath: PUBLIC_PATH,
+    path: path.resolve('./build'),
     filename: '[name].' + (IS_PROD ? 'min.' : '') + 'js',
     libraryTarget: 'umd',
     umdNamedDefine: true
   },
   devtool: IS_DEV ? 'cheap-module-eval-source-map' : 'cheap-module-source-map',
   devServer: {
-    // contentBase: './examples',
-    // publicPath: '/node_modules/material-remixer/dist/',
     open: true,
     inline: true,
     hot: true,
