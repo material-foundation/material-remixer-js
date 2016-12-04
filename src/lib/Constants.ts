@@ -16,17 +16,17 @@
 
 /** Keycode constants. */
 export const KeyCode = {
-  ESC: 27
+  ESC: 27,
 };
 
 /** Key event constants. */
 export const KeyEvent = {
-  DOWN: "keydown"
+  DOWN: "keydown",
 };
 
 /** Storage keys constants. */
 export const StorageKey = {
-  REMIXER:  "__remixer__"
+  REMIXER:  "__remixer__",
 };
 
 /** Variable types constants. */
@@ -46,20 +46,18 @@ export const CSS = {
   MDL_SECONDARY:          "mdl-list__item-secondary-content",
   MDL_TWO_LINE:           "mdl-list__item--two-line",
 
-  // iFrame ID must be unique within a client page.
-  RMX_OVERLAY_FRAME:      "__remixer-overlay-frame__",
-
-  RMX_OVERLAY_WRAPPER:    "rmx-overlay-wrapper",
-  RMX_VISIBLE:            "rmx-visible",
-  RMX_SELECTED_VALUE:     "rmx-selected-value",
   RMX_COLOR_SWATCH:       "rmx-color-swatch",
   RMX_COLOR_SWATCH_ITEM:  "rmx-color-swatch-item",
   RMX_DROPDOWN:           "rmx-dropdown",
+  RMX_OVERLAY_FRAME:      "__remixer-overlay-frame__",
+  RMX_OVERLAY_WRAPPER:    "rmx-overlay-wrapper",
   RMX_RADIO_LIST:         "rmx-radio-list",
   RMX_RADIO_LIST_ITEM:    "rmx-radio-list-item",
+  RMX_SELECTED_VALUE:     "rmx-selected-value",
   RMX_SLIDER:             "rmx-slider",
-  RMX_SLIDER_MIN:         "rmx-slider-min-value",
   RMX_SLIDER_MAX:         "rmx-slider-max-value",
+  RMX_SLIDER_MIN:         "rmx-slider-min-value",
   RMX_SWITCH:             "rmx-switch",
   RMX_TEXTFIELD:          "rmx-textfield",
+  RMX_VISIBLE:            "rmx-visible",
 };

@@ -14,13 +14,18 @@ describe("StringVariable", () => {
   const key: string = "test variable";
   const sanitizedKey: string = "test_variable";
   const defaultValue: string = "B";
-  const possibleValues: Array<string> = ["A", "B", "C", "D"];
+  const possibleValues: string[] = ["A", "B", "C", "D"];
   let callbackSpy: sinon.SinonSpy;
   let variable: StringVariable;
 
   beforeEach(() => {
     callbackSpy = sinon.spy();
-    variable = remixer.addStringVariable(key, defaultValue, possibleValues, callbackSpy);
+    variable = remixer.addStringVariable(
+      key,
+      defaultValue,
+      possibleValues,
+      callbackSpy,
+    );
   });
 
   it("should create a new variable", () => {

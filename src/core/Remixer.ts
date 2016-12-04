@@ -14,16 +14,17 @@
  *  under the License.
  */
 
-import "../ui/styles/iframe.less";
 import { BooleanVariable } from "./variables/BooleanVariable";
 import { ColorVariable } from "./variables/ColorVariable";
-import { KeyCode, KeyEvent, CSS } from "../lib/Constants";
+import { CSS, KeyCode, KeyEvent } from "../lib/Constants";
 import { LocalStorage } from "../lib/LocalStorage";
 import { Messaging } from "../lib/Messaging";
 import { NumberVariable } from "./variables/NumberVariable";
-import { RangeVariable } from "./variables/RangeVariable";
+import { IRangeVariableParams, RangeVariable } from "./variables/RangeVariable";
+import { IVariableCallback, IVariableKeyMap, Variable } from "./variables/Variable";
 import { StringVariable } from "./variables/StringVariable";
-import { Variable, VariableCallback, VariableKeyMap } from "./variables/Variable";
+
+import "../ui/styles/iframe.less";
 
 /**
  * A declaration used for the webpack `html-loader` module to load string
@@ -120,13 +121,17 @@ class Remixer {
 
   /**
    * Adds a boolean Variable to array of Variables with optional callback.
-   * @param  {string}               key          The key of the Variable.
-   * @param  {boolean}              defaultValue The initial default value of the variable.
-   * @param  {VariableCallback}     callback     The callback method to be invoked
-   *                                             when the Variable is updated.
+   * @param  {string}            key          The key of the Variable.
+   * @param  {boolean}           defaultValue The initial default value of the variable.
+   * @param  {IVariableCallback} callback     The callback method to be invoked
+   *                                          when the Variable is updated.
    * @return {BooleanVariable}
    */
-  static addBooleanVariable(key: string, defaultValue: boolean, callback?: VariableCallback): BooleanVariable {
+  static addBooleanVariable(
+    key: string,
+    defaultValue: boolean,
+    callback?: IVariableCallback,
+  ): BooleanVariable {
     let variable = new BooleanVariable(key, defaultValue, callback);
     this.addVariable(variable);
     return variable;
@@ -139,11 +144,18 @@ class Remixer {
    * @param  {number}             minValue     The allowed minimum value of the variable.
    * @param  {number}             maxValue     The allowed maximum value of the variable.
    * @param  {number}             increment    The amount to increment the value.
-   * @param  {VariableCallback}   callback     The callback method to be invoked
+   * @param  {IVariableCallback}  callback     The callback method to be invoked
    *                                           when the Variable is updated.
    * @return {RangeVariable}
    */
-  static addRangeVariable(key: string, defaultValue: number, minValue: number, maxValue: number, increment: number, callback?: VariableCallback): RangeVariable {
+  static addRangeVariable(
+    key: string,
+    defaultValue: number,
+    minValue: number,
+    maxValue: number,
+    increment: number,
+    callback?: IVariableCallback,
+  ): RangeVariable {
     let variable = new RangeVariable(key, defaultValue, minValue, maxValue, increment, callback);
     this.addVariable(variable);
     return variable;
@@ -153,12 +165,17 @@ class Remixer {
    * Adds a string Variable to array of variables with optional callback
    * @param  {string}              key            The key of the Variable.
    * @param  {string}              defaultValue   The initial default value of the variable.
-   * @param  {Array<string>}       possibleValues The optional array of available items for the variable.
-   * @param  {VariableCallback}    callback       The callback method to be invoked
+   * @param  {string[]}            possibleValues The optional array of available items for the variable.
+   * @param  {IVariableCallback}   callback       The callback method to be invoked
    *                                              when the Variable is updated.
    * @return {StringVariable}
    */
-  static addStringVariable(key: string, defaultValue: string, possibleValues?: Array<string>, callback?: VariableCallback): StringVariable {
+  static addStringVariable(
+    key: string,
+    defaultValue: string,
+    possibleValues?: string[],
+    callback?: IVariableCallback,
+  ): StringVariable {
     let variable = new StringVariable(key, defaultValue, possibleValues, callback);
     this.addVariable(variable);
     return variable;
@@ -168,12 +185,17 @@ class Remixer {
    * Adds a number variable to array of variables with optional callback.
    * @param  {string}              key            The key of the Variable.
    * @param  {number}              defaultValue   The initial default value of the variable.
-   * @param  {Array<number>}       possibleValues The optional array of available items for the variable.
-   * @param  {VariableCallback}    callback       The callback method to be invoked
+   * @param  {number[]}            possibleValues The optional array of available items for the variable.
+   * @param  {IVariableCallback}   callback       The callback method to be invoked
    *                                              when the Variable is updated.
    * @return {NumberVariable}
    */
-  static addNumberVariable(key: string, defaultValue: number, possibleValues?: Array<number>, callback?: VariableCallback): NumberVariable {
+  static addNumberVariable(
+    key: string,
+    defaultValue: number,
+    possibleValues?: number[],
+    callback?: IVariableCallback,
+  ): NumberVariable {
     let variable = new NumberVariable(key, defaultValue, possibleValues, callback);
     this.addVariable(variable);
     return variable;
@@ -181,14 +203,19 @@ class Remixer {
 
   /**
    * Adds a color variable to array of variables with optional callback.
-   * @param  {string}             key            The key of the Variable.
-   * @param  {string}             defaultValue   The initial default value of the variable.
-   * @param  {Array<string>}      possibleValues The optional array of available items for the variable.
-   * @param  {VariableCallback}   callback       The callback method to be invoked
-   *                                             when the Variable is updated.
+   * @param  {string}              key            The key of the Variable.
+   * @param  {string}              defaultValue   The initial default value of the variable.
+   * @param  {string[]}            possibleValues The optional array of available items for the variable.
+   * @param  {IVariableCallback}   callback       The callback method to be invoked
+   *                                              when the Variable is updated.
    * @return {ColorVariable}
    */
-  static addColorVariable(key: string, defaultValue: string, possibleValues?: Array<string>, callback?: VariableCallback): ColorVariable {
+  static addColorVariable(
+    key: string,
+    defaultValue: string,
+    possibleValues?: string[],
+    callback?: IVariableCallback,
+  ): ColorVariable {
     let variable = new ColorVariable(key, defaultValue, possibleValues, callback);
     this.addVariable(variable);
     return variable;
@@ -221,28 +248,28 @@ class Remixer {
     }
   }
 
-  private _variables: VariableKeyMap = {};
+  private _variables: IVariableKeyMap = {};
 
   /**
    * Returns the Variable-Key mapping from the Remixer shared instance.
-   * @return {VariableKeyMap}
+   * @return {IVariableKeyMap}
    */
-  get variables(): VariableKeyMap {
+  get variables(): IVariableKeyMap {
     return this._variables;
   }
 
   /**
    * Returns an array of Variables from the Remixer shared instance.
-   * @return {Array<Variable>} Array of Variables.
+   * @return {Variable[]} Array of Variables.
    */
-  get variablesArray(): Array<Variable> {
-    return Object.keys(this._variables).map(key => this._variables[key]);
+  get variablesArray(): Variable[] {
+    return Object.keys(this._variables).map((key) => this._variables[key]);
   }
 
   /**
    * Returns an Variable for a given key from the Remixer shared instance.
    * @static
-   * @return {Array<Variable>} Array of Variables.
+   * @return {Variable[]} Array of Variables.
    */
   static getVariable(key: string): Variable {
     return this._sharedInstance._variables[key];

@@ -15,26 +15,27 @@
  */
 
 import * as React from "react";
+
 import { CSS, VariableType } from "../../lib/Constants";
-import { StringControlProps } from "./controlProps";
+import { IStringControlProps } from "./controlProps";
 
 /**
  * A textfield control.
  * @class
  * @extends React.Component
  */
-export class TextFieldControl extends React.Component<StringControlProps, void> {
+export class TextFieldControl extends React.Component<IStringControlProps, void> {
 
   /** Handles the update event for this control. */
   onChange = (event: React.FormEvent<HTMLInputElement>): void => {
     this.props.updateVariable(
       this.props.variable,
-      (event.target as HTMLInputElement).value
+      (event.target as HTMLInputElement).value,
     );
   }
 
   /** @override */
-  shouldComponentUpdate(nextProps: StringControlProps) {
+  shouldComponentUpdate(nextProps: IStringControlProps) {
     return nextProps.variable !== this.props.variable;
   }
 
@@ -44,7 +45,7 @@ export class TextFieldControl extends React.Component<StringControlProps, void> 
       title,
       key,
       dataType,
-      selectedValue
+      selectedValue,
     } = this.props.variable;
     const id = `${CSS.RMX_TEXTFIELD}-${key}`;
     const isNumber: boolean = dataType === VariableType.NUMBER;

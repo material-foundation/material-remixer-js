@@ -15,26 +15,27 @@
  */
 
 import * as React from "react";
-import { CSS, VariableType } from "../../lib/Constants";
-import { RangeControlProps } from "./controlProps";
+
+import { CSS } from "../../lib/Constants";
+import { IRangeControlProps } from "./controlProps";
 
 /**
  * A slider control.
  * @class
  * @extends React.Component
  */
-export class SliderControl extends React.Component<RangeControlProps, void> {
+export class SliderControl extends React.Component<IRangeControlProps, void> {
 
   /** Handles the update event for this control. */
   onChange = (event: React.FormEvent<HTMLInputElement>): void => {
     this.props.updateVariable(
       this.props.variable,
-      (event.target as HTMLInputElement).value
+      (event.target as HTMLInputElement).value,
     );
   }
 
   /** @override */
-  shouldComponentUpdate(nextProps: RangeControlProps) {
+  shouldComponentUpdate(nextProps: IRangeControlProps) {
     return nextProps.variable !== this.props.variable;
   }
 

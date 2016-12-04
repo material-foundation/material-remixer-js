@@ -15,10 +15,11 @@
  */
 
 import * as React from "react";
-import { ColorSwatchControl } from "./controls/ColorSwatchControl";
-import { ControlUpdateProps } from "./controls/controlProps";
+
 import { CSS, VariableType } from "../lib/Constants";
+import { ColorSwatchControl } from "./controls/ColorSwatchControl";
 import { DropdownControl } from "./controls/DropdownControl";
+import { IControlUpdateProps } from "./controls/controlProps";
 import { RadioListControl } from "./controls/RadioListControl";
 import { SliderControl } from "./controls/SliderControl";
 import { StringVariable } from "../core/variables/StringVariable";
@@ -29,10 +30,10 @@ import { Variable } from "../core/variables/Variable";
 /**
  * Interface for a React class that requires an array of Variables.
  * @interface
- * @extends ControlUpdateProps
+ * @extends IControlUpdateProps
  */
-export interface OverlayVariableProps extends ControlUpdateProps {
-  variables: Array<Variable>;
+export interface IOverlayVariableProps extends IControlUpdateProps {
+  variables: Variable[];
 }
 
 /**
@@ -41,14 +42,33 @@ export interface OverlayVariableProps extends ControlUpdateProps {
  * @class
  * @extends React.Component
  */
-export class OverlayVariables extends React.Component<OverlayVariableProps, void> {
+export class OverlayVariables extends React.Component<IOverlayVariableProps, void> {
+
+  /** @override */
+  render() {
+    return (
+      <div className={CSS.MDL_LIST}>
+        {this.props.variables.map((variable) => {
+          const Control = this.controlForVariable(variable);
+          return (
+            <Control
+              variable={variable}
+              updateVariable={this.props.updateVariable}
+              key={variable.key}
+            />
+          );
+        })}
+      </div>
+    );
+  }
 
   /**
    * Returns a control as determined by the variable `dataType` property.
+   * @private
    * @param  {Variable} variable The variable to provide the control for.
    * @return {any} A control component.
    */
-  controlForVariable(variable: Variable): any {
+  private controlForVariable(variable: Variable): any {
     switch (variable.dataType) {
       case VariableType.BOOLEAN:
         return SwitchControl;
@@ -67,25 +87,8 @@ export class OverlayVariables extends React.Component<OverlayVariableProps, void
         return TextFieldControl;
       case VariableType.COLOR:
         return ColorSwatchControl;
+      default:
+        return null;
     }
-    return null;
-  }
-
-  /** @override */
-  render() {
-    return (
-      <div className={CSS.MDL_LIST}>
-        {this.props.variables.map(variable => {
-          const Control = this.controlForVariable(variable);
-          return (
-            <Control
-              variable={variable}
-              updateVariable={this.props.updateVariable}
-              key={variable.key}
-            />
-          );
-        })}
-      </div>
-    );
   }
 }

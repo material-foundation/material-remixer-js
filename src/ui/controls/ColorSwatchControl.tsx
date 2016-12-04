@@ -15,8 +15,9 @@
  */
 
 import * as React from "react";
-import { ColorControlProps } from "./controlProps";
-import { CSS, VariableType } from "../../lib/Constants";
+
+import { CSS } from "../../lib/Constants";
+import { IColorControlProps } from "./controlProps";
 
 /**
  * A color swatch picker control consisting of a single color swatch for each
@@ -24,18 +25,18 @@ import { CSS, VariableType } from "../../lib/Constants";
  * @class
  * @extends React.Component
  */
-export class ColorSwatchControl extends React.Component<ColorControlProps, void> {
+export class ColorSwatchControl extends React.Component<IColorControlProps, void> {
 
   /** Handles the update event for this control. */
   onClick = (event: React.FormEvent<HTMLElement>): void => {
     this.props.updateVariable(
       this.props.variable,
-      (event.target as HTMLElement).dataset["value"]
+      (event.target as HTMLElement).dataset["value"],
     );
   }
 
   /** @override */
-  shouldComponentUpdate(nextProps: ColorControlProps) {
+  shouldComponentUpdate(nextProps: IColorControlProps) {
     return nextProps.variable !== this.props.variable;
   }
 
@@ -44,7 +45,7 @@ export class ColorSwatchControl extends React.Component<ColorControlProps, void>
     const {
       title,
       possibleValues,
-      selectedValue
+      selectedValue,
     } = this.props.variable;
 
     return (
@@ -71,7 +72,7 @@ export class ColorSwatchControl extends React.Component<ColorControlProps, void>
  * Interface containing properties for a single color swatch.
  * @interface
  */
-interface ColorSwatchProps {
+interface IColorSwatchProps {
   color: string;
   isSelected: boolean;
   onClick: any;
@@ -79,9 +80,9 @@ interface ColorSwatchProps {
 
 /**
  * Returns a single color swatch displayed within the `ColorSwatchControl`.
- * @param {ColorSwatchProps} props The color swatch properties.
+ * @param {IColorSwatchProps} props The color swatch properties.
  */
-function ColorSwatch(props: ColorSwatchProps) {
+function ColorSwatch(props: IColorSwatchProps) {
   const {
     color,
     isSelected,

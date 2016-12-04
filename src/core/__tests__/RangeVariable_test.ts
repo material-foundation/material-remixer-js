@@ -22,7 +22,14 @@ describe("RangeVariable", () => {
 
   beforeEach(() => {
     callbackSpy = sinon.spy();
-    variable = remixer.addRangeVariable(key, defaultValue, minValue, maxValue, increment, callbackSpy);
+    variable = remixer.addRangeVariable(
+      key,
+      defaultValue,
+      minValue,
+      maxValue,
+      increment,
+      callbackSpy,
+    );
   });
 
   it("should create a new variable", () => {

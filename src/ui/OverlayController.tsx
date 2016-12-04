@@ -15,7 +15,8 @@
  */
 
 import * as React from "react";
-import { KeyCode, KeyEvent, CSS } from "../lib/Constants";
+
+import { CSS, KeyCode, KeyEvent } from "../lib/Constants";
 import { Messaging } from "../lib/Messaging";
 import { OverlayVariables } from "./OverlayVariables";
 import { Variable } from "../core/variables/Variable";
@@ -24,9 +25,9 @@ import { Variable } from "../core/variables/Variable";
  * Interface for the properties assigned to the OverlayController component.
  * @interface
  */
-interface ControllerProps {
+interface IControllerProps {
   wrapperElement: HTMLElement;
-  variables: Array<Variable>;
+  variables: Variable[];
   updateVariable(variable: Variable, selectedValue: any): void;
 }
 
@@ -36,7 +37,7 @@ interface ControllerProps {
  * @class
  * @extends React.Component
  */
-export class OverlayController extends React.Component<ControllerProps, void> {
+export class OverlayController extends React.Component<IControllerProps, void> {
 
   /** @override */
   componentDidMount() {

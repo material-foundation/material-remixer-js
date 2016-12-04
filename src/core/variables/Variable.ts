@@ -14,29 +14,29 @@
  *  under the License.
  */
 
-import { SerializableData } from "../../lib/LocalStorage";
 import { remixer } from "../Remixer";
+import { ISerializableData } from "../../lib/LocalStorage";
 
 /**
  * Interface for a class that represents a type a Variable.
  * @interface
  */
-export interface VariableParams {
+export interface IVariableParams {
   key: string;
   title: string;
   dataType: string;
   defaultValue: any;
   selectedValue: any;
-  callbacks?: Array<VariableCallback>;
+  callbacks?: IVariableCallback[];
 }
 
 /**
  * Interface for a class that represents a type a Variable with possible values.
  * @interface
- * @extends VariableParams
+ * @extends IVariableParams
  */
-export interface VariableListParams extends VariableParams {
-  possibleValues?: Array<any>;
+export interface IVariableListParams extends IVariableParams {
+  possibleValues?: any[];
 }
 
 /**
@@ -44,7 +44,7 @@ export interface VariableListParams extends VariableParams {
  * @interface
  * @extends Function
  */
-export interface VariableCallback extends Function {
+export interface IVariableCallback extends Function {
   variable?: Variable;
 }
 
@@ -52,26 +52,31 @@ export interface VariableCallback extends Function {
  * Interface that maps a Variable to its key.
  * @interface
  */
-export interface VariableKeyMap {
+export interface IVariableKeyMap {
   [key: string]: Variable;
 }
 
 /**
  * A class representing a type a Variable.
  * @class
- * @implements {VariableParams}
+ * @implements {IVariableParams}
  */
-export class Variable implements VariableParams {
+export class Variable implements IVariableParams {
 
   /**
    * Creates an instance of a Variable.
-   * @param  {string}           key          A unique key for the Variable.
-   * @param  {string}           dataType     The data type of this Variable.
-   * @param  {any}              defaultValue The default value.
-   * @param  {VariableCallback} callback     The callback to invoke when updated.
+   * @param  {string}            key          A unique key for the Variable.
+   * @param  {string}            dataType     The data type of this Variable.
+   * @param  {any}               defaultValue The default value.
+   * @param  {IVariableCallback} callback     The callback to invoke when updated.
    * @return {Variable}
    */
-  constructor(key: string, dataType: string, defaultValue: any, callback?: VariableCallback) {
+  constructor(
+    key: string,
+    dataType: string,
+    defaultValue: any,
+    callback?: IVariableCallback,
+  ) {
     this.key = this.sanitizeKey(key);
     this.title = key;
     this.dataType = dataType;
@@ -145,21 +150,21 @@ export class Variable implements VariableParams {
     }
   }
 
-  protected _callbacks: Array<VariableCallback> = new Array<VariableCallback>();
+  protected _callbacks: IVariableCallback[] = new Array<IVariableCallback>();
 
   /**
    * The callback method to be invoked when the Variable is updated.
-   * @return {Array<VariableCallback>} The array of callback methods.
+   * @return {IVariableCallback[]} The array of callback methods.
    */
-  get callbacks(): Array<VariableCallback> {
+  get callbacks(): IVariableCallback[] {
     return this._callbacks;
   }
 
   /**
    * Adds a callback to array of callbacks.
-   * @param {VariableCallback} callback The callback to add.
+   * @param {IVariableCallback} callback The callback to add.
    */
-  addCallback(callback: VariableCallback): any {
+  addCallback(callback: IVariableCallback): any {
     this._callbacks.push(callback);
   }
 
@@ -174,9 +179,9 @@ export class Variable implements VariableParams {
 
   /**
    * First adds a callback to array, and then immediatly executes that callback.
-   * @param {VariableCallback} callback The callback to add and execute.
+   * @param {IVariableCallback} callback The callback to add and execute.
    */
-  addAndExecuteCallback(callback: VariableCallback): void {
+  addAndExecuteCallback(callback: IVariableCallback): void {
     this._callbacks.push(callback);
     callback(this);
   }
@@ -197,10 +202,10 @@ export class Variable implements VariableParams {
 
   /**
    * Returns a serialized representation of this object.
-   * @return {SerializableData} The serialized data.
+   * @return {ISerializableData} The serialized data.
    */
-  serialize(): SerializableData {
-    let data = <SerializableData>{};
+  serialize(): ISerializableData {
+    let data = <ISerializableData>{};
     data.key = this.key;
     data.dataType = this.dataType;
     data.title = this.title;
@@ -210,10 +215,10 @@ export class Variable implements VariableParams {
   /**
    * Subclass should override this method and return a new instance of thei
    * Variable class from serialized data.
-   * @param  {SerializableData} data The serialized data.
-   * @return {Variable}        A new initialized Variable subclass.
+   * @param  {ISerializableData} data The serialized data.
+   * @return {Variable}               A new initialized Variable subclass.
    */
-  static deserialize(data: SerializableData): Variable {
+  static deserialize(data: ISerializableData): Variable {
     return null;
   }
 

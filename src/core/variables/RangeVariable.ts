@@ -14,42 +14,51 @@
  *  under the License.
  */
 
-import { SerializableData } from "../../lib/LocalStorage";
-import { Variable, VariableParams, VariableCallback } from "./Variable";
+import { ISerializableData } from "../../lib/LocalStorage";
+import { IVariableCallback, IVariableParams, Variable } from "./Variable";
 import { VariableType } from "../../lib/Constants";
 
 /**
- * Interface for a class that represents a type of Variable for a range of values.
+ * Interface for a class that represents a type of Variable for a range
+ * of values.
  * @interface
- * @extends VariableParams
+ * @extends IVariableParams
  */
-interface RangeVariableParams extends VariableParams {
+export interface IRangeVariableParams extends IVariableParams {
   defaultValue: number;
   selectedValue: number;
   minValue: number;
   maxValue: number;
   increment: number;
+  callback?: IVariableCallback;
 }
 
 /**
  * A class representing a type of Variable for a range of values.
  * @class
  * @extends Variable
- * @implements {RangeVariableParams}
+ * @implements {IRangeVariableParams}
  */
-export class RangeVariable extends Variable implements RangeVariableParams {
+export class RangeVariable extends Variable implements IRangeVariableParams {
 
   /**
    * Creates an instance of a RangeVariable.
    * @constructor
-   * @param  {string}           key          A unique key for the Variable.
-   * @param  {number}           defaultValue The default value.
-   * @param  {number}           minValue     The minimum value allowed.
-   * @param  {number}           maxValue     The maximum value allowed.
-   * @param  {VariableCallback} callback     The callback to invoke when updated.
+   * @param  {string}            key          A unique key for the Variable.
+   * @param  {number}            defaultValue The default value.
+   * @param  {number}            minValue     The minimum value allowed.
+   * @param  {number}            maxValue     The maximum value allowed.
+   * @param  {IVariableCallback} callback     The callback to invoke when updated.
    * @return {RangeVariable}
    */
-  constructor(key: string, defaultValue: number, minValue: number, maxValue: number, increment: number, callback?: VariableCallback) {
+  constructor(
+    key: string,
+    defaultValue: number,
+    minValue: number,
+    maxValue: number,
+    increment: number,
+    callback?: IVariableCallback,
+  ) {
     super(key, VariableType.RANGE, defaultValue, callback);
     this.minValue = minValue;
     this.maxValue = maxValue;
@@ -66,7 +75,7 @@ export class RangeVariable extends Variable implements RangeVariableParams {
       this.defaultValue,
       this.minValue,
       this.maxValue,
-      this.increment
+      this.increment,
     );
     cloned.title = this.title;
     cloned._callbacks = this._callbacks.slice();
@@ -97,9 +106,9 @@ export class RangeVariable extends Variable implements RangeVariableParams {
   /**
    * Returns a serialized representation of this object.
    * @override
-   * @return {SerializableData} The serialized data.
+   * @return {ISerializableData} The serialized data.
    */
-  serialize(): SerializableData {
+  serialize(): ISerializableData {
     let data = super.serialize();
     data.selectedValue = this.selectedValue.toString();
     data.minValue = this.minValue;
@@ -111,14 +120,20 @@ export class RangeVariable extends Variable implements RangeVariableParams {
   /**
    * Returns a new initialized RangeVariable from serialized data.
    * @override
-   * @param  {SerializableData} data The serialized data.
-   * @return {RangeVariable}         A new initialized RangeVariable.
+   * @param  {ISerializableData} data The serialized data.
+   * @return {RangeVariable}          A new initialized RangeVariable.
    */
-  static deserialize(data: SerializableData): Variable {
+  static deserialize(data: ISerializableData): Variable {
     let selectedValue: number = parseFloat(data.selectedValue);
     let minValue: number = data.minValue;
     let maxValue: number = data.maxValue;
     let increment: number = data.increment;
-    return new RangeVariable(data.key, selectedValue, minValue, maxValue, increment);
+    return new RangeVariable(
+      data.key,
+      selectedValue,
+      minValue,
+      maxValue,
+      increment,
+    );
   }
 }
