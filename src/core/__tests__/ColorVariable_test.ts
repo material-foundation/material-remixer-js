@@ -14,13 +14,18 @@ describe("ColorVariable", () => {
   const key: string = "test variable";
   const sanitizedKey: string = "test_variable";
   const defaultValue: string = "#4285F4";
-  const possibleValues: Array<string> = ["#4285F4", "#0F9D58", "#DB4437"];
+  const possibleValues: string[] = ["#4285F4", "#0F9D58", "#DB4437"];
   let callbackSpy: sinon.SinonSpy;
   let variable: ColorVariable;
 
   beforeEach(() => {
     callbackSpy = sinon.spy();
-    variable = remixer.addColorVariable(key, defaultValue, possibleValues, callbackSpy);
+    variable = remixer.addColorVariable(
+      key,
+      defaultValue,
+      possibleValues,
+      callbackSpy,
+    );
   });
 
   it("should create a new variable", () => {

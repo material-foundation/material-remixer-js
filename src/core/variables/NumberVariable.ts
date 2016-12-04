@@ -14,39 +14,44 @@
  *  under the License.
  */
 
-import { SerializableData } from "../../lib/LocalStorage";
-import { Variable, VariableListParams, VariableCallback } from "./Variable";
+import { ISerializableData } from "../../lib/LocalStorage";
+import { IVariableCallback, IVariableListParams, Variable } from "./Variable";
 import { VariableType } from "../../lib/Constants";
 
 /**
  * Interface for a class that represents a type of Variable for number values.
  * @interface
- * @extends VariableListParams
+ * @extends IVariableListParams
  */
-interface NumberVariableParams extends VariableListParams {
+interface INumberVariableParams extends IVariableListParams {
   defaultValue: number;
   selectedValue: number;
-  possibleValues?: Array<number>;
+  possibleValues?: number[];
 }
 
 /**
  * A class representing a type of Variable for number values.
  * @class
  * @extends Variable
- * @implements {NumberVariableParams}
+ * @implements {INumberVariableParams}
  */
-export class NumberVariable extends Variable implements NumberVariableParams {
+export class NumberVariable extends Variable implements INumberVariableParams {
 
   /**
    * Creates an instance of a ColorVariable.
    * @constructor
-   * @param  {string}           key            A unique key for the Variable.
-   * @param  {number}           defaultValue   The default value.
-   * @param  {Array<number>}    possibleValues The array of possible values.
-   * @param  {VariableCallback} callback       The callback to invoke when updated.
-   * @return {[NumberVariable]}
+   * @param  {string}            key            A unique key for the Variable.
+   * @param  {number}            defaultValue   The default value.
+   * @param  {number[]}          possibleValues The array of possible values.
+   * @param  {IVariableCallback} callback       The callback to invoke when updated.
+   * @return {NumberVariable}
    */
-  constructor(key: string, defaultValue: number, possibleValues?: Array<number>, callback?: VariableCallback) {
+  constructor(
+    key: string,
+    defaultValue: number,
+    possibleValues?: number[],
+    callback?: IVariableCallback,
+  ) {
     super(key, VariableType.NUMBER, defaultValue, callback);
     this.possibleValues = possibleValues;
   }
@@ -59,7 +64,7 @@ export class NumberVariable extends Variable implements NumberVariableParams {
     let cloned = new NumberVariable(
       this.key,
       this.defaultValue,
-      this.possibleValues
+      this.possibleValues,
     );
     cloned.title = this.title;
     cloned._callbacks = this._callbacks.slice();
@@ -69,16 +74,16 @@ export class NumberVariable extends Variable implements NumberVariableParams {
   /**
    * The array of possible values for this Variable.
    * @override
-   * @type {Array<number>}
+   * @type {number[]}
    */
-  possibleValues?: Array<number>;
+  possibleValues?: number[];
 
   /**
    * Returns a serialized representation of this object.
    * @override
-   * @return {SerializableData} The serialized data.
+   * @return {ISerializableData} The serialized data.
    */
-  serialize(): SerializableData {
+  serialize(): ISerializableData {
     let data = super.serialize();
     data.selectedValue = this.selectedValue;
     data.possibleValues = this.possibleValues;
@@ -88,10 +93,14 @@ export class NumberVariable extends Variable implements NumberVariableParams {
   /**
    * Returns a new initialized NumberVariable from serialized data.
    * @override
-   * @param  {SerializableData} data The serialized data.
-   * @return {NumberVariable}        A new initialized NumberVariable.
+   * @param  {ISerializableData} data The serialized data.
+   * @return {NumberVariable}         A new initialized NumberVariable.
    */
-  static deserialize(data: SerializableData): Variable {
-    return new NumberVariable(data.key, data.selectedValue, data.possibleValues);
+  static deserialize(data: ISerializableData): Variable {
+    return new NumberVariable(
+      data.key,
+      data.selectedValue,
+      data.possibleValues,
+    );
   }
 }

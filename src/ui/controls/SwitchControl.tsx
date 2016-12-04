@@ -15,15 +15,16 @@
  */
 
 import * as React from "react";
-import { BooleanControlProps } from "./controlProps";
+
 import { CSS } from "../../lib/Constants";
+import { IBooleanControlProps } from "./controlProps";
 
 /**
  * A switch control.
  * @class
  * @extends React.Component
  */
-export class SwitchControl extends React.Component<BooleanControlProps, void> {
+export class SwitchControl extends React.Component<IBooleanControlProps, void> {
 
   /** Handles the update event for this control. */
   onChange = (event: React.FormEvent<HTMLInputElement>): void => {
@@ -32,7 +33,7 @@ export class SwitchControl extends React.Component<BooleanControlProps, void> {
   }
 
   /** @override */
-  shouldComponentUpdate(nextProps: BooleanControlProps) {
+  shouldComponentUpdate(nextProps: IBooleanControlProps) {
     return nextProps.variable !== this.props.variable;
   }
 
