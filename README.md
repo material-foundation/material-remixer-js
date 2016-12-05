@@ -1,4 +1,4 @@
-![remixer](docs/assets/lockup_remixer_for_web.svg)
+![remixer](https://cdn.rawgit.com/material-foundation/material-remixer-web/develop/docs/assets/lockup_remixer_for_web.svg)
 
 [![Build Status](https://travis-ci.org/material-foundation/material-remixer-web.svg?branch=develop)](https://travis-ci.org/material-foundation/material-remixer-web) [![codecov](https://codecov.io/gh/material-foundation/material-remixer-web/branch/develop/graph/badge.svg)](https://codecov.io/gh/material-foundation/material-remixer-web) [![npm version](https://badge.fury.io/js/material-remixer.svg)](https://badge.fury.io/js/material-remixer)
 
