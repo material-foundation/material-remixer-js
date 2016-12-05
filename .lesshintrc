@@ -1,0 +1,6 @@
+{
+  "fileExtensions": [".less", ".css"],
+  "idSelector": false,
+  "importantRule": false,
+  "zeroUnit": false
+}

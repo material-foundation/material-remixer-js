@@ -1,6 +1,6 @@
 {
   "name": "material-remixer",
-  "version": "0.5.3",
+  "version": "0.5.4",
   "description": "A set of libraries and protocols to allow the sharing of design values and live refinement of apps during the development process.",
   "homepage": "https://github.com/material-foundation/material-remixer",
   "author": "The Material Remixer Authors (see AUTHORS)",
@@ -25,6 +25,7 @@
     "dev": "npm run clean && npm run build && cross-env RMX_ENV=development webpack-dev-server",
     "dist": "npm run clean && npm run build && copyFiles -f build/*.* dist",
     "lint:ts": "tslint --fix --force 'src/**/*.ts?(x)'",
+    "lint:css": "lesshint src/ui/styles/*.less examples/*.css",
     "lint": "npm-run-all --parallel lint:*",
     "test": "karma start"
   },
@@ -53,6 +54,7 @@
     "karma-webpack": "^1.8.0",
     "less": "^2.7.1",
     "less-loader": "^2.2.3",
+    "lesshint": "^2.3.0",
     "mkdirp": "^0.5.1",
     "mocha": "^3.1.2",
     "npm-run-all": "^3.1.2",
