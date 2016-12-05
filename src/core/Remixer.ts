@@ -54,7 +54,12 @@ class Remixer {
    * @return {Remixer} The attached instance of Remixer.
    */
   static get attachedInstance(): Remixer {
-    return window.parent["remixer"]._sharedInstance as Remixer;
+    let parentRemixer = window.parent["remixer"];
+    if (parentRemixer) {
+      return parentRemixer._sharedInstance as Remixer;
+    }
+    // Simply return shared remixer instance if no parent.
+    return this._sharedInstance;
   }
 
   private _frameElement: HTMLFrameElement;
