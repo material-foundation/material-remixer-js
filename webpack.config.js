@@ -53,6 +53,11 @@ module.exports = {
     }, {
       test: /\.html$/,
       loader: 'html-loader'
+    }, {
+      test: /\.tsx?$/,
+      exclude: /(__tests__|node_modules)\//,
+      loader: 'istanbul-instrumenter-loader',
+      enforce: 'post'
     }],
   },
   externals: {
