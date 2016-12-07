@@ -19,9 +19,6 @@
   "include": [
     "./src/**/*"
   ],
-  "exclude": [
-    "**/*_test.ts"
-  ],
   "compileOnSave": false,
   "buildOnSave": false
 }
