@@ -53,7 +53,7 @@ export class ColorVariable extends Variable implements IColorVariableParams {
     callback?: IVariableCallback,
   ) {
     super(key, VariableType.COLOR, defaultValue, callback);
-    this.possibleValues = possibleValues;
+    this.possibleValues = possibleValues ? possibleValues : [];
   }
 
   /**
