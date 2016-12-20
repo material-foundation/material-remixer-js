@@ -36,10 +36,10 @@ module.exports = function(config) {
       }]
     },
     files: [
-      'src/**/__tests__/*.ts',
+      'src/**/__tests__/*.ts?(x)',
     ],
     preprocessors: {
-      'src/**/*.ts': ['webpack'],
+      'src/**/*.ts?(x)': ['webpack'],
     },
     webpack: {
       devtool: webpackConfig.devtool,
