@@ -53,7 +53,7 @@ export class NumberVariable extends Variable implements INumberVariableParams {
     callback?: IVariableCallback,
   ) {
     super(key, VariableType.NUMBER, defaultValue, callback);
-    this.possibleValues = possibleValues;
+    this.possibleValues = possibleValues ? possibleValues : [];
   }
 
   /**

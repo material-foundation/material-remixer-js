@@ -53,7 +53,7 @@ export class StringVariable extends Variable implements IStringVariableParams {
     callback?: IVariableCallback,
   ) {
     super(key, VariableType.STRING, defaultValue, callback);
-    this.possibleValues = possibleValues;
+    this.possibleValues = possibleValues ? possibleValues : [];
   }
 
   /**
