@@ -60,10 +60,6 @@ module.exports = {
       enforce: 'post'
     }],
   },
-  externals: {
-    'react': 'React',
-    'react-dom': 'ReactDOM',
-  },
   plugins: [
     new webpack.BannerPlugin(`${PACKAGE.name}
 @version v${PACKAGE.version}
