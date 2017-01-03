@@ -5,7 +5,7 @@ import * as sinonChai from "sinon-chai";
 import { remixer } from "../Remixer";
 import { RangeVariable } from "../variables/RangeVariable";
 import { Variable } from "../variables/Variable";
-import { VariableType } from "../../lib/Constants";
+import { VariableDataType } from "../../lib/Constants";
 
 const expect = chai.expect;
 chai.use(sinonChai);
@@ -37,7 +37,7 @@ describe("RangeVariable", () => {
   });
 
   it("have the correct datatype", () => {
-    expect(variable.dataType).to.equal(VariableType.RANGE);
+    expect(variable.dataType).to.equal(VariableDataType.RANGE);
   });
 
   it("have the correct title", () => {

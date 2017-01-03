@@ -16,7 +16,7 @@
 
 import { ISerializableData } from "../../lib/LocalStorage";
 import { IVariableCallback, IVariableListParams, Variable } from "./Variable";
-import { VariableType } from "../../lib/Constants";
+import { VariableDataType } from "../../lib/Constants";
 
 /**
  * Interface for a class that represents a type of Variable for number values.
@@ -52,7 +52,7 @@ export class NumberVariable extends Variable implements INumberVariableParams {
     possibleValues?: number[],
     callback?: IVariableCallback,
   ) {
-    super(key, VariableType.NUMBER, defaultValue, callback);
+    super(key, VariableDataType.NUMBER, defaultValue, callback);
     this.possibleValues = possibleValues ? possibleValues : [];
   }
 

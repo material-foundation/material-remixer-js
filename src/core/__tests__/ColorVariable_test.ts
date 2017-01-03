@@ -5,7 +5,7 @@ import * as sinonChai from "sinon-chai";
 import { remixer } from "../Remixer";
 import { ColorVariable } from "../variables/ColorVariable";
 import { Variable } from "../variables/Variable";
-import { VariableType } from "../../lib/Constants";
+import { VariableDataType } from "../../lib/Constants";
 
 const expect = chai.expect;
 chai.use(sinonChai);
@@ -33,7 +33,7 @@ describe("ColorVariable", () => {
   });
 
   it("have the correct datatype", () => {
-    expect(variable.dataType).to.equal(VariableType.COLOR);
+    expect(variable.dataType).to.equal(VariableDataType.COLOR);
   });
 
   it("have the correct title", () => {
