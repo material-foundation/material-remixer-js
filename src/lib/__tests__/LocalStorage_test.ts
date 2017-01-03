@@ -4,7 +4,7 @@ import * as sinonChai from "sinon-chai";
 
 import { remixer } from "../../core/Remixer";
 import { LocalStorage } from "../LocalStorage";
-import { VariableType } from "../Constants";
+import { VariableDataType } from "../Constants";
 
 const expect = chai.expect;
 chai.use(sinonChai);
@@ -29,7 +29,7 @@ describe("LocalStorage", () => {
     addVariables();
     let stringVariable = LocalStorage.getVariable("key2");
 
-    expect(stringVariable.dataType).to.equal(VariableType.STRING);
+    expect(stringVariable.dataType).to.equal(VariableDataType.STRING);
     expect(stringVariable.selectedValue).to.equal("testString");
   });
 });

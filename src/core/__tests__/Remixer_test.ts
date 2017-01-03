@@ -3,7 +3,7 @@ import * as sinon from "sinon";
 import * as sinonChai from "sinon-chai";
 
 import { remixer } from "../Remixer";
-import { VariableType } from "../../lib/Constants";
+import { VariableDataType } from "../../lib/Constants";
 
 const expect = chai.expect;
 chai.use(sinonChai);
@@ -35,7 +35,7 @@ describe("Remixer", () => {
 
   it("should retrieve correct variable from map by key", () => {
     let stringVariable = remixer.getVariable("key2");
-    expect(stringVariable.dataType).to.equal(VariableType.STRING);
+    expect(stringVariable.dataType).to.equal(VariableDataType.STRING);
   });
 
   it("should update selected value of variable", () => {

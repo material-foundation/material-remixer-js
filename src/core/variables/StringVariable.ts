@@ -16,7 +16,7 @@
 
 import { ISerializableData } from "../../lib/LocalStorage";
 import { IVariableCallback, IVariableListParams, Variable } from "./Variable";
-import { VariableType } from "../../lib/Constants";
+import { VariableDataType } from "../../lib/Constants";
 
 /**
  * Interface for a class that represents a type of Variable for string values.
@@ -52,7 +52,7 @@ export class StringVariable extends Variable implements IStringVariableParams {
     possibleValues?: string[],
     callback?: IVariableCallback,
   ) {
-    super(key, VariableType.STRING, defaultValue, callback);
+    super(key, VariableDataType.STRING, defaultValue, callback);
     this.possibleValues = possibleValues ? possibleValues : [];
   }
 

@@ -5,7 +5,7 @@ import * as sinonChai from "sinon-chai";
 import { remixer } from "../Remixer";
 import { BooleanVariable } from "../variables/BooleanVariable";
 import { Variable } from "../variables/Variable";
-import { VariableType } from "../../lib/Constants";
+import { VariableDataType } from "../../lib/Constants";
 
 const expect = chai.expect;
 chai.use(sinonChai);
@@ -27,7 +27,7 @@ describe("BooleanVariable", () => {
   });
 
   it("have the correct datatype", () => {
-    expect(variable.dataType).to.equal(VariableType.BOOLEAN);
+    expect(variable.dataType).to.equal(VariableDataType.BOOLEAN);
   });
 
   it("have the correct title", () => {

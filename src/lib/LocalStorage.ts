@@ -20,7 +20,7 @@ import { NumberVariable } from "../core/variables/NumberVariable";
 import { RangeVariable } from "../core/variables/RangeVariable";
 import { StringVariable } from "../core/variables/StringVariable";
 import { Variable } from "../core/variables/Variable";
-import { StorageKey, VariableType } from "../lib/Constants";
+import { StorageKey, VariableDataType } from "../lib/Constants";
 
 /**
  * Interface for a class that represents serialized data.
@@ -87,15 +87,15 @@ export class LocalStorage {
    */
   private static deserialize(data: ISerializableData): Variable {
     switch (data.dataType) {
-      case VariableType.BOOLEAN:
+      case VariableDataType.BOOLEAN:
         return BooleanVariable.deserialize(data);
-      case VariableType.COLOR:
+      case VariableDataType.COLOR:
         return ColorVariable.deserialize(data);
-      case VariableType.NUMBER:
+      case VariableDataType.NUMBER:
         return NumberVariable.deserialize(data);
-      case VariableType.RANGE:
+      case VariableDataType.RANGE:
         return RangeVariable.deserialize(data);
-      case VariableType.STRING:
+      case VariableDataType.STRING:
         return StringVariable.deserialize(data);
       default:
         return null;

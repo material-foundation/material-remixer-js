@@ -29,13 +29,13 @@ export const StorageKey = {
   REMIXER:  "__remixer__",
 };
 
-/** Variable types constants. */
-export const VariableType = {
-  BOOLEAN:  "boolean",
-  COLOR:    "color",
-  NUMBER:   "number",
-  RANGE:    "range",
-  STRING:   "string",
+/** Variable data type constants. */
+export const VariableDataType = {
+  BOOLEAN:  "__DataTypeBoolean__",
+  COLOR:    "__DataTypeColor__",
+  NUMBER:   "__DataTypeNumber__",
+  RANGE:    "__DataTypeRange_",
+  STRING:   "__DataTypeString__",
 };
 
 /** CSS class and id constants. */
