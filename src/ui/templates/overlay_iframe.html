@@ -21,13 +21,20 @@
   <link rel="stylesheet" href="./node_modules/material-design-lite/material.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <script src="./node_modules/material-design-lite/material.min.js"></script>
-  <script src="./node_modules/react/dist/react.js"></script>
-  <script src="./node_modules/react-dom/dist/react-dom.js"></script>
+  <script src="./node_modules/react/dist/react.min.js"></script>
+  <script src="./node_modules/react-dom/dist/react-dom.min.js"></script>
 </head>
 
 <body>
   <div id="rmx-overlay-wrapper"></div>
-  <script src="./node_modules/material-remixer/dist/overlay.js"></script>
+  <script>
+    // Dynamically load the overlay(.min?).js from same path as remixer script.
+    var remixerPath = window.parent.document.querySelector('script[src*="remixer"]');
+    var overlayPath = remixerPath.src.replace('remixer', 'overlay');
+    var overlayScript = document.createElement('script');
+    overlayScript.setAttribute('src', overlayPath);
+    document.head.appendChild(overlayScript);
+  </script>
 </body>
 
 </html>
