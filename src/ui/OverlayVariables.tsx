@@ -76,7 +76,7 @@ export class OverlayVariables extends React.Component<IOverlayVariableProps, voi
         return SliderControl;
       case VariableType.STRING:
         const { possibleValues } = variable as StringVariable;
-        if (!possibleValues) {
+        if (possibleValues.length <= 1) {
           return TextFieldControl;
         } else if (possibleValues.length === 2) {
           return RadioListControl;
