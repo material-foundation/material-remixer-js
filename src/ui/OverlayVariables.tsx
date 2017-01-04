@@ -16,7 +16,7 @@
 
 import * as React from "react";
 
-import { CSS, VariableType } from "../lib/Constants";
+import { CSS, ConstraintType, DataType } from "../lib/Constants";
 import { ColorSwatchControl } from "./controls/ColorSwatchControl";
 import { DropdownControl } from "./controls/DropdownControl";
 import { IControlUpdateProps } from "./controls/controlProps";
@@ -70,11 +70,9 @@ export class OverlayVariables extends React.Component<IOverlayVariableProps, voi
    */
   private controlForVariable(variable: Variable): any {
     switch (variable.dataType) {
-      case VariableType.BOOLEAN:
+      case DataType.BOOLEAN:
         return SwitchControl;
-      case VariableType.RANGE:
-        return SliderControl;
-      case VariableType.STRING:
+      case DataType.STRING:
         const { possibleValues } = variable as StringVariable;
         if (possibleValues.length <= 1) {
           return TextFieldControl;
@@ -83,9 +81,12 @@ export class OverlayVariables extends React.Component<IOverlayVariableProps, voi
         } else {
           return DropdownControl;
         }
-      case VariableType.NUMBER:
+      case DataType.NUMBER:
+        if (variable.constraintType === ConstraintType.RANGE) {
+          return SliderControl;
+        }
         return TextFieldControl;
-      case VariableType.COLOR:
+      case DataType.COLOR:
         return ColorSwatchControl;
       default:
         return null;

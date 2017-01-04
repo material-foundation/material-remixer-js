@@ -15,6 +15,7 @@
  */
 
 import { remixer } from "../Remixer";
+import { ConstraintType } from "../../lib/Constants";
 import { ISerializableData } from "../../lib/LocalStorage";
 
 /**
@@ -24,6 +25,7 @@ import { ISerializableData } from "../../lib/LocalStorage";
 export interface IVariableParams {
   key: string;
   title: string;
+  constraintType: string;
   dataType: string;
   defaultValue: any;
   selectedValue: any;
@@ -79,6 +81,7 @@ export class Variable implements IVariableParams {
   ) {
     this.key = this.sanitizeKey(key);
     this.title = key;
+    this.constraintType = ConstraintType.NONE;
     this.dataType = dataType;
     this.defaultValue = defaultValue;
     this._selectedValue = defaultValue;
@@ -93,11 +96,22 @@ export class Variable implements IVariableParams {
    * @return {Variable} Returns the cloned variable.
    */
   clone() {
-    let cloned = new Variable(this.key, this.defaultValue, null);
+    let cloned = new Variable(
+      this.key,
+      this.dataType,
+      this.defaultValue,
+      null,
+    );
     cloned.title = this.title;
     cloned._callbacks = this._callbacks.slice();
     return cloned;
   }
+
+  /**
+   * The data constraint type for this Variable.
+   * @type {string}
+   */
+  constraintType: string;
 
   /**
    * The data type represented by this Variable.
@@ -207,6 +221,7 @@ export class Variable implements IVariableParams {
   serialize(): ISerializableData {
     let data = <ISerializableData>{};
     data.key = this.key;
+    data.constraintType = this.constraintType;
     data.dataType = this.dataType;
     data.title = this.title;
     return data;

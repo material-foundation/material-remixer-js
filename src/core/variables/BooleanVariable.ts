@@ -14,9 +14,9 @@
  *  under the License.
  */
 
+import { DataType } from "../../lib/Constants";
 import { ISerializableData } from "../../lib/LocalStorage";
 import { IVariableCallback, IVariableParams, Variable } from "./Variable";
-import { VariableType } from "../../lib/Constants";
 
 /**
  * Interface for a class that represents a type of Variable for boolean values.
@@ -49,7 +49,7 @@ export class BooleanVariable extends Variable implements IBooleanVariableParams 
     defaultValue: boolean,
     callback?: IVariableCallback,
   ) {
-    super(key, VariableType.BOOLEAN, defaultValue, callback);
+    super(key, DataType.BOOLEAN, defaultValue, callback);
   }
 
   /**
