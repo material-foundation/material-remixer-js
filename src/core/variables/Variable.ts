@@ -81,7 +81,6 @@ export class Variable implements IVariableParams {
   ) {
     this.key = this.sanitizeKey(key);
     this.title = key;
-    this.constraintType = ConstraintType.NONE;
     this.dataType = dataType;
     this.defaultValue = defaultValue;
     this._selectedValue = defaultValue;
@@ -110,8 +109,11 @@ export class Variable implements IVariableParams {
   /**
    * The data constraint type for this Variable.
    * @type {string}
+   * @readonly
    */
-  constraintType: string;
+  get constraintType(): string {
+    return ConstraintType.NONE;
+  }
 
   /**
    * The data type represented by this Variable.

@@ -54,7 +54,6 @@ export class NumberVariable extends Variable implements INumberVariableParams {
   ) {
     super(key, DataType.NUMBER, defaultValue, callback);
     this.possibleValues = possibleValues ? possibleValues : [];
-    this.constraintType = ConstraintType.LIST;
   }
 
   /**
@@ -70,6 +69,16 @@ export class NumberVariable extends Variable implements INumberVariableParams {
     cloned.title = this.title;
     cloned._callbacks = this._callbacks.slice();
     return cloned;
+  }
+
+  /**
+   * The data constraint type for this Variable.
+   * @type {string}
+   * @readonly
+   */
+  get constraintType(): string {
+    return this.possibleValues.length > 1 ?
+        ConstraintType.LIST : ConstraintType.NONE;
   }
 
   /**

@@ -60,10 +60,18 @@ export class RangeVariable extends Variable implements IRangeVariableParams {
     callback?: IVariableCallback,
   ) {
     super(key, DataType.NUMBER, defaultValue, callback);
-    this.constraintType = ConstraintType.RANGE;
     this.minValue = minValue;
     this.maxValue = maxValue;
     this.increment = increment;
+  }
+
+  /**
+   * The data constraint type for this Variable.
+   * @type {string}
+   * @readonly
+   */
+  get constraintType(): string {
+    return ConstraintType.RANGE;
   }
 
   /**

@@ -54,7 +54,16 @@ export class StringVariable extends Variable implements IStringVariableParams {
   ) {
     super(key, DataType.STRING, defaultValue, callback);
     this.possibleValues = possibleValues ? possibleValues : [];
-    this.constraintType = ConstraintType.LIST;
+  }
+
+  /**
+   * The data constraint type for this Variable.
+   * @type {string}
+   * @readonly
+   */
+  get constraintType(): string {
+    return this.possibleValues.length > 1 ?
+        ConstraintType.LIST : ConstraintType.NONE;
   }
 
   /**
