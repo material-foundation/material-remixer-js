@@ -20,6 +20,7 @@ const path = require('path');
 const webpack = require('webpack');
 const PACKAGE = require('./package.json');
 
+const PUBLIC_PATH = '/assets/';
 const IS_DEV = process.env.RMX_ENV === 'development';
 const IS_PROD = process.env.RMX_ENV === 'production';
 
@@ -30,15 +31,18 @@ module.exports = {
   },
   output: {
     path: path.resolve('./build'),
+    publicPath: PUBLIC_PATH,
     filename: '[name].' + (IS_PROD ? 'min.' : '') + 'js',
     libraryTarget: 'umd',
     umdNamedDefine: true
   },
   devtool: IS_DEV ? 'cheap-module-eval-source-map' : 'cheap-module-source-map',
   devServer: {
-    open: true,
+    contentBase: "examples",
     inline: true,
-    hot: true,
+  },
+  performance: {
+    hints: !IS_DEV
   },
   resolve: {
     extensions: ['.webpack.js', '.web.js', '.ts', '.tsx', '.js']
@@ -61,6 +65,7 @@ module.exports = {
     }],
   },
   plugins: [
+    new webpack.HotModuleReplacementPlugin(),
     new webpack.BannerPlugin(`${PACKAGE.name}
 @version v${PACKAGE.version}
 @license ${PACKAGE.license}
