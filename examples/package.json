@@ -5,10 +5,10 @@
   "author": "The Material Remixer Authors (see AUTHORS)",
   "license": "Apache-2.0",
   "scripts": {
-    "start": "$( yarn bin )/http-server -o"
+    "start": "webpack-dev-server --open"
   },
   "devDependencies": {
-    "http-server": "^0.9.0"
+    "webpack-dev-server": "^2.2.0-rc.0"
   },
   "dependencies": {
     "material-design-lite": "^1.2.1",
