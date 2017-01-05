@@ -16,7 +16,7 @@
 
 import * as React from "react";
 
-import { CSS, VariableType } from "../../lib/Constants";
+import { CSS, DataType } from "../../lib/Constants";
 import { IStringControlProps } from "./controlProps";
 
 /**
@@ -48,7 +48,7 @@ export class TextFieldControl extends React.Component<IStringControlProps, void>
       selectedValue,
     } = this.props.variable;
     const id = `${CSS.RMX_TEXTFIELD}-${key}`;
-    const isNumber: boolean = dataType === VariableType.NUMBER;
+    const isNumber: boolean = dataType === DataType.NUMBER;
     const pattern = isNumber ? "-?[0-9]*(\.[0-9]+)?" : ".*";
 
     return (

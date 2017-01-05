@@ -14,9 +14,9 @@
  *  under the License.
  */
 
+import { ConstraintType, DataType } from "../../lib/Constants";
 import { ISerializableData } from "../../lib/LocalStorage";
 import { IVariableCallback, IVariableParams, Variable } from "./Variable";
-import { VariableType } from "../../lib/Constants";
 
 /**
  * Interface for a class that represents a type of Variable for a range
@@ -59,10 +59,19 @@ export class RangeVariable extends Variable implements IRangeVariableParams {
     increment: number,
     callback?: IVariableCallback,
   ) {
-    super(key, VariableType.RANGE, defaultValue, callback);
+    super(key, DataType.NUMBER, defaultValue, callback);
     this.minValue = minValue;
     this.maxValue = maxValue;
     this.increment = increment;
+  }
+
+  /**
+   * The data constraint type for this Variable.
+   * @type {string}
+   * @readonly
+   */
+  get constraintType(): string {
+    return ConstraintType.RANGE;
   }
 
   /**

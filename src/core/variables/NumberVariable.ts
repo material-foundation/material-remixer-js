@@ -14,9 +14,9 @@
  *  under the License.
  */
 
+import { ConstraintType, DataType } from "../../lib/Constants";
 import { ISerializableData } from "../../lib/LocalStorage";
 import { IVariableCallback, IVariableListParams, Variable } from "./Variable";
-import { VariableType } from "../../lib/Constants";
 
 /**
  * Interface for a class that represents a type of Variable for number values.
@@ -52,7 +52,7 @@ export class NumberVariable extends Variable implements INumberVariableParams {
     possibleValues?: number[],
     callback?: IVariableCallback,
   ) {
-    super(key, VariableType.NUMBER, defaultValue, callback);
+    super(key, DataType.NUMBER, defaultValue, callback);
     this.possibleValues = possibleValues ? possibleValues : [];
   }
 
@@ -69,6 +69,16 @@ export class NumberVariable extends Variable implements INumberVariableParams {
     cloned.title = this.title;
     cloned._callbacks = this._callbacks.slice();
     return cloned;
+  }
+
+  /**
+   * The data constraint type for this Variable.
+   * @type {string}
+   * @readonly
+   */
+  get constraintType(): string {
+    return this.possibleValues.length > 1 ?
+        ConstraintType.LIST : ConstraintType.NONE;
   }
 
   /**

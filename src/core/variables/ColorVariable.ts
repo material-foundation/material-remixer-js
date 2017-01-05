@@ -14,9 +14,9 @@
  *  under the License.
  */
 
+import { ConstraintType, DataType } from "../../lib/Constants";
 import { ISerializableData } from "../../lib/LocalStorage";
 import { IVariableCallback, IVariableListParams, Variable } from "./Variable";
-import { VariableType } from "../../lib/Constants";
 
 /**
  * Interface for a class that represents a type of Variable for color values.
@@ -52,8 +52,18 @@ export class ColorVariable extends Variable implements IColorVariableParams {
     possibleValues?: string[],
     callback?: IVariableCallback,
   ) {
-    super(key, VariableType.COLOR, defaultValue, callback);
+    super(key, DataType.COLOR, defaultValue, callback);
     this.possibleValues = possibleValues ? possibleValues : [];
+  }
+
+  /**
+   * The data constraint type for this Variable.
+   * @type {string}
+   * @readonly
+   */
+  get constraintType(): string {
+    return this.possibleValues.length > 1 ?
+        ConstraintType.LIST : ConstraintType.NONE;
   }
 
   /**

@@ -14,9 +14,9 @@
  *  under the License.
  */
 
+import { ConstraintType, DataType } from "../../lib/Constants";
 import { ISerializableData } from "../../lib/LocalStorage";
 import { IVariableCallback, IVariableListParams, Variable } from "./Variable";
-import { VariableType } from "../../lib/Constants";
 
 /**
  * Interface for a class that represents a type of Variable for string values.
@@ -52,8 +52,18 @@ export class StringVariable extends Variable implements IStringVariableParams {
     possibleValues?: string[],
     callback?: IVariableCallback,
   ) {
-    super(key, VariableType.STRING, defaultValue, callback);
+    super(key, DataType.STRING, defaultValue, callback);
     this.possibleValues = possibleValues ? possibleValues : [];
+  }
+
+  /**
+   * The data constraint type for this Variable.
+   * @type {string}
+   * @readonly
+   */
+  get constraintType(): string {
+    return this.possibleValues.length > 1 ?
+        ConstraintType.LIST : ConstraintType.NONE;
   }
 
   /**

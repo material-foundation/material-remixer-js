@@ -16,11 +16,11 @@
 
 import { BooleanVariable } from "../core/variables/BooleanVariable";
 import { ColorVariable } from "../core/variables/ColorVariable";
+import { ConstraintType, DataType, StorageKey } from "../lib/Constants";
 import { NumberVariable } from "../core/variables/NumberVariable";
 import { RangeVariable } from "../core/variables/RangeVariable";
 import { StringVariable } from "../core/variables/StringVariable";
 import { Variable } from "../core/variables/Variable";
-import { StorageKey, VariableType } from "../lib/Constants";
 
 /**
  * Interface for a class that represents serialized data.
@@ -28,6 +28,7 @@ import { StorageKey, VariableType } from "../lib/Constants";
  */
 export interface ISerializableData {
   key: string;
+  constraintType: string;
   dataType: string;
   title: string;
   defaultValue: any;
@@ -87,15 +88,16 @@ export class LocalStorage {
    */
   private static deserialize(data: ISerializableData): Variable {
     switch (data.dataType) {
-      case VariableType.BOOLEAN:
+      case DataType.BOOLEAN:
         return BooleanVariable.deserialize(data);
-      case VariableType.COLOR:
+      case DataType.COLOR:
         return ColorVariable.deserialize(data);
-      case VariableType.NUMBER:
+      case DataType.NUMBER:
+        if (data.constraintType === ConstraintType.RANGE) {
+          return RangeVariable.deserialize(data);
+        }
         return NumberVariable.deserialize(data);
-      case VariableType.RANGE:
-        return RangeVariable.deserialize(data);
-      case VariableType.STRING:
+      case DataType.STRING:
         return StringVariable.deserialize(data);
       default:
         return null;

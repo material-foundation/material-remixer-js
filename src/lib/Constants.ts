@@ -26,16 +26,22 @@ export const KeyEvent = {
 
 /** Storage keys constants. */
 export const StorageKey = {
-  REMIXER:  "__remixer__",
+  REMIXER: "__remixer__",
 };
 
-/** Variable types constants. */
-export const VariableType = {
-  BOOLEAN:  "boolean",
-  COLOR:    "color",
-  NUMBER:   "number",
-  RANGE:    "range",
-  STRING:   "string",
+/** Variable data constraints. */
+export const ConstraintType = {
+  NONE: "__ConstraintTypeNone__",
+  LIST: "__ConstraintTypeList__",
+  RANGE: "__ConstraintTypeRange__",
+};
+
+/** Variable data types. */
+export const DataType = {
+  BOOLEAN: "__DataTypeBoolean__",
+  COLOR: "__DataTypeColor__",
+  NUMBER: "__DataTypeNumber__",
+  STRING: "__DataTypeString__",
 };
 
 /** CSS class and id constants. */
