@@ -44,6 +44,15 @@ describe("ColorVariable", () => {
     expect(variable.controlType).to.equal(ControlType.COLOR_LIST);
   });
 
+  it("should have correct controlType based on number of allowed values", () => {
+    // List control.
+    expect(variable.controlType).to.equal(ControlType.COLOR_LIST);
+
+    // Input control.
+    let var1 = remixer.addColorVariable("test_key", "#4285F4");
+    expect(var1.controlType).to.equal(ControlType.COLOR_INPUT);
+  });
+
   it("have the correct title", () => {
     expect(variable.title).to.equal(key);
   });

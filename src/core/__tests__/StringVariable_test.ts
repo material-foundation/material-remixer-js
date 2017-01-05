@@ -40,8 +40,17 @@ describe("StringVariable", () => {
     expect(variable.constraintType).to.equal(ConstraintType.LIST);
   });
 
-  it("have the correct controlType", () => {
+  it("should have correct controlType based on number of allowed values", () => {
+    // List control.
     expect(variable.controlType).to.equal(ControlType.TEXT_LIST);
+
+    // Segmented control.
+    let var1 = remixer.addStringVariable("test_key1", "a", ["a", "b"]);
+    expect(var1.controlType).to.equal(ControlType.SEGMENTED);
+
+    // Text input control.
+    let var2 = remixer.addStringVariable("test_key2", "a");
+    expect(var2.controlType).to.equal(ControlType.TEXT_INPUT);
   });
 
   it("have the correct title", () => {
