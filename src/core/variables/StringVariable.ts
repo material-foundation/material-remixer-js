@@ -62,7 +62,7 @@ export class StringVariable extends Variable implements IStringVariableParams {
    * @readonly
    */
   get constraintType(): string {
-    return this.possibleValues.length > 1 ?
+    return this.possibleValues.length > 0 ?
         ConstraintType.LIST : ConstraintType.NONE;
   }
 
