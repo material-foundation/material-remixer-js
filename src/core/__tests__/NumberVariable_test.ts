@@ -42,6 +42,9 @@ describe("NumberVariable", () => {
 
   it("have the correct controlType", () => {
     expect(variable.controlType).to.equal(ControlType.TEXT_LIST);
+
+    variable.possibleValues = [];
+    expect(variable.controlType).to.equal(ControlType.TEXT_INPUT);
   });
 
   it("have the correct title", () => {
