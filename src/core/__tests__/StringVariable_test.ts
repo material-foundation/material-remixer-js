@@ -42,12 +42,6 @@ describe("StringVariable", () => {
 
   it("have the correct controlType", () => {
     expect(variable.controlType).to.equal(ControlType.TEXT_LIST);
-
-    variable.limitedToValues.splice(0, 2);
-    expect(variable.controlType).to.equal(ControlType.SEGMENTED);
-
-    variable.limitedToValues = [];
-    expect(variable.controlType).to.equal(ControlType.TEXT_INPUT);
   });
 
   it("have the correct title", () => {

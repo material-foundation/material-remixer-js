@@ -42,9 +42,6 @@ describe("ColorVariable", () => {
 
   it("have the correct controlType", () => {
     expect(variable.controlType).to.equal(ControlType.COLOR_LIST);
-
-    variable.limitedToValues = [];
-    expect(variable.controlType).to.equal(ControlType.COLOR_INPUT);
   });
 
   it("have the correct title", () => {
