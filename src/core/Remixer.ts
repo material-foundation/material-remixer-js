@@ -170,7 +170,7 @@ class Remixer {
    * Adds a string Variable to array of variables with optional callback
    * @param  {string}              key             The key of the Variable.
    * @param  {string}              defaultValue    The initial default value of the variable.
-   * @param  {string[]}            limitedToValues The optional array of available items for the variable.
+   * @param  {string[]}            limitedToValues The optional array of allowed values.
    * @param  {IVariableCallback}   callback        The callback method to be invoked
    *                                               when the Variable is updated.
    * @return {StringVariable}
@@ -190,7 +190,7 @@ class Remixer {
    * Adds a number variable to array of variables with optional callback.
    * @param  {string}              key             The key of the Variable.
    * @param  {number}              defaultValue    The initial default value of the variable.
-   * @param  {number[]}            limitedToValues The optional array of available items for the variable.
+   * @param  {number[]}            limitedToValues The optional array of allowed values.
    * @param  {IVariableCallback}   callback        The callback method to be invoked
    *                                               when the Variable is updated.
    * @return {NumberVariable}
@@ -210,7 +210,7 @@ class Remixer {
    * Adds a color variable to array of variables with optional callback.
    * @param  {string}              key             The key of the Variable.
    * @param  {string}              defaultValue    The initial default value of the variable.
-   * @param  {string[]}            limitedToValues The optional array of available items for the variable.
+   * @param  {string[]}            limitedToValues The optional array of allowed values.
    * @param  {IVariableCallback}   callback        The callback method to be invoked
    *                                               when the Variable is updated.
    * @return {ColorVariable}

@@ -33,8 +33,8 @@ export interface IVariableParams {
 }
 
 /**
- * Interface for a class that represents a type of Variable with an array of
- * limited values.
+ * Interface for a class that represents a type of Variable that can only be
+ * set to predefined values.
  * @interface
  * @extends IVariableParams
  */
