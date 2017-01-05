@@ -38,6 +38,9 @@ describe("StringVariable", () => {
 
   it("have the correct contraintType", () => {
     expect(variable.constraintType).to.equal(ConstraintType.LIST);
+
+    variable.possibleValues = [];
+    expect(variable.constraintType).to.equal(ConstraintType.NONE);
   });
 
   it("have the correct title", () => {
@@ -59,5 +62,10 @@ describe("StringVariable", () => {
     const updatedVariable = callbackSpy.args[0][0];
     expect(callbackSpy).to.have.been.calledOnce.and.calledWith(variable);
     expect(updatedVariable.selectedValue).to.equal(newValue);
+  });
+
+  it("should clone properly", () => {
+    let clone = variable.clone();
+    expect(JSON.stringify(clone)).to.equal(JSON.stringify(variable));
   });
 });

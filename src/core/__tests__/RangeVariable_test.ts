@@ -66,4 +66,9 @@ describe("RangeVariable", () => {
     expect(callbackSpy).to.have.been.calledOnce.and.calledWith(variable);
     expect(updatedVariable.selectedValue).to.equal(newValue);
   });
+
+  it("should clone properly", () => {
+    let clone = variable.clone();
+    expect(JSON.stringify(clone)).to.equal(JSON.stringify(variable));
+  });
 });
