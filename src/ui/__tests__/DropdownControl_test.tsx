@@ -12,11 +12,11 @@ const expect = chai.expect;
 describe("DropdownControl", () => {
   const key: string = "test_variable";
   const defaultValue: string = "a";
-  const possibleValues: string[] = ["a", "b", "c"];
+  const limitedToValues: string[] = ["a", "b", "c"];
   let variable: Variable;
 
   beforeEach(() => {
-    variable = remixer.addStringVariable(key, defaultValue, possibleValues);
+    variable = remixer.addStringVariable(key, defaultValue, limitedToValues);
     this.component = TestUtils.renderIntoDocument(
       <DropdownControl
         variable={variable}
@@ -42,7 +42,7 @@ describe("DropdownControl", () => {
 
     for (let i = 0; i < list.children.length; i++) {
       let element = list.children[i] as HTMLElement;
-      expect(element.dataset["value"]).to.equal(possibleValues[i]);
+      expect(element.dataset["value"]).to.equal(limitedToValues[i]);
     }
   });
 });

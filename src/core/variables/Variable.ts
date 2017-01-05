@@ -33,12 +33,13 @@ export interface IVariableParams {
 }
 
 /**
- * Interface for a class that represents a type a Variable with possible values.
+ * Interface for a class that represents a type of Variable with an array of
+ * limited values.
  * @interface
  * @extends IVariableParams
  */
 export interface IVariableListParams extends IVariableParams {
-  possibleValues?: any[];
+  limitedToValues?: any[];
 }
 
 /**

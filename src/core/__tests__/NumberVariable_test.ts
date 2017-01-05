@@ -14,7 +14,7 @@ describe("NumberVariable", () => {
   const key: string = "test variable";
   const sanitizedKey: string = "test_variable";
   const defaultValue: number = 20;
-  const possibleValues: number[] = [10, 20, 30, 40];
+  const limitedToValues: number[] = [10, 20, 30, 40];
   let callbackSpy: sinon.SinonSpy;
   let variable: NumberVariable;
 
@@ -23,7 +23,7 @@ describe("NumberVariable", () => {
     variable = remixer.addNumberVariable(
       key,
       defaultValue,
-      possibleValues,
+      limitedToValues,
       callbackSpy,
     );
   });
@@ -48,8 +48,8 @@ describe("NumberVariable", () => {
     expect(variable.key).to.equal(sanitizedKey);
   });
 
-  it("have the correct possible values", () => {
-    expect(variable.possibleValues).to.equal(possibleValues);
+  it("have the correct allowed values", () => {
+    expect(variable.limitedToValues).to.equal(limitedToValues);
   });
 
   it("should trigger callback when selected value of variable changes", () => {

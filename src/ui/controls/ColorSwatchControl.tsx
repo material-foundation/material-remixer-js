@@ -21,7 +21,7 @@ import { IColorControlProps } from "./controlProps";
 
 /**
  * A color swatch picker control consisting of a single color swatch for each
- * possible value.
+ * allowed value.
  * @class
  * @extends React.Component
  */
@@ -44,7 +44,7 @@ export class ColorSwatchControl extends React.Component<IColorControlProps, void
   render() {
     const {
       title,
-      possibleValues,
+      limitedToValues,
       selectedValue,
     } = this.props.variable;
 
@@ -55,7 +55,7 @@ export class ColorSwatchControl extends React.Component<IColorControlProps, void
             <span className={CSS.RMX_SELECTED_VALUE}>{selectedValue}</span>
           </span>
           <span className={CSS.MDL_SECONDARY}>
-            {possibleValues.map((value: string) => (
+            {limitedToValues.map((value: string) => (
               <ColorSwatch color={value} key={value}
                 isSelected={selectedValue === value}
                 onClick={this.onClick}

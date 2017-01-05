@@ -26,7 +26,7 @@ import { IVariableCallback, IVariableListParams, Variable } from "./Variable";
 interface INumberVariableParams extends IVariableListParams {
   defaultValue: number;
   selectedValue: number;
-  possibleValues?: number[];
+  limitedToValues?: number[];
 }
 
 /**
@@ -42,18 +42,18 @@ export class NumberVariable extends Variable implements INumberVariableParams {
    * @constructor
    * @param  {string}            key            A unique key for the Variable.
    * @param  {number}            defaultValue   The default value.
-   * @param  {number[]}          possibleValues The array of possible values.
+   * @param  {number[]}          limitedToValues The array of allowed values.
    * @param  {IVariableCallback} callback       The callback to invoke when updated.
    * @return {NumberVariable}
    */
   constructor(
     key: string,
     defaultValue: number,
-    possibleValues?: number[],
+    limitedToValues?: number[],
     callback?: IVariableCallback,
   ) {
     super(key, DataType.NUMBER, defaultValue, callback);
-    this.possibleValues = possibleValues ? possibleValues : [];
+    this.limitedToValues = limitedToValues ? limitedToValues : [];
   }
 
   /**
@@ -64,7 +64,7 @@ export class NumberVariable extends Variable implements INumberVariableParams {
     let cloned = new NumberVariable(
       this.key,
       this.defaultValue,
-      this.possibleValues,
+      this.limitedToValues,
     );
     cloned.title = this.title;
     cloned._callbacks = this._callbacks.slice();
@@ -77,16 +77,16 @@ export class NumberVariable extends Variable implements INumberVariableParams {
    * @readonly
    */
   get constraintType(): string {
-    return this.possibleValues.length > 0 ?
+    return this.limitedToValues.length > 0 ?
         ConstraintType.LIST : ConstraintType.NONE;
   }
 
   /**
-   * The array of possible values for this Variable.
+   * The array of allowed values for this Variable.
    * @override
    * @type {number[]}
    */
-  possibleValues?: number[];
+  limitedToValues?: number[];
 
   /**
    * Returns a serialized representation of this object.
@@ -96,7 +96,7 @@ export class NumberVariable extends Variable implements INumberVariableParams {
   serialize(): ISerializableData {
     let data = super.serialize();
     data.selectedValue = this.selectedValue;
-    data.possibleValues = this.possibleValues;
+    data.limitedToValues = this.limitedToValues;
     return data;
   }
 
@@ -110,7 +110,7 @@ export class NumberVariable extends Variable implements INumberVariableParams {
     return new NumberVariable(
       data.key,
       data.selectedValue,
-      data.possibleValues,
+      data.limitedToValues,
     );
   }
 }

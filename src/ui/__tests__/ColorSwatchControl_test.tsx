@@ -12,11 +12,11 @@ const expect = chai.expect;
 describe("ColorSwatchControl", () => {
   const key: string = "test_variable";
   const defaultValue: string = "#4285F4";
-  const possibleValues: string[] = ["#4285F4", "#0F9D58", "#DB4437"];
+  const limitedToValues: string[] = ["#4285F4", "#0F9D58", "#DB4437"];
   let variable: Variable;
 
   beforeEach(() => {
-    variable = remixer.addColorVariable(key, defaultValue, possibleValues);
+    variable = remixer.addColorVariable(key, defaultValue, limitedToValues);
     this.component = TestUtils.renderIntoDocument(
       <ColorSwatchControl
         variable={variable}
@@ -42,7 +42,7 @@ describe("ColorSwatchControl", () => {
 
     for (let i = 0; i < list.children.length; i++) {
       let element = list.children[i] as HTMLElement;
-      expect(element.dataset["value"]).to.equal(possibleValues[i]);
+      expect(element.dataset["value"]).to.equal(limitedToValues[i]);
     }
   });
 });

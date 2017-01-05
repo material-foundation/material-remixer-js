@@ -44,7 +44,7 @@ export class DropdownControl extends React.Component<IStringControlProps, void> 
     const {
       title,
       key,
-      possibleValues,
+      limitedToValues,
       selectedValue,
     } = this.props.variable;
     const id = `${CSS.RMX_DROPDOWN}-${key}`;
@@ -62,7 +62,7 @@ export class DropdownControl extends React.Component<IStringControlProps, void> 
             className="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
             htmlFor={id}
           >
-            {possibleValues.map((value: string) => (
+            {limitedToValues.map((value: string) => (
               <li className="mdl-menu__item" key={value}
                 onClick={this.onClick}
                 data-value={value}>{value}
