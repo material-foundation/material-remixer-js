@@ -168,60 +168,60 @@ class Remixer {
 
   /**
    * Adds a string Variable to array of variables with optional callback
-   * @param  {string}              key            The key of the Variable.
-   * @param  {string}              defaultValue   The initial default value of the variable.
-   * @param  {string[]}            possibleValues The optional array of available items for the variable.
-   * @param  {IVariableCallback}   callback       The callback method to be invoked
-   *                                              when the Variable is updated.
+   * @param  {string}              key             The key of the Variable.
+   * @param  {string}              defaultValue    The initial default value of the variable.
+   * @param  {string[]}            limitedToValues The optional array of allowed values.
+   * @param  {IVariableCallback}   callback        The callback method to be invoked
+   *                                               when the Variable is updated.
    * @return {StringVariable}
    */
   static addStringVariable(
     key: string,
     defaultValue: string,
-    possibleValues?: string[],
+    limitedToValues?: string[],
     callback?: IVariableCallback,
   ): StringVariable {
-    let variable = new StringVariable(key, defaultValue, possibleValues, callback);
+    let variable = new StringVariable(key, defaultValue, limitedToValues, callback);
     this.addVariable(variable);
     return variable;
   }
 
   /**
    * Adds a number variable to array of variables with optional callback.
-   * @param  {string}              key            The key of the Variable.
-   * @param  {number}              defaultValue   The initial default value of the variable.
-   * @param  {number[]}            possibleValues The optional array of available items for the variable.
-   * @param  {IVariableCallback}   callback       The callback method to be invoked
-   *                                              when the Variable is updated.
+   * @param  {string}              key             The key of the Variable.
+   * @param  {number}              defaultValue    The initial default value of the variable.
+   * @param  {number[]}            limitedToValues The optional array of allowed values.
+   * @param  {IVariableCallback}   callback        The callback method to be invoked
+   *                                               when the Variable is updated.
    * @return {NumberVariable}
    */
   static addNumberVariable(
     key: string,
     defaultValue: number,
-    possibleValues?: number[],
+    limitedToValues?: number[],
     callback?: IVariableCallback,
   ): NumberVariable {
-    let variable = new NumberVariable(key, defaultValue, possibleValues, callback);
+    let variable = new NumberVariable(key, defaultValue, limitedToValues, callback);
     this.addVariable(variable);
     return variable;
   }
 
   /**
    * Adds a color variable to array of variables with optional callback.
-   * @param  {string}              key            The key of the Variable.
-   * @param  {string}              defaultValue   The initial default value of the variable.
-   * @param  {string[]}            possibleValues The optional array of available items for the variable.
-   * @param  {IVariableCallback}   callback       The callback method to be invoked
-   *                                              when the Variable is updated.
+   * @param  {string}              key             The key of the Variable.
+   * @param  {string}              defaultValue    The initial default value of the variable.
+   * @param  {string[]}            limitedToValues The optional array of allowed values.
+   * @param  {IVariableCallback}   callback        The callback method to be invoked
+   *                                               when the Variable is updated.
    * @return {ColorVariable}
    */
   static addColorVariable(
     key: string,
     defaultValue: string,
-    possibleValues?: string[],
+    limitedToValues?: string[],
     callback?: IVariableCallback,
   ): ColorVariable {
-    let variable = new ColorVariable(key, defaultValue, possibleValues, callback);
+    let variable = new ColorVariable(key, defaultValue, limitedToValues, callback);
     this.addVariable(variable);
     return variable;
   }

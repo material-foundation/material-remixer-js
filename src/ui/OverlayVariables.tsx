@@ -73,10 +73,10 @@ export class OverlayVariables extends React.Component<IOverlayVariableProps, voi
       case DataType.BOOLEAN:
         return SwitchControl;
       case DataType.STRING:
-        const { possibleValues } = variable as StringVariable;
-        if (possibleValues.length <= 1) {
+        const { limitedToValues } = variable as StringVariable;
+        if (limitedToValues.length <= 1) {
           return TextFieldControl;
-        } else if (possibleValues.length === 2) {
+        } else if (limitedToValues.length === 2) {
           return RadioListControl;
         } else {
           return DropdownControl;

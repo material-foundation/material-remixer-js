@@ -44,7 +44,7 @@ export class RadioListControl extends React.Component<IStringControlProps, void>
     const {
       title,
       key,
-      possibleValues,
+      limitedToValues,
       selectedValue,
     } = this.props.variable;
     const id = `${CSS.RMX_RADIO_LIST_ITEM}-${key}`;
@@ -53,7 +53,7 @@ export class RadioListControl extends React.Component<IStringControlProps, void>
       <div className={`${CSS.RMX_RADIO_LIST} ${CSS.MDL_LIST_ITEM}`}>
         <span className={CSS.MDL_PRIMARY}>{title}</span>
         <span className={CSS.MDL_SECONDARY}>
-          {possibleValues.map((value: string, i: number) => (
+          {limitedToValues.map((value: string, i: number) => (
             <label className={`${CSS.RMX_RADIO_LIST_ITEM} mdl-radio mdl-js-radio mdl-js-ripple-effect`}
               htmlFor={`${id}-${i}`} key={value}
             >
