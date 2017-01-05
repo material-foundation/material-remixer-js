@@ -63,6 +63,7 @@ export class RangeVariable extends Variable implements IRangeVariableParams {
     this.minValue = minValue;
     this.maxValue = maxValue;
     this.increment = increment;
+    this.controlType = ControlType.SLIDER;
   }
 
   /**
@@ -72,15 +73,6 @@ export class RangeVariable extends Variable implements IRangeVariableParams {
    */
   get constraintType(): string {
     return ConstraintType.RANGE;
-  }
-
-  /**
-   * The rendered control type for this Variable.
-   * @type {string}
-   * @readonly
-   */
-  get controlType(): string {
-    return ControlType.SLIDER;
   }
 
   /**

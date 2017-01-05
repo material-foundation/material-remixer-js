@@ -120,11 +120,8 @@ export class Variable implements IVariableParams {
   /**
    * The rendered control type for this Variable.
    * @type {string}
-   * @readonly
    */
-  get controlType(): string {
-    return null;
-  }
+  controlType: string;
 
   /**
    * The data type represented by this Variable.

@@ -54,6 +54,13 @@ export class StringVariable extends Variable implements IStringVariableParams {
   ) {
     super(key, DataType.STRING, defaultValue, callback);
     this.limitedToValues = limitedToValues ? limitedToValues : [];
+    if (this.limitedToValues.length === 0) {
+      this.controlType = ControlType.TEXT_INPUT;
+    } else if (this.limitedToValues.length <= 2) {
+      this.controlType = ControlType.SEGMENTED;
+    } else {
+      this.controlType = ControlType.TEXT_LIST;
+    }
   }
 
   /**
@@ -64,20 +71,6 @@ export class StringVariable extends Variable implements IStringVariableParams {
   get constraintType(): string {
     return this.limitedToValues.length > 0 ?
         ConstraintType.LIST : ConstraintType.NONE;
-  }
-
-  /**
-   * The rendered control type for this Variable.
-   * @type {string}
-   * @readonly
-   */
-  get controlType(): string {
-    if (this.limitedToValues.length === 0) {
-      return ControlType.TEXT_INPUT;
-    } else if (this.limitedToValues.length <= 2) {
-      return ControlType.SEGMENTED;
-    }
-    return ControlType.TEXT_LIST;
   }
 
   /**

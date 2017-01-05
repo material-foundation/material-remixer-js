@@ -54,6 +54,8 @@ export class ColorVariable extends Variable implements IColorVariableParams {
   ) {
     super(key, DataType.COLOR, defaultValue, callback);
     this.limitedToValues = limitedToValues ? limitedToValues : [];
+    this.controlType = (this.limitedToValues.length > 0) ?
+        ControlType.COLOR_LIST : ControlType.COLOR_INPUT;
   }
 
   /**
@@ -64,16 +66,6 @@ export class ColorVariable extends Variable implements IColorVariableParams {
   get constraintType(): string {
     return this.limitedToValues.length > 0 ?
         ConstraintType.LIST : ConstraintType.NONE;
-  }
-
-  /**
-   * The rendered control type for this Variable.
-   * @type {string}
-   * @readonly
-   */
-  get controlType(): string {
-    return this.limitedToValues.length > 0 ?
-        ControlType.COLOR_LIST : ControlType.COLOR_INPUT;
   }
 
   /**
