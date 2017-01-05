@@ -26,7 +26,7 @@ import { IVariableCallback, IVariableListParams, Variable } from "./Variable";
 interface IColorVariableParams extends IVariableListParams {
   defaultValue: string;
   selectedValue: string;
-  possibleValues?: string[];
+  limitedToValues?: string[];
 }
 
 /**
@@ -42,18 +42,18 @@ export class ColorVariable extends Variable implements IColorVariableParams {
    * @constructor
    * @param  {string}            key            A unique key for the Variable.
    * @param  {string}            defaultValue   The default value.
-   * @param  {string[]}          possibleValues The array of possible values.
+   * @param  {string[]}          limitedToValues The array of allowed values.
    * @param  {IVariableCallback} callback       The callback to invoke when updated.
    * @return {ColorVariable}
    */
   constructor(
     key: string,
     defaultValue: string,
-    possibleValues?: string[],
+    limitedToValues?: string[],
     callback?: IVariableCallback,
   ) {
     super(key, DataType.COLOR, defaultValue, callback);
-    this.possibleValues = possibleValues ? possibleValues : [];
+    this.limitedToValues = limitedToValues ? limitedToValues : [];
   }
 
   /**
@@ -62,7 +62,7 @@ export class ColorVariable extends Variable implements IColorVariableParams {
    * @readonly
    */
   get constraintType(): string {
-    return this.possibleValues.length > 0 ?
+    return this.limitedToValues.length > 0 ?
         ConstraintType.LIST : ConstraintType.NONE;
   }
 
@@ -72,7 +72,7 @@ export class ColorVariable extends Variable implements IColorVariableParams {
    * @readonly
    */
   get controlType(): string {
-    return this.possibleValues.length > 0 ?
+    return this.limitedToValues.length > 0 ?
         ControlType.COLOR_LIST : ControlType.COLOR_INPUT;
   }
 
@@ -84,7 +84,7 @@ export class ColorVariable extends Variable implements IColorVariableParams {
     let cloned = new ColorVariable(
       this.key,
       this.defaultValue,
-      this.possibleValues,
+      this.limitedToValues,
     );
     cloned.title = this.title;
     cloned._callbacks = this._callbacks.slice();
@@ -92,11 +92,11 @@ export class ColorVariable extends Variable implements IColorVariableParams {
   }
 
   /**
-   * The array of possible values for this Variable.
+   * The array of allowed values for this Variable.
    * @override
    * @type {string[]}
    */
-  possibleValues?: string[];
+  limitedToValues?: string[];
 
   /**
    * Returns a serialized representation of this object.
@@ -106,7 +106,7 @@ export class ColorVariable extends Variable implements IColorVariableParams {
   serialize(): ISerializableData {
     let data = super.serialize();
     data.selectedValue = this.selectedValue;
-    data.possibleValues = this.possibleValues;
+    data.limitedToValues = this.limitedToValues;
     return data;
   }
 
@@ -117,6 +117,6 @@ export class ColorVariable extends Variable implements IColorVariableParams {
    * @return {ColorVariable}          A new initialized ColorVariable.
    */
   static deserialize(data: ISerializableData): Variable {
-    return new ColorVariable(data.key, data.selectedValue, data.possibleValues);
+    return new ColorVariable(data.key, data.selectedValue, data.limitedToValues);
   }
 }

@@ -26,7 +26,7 @@ import { IVariableCallback, IVariableListParams, Variable } from "./Variable";
 interface IStringVariableParams extends IVariableListParams {
   defaultValue: string;
   selectedValue: string;
-  possibleValues?: string[];
+  limitedToValues?: string[];
 }
 
 /**
@@ -42,18 +42,18 @@ export class StringVariable extends Variable implements IStringVariableParams {
    * @constructor
    * @param  {string}            key            [A unique key for the Variable.
    * @param  {string}            defaultValue   The default value.
-   * @param  {string[]}          possibleValues The array of possible values.
+   * @param  {string[]}          limitedToValues The array of allowed values.
    * @param  {IVariableCallback} callback       The callback to invoke when updated.
    * @return {StringVariable}
    */
   constructor(
     key: string,
     defaultValue: string,
-    possibleValues?: string[],
+    limitedToValues?: string[],
     callback?: IVariableCallback,
   ) {
     super(key, DataType.STRING, defaultValue, callback);
-    this.possibleValues = possibleValues ? possibleValues : [];
+    this.limitedToValues = limitedToValues ? limitedToValues : [];
   }
 
   /**
@@ -62,7 +62,7 @@ export class StringVariable extends Variable implements IStringVariableParams {
    * @readonly
    */
   get constraintType(): string {
-    return this.possibleValues.length > 0 ?
+    return this.limitedToValues.length > 0 ?
         ConstraintType.LIST : ConstraintType.NONE;
   }
 
@@ -72,9 +72,9 @@ export class StringVariable extends Variable implements IStringVariableParams {
    * @readonly
    */
   get controlType(): string {
-    if (this.possibleValues.length === 0) {
+    if (this.limitedToValues.length === 0) {
       return ControlType.TEXT_INPUT;
-    } else if (this.possibleValues.length <= 2) {
+    } else if (this.limitedToValues.length <= 2) {
       return ControlType.SEGMENTED;
     }
     return ControlType.TEXT_LIST;
@@ -88,7 +88,7 @@ export class StringVariable extends Variable implements IStringVariableParams {
     let cloned = new StringVariable(
       this.key,
       this.defaultValue,
-      this.possibleValues,
+      this.limitedToValues,
     );
     cloned.title = this.title;
     cloned._callbacks = this._callbacks.slice();
@@ -96,11 +96,11 @@ export class StringVariable extends Variable implements IStringVariableParams {
   }
 
   /**
-   * The array of possible values for this Variable.
+   * The array of allowed values for this Variable.
    * @override
    * @type {string[]}
    */
-  possibleValues?: string[];
+  limitedToValues?: string[];
 
   /**
    * Returns a serialized representation of this object.
@@ -110,7 +110,7 @@ export class StringVariable extends Variable implements IStringVariableParams {
   serialize(): ISerializableData {
     let data = super.serialize();
     data.selectedValue = this.selectedValue;
-    data.possibleValues = this.possibleValues;
+    data.limitedToValues = this.limitedToValues;
     return data;
   }
 
@@ -124,7 +124,7 @@ export class StringVariable extends Variable implements IStringVariableParams {
     return new StringVariable(
       data.key,
       data.selectedValue,
-      data.possibleValues,
+      data.limitedToValues,
     );
   }
 }

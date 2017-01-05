@@ -34,7 +34,7 @@ export interface ISerializableData {
   title: string;
   defaultValue: any;
   selectedValue: any;
-  possibleValues?: any[];
+  limitedToValues?: any[];
   minValue?: number;
   maxValue?: number;
   increment?: number;
