@@ -36,6 +36,19 @@ export const ConstraintType = {
   RANGE: "__ConstraintTypeRange__",
 };
 
+/** Rendered variable control types. */
+export const ControlType = {
+  BUTTON: "__ControlTypeButton__",
+  COLOR_INPUT: "__ControlTypeColorInput__",
+  COLOR_LIST: "__ControlTypeColorList__",
+  SEGMENTED: "__ControlTypeSegmented__",
+  SLIDER: "__ControlTypeSlider__",
+  STEPPER: "__ControlTypeStepper__",
+  SWITCH: "__ControlTypeSwitch__",
+  TEXT_INPUT: "__ControlTypeTextInput__",
+  TEXT_LIST: "__ControlTypeTextList__",
+};
+
 /** Variable data types. */
 export const DataType = {
   BOOLEAN: "__DataTypeBoolean__",

@@ -14,7 +14,7 @@
  *  under the License.
  */
 
-import { ConstraintType, DataType } from "../../lib/Constants";
+import { ConstraintType, ControlType, DataType } from "../../lib/Constants";
 import { ISerializableData } from "../../lib/LocalStorage";
 import { IVariableCallback, IVariableListParams, Variable } from "./Variable";
 
@@ -64,6 +64,16 @@ export class ColorVariable extends Variable implements IColorVariableParams {
   get constraintType(): string {
     return this.possibleValues.length > 0 ?
         ConstraintType.LIST : ConstraintType.NONE;
+  }
+
+  /**
+   * The rendered control type for this Variable.
+   * @type {string}
+   * @readonly
+   */
+  get controlType(): string {
+    return this.possibleValues.length > 0 ?
+        ControlType.COLOR_LIST : ControlType.COLOR_INPUT;
   }
 
   /**

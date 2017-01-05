@@ -3,7 +3,7 @@ import * as sinon from "sinon";
 import * as sinonChai from "sinon-chai";
 
 import { remixer } from "../Remixer";
-import { ConstraintType, DataType } from "../../lib/Constants";
+import { ConstraintType, ControlType, DataType } from "../../lib/Constants";
 import { RangeVariable } from "../variables/RangeVariable";
 import { Variable } from "../variables/Variable";
 
@@ -42,6 +42,10 @@ describe("RangeVariable", () => {
 
   it("have the correct contraintType", () => {
     expect(variable.constraintType).to.equal(ConstraintType.RANGE);
+  });
+
+  it("have the correct controlType", () => {
+    expect(variable.controlType).to.equal(ControlType.SLIDER);
   });
 
   it("have the correct title", () => {

@@ -3,7 +3,7 @@ import * as sinon from "sinon";
 import * as sinonChai from "sinon-chai";
 
 import { remixer } from "../../core/Remixer";
-import { DataType } from "../Constants";
+import { ConstraintType, ControlType, DataType } from "../Constants";
 import { LocalStorage } from "../LocalStorage";
 
 const expect = chai.expect;
@@ -12,9 +12,9 @@ chai.use(sinonChai);
 describe("LocalStorage", () => {
 
   function addVariables() {
-    remixer.addBooleanVariable("key1", true);
-    remixer.addStringVariable("key2", "testString");
-    remixer.addNumberVariable("key3", 40);
+    remixer.addBooleanVariable("test_key1", true);
+    remixer.addStringVariable("test_key2", "testString");
+    remixer.addNumberVariable("test_key3", 40);
   }
 
   it("should call saveVariable method", () => {
@@ -27,9 +27,11 @@ describe("LocalStorage", () => {
 
   it("should retrieve correct variable from storage", () => {
     addVariables();
-    let stringVariable = LocalStorage.getVariable("key2");
+    let stringVariable = LocalStorage.getVariable("test_key2");
 
     expect(stringVariable.dataType).to.equal(DataType.STRING);
+    expect(stringVariable.constraintType).to.equal(ConstraintType.NONE);
+    expect(stringVariable.controlType).to.equal(ControlType.TEXT_INPUT);
     expect(stringVariable.selectedValue).to.equal("testString");
   });
 });

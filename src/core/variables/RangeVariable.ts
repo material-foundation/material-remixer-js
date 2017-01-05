@@ -14,7 +14,7 @@
  *  under the License.
  */
 
-import { ConstraintType, DataType } from "../../lib/Constants";
+import { ConstraintType, ControlType, DataType } from "../../lib/Constants";
 import { ISerializableData } from "../../lib/LocalStorage";
 import { IVariableCallback, IVariableParams, Variable } from "./Variable";
 
@@ -72,6 +72,15 @@ export class RangeVariable extends Variable implements IRangeVariableParams {
    */
   get constraintType(): string {
     return ConstraintType.RANGE;
+  }
+
+  /**
+   * The rendered control type for this Variable.
+   * @type {string}
+   * @readonly
+   */
+  get controlType(): string {
+    return ControlType.SLIDER;
   }
 
   /**
