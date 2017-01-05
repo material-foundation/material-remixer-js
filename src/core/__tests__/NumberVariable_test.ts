@@ -3,7 +3,7 @@ import * as sinon from "sinon";
 import * as sinonChai from "sinon-chai";
 
 import { remixer } from "../Remixer";
-import { DataType } from "../../lib/Constants";
+import { ConstraintType, DataType } from "../../lib/Constants";
 import { NumberVariable } from "../variables/NumberVariable";
 import { Variable } from "../variables/Variable";
 
@@ -34,6 +34,10 @@ describe("NumberVariable", () => {
 
   it("have the correct datatype", () => {
     expect(variable.dataType).to.equal(DataType.NUMBER);
+  });
+
+  it("have the correct contraintType", () => {
+    expect(variable.constraintType).to.equal(ConstraintType.LIST);
   });
 
   it("have the correct title", () => {

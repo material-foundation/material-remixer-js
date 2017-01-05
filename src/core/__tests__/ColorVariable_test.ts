@@ -4,7 +4,7 @@ import * as sinonChai from "sinon-chai";
 
 import { remixer } from "../Remixer";
 import { ColorVariable } from "../variables/ColorVariable";
-import { DataType } from "../../lib/Constants";
+import { ConstraintType, DataType } from "../../lib/Constants";
 import { Variable } from "../variables/Variable";
 
 const expect = chai.expect;
@@ -34,6 +34,10 @@ describe("ColorVariable", () => {
 
   it("have the correct datatype", () => {
     expect(variable.dataType).to.equal(DataType.COLOR);
+  });
+
+  it("have the correct contraintType", () => {
+    expect(variable.constraintType).to.equal(ConstraintType.LIST);
   });
 
   it("have the correct title", () => {
