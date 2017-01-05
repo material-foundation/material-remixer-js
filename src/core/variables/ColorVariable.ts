@@ -14,6 +14,8 @@
  *  under the License.
  */
 
+import * as tinycolor from "tinycolor2";
+
 import { ConstraintType, DataType } from "../../lib/Constants";
 import { ISerializableData } from "../../lib/LocalStorage";
 import { IVariableCallback, IVariableListParams, Variable } from "./Variable";
@@ -40,10 +42,10 @@ export class ColorVariable extends Variable implements IColorVariableParams {
   /**
    * Creates an instance of a ColorVariable.
    * @constructor
-   * @param  {string}            key            A unique key for the Variable.
-   * @param  {string}            defaultValue   The default value.
+   * @param  {string}            key             A unique key for the Variable.
+   * @param  {string}            defaultValue    The default value.
    * @param  {string[]}          limitedToValues The array of allowed values.
-   * @param  {IVariableCallback} callback       The callback to invoke when updated.
+   * @param  {IVariableCallback} callback        The callback to invoke when updated.
    * @return {ColorVariable}
    */
   constructor(
@@ -52,8 +54,12 @@ export class ColorVariable extends Variable implements IColorVariableParams {
     limitedToValues?: string[],
     callback?: IVariableCallback,
   ) {
-    super(key, DataType.COLOR, defaultValue, callback);
+    super(key, DataType.COLOR, tinycolor(defaultValue).toString(), callback);
     this.limitedToValues = limitedToValues ? limitedToValues : [];
+    this.limitedToValues = this.limitedToValues.map((value: any) => {
+      return tinycolor(value).toString();
+    });
+    console.log(this.limitedToValues);
   }
 
   /**
@@ -95,7 +101,7 @@ export class ColorVariable extends Variable implements IColorVariableParams {
    */
   serialize(): ISerializableData {
     let data = super.serialize();
-    data.selectedValue = this.selectedValue;
+    data.selectedValue = tinycolor(this.selectedValue).toRgb();
     data.limitedToValues = this.limitedToValues;
     return data;
   }
