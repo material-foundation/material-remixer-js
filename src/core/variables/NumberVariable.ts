@@ -14,7 +14,7 @@
  *  under the License.
  */
 
-import { ConstraintType, DataType } from "../../lib/Constants";
+import { ConstraintType, ControlType, DataType } from "../../lib/Constants";
 import { ISerializableData } from "../../lib/LocalStorage";
 import { IVariableCallback, IVariableListParams, Variable } from "./Variable";
 
@@ -54,6 +54,23 @@ export class NumberVariable extends Variable implements INumberVariableParams {
   ) {
     super(key, DataType.NUMBER, defaultValue, callback);
     this.limitedToValues = limitedToValues ? limitedToValues : [];
+    if (this.limitedToValues.length === 0) {
+      this.controlType = ControlType.TEXT_INPUT;
+    } else if (this.limitedToValues.length <= 2) {
+      this.controlType = ControlType.SEGMENTED;
+    } else {
+      this.controlType = ControlType.TEXT_LIST;
+    }
+  }
+
+  /**
+   * The data constraint type for this Variable.
+   * @type {string}
+   * @readonly
+   */
+  get constraintType(): string {
+    return this.limitedToValues.length > 0 ?
+        ConstraintType.LIST : ConstraintType.NONE;
   }
 
   /**
@@ -69,16 +86,6 @@ export class NumberVariable extends Variable implements INumberVariableParams {
     cloned.title = this.title;
     cloned._callbacks = this._callbacks.slice();
     return cloned;
-  }
-
-  /**
-   * The data constraint type for this Variable.
-   * @type {string}
-   * @readonly
-   */
-  get constraintType(): string {
-    return this.limitedToValues.length > 0 ?
-        ConstraintType.LIST : ConstraintType.NONE;
   }
 
   /**

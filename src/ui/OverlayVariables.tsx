@@ -16,7 +16,7 @@
 
 import * as React from "react";
 
-import { CSS, ConstraintType, DataType } from "../lib/Constants";
+import { CSS, ControlType } from "../lib/Constants";
 import { ColorSwatchControl } from "./controls/ColorSwatchControl";
 import { DropdownControl } from "./controls/DropdownControl";
 import { IControlUpdateProps } from "./controls/controlProps";
@@ -50,13 +50,15 @@ export class OverlayVariables extends React.Component<IOverlayVariableProps, voi
       <div className={CSS.MDL_LIST}>
         {this.props.variables.map((variable) => {
           const Control = this.controlForVariable(variable);
-          return (
-            <Control
-              variable={variable}
-              updateVariable={this.props.updateVariable}
-              key={variable.key}
-            />
-          );
+          if (Control) {
+            return (
+              <Control
+                variable={variable}
+                updateVariable={this.props.updateVariable}
+                key={variable.key}
+              />
+            );
+          }
         })}
       </div>
     );
@@ -69,25 +71,21 @@ export class OverlayVariables extends React.Component<IOverlayVariableProps, voi
    * @return {any} A control component.
    */
   private controlForVariable(variable: Variable): any {
-    switch (variable.dataType) {
-      case DataType.BOOLEAN:
-        return SwitchControl;
-      case DataType.STRING:
-        const { limitedToValues } = variable as StringVariable;
-        if (limitedToValues.length <= 1) {
-          return TextFieldControl;
-        } else if (limitedToValues.length === 2) {
-          return RadioListControl;
-        } else {
-          return DropdownControl;
-        }
-      case DataType.NUMBER:
-        if (variable.constraintType === ConstraintType.RANGE) {
-          return SliderControl;
-        }
-        return TextFieldControl;
-      case DataType.COLOR:
+    // TODO(cjcox): Provide support for controls:
+    // BUTTON, COLOR_INPUT, STEPPER
+    switch (variable.controlType) {
+      case ControlType.COLOR_LIST:
         return ColorSwatchControl;
+      case ControlType.SEGMENTED:
+        return RadioListControl;
+      case ControlType.SLIDER:
+        return SliderControl;
+      case ControlType.SWITCH:
+        return SwitchControl;
+      case ControlType.TEXT_INPUT:
+        return TextFieldControl;
+      case ControlType.TEXT_LIST:
+        return DropdownControl;
       default:
         return null;
     }

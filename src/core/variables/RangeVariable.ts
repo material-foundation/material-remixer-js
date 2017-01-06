@@ -14,7 +14,7 @@
  *  under the License.
  */
 
-import { ConstraintType, DataType } from "../../lib/Constants";
+import { ConstraintType, ControlType, DataType } from "../../lib/Constants";
 import { ISerializableData } from "../../lib/LocalStorage";
 import { IVariableCallback, IVariableParams, Variable } from "./Variable";
 
@@ -63,6 +63,7 @@ export class RangeVariable extends Variable implements IRangeVariableParams {
     this.minValue = minValue;
     this.maxValue = maxValue;
     this.increment = increment;
+    this.controlType = ControlType.SLIDER;
   }
 
   /**

@@ -14,7 +14,7 @@
  *  under the License.
  */
 
-import { ConstraintType, DataType } from "../../lib/Constants";
+import { ConstraintType, ControlType, DataType } from "../../lib/Constants";
 import { ISerializableData } from "../../lib/LocalStorage";
 import { IVariableCallback, IVariableListParams, Variable } from "./Variable";
 
@@ -54,6 +54,8 @@ export class ColorVariable extends Variable implements IColorVariableParams {
   ) {
     super(key, DataType.COLOR, defaultValue, callback);
     this.limitedToValues = limitedToValues ? limitedToValues : [];
+    this.controlType = (this.limitedToValues.length > 0) ?
+        ControlType.COLOR_LIST : ControlType.COLOR_INPUT;
   }
 
   /**

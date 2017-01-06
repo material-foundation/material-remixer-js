@@ -14,7 +14,7 @@
  *  under the License.
  */
 
-import { ConstraintType, DataType } from "../../lib/Constants";
+import { ConstraintType, ControlType, DataType } from "../../lib/Constants";
 import { ISerializableData } from "../../lib/LocalStorage";
 import { IVariableCallback, IVariableListParams, Variable } from "./Variable";
 
@@ -54,6 +54,13 @@ export class StringVariable extends Variable implements IStringVariableParams {
   ) {
     super(key, DataType.STRING, defaultValue, callback);
     this.limitedToValues = limitedToValues ? limitedToValues : [];
+    if (this.limitedToValues.length === 0) {
+      this.controlType = ControlType.TEXT_INPUT;
+    } else if (this.limitedToValues.length <= 2) {
+      this.controlType = ControlType.SEGMENTED;
+    } else {
+      this.controlType = ControlType.TEXT_LIST;
+    }
   }
 
   /**

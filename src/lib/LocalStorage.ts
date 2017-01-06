@@ -29,6 +29,7 @@ import { Variable } from "../core/variables/Variable";
 export interface ISerializableData {
   key: string;
   constraintType: string;
+  controlType: string;
   dataType: string;
   title: string;
   defaultValue: any;
