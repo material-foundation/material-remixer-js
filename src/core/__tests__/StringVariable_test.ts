@@ -3,7 +3,7 @@ import * as sinon from "sinon";
 import * as sinonChai from "sinon-chai";
 
 import { remixer } from "../Remixer";
-import { ConstraintType, DataType } from "../../lib/Constants";
+import { ConstraintType, ControlType, DataType } from "../../lib/Constants";
 import { StringVariable } from "../variables/StringVariable";
 import { Variable } from "../variables/Variable";
 
@@ -38,6 +38,19 @@ describe("StringVariable", () => {
 
   it("have the correct contraintType", () => {
     expect(variable.constraintType).to.equal(ConstraintType.LIST);
+  });
+
+  it("should have correct controlType based on number of allowed values", () => {
+    // List control.
+    expect(variable.controlType).to.equal(ControlType.TEXT_LIST);
+
+    // Segmented control.
+    let var1 = remixer.addStringVariable("test_key1", "a", ["a", "b"]);
+    expect(var1.controlType).to.equal(ControlType.SEGMENTED);
+
+    // Text input control.
+    let var2 = remixer.addStringVariable("test_key2", "a");
+    expect(var2.controlType).to.equal(ControlType.TEXT_INPUT);
   });
 
   it("have the correct title", () => {

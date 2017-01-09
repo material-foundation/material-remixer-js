@@ -16,7 +16,7 @@
 
 import * as TinyColor from "tinycolor2";
 
-import { ConstraintType, DataType } from "../../lib/Constants";
+import { ConstraintType, ControlType, DataType } from "../../lib/Constants";
 import { ISerializableData } from "../../lib/LocalStorage";
 import { IVariableCallback, IVariableListParams, Variable } from "./Variable";
 

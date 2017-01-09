@@ -26,6 +26,7 @@ export interface IVariableParams {
   key: string;
   title: string;
   constraintType: string;
+  controlType: string;
   dataType: string;
   defaultValue: any;
   selectedValue: any;
@@ -115,6 +116,12 @@ export class Variable implements IVariableParams {
   get constraintType(): string {
     return ConstraintType.NONE;
   }
+
+  /**
+   * The rendered control type for this Variable.
+   * @type {string}
+   */
+  controlType: string;
 
   /**
    * The data type represented by this Variable.
@@ -225,6 +232,7 @@ export class Variable implements IVariableParams {
     let data = <ISerializableData>{};
     data.key = this.key;
     data.constraintType = this.constraintType;
+    data.controlType = this.controlType;
     data.dataType = this.dataType;
     data.title = this.title;
     return data;
