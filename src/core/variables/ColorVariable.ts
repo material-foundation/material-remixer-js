@@ -14,6 +14,8 @@
  *  under the License.
  */
 
+import * as TinyColor from "tinycolor2";
+
 import { ConstraintType, ControlType, DataType } from "../../lib/Constants";
 import { ISerializableData } from "../../lib/LocalStorage";
 import { IVariableCallback, IVariableListParams, Variable } from "./Variable";
@@ -40,10 +42,10 @@ export class ColorVariable extends Variable implements IColorVariableParams {
   /**
    * Creates an instance of a ColorVariable.
    * @constructor
-   * @param  {string}            key            A unique key for the Variable.
-   * @param  {string}            defaultValue   The default value.
+   * @param  {string}            key             A unique key for the Variable.
+   * @param  {string}            defaultValue    The default value.
    * @param  {string[]}          limitedToValues The array of allowed values.
-   * @param  {IVariableCallback} callback       The callback to invoke when updated.
+   * @param  {IVariableCallback} callback        The callback to invoke when updated.
    * @return {ColorVariable}
    */
   constructor(
@@ -97,8 +99,10 @@ export class ColorVariable extends Variable implements IColorVariableParams {
    */
   serialize(): ISerializableData {
     let data = super.serialize();
-    data.selectedValue = this.selectedValue;
-    data.limitedToValues = this.limitedToValues;
+    data.selectedValue = TinyColor(this.selectedValue).toRgb();
+    data.limitedToValues = this.limitedToValues.map((value: any) => {
+      return TinyColor(value).toRgb();
+    });
     return data;
   }
 
@@ -109,6 +113,10 @@ export class ColorVariable extends Variable implements IColorVariableParams {
    * @return {ColorVariable}          A new initialized ColorVariable.
    */
   static deserialize(data: ISerializableData): Variable {
-    return new ColorVariable(data.key, data.selectedValue, data.limitedToValues);
+    let selectedValue = TinyColor(data.selectedValue).toHexString();
+    let limitedToValues = data.limitedToValues.map((color: string) => {
+      return TinyColor(color).toHexString();
+    });
+    return new ColorVariable(data.key, selectedValue, limitedToValues);
   }
 }

@@ -15,6 +15,7 @@
  */
 
 import * as React from "react";
+import * as TinyColor from "tinycolor2";
 
 import { CSS } from "../../lib/Constants";
 import { IColorControlProps } from "./controlProps";
@@ -52,12 +53,17 @@ export class ColorSwatchControl extends React.Component<IColorControlProps, void
       <div className={`${CSS.RMX_COLOR_SWATCH} ${CSS.MDL_LIST_ITEM} ${CSS.MDL_TWO_LINE}`}>
         <span className={CSS.MDL_PRIMARY}>
           <span>{title}
-            <span className={CSS.RMX_SELECTED_VALUE}>{selectedValue}</span>
+            <span className={CSS.RMX_SELECTED_VALUE}>
+              {TinyColor(selectedValue).toString()}
+            </span>
           </span>
           <span className={CSS.MDL_SECONDARY}>
             {limitedToValues.map((value: string) => (
               <ColorSwatch color={value} key={value}
-                isSelected={selectedValue === value}
+                isSelected={
+                  TinyColor(selectedValue).toRgbString() ===
+                    TinyColor(value).toRgbString()
+                }
                 onClick={this.onClick}
               />
             ))}
@@ -88,6 +94,10 @@ function ColorSwatch(props: IColorSwatchProps) {
     isSelected,
     onClick,
   } = props;
+  // Determine a readable color to prevent a white checkmark on a light
+  // color swatch.
+  let readableCheckColors = [TinyColor("white"), TinyColor("gray")];
+  let checkColor = TinyColor.mostReadable(TinyColor(color), readableCheckColors);
   return (
     <div
       className={CSS.RMX_COLOR_SWATCH_ITEM}
@@ -95,7 +105,9 @@ function ColorSwatch(props: IColorSwatchProps) {
       data-value={color}
       onClick={onClick}
     >
-      {isSelected ? <i className="material-icons">check</i> : ""}
+      {
+        isSelected ? <i className="material-icons" style={{color: checkColor}}>check</i> : ""
+      }
     </div>
   );
 }

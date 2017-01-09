@@ -42,7 +42,7 @@ module.exports = {
     inline: true,
   },
   performance: {
-    hints: !IS_DEV
+    hints: IS_DEV ? false : "warning"
   },
   resolve: {
     extensions: ['.webpack.js', '.web.js', '.ts', '.tsx', '.js']
