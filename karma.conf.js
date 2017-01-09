@@ -13,7 +13,7 @@
  *  License for the specific language governing permissions and limitations
  *  under the License.
  */
- 
+
 const webpackConfig = require('./webpack.config.js');
 
 module.exports = function(config) {
@@ -28,19 +28,18 @@ module.exports = function(config) {
       },
     },
     coverageReporter: {
+      dir: 'coverage',
       reporters: [{
+        type: 'text'
+      }, {
         type: 'lcov'
       }]
     },
     files: [
-      'src/**/__tests__/**',
-    ],
-    exclude: [
-      '**/*.map',
+      'src/**/__tests__/*.ts?(x)',
     ],
     preprocessors: {
-      './src/**/*.ts': ['webpack', 'coverage'],
-      './src/**/*.js': ['webpack', 'coverage'],
+      'src/**/*.ts?(x)': ['webpack'],
     },
     webpack: {
       devtool: webpackConfig.devtool,

@@ -4,8 +4,8 @@ import * as sinonChai from "sinon-chai";
 
 import { remixer } from "../Remixer";
 import { BooleanVariable } from "../variables/BooleanVariable";
+import { ConstraintType, ControlType, DataType } from "../../lib/Constants";
 import { Variable } from "../variables/Variable";
-import { VariableType } from "../../lib/Constants";
 
 const expect = chai.expect;
 chai.use(sinonChai);
@@ -27,7 +27,15 @@ describe("BooleanVariable", () => {
   });
 
   it("have the correct datatype", () => {
-    expect(variable.dataType).to.equal(VariableType.BOOLEAN);
+    expect(variable.dataType).to.equal(DataType.BOOLEAN);
+  });
+
+  it("have the correct contraintType", () => {
+    expect(variable.constraintType).to.equal(ConstraintType.NONE);
+  });
+
+  it("have the correct controlType", () => {
+    expect(variable.controlType).to.equal(ControlType.SWITCH);
   });
 
   it("have the correct title", () => {
@@ -45,5 +53,10 @@ describe("BooleanVariable", () => {
     const updatedVariable = callbackSpy.args[0][0];
     expect(callbackSpy).to.have.been.calledOnce.and.calledWith(variable);
     expect(updatedVariable.selectedValue).to.equal(newValue);
+  });
+
+  it("should clone properly", () => {
+    let clone = variable.clone();
+    expect(JSON.stringify(clone)).to.equal(JSON.stringify(variable));
   });
 });

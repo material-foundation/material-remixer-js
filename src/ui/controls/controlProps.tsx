@@ -25,7 +25,7 @@ import { Variable } from "../../core/variables/Variable";
  * Interface for variable controls properties and state.
  * @interface
  */
-export interface ControlUpdateProps {
+export interface IControlUpdateProps {
   updateVariable(variable: Variable, selectedValue: any): void;
 }
 
@@ -33,7 +33,7 @@ export interface ControlUpdateProps {
  * Interface for variable control properties.
  * @interface
  */
-interface ControlVariableProps extends ControlUpdateProps {
+interface IControlVariableProps extends IControlUpdateProps {
   variable: Variable;
 }
 
@@ -42,7 +42,7 @@ interface ControlVariableProps extends ControlUpdateProps {
  * @interface
  * @extends ControlInterface
  */
-export interface BooleanControlProps extends ControlVariableProps {
+export interface IBooleanControlProps extends IControlVariableProps {
   variable: BooleanVariable;
 }
 
@@ -51,7 +51,7 @@ export interface BooleanControlProps extends ControlVariableProps {
  * @interface
  * @extends ControlInterface
  */
-export interface ColorControlProps extends ControlVariableProps {
+export interface IColorControlProps extends IControlVariableProps {
   variable: ColorVariable;
 }
 
@@ -60,7 +60,7 @@ export interface ColorControlProps extends ControlVariableProps {
  * @interface
  * @extends ControlInterface
  */
-export interface NumberControlProps extends ControlVariableProps {
+export interface INumberControlProps extends IControlVariableProps {
   variable: NumberVariable;
 }
 
@@ -69,7 +69,7 @@ export interface NumberControlProps extends ControlVariableProps {
  * @interface
  * @extends ControlInterface
  */
-export interface RangeControlProps extends ControlVariableProps {
+export interface IRangeControlProps extends IControlVariableProps {
   variable: RangeVariable;
 }
 
@@ -78,6 +78,6 @@ export interface RangeControlProps extends ControlVariableProps {
  * @interface
  * @extends ControlInterface
  */
-export interface StringControlProps extends ControlVariableProps {
+export interface IStringControlProps extends IControlVariableProps {
   variable: StringVariable;
 }

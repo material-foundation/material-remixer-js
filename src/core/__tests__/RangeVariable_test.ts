@@ -3,9 +3,9 @@ import * as sinon from "sinon";
 import * as sinonChai from "sinon-chai";
 
 import { remixer } from "../Remixer";
+import { ConstraintType, ControlType, DataType } from "../../lib/Constants";
 import { RangeVariable } from "../variables/RangeVariable";
 import { Variable } from "../variables/Variable";
-import { VariableType } from "../../lib/Constants";
 
 const expect = chai.expect;
 chai.use(sinonChai);
@@ -22,7 +22,14 @@ describe("RangeVariable", () => {
 
   beforeEach(() => {
     callbackSpy = sinon.spy();
-    variable = remixer.addRangeVariable(key, defaultValue, minValue, maxValue, increment, callbackSpy);
+    variable = remixer.addRangeVariable(
+      key,
+      defaultValue,
+      minValue,
+      maxValue,
+      increment,
+      callbackSpy,
+    );
   });
 
   it("should create a new variable", () => {
@@ -30,7 +37,15 @@ describe("RangeVariable", () => {
   });
 
   it("have the correct datatype", () => {
-    expect(variable.dataType).to.equal(VariableType.RANGE);
+    expect(variable.dataType).to.equal(DataType.NUMBER);
+  });
+
+  it("have the correct contraintType", () => {
+    expect(variable.constraintType).to.equal(ConstraintType.RANGE);
+  });
+
+  it("have the correct controlType", () => {
+    expect(variable.controlType).to.equal(ControlType.SLIDER);
   });
 
   it("have the correct title", () => {
@@ -54,5 +69,10 @@ describe("RangeVariable", () => {
     const updatedVariable = callbackSpy.args[0][0];
     expect(callbackSpy).to.have.been.calledOnce.and.calledWith(variable);
     expect(updatedVariable.selectedValue).to.equal(newValue);
+  });
+
+  it("should clone properly", () => {
+    let clone = variable.clone();
+    expect(JSON.stringify(clone)).to.equal(JSON.stringify(variable));
   });
 });

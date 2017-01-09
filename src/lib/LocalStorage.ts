@@ -14,12 +14,11 @@
  *  under the License.
  */
 
-import { remixer } from "../core/Remixer";
 import { BooleanVariable } from "../core/variables/BooleanVariable";
 import { ColorVariable } from "../core/variables/ColorVariable";
+import { ConstraintType, DataType, StorageKey } from "../lib/Constants";
 import { NumberVariable } from "../core/variables/NumberVariable";
 import { RangeVariable } from "../core/variables/RangeVariable";
-import { StorageKey, VariableType } from "../lib/Constants";
 import { StringVariable } from "../core/variables/StringVariable";
 import { Variable } from "../core/variables/Variable";
 
@@ -27,13 +26,15 @@ import { Variable } from "../core/variables/Variable";
  * Interface for a class that represents serialized data.
  * @interface
  */
-export interface SerializableData {
+export interface ISerializableData {
   key: string;
+  constraintType: string;
+  controlType: string;
   dataType: string;
   title: string;
   defaultValue: any;
   selectedValue: any;
-  possibleValues?: Array<any>;
+  limitedToValues?: any[];
   minValue?: number;
   maxValue?: number;
   increment?: number;
@@ -43,8 +44,8 @@ export interface SerializableData {
  * Interface that maps a serialized data to a global "remixer" key.
  * @interface
  */
-interface SerializableDataMap {
-  [remixer: string]: SerializableData;
+interface ISerializableDataMap {
+  [remixer: string]: ISerializableData;
 }
 
 /**
@@ -61,7 +62,7 @@ export class LocalStorage {
    */
   static getVariable(key: string): Variable {
     let remixerData = this.getRawData();
-    let variableData = remixerData[key] as SerializableData;
+    let variableData = remixerData[key] as ISerializableData;
     if (variableData) {
       return this.deserialize(variableData);
     }
@@ -83,20 +84,21 @@ export class LocalStorage {
    * Returns an initialized Variable based on the data type.
    * @private
    * @static
-   * @param  {SerializableData} data The serialized data.
+   * @param  {ISerializableData} data The serialized data.
    * @return {Variable}
    */
-  private static deserialize(data: SerializableData): Variable {
+  private static deserialize(data: ISerializableData): Variable {
     switch (data.dataType) {
-      case VariableType.BOOLEAN:
+      case DataType.BOOLEAN:
         return BooleanVariable.deserialize(data);
-      case VariableType.COLOR:
+      case DataType.COLOR:
         return ColorVariable.deserialize(data);
-      case VariableType.NUMBER:
+      case DataType.NUMBER:
+        if (data.constraintType === ConstraintType.RANGE) {
+          return RangeVariable.deserialize(data);
+        }
         return NumberVariable.deserialize(data);
-      case VariableType.RANGE:
-        return RangeVariable.deserialize(data);
-      case VariableType.STRING:
+      case DataType.STRING:
         return StringVariable.deserialize(data);
       default:
         return null;
@@ -107,10 +109,10 @@ export class LocalStorage {
    * Retrieves the raw JSON data from local storage.
    * @private
    * @static
-   * @return {SerializableDataMap} The json data from local storage.
+   * @return {ISerializableDataMap} The json data from local storage.
    */
-  private static getRawData(): SerializableDataMap {
-    let data: SerializableDataMap = JSON.parse(localStorage.getItem(StorageKey.REMIXER));
+  private static getRawData(): ISerializableDataMap {
+    let data: ISerializableDataMap = JSON.parse(localStorage.getItem(StorageKey.REMIXER));
     return data || {};
   }
 
@@ -118,9 +120,9 @@ export class LocalStorage {
    * Saves the raw JSON data to local storage.
    * @private
    * @static
-   * @param {SerializableDataMap} data The serialized data to save.
+   * @param {ISerializableDataMap} data The serialized data to save.
    */
-  private static saveRawData(data: SerializableDataMap): void {
+  private static saveRawData(data: ISerializableDataMap): void {
     localStorage.setItem(StorageKey.REMIXER, JSON.stringify(data));
   }
 }

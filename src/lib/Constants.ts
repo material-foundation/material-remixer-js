@@ -16,26 +16,45 @@
 
 /** Keycode constants. */
 export const KeyCode = {
-  ESC: 27
+  ESC: 27,
 };
 
 /** Key event constants. */
 export const KeyEvent = {
-  DOWN: "keydown"
+  DOWN: "keydown",
 };
 
 /** Storage keys constants. */
 export const StorageKey = {
-  REMIXER:  "__remixer__"
+  REMIXER: "__remixer__",
 };
 
-/** Variable types constants. */
-export const VariableType = {
-  BOOLEAN:  "boolean",
-  COLOR:    "color",
-  NUMBER:   "number",
-  RANGE:    "range",
-  STRING:   "string",
+/** Variable data constraints. */
+export const ConstraintType = {
+  NONE: "__ConstraintTypeNone__",
+  LIST: "__ConstraintTypeList__",
+  RANGE: "__ConstraintTypeRange__",
+};
+
+/** Rendered variable control types. */
+export const ControlType = {
+  BUTTON: "__ControlTypeButton__",
+  COLOR_INPUT: "__ControlTypeColorInput__",
+  COLOR_LIST: "__ControlTypeColorList__",
+  SEGMENTED: "__ControlTypeSegmented__",
+  SLIDER: "__ControlTypeSlider__",
+  STEPPER: "__ControlTypeStepper__",
+  SWITCH: "__ControlTypeSwitch__",
+  TEXT_INPUT: "__ControlTypeTextInput__",
+  TEXT_LIST: "__ControlTypeTextList__",
+};
+
+/** Variable data types. */
+export const DataType = {
+  BOOLEAN: "__DataTypeBoolean__",
+  COLOR: "__DataTypeColor__",
+  NUMBER: "__DataTypeNumber__",
+  STRING: "__DataTypeString__",
 };
 
 /** CSS class and id constants. */
@@ -46,20 +65,18 @@ export const CSS = {
   MDL_SECONDARY:          "mdl-list__item-secondary-content",
   MDL_TWO_LINE:           "mdl-list__item--two-line",
 
-  // iFrame ID must be unique within a client page.
-  RMX_OVERLAY_FRAME:      "__remixer-overlay-frame__",
-
-  RMX_OVERLAY_WRAPPER:    "rmx-overlay-wrapper",
-  RMX_VISIBLE:            "rmx-visible",
-  RMX_SELECTED_VALUE:     "rmx-selected-value",
   RMX_COLOR_SWATCH:       "rmx-color-swatch",
   RMX_COLOR_SWATCH_ITEM:  "rmx-color-swatch-item",
   RMX_DROPDOWN:           "rmx-dropdown",
+  RMX_OVERLAY_FRAME:      "__remixer-overlay-frame__",
+  RMX_OVERLAY_WRAPPER:    "rmx-overlay-wrapper",
   RMX_RADIO_LIST:         "rmx-radio-list",
   RMX_RADIO_LIST_ITEM:    "rmx-radio-list-item",
+  RMX_SELECTED_VALUE:     "rmx-selected-value",
   RMX_SLIDER:             "rmx-slider",
-  RMX_SLIDER_MIN:         "rmx-slider-min-value",
   RMX_SLIDER_MAX:         "rmx-slider-max-value",
+  RMX_SLIDER_MIN:         "rmx-slider-min-value",
   RMX_SWITCH:             "rmx-switch",
   RMX_TEXTFIELD:          "rmx-textfield",
+  RMX_VISIBLE:            "rmx-visible",
 };

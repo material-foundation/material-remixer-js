@@ -1,6 +1,6 @@
 {
   "name": "material-remixer",
-  "version": "0.5.2",
+  "version": "0.5.7",
   "description": "A set of libraries and protocols to allow the sharing of design values and live refinement of apps during the development process.",
   "homepage": "https://github.com/material-foundation/material-remixer",
   "author": "The Material Remixer Authors (see AUTHORS)",
@@ -11,10 +11,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/material-foundation/material-remixer-web.git"
+    "url": "https://github.com/material-foundation/material-remixer-js.git"
   },
   "bugs": {
-    "url": "https://github.com/material-foundation/material-remixer-web/issues/"
+    "url": "https://github.com/material-foundation/material-remixer-js/issues/"
   },
   "scripts": {
     "build:dev": "mkdirp build && cross-env RMX_ENV=development webpack --progress --colors",
@@ -24,8 +24,8 @@
     "clean": "del-cli build/** dist/**",
     "dev": "npm run clean && npm run build && cross-env RMX_ENV=development webpack-dev-server",
     "dist": "npm run clean && npm run build && copyFiles -f build/*.* dist",
-    "install": "cd examples && npm install",
     "lint:ts": "tslint --fix --force 'src/**/*.ts?(x)'",
+    "lint:css": "lesshint src/ui/styles/*.less examples/*.css",
     "lint": "npm-run-all --parallel lint:*",
     "test": "karma start"
   },
@@ -33,9 +33,11 @@
     "@types/chai": "^3.4.34",
     "@types/mocha": "^2.2.33",
     "@types/react": "^0.14.50",
+    "@types/react-addons-test-utils": "^0.14.15",
     "@types/react-dom": "^0.14.19",
     "@types/sinon": "^1.16.32",
     "@types/sinon-chai": "^2.7.27",
+    "@types/tinycolor2": "^1.1.0",
     "chai": "^3.5.0",
     "codecov.io": "^0.1.6",
     "copyfiles": "^1.0.0",
@@ -43,6 +45,7 @@
     "css-loader": "^0.26.0",
     "del-cli": "^0.2.0",
     "html-loader": "^0.4.4",
+    "istanbul-instrumenter-loader": "^1.1.0",
     "karma": "^1.3.0",
     "karma-chai": "^0.1.0",
     "karma-chrome-launcher": "^2.0.0",
@@ -54,9 +57,11 @@
     "karma-webpack": "^1.8.0",
     "less": "^2.7.1",
     "less-loader": "^2.2.3",
+    "lesshint": "^2.3.0",
     "mkdirp": "^0.5.1",
     "mocha": "^3.1.2",
     "npm-run-all": "^3.1.2",
+    "react-addons-test-utils": "^15.4.1",
     "sinon": "^2.0.0-pre.4",
     "sinon-chai": "^2.8.0",
     "source-map-loader": "^0.1.5",
@@ -64,12 +69,13 @@
     "ts-loader": "^1.2.2",
     "tslint": "^4.0.2",
     "typescript": "^2.0.10",
-    "webpack": "^2.1.0-beta.27",
-    "webpack-dev-server": "^2.1.0-beta.12"
+    "webpack": "^2.2.0-rc.3",
+    "webpack-dev-server": "^2.2.0-rc.0"
   },
   "dependencies": {
     "material-design-lite": "^1.2.1",
     "react": "^15.4.0",
-    "react-dom": "^15.4.0"
+    "react-dom": "^15.4.0",
+    "tinycolor2": "^1.4.1"
   }
 }

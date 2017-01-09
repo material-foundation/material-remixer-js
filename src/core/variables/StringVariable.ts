@@ -14,41 +14,63 @@
  *  under the License.
  */
 
-import { SerializableData } from "../../lib/LocalStorage";
-import { Variable, VariableListParams, VariableCallback } from "./Variable";
-import { VariableType } from "../../lib/Constants";
+import { ConstraintType, ControlType, DataType } from "../../lib/Constants";
+import { ISerializableData } from "../../lib/LocalStorage";
+import { IVariableCallback, IVariableListParams, Variable } from "./Variable";
 
 /**
  * Interface for a class that represents a type of Variable for string values.
  * @interface
- * @extends VariableListParams
+ * @extends IVariableListParams
  */
-interface StringVariableParams extends VariableListParams {
+interface IStringVariableParams extends IVariableListParams {
   defaultValue: string;
   selectedValue: string;
-  possibleValues?: Array<string>;
+  limitedToValues?: string[];
 }
 
 /**
  * A class representing a type of Variable for string values.
  * @class
  * @extends Variable
- * @implements {StringVariableParams}
+ * @implements {IStringVariableParams}
  */
-export class StringVariable extends Variable implements StringVariableParams {
+export class StringVariable extends Variable implements IStringVariableParams {
 
   /**
    * Creates an instance of a StringVariable.
    * @constructor
-   * @param  {string}           key            [A unique key for the Variable.
-   * @param  {string}           defaultValue   The default value.
-   * @param  {Array<string>}    possibleValues The array of possible values.
-   * @param  {VariableCallback} callback       The callback to invoke when updated.
+   * @param  {string}            key            [A unique key for the Variable.
+   * @param  {string}            defaultValue   The default value.
+   * @param  {string[]}          limitedToValues The array of allowed values.
+   * @param  {IVariableCallback} callback       The callback to invoke when updated.
    * @return {StringVariable}
    */
-  constructor(key: string, defaultValue: string, possibleValues?: Array<string>, callback?: VariableCallback) {
-    super(key, VariableType.STRING, defaultValue, callback);
-    this.possibleValues = possibleValues;
+  constructor(
+    key: string,
+    defaultValue: string,
+    limitedToValues?: string[],
+    callback?: IVariableCallback,
+  ) {
+    super(key, DataType.STRING, defaultValue, callback);
+    this.limitedToValues = limitedToValues ? limitedToValues : [];
+    if (this.limitedToValues.length === 0) {
+      this.controlType = ControlType.TEXT_INPUT;
+    } else if (this.limitedToValues.length <= 2) {
+      this.controlType = ControlType.SEGMENTED;
+    } else {
+      this.controlType = ControlType.TEXT_LIST;
+    }
+  }
+
+  /**
+   * The data constraint type for this Variable.
+   * @type {string}
+   * @readonly
+   */
+  get constraintType(): string {
+    return this.limitedToValues.length > 0 ?
+        ConstraintType.LIST : ConstraintType.NONE;
   }
 
   /**
@@ -59,7 +81,7 @@ export class StringVariable extends Variable implements StringVariableParams {
     let cloned = new StringVariable(
       this.key,
       this.defaultValue,
-      this.possibleValues
+      this.limitedToValues,
     );
     cloned.title = this.title;
     cloned._callbacks = this._callbacks.slice();
@@ -67,31 +89,35 @@ export class StringVariable extends Variable implements StringVariableParams {
   }
 
   /**
-   * The array of possible values for this Variable.
+   * The array of allowed values for this Variable.
    * @override
-   * @type {Array<string>}
+   * @type {string[]}
    */
-  possibleValues?: Array<string>;
+  limitedToValues?: string[];
 
   /**
    * Returns a serialized representation of this object.
    * @override
-   * @return {SerializableData} The serialized data.
+   * @return {ISerializableData} The serialized data.
    */
-  serialize(): SerializableData {
+  serialize(): ISerializableData {
     let data = super.serialize();
     data.selectedValue = this.selectedValue;
-    data.possibleValues = this.possibleValues;
+    data.limitedToValues = this.limitedToValues;
     return data;
   }
 
   /**
    * Returns a new initialized StringVariable from serialized data.
    * @override
-   * @param  {SerializableData} data The serialized data.
-   * @return {StringVariable}        A new initialized StringVariable.
+   * @param  {ISerializableData} data The serialized data.
+   * @return {StringVariable}         A new initialized StringVariable.
    */
-  static deserialize(data: SerializableData): StringVariable {
-    return new StringVariable(data.key, data.selectedValue, data.possibleValues);
+  static deserialize(data: ISerializableData): StringVariable {
+    return new StringVariable(
+      data.key,
+      data.selectedValue,
+      data.limitedToValues,
+    );
   }
 }

@@ -13,12 +13,21 @@
  *  License for the specific language governing permissions and limitations
  *  under the License.
  */
-#__remixer-overlay-frame__ {
-  border: 0;
-  height: 100%;
-  position: fixed;
-  right: 0;
-  top: 0;
-  width: 400px;
-  z-index: 999999;
-}
+
+'use strict';
+
+module.exports = {
+  entry: {
+    remixer: './node_modules/material-remixer/dist/remixer.js',
+    overlay: './node_modules/material-remixer/dist/overlay.js',
+  },
+  output: {
+    publicPath: '/assets/',
+    filename: '[name].js',
+    libraryTarget: 'umd',
+    umdNamedDefine: true
+  },
+  performance: {
+    hints: false
+  },
+};

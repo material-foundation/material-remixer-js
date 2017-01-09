@@ -15,26 +15,27 @@
  */
 
 import * as React from "react";
+
 import { CSS } from "../../lib/Constants";
-import { StringControlProps } from "./controlProps";
+import { IStringControlProps } from "./controlProps";
 
 /**
  * A dropdown control.
  * @class
  * @extends React.Component
  */
-export class DropdownControl extends React.Component<StringControlProps, void> {
+export class DropdownControl extends React.Component<IStringControlProps, void> {
 
   /** Handles the update event for this control. */
   onClick = (event: React.FormEvent<HTMLElement>): void => {
     this.props.updateVariable(
       this.props.variable,
-      (event.target as HTMLElement).dataset["value"]
+      (event.target as HTMLElement).dataset["value"],
     );
   }
 
   /** @override */
-  shouldComponentUpdate(nextProps: StringControlProps) {
+  shouldComponentUpdate(nextProps: IStringControlProps) {
     return nextProps.variable !== this.props.variable;
   }
 
@@ -43,8 +44,8 @@ export class DropdownControl extends React.Component<StringControlProps, void> {
     const {
       title,
       key,
-      possibleValues,
-      selectedValue
+      limitedToValues,
+      selectedValue,
     } = this.props.variable;
     const id = `${CSS.RMX_DROPDOWN}-${key}`;
 
@@ -61,7 +62,7 @@ export class DropdownControl extends React.Component<StringControlProps, void> {
             className="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
             htmlFor={id}
           >
-            {possibleValues.map((value: string) => (
+            {limitedToValues.map((value: string) => (
               <li className="mdl-menu__item" key={value}
                 onClick={this.onClick}
                 data-value={value}>{value}

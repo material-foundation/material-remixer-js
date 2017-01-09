@@ -15,27 +15,29 @@
  */
 
 import * as React from "react";
-import { ColorControlProps } from "./controlProps";
-import { CSS, VariableType } from "../../lib/Constants";
+import * as TinyColor from "tinycolor2";
+
+import { CSS } from "../../lib/Constants";
+import { IColorControlProps } from "./controlProps";
 
 /**
  * A color swatch picker control consisting of a single color swatch for each
- * possible value.
+ * allowed value.
  * @class
  * @extends React.Component
  */
-export class ColorSwatchControl extends React.Component<ColorControlProps, void> {
+export class ColorSwatchControl extends React.Component<IColorControlProps, void> {
 
   /** Handles the update event for this control. */
   onClick = (event: React.FormEvent<HTMLElement>): void => {
     this.props.updateVariable(
       this.props.variable,
-      (event.target as HTMLElement).dataset["value"]
+      (event.target as HTMLElement).dataset["value"],
     );
   }
 
   /** @override */
-  shouldComponentUpdate(nextProps: ColorControlProps) {
+  shouldComponentUpdate(nextProps: IColorControlProps) {
     return nextProps.variable !== this.props.variable;
   }
 
@@ -43,20 +45,25 @@ export class ColorSwatchControl extends React.Component<ColorControlProps, void>
   render() {
     const {
       title,
-      possibleValues,
-      selectedValue
+      limitedToValues,
+      selectedValue,
     } = this.props.variable;
 
     return (
       <div className={`${CSS.RMX_COLOR_SWATCH} ${CSS.MDL_LIST_ITEM} ${CSS.MDL_TWO_LINE}`}>
         <span className={CSS.MDL_PRIMARY}>
           <span>{title}
-            <span className={CSS.RMX_SELECTED_VALUE}>{selectedValue}</span>
+            <span className={CSS.RMX_SELECTED_VALUE}>
+              {TinyColor(selectedValue).toString()}
+            </span>
           </span>
           <span className={CSS.MDL_SECONDARY}>
-            {possibleValues.map((value: string) => (
+            {limitedToValues.map((value: string) => (
               <ColorSwatch color={value} key={value}
-                isSelected={selectedValue === value}
+                isSelected={
+                  TinyColor(selectedValue).toRgbString() ===
+                    TinyColor(value).toRgbString()
+                }
                 onClick={this.onClick}
               />
             ))}
@@ -71,7 +78,7 @@ export class ColorSwatchControl extends React.Component<ColorControlProps, void>
  * Interface containing properties for a single color swatch.
  * @interface
  */
-interface ColorSwatchProps {
+interface IColorSwatchProps {
   color: string;
   isSelected: boolean;
   onClick: any;
@@ -79,14 +86,18 @@ interface ColorSwatchProps {
 
 /**
  * Returns a single color swatch displayed within the `ColorSwatchControl`.
- * @param {ColorSwatchProps} props The color swatch properties.
+ * @param {IColorSwatchProps} props The color swatch properties.
  */
-function ColorSwatch(props: ColorSwatchProps) {
+function ColorSwatch(props: IColorSwatchProps) {
   const {
     color,
     isSelected,
     onClick,
   } = props;
+  // Determine a readable color to prevent a white checkmark on a light
+  // color swatch.
+  let readableCheckColors = [TinyColor("white"), TinyColor("gray")];
+  let checkColor = TinyColor.mostReadable(TinyColor(color), readableCheckColors);
   return (
     <div
       className={CSS.RMX_COLOR_SWATCH_ITEM}
@@ -94,7 +105,9 @@ function ColorSwatch(props: ColorSwatchProps) {
       data-value={color}
       onClick={onClick}
     >
-      {isSelected ? <i className="material-icons">check</i> : ""}
+      {
+        isSelected ? <i className="material-icons" style={{color: checkColor}}>check</i> : ""
+      }
     </div>
   );
 }

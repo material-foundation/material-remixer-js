@@ -14,16 +14,16 @@
  *  under the License.
  */
 
-import { SerializableData } from "../../lib/LocalStorage";
-import { Variable, VariableParams, VariableCallback } from "./Variable";
-import { VariableType } from "../../lib/Constants";
+import { ControlType, DataType } from "../../lib/Constants";
+import { ISerializableData } from "../../lib/LocalStorage";
+import { IVariableCallback, IVariableParams, Variable } from "./Variable";
 
 /**
  * Interface for a class that represents a type of Variable for boolean values.
  * @interface
- * @extends VariableParams
+ * @extends IVariableParams
  */
-interface BooleanVariableParams extends VariableParams {
+interface IBooleanVariableParams extends IVariableParams {
   defaultValue: boolean;
   selectedValue: boolean;
 }
@@ -32,20 +32,25 @@ interface BooleanVariableParams extends VariableParams {
  * A class representing a type of Variable for boolean values.
  * @class
  * @extends Variable
- * @implements {BooleanVariableParams}
+ * @implements {IBooleanVariableParams}
  */
-export class BooleanVariable extends Variable implements BooleanVariableParams {
+export class BooleanVariable extends Variable implements IBooleanVariableParams {
 
   /**
    * Creates an instance of a BooleanVariable.
    * @constructor
-   * @param  {string}           key          A unique key for the Variable.
-   * @param  {boolean}          defaultValue The default value.
-   * @param  {VariableCallback} callback     The callback to invoke when updated.
+   * @param  {string}            key          A unique key for the Variable.
+   * @param  {boolean}           defaultValue The default value.
+   * @param  {IVariableCallback} callback     The callback to invoke when updated.
    * @return {BooleanVariable}
    */
-  constructor(key: string, defaultValue: boolean, callback?: VariableCallback) {
-    super(key, VariableType.BOOLEAN, defaultValue, callback);
+  constructor(
+    key: string,
+    defaultValue: boolean,
+    callback?: IVariableCallback,
+  ) {
+    super(key, DataType.BOOLEAN, defaultValue, callback);
+    this.controlType = ControlType.SWITCH;
   }
 
   /**
@@ -62,9 +67,9 @@ export class BooleanVariable extends Variable implements BooleanVariableParams {
   /**
    * Returns a serialized representation of this object.
    * @override
-   * @return {SerializableData} The serialized data.
+   * @return {ISerializableData} The serialized data.
    */
-  serialize(): SerializableData {
+  serialize(): ISerializableData {
     let data = super.serialize();
     data.defaultValue = this.defaultValue;
     data.selectedValue = this.selectedValue;
@@ -74,10 +79,10 @@ export class BooleanVariable extends Variable implements BooleanVariableParams {
   /**
    * Returns a new initialized BooleanVariable from serialized data.
    * @override
-   * @param  {SerializableData} data The serialized data.
-   * @return {BooleanVariable}       A new initialized BooleanVariable.
+   * @param  {ISerializableData} data The serialized data.
+   * @return {BooleanVariable}        A new initialized BooleanVariable.
    */
-  static deserialize(data: SerializableData): BooleanVariable {
+  static deserialize(data: ISerializableData): BooleanVariable {
     return new BooleanVariable(data.key, data.selectedValue);
   }
 }

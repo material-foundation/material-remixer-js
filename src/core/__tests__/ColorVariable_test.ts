@@ -4,8 +4,8 @@ import * as sinonChai from "sinon-chai";
 
 import { remixer } from "../Remixer";
 import { ColorVariable } from "../variables/ColorVariable";
+import { ConstraintType, ControlType, DataType } from "../../lib/Constants";
 import { Variable } from "../variables/Variable";
-import { VariableType } from "../../lib/Constants";
 
 const expect = chai.expect;
 chai.use(sinonChai);
@@ -14,13 +14,18 @@ describe("ColorVariable", () => {
   const key: string = "test variable";
   const sanitizedKey: string = "test_variable";
   const defaultValue: string = "#4285F4";
-  const possibleValues: Array<string> = ["#4285F4", "#0F9D58", "#DB4437"];
+  const limitedToValues: string[] = ["#4285F4", "#0F9D58", "#DB4437"];
   let callbackSpy: sinon.SinonSpy;
   let variable: ColorVariable;
 
   beforeEach(() => {
     callbackSpy = sinon.spy();
-    variable = remixer.addColorVariable(key, defaultValue, possibleValues, callbackSpy);
+    variable = remixer.addColorVariable(
+      key,
+      defaultValue,
+      limitedToValues,
+      callbackSpy,
+    );
   });
 
   it("should create a new variable", () => {
@@ -28,7 +33,27 @@ describe("ColorVariable", () => {
   });
 
   it("have the correct datatype", () => {
-    expect(variable.dataType).to.equal(VariableType.COLOR);
+    expect(variable.dataType).to.equal(DataType.COLOR);
+  });
+
+  it("have the correct contraintType", () => {
+    expect(variable.constraintType).to.equal(ConstraintType.LIST);
+
+    variable.limitedToValues = [];
+    expect(variable.constraintType).to.equal(ConstraintType.NONE);
+  });
+
+  it("have the correct controlType", () => {
+    expect(variable.controlType).to.equal(ControlType.COLOR_LIST);
+  });
+
+  it("should have correct controlType based on number of allowed values", () => {
+    // List control.
+    expect(variable.controlType).to.equal(ControlType.COLOR_LIST);
+
+    // Input control.
+    let var1 = remixer.addColorVariable("test_key", "#4285F4");
+    expect(var1.controlType).to.equal(ControlType.COLOR_INPUT);
   });
 
   it("have the correct title", () => {
@@ -39,8 +64,8 @@ describe("ColorVariable", () => {
     expect(variable.key).to.equal(sanitizedKey);
   });
 
-  it("have the correct possible values", () => {
-    expect(variable.possibleValues).to.equal(possibleValues);
+  it("have the correct allowed values", () => {
+    expect(variable.limitedToValues).to.equal(limitedToValues);
   });
 
   it("should trigger callback when selected value of variable changes", () => {
@@ -50,5 +75,10 @@ describe("ColorVariable", () => {
     const updatedVariable = callbackSpy.args[0][0];
     expect(callbackSpy).to.have.been.calledOnce.and.calledWith(variable);
     expect(updatedVariable.selectedValue).to.equal(newValue);
+  });
+
+  it("should clone properly", () => {
+    let clone = variable.clone();
+    expect(JSON.stringify(clone)).to.equal(JSON.stringify(variable));
   });
 });

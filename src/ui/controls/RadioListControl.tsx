@@ -15,26 +15,27 @@
  */
 
 import * as React from "react";
-import { CSS, VariableType } from "../../lib/Constants";
-import { StringControlProps } from "./controlProps";
+
+import { CSS } from "../../lib/Constants";
+import { IStringControlProps } from "./controlProps";
 
 /**
  * A radio list control.
  * @class
  * @extends React.Component
  */
-export class RadioListControl extends React.Component<StringControlProps, void> {
+export class RadioListControl extends React.Component<IStringControlProps, void> {
 
   /** Handles the update event for this control. */
   onChange = (event: React.FormEvent<HTMLInputElement>): void => {
     this.props.updateVariable(
       this.props.variable,
-      (event.target as HTMLInputElement).value
+      (event.target as HTMLInputElement).value,
     );
   }
 
   /** @override */
-  shouldComponentUpdate(nextProps: StringControlProps) {
+  shouldComponentUpdate(nextProps: IStringControlProps) {
     return nextProps.variable !== this.props.variable;
   }
 
@@ -43,8 +44,8 @@ export class RadioListControl extends React.Component<StringControlProps, void> 
     const {
       title,
       key,
-      possibleValues,
-      selectedValue
+      limitedToValues,
+      selectedValue,
     } = this.props.variable;
     const id = `${CSS.RMX_RADIO_LIST_ITEM}-${key}`;
 
@@ -52,7 +53,7 @@ export class RadioListControl extends React.Component<StringControlProps, void> 
       <div className={`${CSS.RMX_RADIO_LIST} ${CSS.MDL_LIST_ITEM}`}>
         <span className={CSS.MDL_PRIMARY}>{title}</span>
         <span className={CSS.MDL_SECONDARY}>
-          {possibleValues.map((value: string, i: number) => (
+          {limitedToValues.map((value: string, i: number) => (
             <label className={`${CSS.RMX_RADIO_LIST_ITEM} mdl-radio mdl-js-radio mdl-js-ripple-effect`}
               htmlFor={`${id}-${i}`} key={value}
             >
