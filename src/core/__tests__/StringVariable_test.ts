@@ -39,7 +39,7 @@ describe("StringVariable", () => {
   it("have the correct contraintType", () => {
     expect(variable.constraintType).to.equal(ConstraintType.LIST);
 
-    variable.possibleValues = [];
+    variable.limitedToValues = [];
     expect(variable.constraintType).to.equal(ConstraintType.NONE);
   });
 
