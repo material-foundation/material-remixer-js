@@ -56,6 +56,8 @@ export class ColorVariable extends Variable implements IColorVariableParams {
   ) {
     super(key, DataType.COLOR, defaultValue, callback);
     this.limitedToValues = limitedToValues ? limitedToValues : [];
+    this.controlType = (this.limitedToValues.length > 0) ?
+        ControlType.COLOR_LIST : ControlType.COLOR_INPUT;
   }
 
   /**
