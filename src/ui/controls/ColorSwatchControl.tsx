@@ -60,7 +60,10 @@ export class ColorSwatchControl extends React.Component<IColorControlProps, void
           <span className={CSS.MDL_SECONDARY}>
             {limitedToValues.map((value: string) => (
               <ColorSwatch color={value} key={value}
-                isSelected={selectedValue === value}
+                isSelected={
+                  TinyColor(selectedValue).toRgbString() ===
+                    TinyColor(value).toRgbString()
+                }
                 onClick={this.onClick}
               />
             ))}
