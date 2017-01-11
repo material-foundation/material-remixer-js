@@ -54,37 +54,38 @@
   <script>
     // Start Remixer.
     remixer.start();
+    remixer.startRemoteController();
 
     // Add a string variable to generate a text field in the overlay.
-    remixer.addStringVariable("Title", "Remixer Demo", null, function(variable) {
-      document.getElementById("remixer-demo-title").innerText = variable.selectedValue;
-    });
+    // remixer.addStringVariable("Title", "Remixer Demo", null, function(variable) {
+    //   document.getElementById("remixer-demo-title").innerText = variable.selectedValue;
+    // });
 
     // Add a boolean variable to generate a toggle switch in the overlay.
     remixer.addBooleanVariable("Show box", true, function(variable) {
       document.getElementById("box").style.display = variable.selectedValue ? "block" : "none";
     });
-
-    // Add a range variable to generate a slider in the overlay.
-    remixer.addRangeVariable("Box opacity", 1, 0, 1, 0.1, function(variable) {
-      document.getElementById("box").style.opacity = variable.selectedValue;
-    });
-
-    // Add a string variable with 3+ possible values to generate a dropdown selector in the overlay.
-    remixer.addStringVariable("Box width", "200px", ["200px", "300px", "400px", "600px"], function(variable) {
-      document.getElementById("box").style.width = variable.selectedValue;
-    });
-
-    // Add an item list variable with colors to generate a color picker in the overlay.
-    remixer.addColorVariable("Box Color", "#4285F4", ["#4285F4", "#0F9D58", "#DB4437"], function(variable) {
-      document.getElementById("box").style.backgroundColor = variable.selectedValue;
-    });
-
-    // Add a string variable with 2 possible values to generate a radio selector in the overlay.
-    remixer.addStringVariable("Theme", "Light", ["Light", "Dark"], function(variable) {
-      var color = variable.selectedValue === "Light" ? "white" : "darkGray";
-      document.body.style.backgroundColor = color;
-    });
+    //
+    // // Add a range variable to generate a slider in the overlay.
+    // remixer.addRangeVariable("Box opacity", 1, 0, 1, 0.1, function(variable) {
+    //   document.getElementById("box").style.opacity = variable.selectedValue;
+    // });
+    //
+    // // Add a string variable with 3+ possible values to generate a dropdown selector in the overlay.
+    // remixer.addStringVariable("Box width", "200px", ["200px", "300px", "400px", "600px"], function(variable) {
+    //   document.getElementById("box").style.width = variable.selectedValue;
+    // });
+    //
+    // // Add an item list variable with colors to generate a color picker in the overlay.
+    // remixer.addColorVariable("Box Color", "#4285F4", ["#4285F4", "#0F9D58", "#DB4437"], function(variable) {
+    //   document.getElementById("box").style.backgroundColor = variable.selectedValue;
+    // });
+    //
+    // // Add a string variable with 2 possible values to generate a radio selector in the overlay.
+    // remixer.addStringVariable("Theme", "Light", ["Light", "Dark"], function(variable) {
+    //   var color = variable.selectedValue === "Light" ? "white" : "darkGray";
+    //   document.body.style.backgroundColor = color;
+    // });
   </script>
 </body>
 

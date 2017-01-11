@@ -22,6 +22,7 @@ import { Messaging } from "../lib/Messaging";
 import { NumberVariable } from "./variables/NumberVariable";
 import { IRangeVariableParams, RangeVariable } from "./variables/RangeVariable";
 import { IVariableCallback, IVariableKeyMap, Variable } from "./variables/Variable";
+import { Remote } from "../lib/Remote";
 import { StringVariable } from "./variables/StringVariable";
 
 import "../ui/styles/iframe.less";
@@ -296,6 +297,15 @@ class Remixer {
    */
   static saveVariable(variable: Variable): void {
     LocalStorage.saveVariable(variable);
+    Remote.saveVariable(variable);
+  }
+
+  static startRemoteController(): void {
+    Remote.startObservingUpdates();
+  }
+
+  static stopRemoteController(): void {
+    Remote.stopObservingUpdates();
   }
 }
 

@@ -60,6 +60,9 @@ export class OverlayController extends React.Component<IControllerProps, void> {
   onMessageReceived(event: MessageEvent): void {
     if (event.data === Messaging.type.ToggleVisibility) {
       this.toggleVisibility();
+    } else if (event.data === Messaging.type.ForceUpdate) {
+      console.log("ForceUpdate");
+      this.forceUpdate();
     }
   }
 

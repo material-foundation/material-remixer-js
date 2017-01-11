@@ -22,6 +22,7 @@ import { CSS } from "../lib/Constants";
  */
 enum MessagingType {
   ToggleVisibility,
+  ForceUpdate,
 }
 
 /**

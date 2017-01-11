@@ -34,6 +34,7 @@ export class SwitchControl extends React.Component<IBooleanControlProps, void> {
 
   /** @override */
   shouldComponentUpdate(nextProps: IBooleanControlProps) {
+    console.log("shouldComponentUpdate", nextProps.variable.selectedValue, this.props.variable.selectedValue);
     return nextProps.variable !== this.props.variable;
   }
 

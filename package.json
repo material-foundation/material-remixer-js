@@ -38,6 +38,7 @@
     "@types/sinon": "^1.16.32",
     "@types/sinon-chai": "^2.7.27",
     "@types/tinycolor2": "^1.1.0",
+    "@types/uuid": "^2.0.29",
     "chai": "^3.5.0",
     "codecov.io": "^0.1.6",
     "copyfiles": "^1.0.0",
@@ -73,9 +74,11 @@
     "webpack-dev-server": "^2.2.0-rc.0"
   },
   "dependencies": {
+    "firebase": "^3.6.5",
     "material-design-lite": "^1.2.1",
     "react": "^15.4.0",
     "react-dom": "^15.4.0",
-    "tinycolor2": "^1.4.1"
+    "tinycolor2": "^1.4.1",
+    "uuid": "^3.0.1"
   }
 }

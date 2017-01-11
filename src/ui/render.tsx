@@ -48,6 +48,7 @@ function updateVariable(variable: Variable, selectedValue: any): void {
 // Renders the OverlayController component to the overlay wrapper element.
 const overlayWrapper = document.getElementById(CSS.RMX_OVERLAY_WRAPPER);
 function redraw(): void {
+  console.log("redraw");
   ReactDOM.render(
     <OverlayController
       wrapperElement={overlayWrapper}
