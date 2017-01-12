@@ -126,42 +126,42 @@ class Remixer {
 
   /**
    * Adds a boolean Variable to array of Variables with optional callback.
-   * @param  {string}            key          The key of the Variable.
-   * @param  {boolean}           defaultValue The initial default value of the variable.
-   * @param  {IVariableCallback} callback     The callback method to be invoked
-   *                                          when the Variable is updated.
+   * @param  {string}            key           The key of the Variable.
+   * @param  {boolean}           selectedValue The initial selected value of the variable.
+   * @param  {IVariableCallback} callback      The callback method to be invoked
+   *                                           when the Variable is updated.
    * @return {BooleanVariable}
    */
   static addBooleanVariable(
     key: string,
-    defaultValue: boolean,
+    selectedValue: boolean,
     callback?: IVariableCallback,
   ): BooleanVariable {
-    let variable = new BooleanVariable(key, defaultValue, callback);
+    let variable = new BooleanVariable(key, selectedValue, callback);
     this.addVariable(variable);
     return variable;
   }
 
   /**
    * Adds a range Variable to array of Variables with optional callback.
-   * @param  {string}             key          The key of the Variable.
-   * @param  {number}             defaultValue The initial default value of the variable.
-   * @param  {number}             minValue     The allowed minimum value of the variable.
-   * @param  {number}             maxValue     The allowed maximum value of the variable.
-   * @param  {number}             increment    The amount to increment the value.
-   * @param  {IVariableCallback}  callback     The callback method to be invoked
-   *                                           when the Variable is updated.
+   * @param  {string}             key           The key of the Variable.
+   * @param  {number}             selectedValue The initial selected value of the variable.
+   * @param  {number}             minValue      The allowed minimum value of the variable.
+   * @param  {number}             maxValue      The allowed maximum value of the variable.
+   * @param  {number}             increment     The amount to increment the value.
+   * @param  {IVariableCallback}  callback      The callback method to be invoked
+   *                                            when the Variable is updated.
    * @return {RangeVariable}
    */
   static addRangeVariable(
     key: string,
-    defaultValue: number,
+    selectedValue: number,
     minValue: number,
     maxValue: number,
     increment: number,
     callback?: IVariableCallback,
   ): RangeVariable {
-    let variable = new RangeVariable(key, defaultValue, minValue, maxValue, increment, callback);
+    let variable = new RangeVariable(key, selectedValue, minValue, maxValue, increment, callback);
     this.addVariable(variable);
     return variable;
   }
@@ -169,7 +169,7 @@ class Remixer {
   /**
    * Adds a string Variable to array of variables with optional callback
    * @param  {string}              key             The key of the Variable.
-   * @param  {string}              defaultValue    The initial default value of the variable.
+   * @param  {string}              selectedValue   The initial selected value of the variable.
    * @param  {string[]}            limitedToValues The optional array of allowed values.
    * @param  {IVariableCallback}   callback        The callback method to be invoked
    *                                               when the Variable is updated.
@@ -177,11 +177,11 @@ class Remixer {
    */
   static addStringVariable(
     key: string,
-    defaultValue: string,
+    selectedValue: string,
     limitedToValues?: string[],
     callback?: IVariableCallback,
   ): StringVariable {
-    let variable = new StringVariable(key, defaultValue, limitedToValues, callback);
+    let variable = new StringVariable(key, selectedValue, limitedToValues, callback);
     this.addVariable(variable);
     return variable;
   }
@@ -189,7 +189,7 @@ class Remixer {
   /**
    * Adds a number variable to array of variables with optional callback.
    * @param  {string}              key             The key of the Variable.
-   * @param  {number}              defaultValue    The initial default value of the variable.
+   * @param  {number}              selectedValue   The initial selected value of the variable.
    * @param  {number[]}            limitedToValues The optional array of allowed values.
    * @param  {IVariableCallback}   callback        The callback method to be invoked
    *                                               when the Variable is updated.
@@ -197,11 +197,11 @@ class Remixer {
    */
   static addNumberVariable(
     key: string,
-    defaultValue: number,
+    selectedValue: number,
     limitedToValues?: number[],
     callback?: IVariableCallback,
   ): NumberVariable {
-    let variable = new NumberVariable(key, defaultValue, limitedToValues, callback);
+    let variable = new NumberVariable(key, selectedValue, limitedToValues, callback);
     this.addVariable(variable);
     return variable;
   }
@@ -209,7 +209,7 @@ class Remixer {
   /**
    * Adds a color variable to array of variables with optional callback.
    * @param  {string}              key             The key of the Variable.
-   * @param  {string}              defaultValue    The initial default value of the variable.
+   * @param  {string}              selectedValue   The initial selected value of the variable.
    * @param  {string[]}            limitedToValues The optional array of allowed values.
    * @param  {IVariableCallback}   callback        The callback method to be invoked
    *                                               when the Variable is updated.
@@ -217,11 +217,11 @@ class Remixer {
    */
   static addColorVariable(
     key: string,
-    defaultValue: string,
+    selectedValue: string,
     limitedToValues?: string[],
     callback?: IVariableCallback,
   ): ColorVariable {
-    let variable = new ColorVariable(key, defaultValue, limitedToValues, callback);
+    let variable = new ColorVariable(key, selectedValue, limitedToValues, callback);
     this.addVariable(variable);
     return variable;
   }

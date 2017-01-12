@@ -28,7 +28,6 @@ export interface IVariableParams {
   constraintType: string;
   controlType: string;
   dataType: string;
-  defaultValue: any;
   selectedValue: any;
   callbacks?: IVariableCallback[];
 }
@@ -69,23 +68,22 @@ export class Variable implements IVariableParams {
 
   /**
    * Creates an instance of a Variable.
-   * @param  {string}            key          A unique key for the Variable.
-   * @param  {string}            dataType     The data type of this Variable.
-   * @param  {any}               defaultValue The default value.
-   * @param  {IVariableCallback} callback     The callback to invoke when updated.
+   * @param  {string}            key           A unique key for the Variable.
+   * @param  {string}            dataType      The data type of this Variable.
+   * @param  {any}               selectedValue The initial selected value.
+   * @param  {IVariableCallback} callback      The callback to invoke when updated.
    * @return {Variable}
    */
   constructor(
     key: string,
     dataType: string,
-    defaultValue: any,
+    selectedValue: any,
     callback?: IVariableCallback,
   ) {
     this.key = this.sanitizeKey(key);
     this.title = key;
     this.dataType = dataType;
-    this.defaultValue = defaultValue;
-    this._selectedValue = defaultValue;
+    this._selectedValue = selectedValue;
     if (callback) {
       this._callbacks.push(callback);
     }
@@ -100,7 +98,7 @@ export class Variable implements IVariableParams {
     let cloned = new Variable(
       this.key,
       this.dataType,
-      this.defaultValue,
+      this.selectedValue,
       null,
     );
     cloned.title = this.title;
@@ -140,12 +138,6 @@ export class Variable implements IVariableParams {
    * @type {string}
    */
   title: string;
-
-  /**
-   * The defalut value for this Variable.
-   * @type {any}
-   */
-  defaultValue: any;
 
   /**
    * Whether this Variable has been initialized.
@@ -215,13 +207,6 @@ export class Variable implements IVariableParams {
    */
   save(): void {
     remixer.saveVariable(this);
-  }
-
-  /**
-   * Restores the Variable to its default value.
-   */
-  restore(): void {
-    this.selectedValue = this.defaultValue;
   }
 
   /**
