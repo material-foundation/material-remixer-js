@@ -11,12 +11,12 @@ const expect = chai.expect;
 
 describe("RadioListControl", () => {
   const key: string = "test_variable";
-  const defaultValue: string = "a";
+  const initialValue: string = "a";
   const limitedToValues: string[] = ["a", "b"];
   let variable: Variable;
 
   beforeEach(() => {
-    variable = remixer.addStringVariable(key, defaultValue, limitedToValues);
+    variable = remixer.addStringVariable(key, initialValue, limitedToValues);
     this.component = TestUtils.renderIntoDocument(
       <RadioListControl
         variable={variable}

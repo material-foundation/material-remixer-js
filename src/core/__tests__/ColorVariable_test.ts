@@ -13,7 +13,7 @@ chai.use(sinonChai);
 describe("ColorVariable", () => {
   const key: string = "test variable";
   const sanitizedKey: string = "test_variable";
-  const defaultValue: string = "#4285F4";
+  const initialValue: string = "#4285F4";
   const limitedToValues: string[] = ["#4285F4", "#0F9D58", "#DB4437"];
   let callbackSpy: sinon.SinonSpy;
   let variable: ColorVariable;
@@ -22,7 +22,7 @@ describe("ColorVariable", () => {
     callbackSpy = sinon.spy();
     variable = remixer.addColorVariable(
       key,
-      defaultValue,
+      initialValue,
       limitedToValues,
       callbackSpy,
     );

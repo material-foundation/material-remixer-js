@@ -11,11 +11,11 @@ const expect = chai.expect;
 
 describe("SwitchControl", () => {
   const key: string = "test_variable";
-  const defaultValue: boolean = true;
+  const initialValue: boolean = true;
   let variable: Variable;
 
   beforeEach(() => {
-    variable = remixer.addBooleanVariable(key, defaultValue,);
+    variable = remixer.addBooleanVariable(key, initialValue,);
     this.component = TestUtils.renderIntoDocument(
       <SwitchControl
         variable={variable}
@@ -37,6 +37,6 @@ describe("SwitchControl", () => {
       this.component, "mdl-switch__input"
     ) as HTMLInputElement;
 
-    expect(control.checked).to.equal(defaultValue);
+    expect(control.checked).to.equal(initialValue);
   });
 });
