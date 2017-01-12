@@ -11,12 +11,12 @@ const expect = chai.expect;
 
 describe("TextFieldControl", () => {
   const key: string = "test_variable";
-  const defaultValue: string = "test string value";
+  const initialValue: string = "test string value";
   let variable: Variable;
 
   beforeEach(() => {
-    variable = remixer.addStringVariable(key, defaultValue);
-    variable.selectedValue = defaultValue;
+    variable = remixer.addStringVariable(key, initialValue);
+    variable.selectedValue = initialValue;
     this.component = TestUtils.renderIntoDocument(
       <TextFieldControl
         variable={variable}
@@ -38,6 +38,6 @@ describe("TextFieldControl", () => {
       this.component, "mdl-textfield__input"
     ) as HTMLInputElement;
 
-    expect(textField.value).to.equal(defaultValue);
+    expect(textField.value).to.equal(initialValue);
   });
 });

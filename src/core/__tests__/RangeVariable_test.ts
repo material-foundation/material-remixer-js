@@ -13,7 +13,7 @@ chai.use(sinonChai);
 describe("RangeVariable", () => {
   const key: string = "test variable";
   const sanitizedKey: string = "test_variable";
-  const defaultValue: number = 1;
+  const initialValue: number = 1;
   const minValue: number = 0;
   const maxValue: number = 1;
   const increment: number = 0.1;
@@ -24,7 +24,7 @@ describe("RangeVariable", () => {
     callbackSpy = sinon.spy();
     variable = remixer.addRangeVariable(
       key,
-      defaultValue,
+      initialValue,
       minValue,
       maxValue,
       increment,
