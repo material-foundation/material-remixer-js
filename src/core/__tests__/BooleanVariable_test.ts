@@ -13,13 +13,13 @@ chai.use(sinonChai);
 describe("BooleanVariable", () => {
   const key: string = "test variable";
   const sanitizedKey: string = "test_variable";
-  const defaultValue: boolean = true;
+  const initialValue: boolean = true;
   let callbackSpy: sinon.SinonSpy;
   let variable: BooleanVariable;
 
   beforeEach(() => {
     callbackSpy = sinon.spy();
-    variable = remixer.addBooleanVariable(key, defaultValue, callbackSpy);
+    variable = remixer.addBooleanVariable(key, initialValue, callbackSpy);
   });
 
   it("should create a new variable", () => {

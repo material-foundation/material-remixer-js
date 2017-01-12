@@ -24,7 +24,7 @@ import { IVariableCallback, IVariableListParams, Variable } from "./Variable";
  * @extends IVariableListParams
  */
 interface IStringVariableParams extends IVariableListParams {
-  defaultValue: string;
+  initialValue: string;
   selectedValue: string;
   limitedToValues?: string[];
 }
@@ -41,18 +41,18 @@ export class StringVariable extends Variable implements IStringVariableParams {
    * Creates an instance of a StringVariable.
    * @constructor
    * @param  {string}            key            [A unique key for the Variable.
-   * @param  {string}            defaultValue   The default value.
+   * @param  {string}            initialValue   The initial selected value.
    * @param  {string[]}          limitedToValues The array of allowed values.
    * @param  {IVariableCallback} callback       The callback to invoke when updated.
    * @return {StringVariable}
    */
   constructor(
     key: string,
-    defaultValue: string,
+    initialValue: string,
     limitedToValues?: string[],
     callback?: IVariableCallback,
   ) {
-    super(key, DataType.STRING, defaultValue, callback);
+    super(key, DataType.STRING, initialValue, callback);
     this.limitedToValues = limitedToValues ? limitedToValues : [];
     if (this.limitedToValues.length === 0) {
       this.controlType = ControlType.TEXT_INPUT;
@@ -80,7 +80,7 @@ export class StringVariable extends Variable implements IStringVariableParams {
   clone() {
     let cloned = new StringVariable(
       this.key,
-      this.defaultValue,
+      this.initialValue,
       this.limitedToValues,
     );
     cloned.title = this.title;
