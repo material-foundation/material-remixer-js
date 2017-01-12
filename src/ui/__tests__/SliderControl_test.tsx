@@ -11,14 +11,14 @@ const expect = chai.expect;
 
 describe("SliderControl", () => {
   const key: string = "test_variable";
-  const defaultValue: number = 0.5;
+  const selectedValue: number = 0.5;
   const minValue: number = 0;
   const maxValue: number = 1;
   const increment: number = 0.1;
   let variable: RangeVariable;
 
   beforeEach(() => {
-    variable = remixer.addRangeVariable(key, defaultValue, minValue, maxValue, increment);
+    variable = remixer.addRangeVariable(key, selectedValue, minValue, maxValue, increment);
     this.component = TestUtils.renderIntoDocument(
       <SliderControl
         variable={variable}
@@ -59,6 +59,6 @@ describe("SliderControl", () => {
     expect(Number(slider.min)).to.equal(minValue);
     expect(Number(slider.max)).to.equal(maxValue);
     expect(Number(slider.step)).to.equal(increment);
-    expect(Number(slider.value)).to.equal(defaultValue);
+    expect(Number(slider.value)).to.equal(selectedValue);
   });
 });

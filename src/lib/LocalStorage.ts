@@ -32,7 +32,6 @@ export interface ISerializableData {
   controlType: string;
   dataType: string;
   title: string;
-  defaultValue: any;
   selectedValue: any;
   limitedToValues?: any[];
   minValue?: number;

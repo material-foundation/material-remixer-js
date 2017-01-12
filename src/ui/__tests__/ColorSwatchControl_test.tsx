@@ -11,12 +11,12 @@ const expect = chai.expect;
 
 describe("ColorSwatchControl", () => {
   const key: string = "test_variable";
-  const defaultValue: string = "#4285F4";
+  const selectedValue: string = "#4285F4";
   const limitedToValues: string[] = ["#4285F4", "#0F9D58", "#DB4437"];
   let variable: Variable;
 
   beforeEach(() => {
-    variable = remixer.addColorVariable(key, defaultValue, limitedToValues);
+    variable = remixer.addColorVariable(key, selectedValue, limitedToValues);
     this.component = TestUtils.renderIntoDocument(
       <ColorSwatchControl
         variable={variable}

@@ -24,7 +24,6 @@ import { IVariableCallback, IVariableParams, Variable } from "./Variable";
  * @extends IVariableParams
  */
 interface IBooleanVariableParams extends IVariableParams {
-  defaultValue: boolean;
   selectedValue: boolean;
 }
 
@@ -39,17 +38,17 @@ export class BooleanVariable extends Variable implements IBooleanVariableParams 
   /**
    * Creates an instance of a BooleanVariable.
    * @constructor
-   * @param  {string}            key          A unique key for the Variable.
-   * @param  {boolean}           defaultValue The default value.
-   * @param  {IVariableCallback} callback     The callback to invoke when updated.
+   * @param  {string}            key           A unique key for the Variable.
+   * @param  {boolean}           selectedValue The initial selected value.
+   * @param  {IVariableCallback} callback      The callback to invoke when updated.
    * @return {BooleanVariable}
    */
   constructor(
     key: string,
-    defaultValue: boolean,
+    selectedValue: boolean,
     callback?: IVariableCallback,
   ) {
-    super(key, DataType.BOOLEAN, defaultValue, callback);
+    super(key, DataType.BOOLEAN, selectedValue, callback);
     this.controlType = ControlType.SWITCH;
   }
 
@@ -58,7 +57,7 @@ export class BooleanVariable extends Variable implements IBooleanVariableParams 
    * @return {BooleanVariable} Returns the cloned variable.
    */
   clone() {
-    let cloned = new BooleanVariable(this.key, this.defaultValue, null);
+    let cloned = new BooleanVariable(this.key, this.selectedValue, null);
     cloned.title = this.title;
     cloned._callbacks = this._callbacks.slice();
     return cloned;
@@ -71,7 +70,6 @@ export class BooleanVariable extends Variable implements IBooleanVariableParams 
    */
   serialize(): ISerializableData {
     let data = super.serialize();
-    data.defaultValue = this.defaultValue;
     data.selectedValue = this.selectedValue;
     return data;
   }
