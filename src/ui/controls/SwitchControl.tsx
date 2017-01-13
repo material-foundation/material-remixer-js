@@ -34,8 +34,13 @@ export class SwitchControl extends React.Component<IBooleanControlProps, void> {
 
   /** @override */
   shouldComponentUpdate(nextProps: IBooleanControlProps) {
-    console.log("shouldComponentUpdate", nextProps.variable.selectedValue, this.props.variable.selectedValue);
     return nextProps.variable !== this.props.variable;
+  }
+
+  /** @override */
+  componentDidUpdate() {
+    let materialSwitch = this.refs[CSS.RMX_SWITCH]["MaterialSwitch"];
+    this.props.variable.selectedValue ? materialSwitch.on() : materialSwitch.off();
   }
 
   /** @override */
@@ -52,6 +57,7 @@ export class SwitchControl extends React.Component<IBooleanControlProps, void> {
         <span className={CSS.MDL_PRIMARY}>{title}</span>
         <span className={CSS.MDL_SECONDARY}>
           <label
+            ref={CSS.RMX_SWITCH}
             className="mdl-switch mdl-js-switch mdl-js-ripple-effect"
             htmlFor={id}
           >

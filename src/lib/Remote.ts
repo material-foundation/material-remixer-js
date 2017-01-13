@@ -25,7 +25,7 @@ import { Variable } from "../core/variables/Variable";
 
 export interface IRemoteParams {
   remoteId: string;
-  isActive: boolean;
+  enabled: boolean;
 }
 
 export class Remote implements IRemoteParams {
@@ -69,16 +69,15 @@ export class Remote implements IRemoteParams {
 
   get remoteId(): string {
     if (!this._remoteId) {
-      // return this.
       return this.generateRemoteId();
     }
     return this._remoteId;
   }
 
-  private _isActive: boolean = false;
+  enabled: boolean = false;
 
-  get isActive(): boolean {
-    return this._isActive;
+  static share(): void {
+    this._sharedInstance.enabled = true;
   }
 
   storeRemoteId(remoteId: string) {
@@ -89,51 +88,28 @@ export class Remote implements IRemoteParams {
     return localStorage.getItem(StorageKey.REMIXER_REMOTE);
   }
 
-  static startObservingUpdates(): void {
-    this._sharedInstance._isActive = true;
-
-    // // Example to observe the remote for variable updates.
-    // this._sharedInstance.reference().on("child_added", function(data) {
-    //   console.log("added...");
-    //   // var variable = remixer.variableForKey:data.key];
-    //   // variable.selectedValue = data.selectedValue;
-    //   // remixer.updateVariable(variable);
-    // });
-
-    // Example to observe the remote for variable updates.
-    this._sharedInstance.reference().on("child_changed", function(data) {
-      console.log("changed...");
-      let variable = remixer.getVariable(data.key);
-
-      // variable.selectedValue = data.val().selectedValue;
-      // remixer.updateVariable(variable, data.val().selectedValue);
-
-      // Messaging.postToFrame(Messaging.type.ForceUpdate);
-
-
-      let variables = remixer.attachedInstance.variablesArray;
-      const index = variables.indexOf(variable);
-      let clonedVariable = variable.clone();
-      // clonedVariable.selectedValue = data.val().selectedValue;
-      remixer.updateVariable(clonedVariable, data.val().selectedValue);
-      variables[index] = clonedVariable;
-
+  static startObservingUpdates(variableKey: string): void {
+    let reference = this._sharedInstance.reference().child(variableKey);
+    reference.on("child_changed", function(data) {
+      let variable = remixer.getVariable(data.ref.parent.key);
+      remixer.cloneAndUpdateVariable(variable, data.val());
     });
   }
 
-  static stopObservingUpdates(): void {
-    this.removeAllVariables();
-    this._sharedInstance._isActive = false;
+  static stopObservingUpdates(variableKey: string): void {
+    this._sharedInstance.reference().child(variableKey).off();
   }
 
   static saveVariable(variable: Variable): void {
-    if (this._sharedInstance.isActive) {
+    if (this._sharedInstance.enabled) {
+      this.stopObservingUpdates(variable.key);
       this._sharedInstance.reference().child(variable.key).set(variable.serialize());
+      this.startObservingUpdates(variable.key);
     }
   }
 
   static removeAllVariables(): void {
-    if (this._sharedInstance.isActive) {
+    if (this._sharedInstance.enabled) {
       this._sharedInstance.reference().remove();
     }
   }

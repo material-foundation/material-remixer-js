@@ -239,7 +239,7 @@ class Remixer {
     let existingVariable = this.getVariable(key);
     if (existingVariable) {
       // Variable with key already exists, so only add callback.
-      // TODO(cjcox:) Determin what to do if variable key already exists.
+      // TODO(cjcox:) Determine what to do if variable key already exists.
     } else {
       this._sharedInstance._variables[key] = variable;
       let storedVariable = LocalStorage.getVariable(key);
@@ -251,6 +251,7 @@ class Remixer {
         this.saveVariable(variable);
         variable.executeCallbacks();
       }
+      Remote.saveVariable(storedVariable);
     }
   }
 
@@ -288,7 +289,25 @@ class Remixer {
    * @param {any}      selectedValue The new selected value.
    */
   static updateVariable(variable: Variable, selectedValue: any): void {
-    variable.selectedValue = selectedValue;
+    if (variable.selectedValue !== selectedValue) {
+      variable.selectedValue = selectedValue;
+    }
+  }
+
+  /**
+   * Clones and updates the selected value of a given Variable from the Remixer
+   * shared instance. Allows immutability update required for React rendering.
+   * @static
+   * @param {Variable} variable The variable to clone and update.
+   * @param {any} selectedValue The new selected value.
+   */
+  static cloneAndUpdateVariable(variable: Variable, selectedValue: any): void {
+    console.log("cloneAndUpdateVariable");
+    if (variable.selectedValue !== selectedValue) {
+      let clonedVariable = variable.clone();
+      this.attachedInstance._variables[variable.key] = clonedVariable;
+      clonedVariable.selectedValue = selectedValue;
+    }
   }
 
   /**
@@ -297,16 +316,15 @@ class Remixer {
    */
   static saveVariable(variable: Variable): void {
     LocalStorage.saveVariable(variable);
-    Remote.saveVariable(variable);
   }
 
-  static startRemoteController(): void {
-    Remote.startObservingUpdates();
+  static share(): void {
+    Remote.share();
   }
 
-  static stopRemoteController(): void {
-    Remote.stopObservingUpdates();
-  }
+  // static stopRemoteController(): void {
+  //   Remote.stopObservingUpdates();
+  // }
 }
 
 // Export Remixer.
