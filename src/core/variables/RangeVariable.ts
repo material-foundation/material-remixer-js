@@ -138,12 +138,14 @@ export class RangeVariable extends Variable implements IRangeVariableParams {
     let minValue: number = data.minValue;
     let maxValue: number = data.maxValue;
     let increment: number = data.increment;
-    return new RangeVariable(
+    let variable = new RangeVariable(
       data.key,
       selectedValue,
       minValue,
       maxValue,
       increment,
     );
+    variable.title = data.title;
+    return variable;
   }
 }
