@@ -114,7 +114,8 @@ export class NumberVariable extends Variable implements INumberVariableParams {
    * @return {NumberVariable}         A new initialized NumberVariable.
    */
   static deserialize(data: ISerializableData): Variable {
-    let variable = new NumberVariable(data.key,
+    let variable = new NumberVariable(
+      data.key,
       data.selectedValue,
       data.limitedToValues
     );
