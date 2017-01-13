@@ -117,6 +117,8 @@ export class ColorVariable extends Variable implements IColorVariableParams {
     let limitedToValues = data.limitedToValues.map((color: string) => {
       return TinyColor(color).toHexString();
     });
-    return new ColorVariable(data.key, selectedValue, limitedToValues);
+    let variable = new ColorVariable(data.key, selectedValue, limitedToValues);
+    variable.title = data.title;
+    return variable;
   }
 }

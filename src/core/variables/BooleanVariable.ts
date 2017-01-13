@@ -82,6 +82,8 @@ export class BooleanVariable extends Variable implements IBooleanVariableParams 
    * @return {BooleanVariable}        A new initialized BooleanVariable.
    */
   static deserialize(data: ISerializableData): BooleanVariable {
-    return new BooleanVariable(data.key, data.selectedValue);
+    let variable = new BooleanVariable(data.key, data.selectedValue);
+    variable.title = data.title;
+    return variable;
   }
 }
