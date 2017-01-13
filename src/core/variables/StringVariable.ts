@@ -114,10 +114,12 @@ export class StringVariable extends Variable implements IStringVariableParams {
    * @return {StringVariable}         A new initialized StringVariable.
    */
   static deserialize(data: ISerializableData): StringVariable {
-    return new StringVariable(
+    let variable = new StringVariable(
       data.key,
       data.selectedValue,
       data.limitedToValues,
     );
+    variable.title = data.title;
+    return variable;
   }
 }

@@ -239,7 +239,7 @@ export class Variable implements IVariableParams {
   }
 
   /**
-   * Subclass should override this method and return a new instance of thei
+   * Subclass should override this method and return a new instance of the
    * Variable class from serialized data.
    * @param  {ISerializableData} data The serialized data.
    * @return {Variable}               A new initialized Variable subclass.
