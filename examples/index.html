@@ -65,7 +65,7 @@
     remixer.addBooleanVariable("Show box", true, function(variable) {
       document.getElementById("box").style.display = variable.selectedValue ? "block" : "none";
     });
-    
+
     // Add a range variable to generate a slider in the overlay.
     remixer.addRangeVariable("Box opacity", 1, 0, 1, 0.1, function(variable) {
       document.getElementById("box").style.opacity = variable.selectedValue;
@@ -86,7 +86,6 @@
       var color = variable.selectedValue === "Light" ? "white" : "darkGray";
       document.body.style.backgroundColor = color;
     });
-
   </script>
 </body>
 
