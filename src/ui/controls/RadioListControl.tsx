@@ -42,7 +42,6 @@ export class RadioListControl extends React.Component<IStringControlProps, void>
     return nextProps.variable !== this.props.variable;
   }
 
-  /** @override */
   componentDidUpdate() {
     const { limitedToValues, selectedValue } = this.props.variable;
     let index = limitedToValues.indexOf(selectedValue);
