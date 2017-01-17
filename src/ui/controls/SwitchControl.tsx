@@ -26,6 +26,9 @@ import { IBooleanControlProps } from "./controlProps";
  */
 export class SwitchControl extends React.Component<IBooleanControlProps, void> {
 
+  /** The MDL switch component. */
+  switchControl: HTMLLabelElement;
+
   /** Handles the update event for this control. */
   onChange = (event: React.FormEvent<HTMLInputElement>): void => {
     const { selectedValue } = this.props.variable;
@@ -39,7 +42,7 @@ export class SwitchControl extends React.Component<IBooleanControlProps, void> {
 
   /** @override */
   componentDidUpdate() {
-    let materialSwitch = this.refs[CSS.RMX_SWITCH]["MaterialSwitch"];
+    let materialSwitch = this.switchControl["MaterialRadio"];
     this.props.variable.selectedValue ? materialSwitch.on() : materialSwitch.off();
   }
 
@@ -57,7 +60,7 @@ export class SwitchControl extends React.Component<IBooleanControlProps, void> {
         <span className={CSS.MDL_PRIMARY}>{title}</span>
         <span className={CSS.MDL_SECONDARY}>
           <label
-            ref={CSS.RMX_SWITCH}
+            ref={item => this.switchControl = item}
             className="mdl-switch mdl-js-switch mdl-js-ripple-effect"
             htmlFor={id}
           >

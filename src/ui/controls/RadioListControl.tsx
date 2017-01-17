@@ -26,6 +26,9 @@ import { IStringControlProps } from "./controlProps";
  */
 export class RadioListControl extends React.Component<IStringControlProps, void> {
 
+  /** Array of MDL components. */
+  radioItems: HTMLLabelElement[] = [];
+
   /** Handles the update event for this control. */
   onChange = (event: React.FormEvent<HTMLInputElement>): void => {
     this.props.updateVariable(
@@ -43,8 +46,7 @@ export class RadioListControl extends React.Component<IStringControlProps, void>
   componentDidUpdate() {
     const { limitedToValues, selectedValue } = this.props.variable;
     let index = limitedToValues.indexOf(selectedValue);
-    let id = `${CSS.RMX_RADIO_LIST_ITEM}-Theme-${index}`;
-    let materialRadio = this.refs[id]["MaterialRadio"];
+    let materialRadio = this.radioItems[index]["MaterialRadio"];
     materialRadio.check();
   }
 
@@ -64,7 +66,7 @@ export class RadioListControl extends React.Component<IStringControlProps, void>
         <span className={CSS.MDL_SECONDARY}>
           {limitedToValues.map((value: string, i: number) => (
             <label
-              ref={`${id}-${i}`}
+              ref={item => this.radioItems[i] = item}
               className={`${CSS.RMX_RADIO_LIST_ITEM} mdl-radio mdl-js-radio mdl-js-ripple-effect`}
               htmlFor={`${id}-${i}`} key={value}
             >
