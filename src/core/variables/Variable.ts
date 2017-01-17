@@ -14,6 +14,7 @@
  *  under the License.
  */
 
+import { throttle } from "lodash";
 import { remixer } from "../Remixer";
 import { ConstraintType } from "../../lib/Constants";
 import { ISerializableData } from "../../lib/LocalStorage";
@@ -32,6 +33,7 @@ export interface IVariableParams {
   initialValue: any;
   selectedValue: any;
   callbacks?: IVariableCallback[];
+  throttleUpdate(value: any): void;
 }
 
 /**
@@ -166,13 +168,27 @@ export class Variable implements IVariableParams {
   }
 
   set selectedValue(value: any) {
-    // TODO(cjcox): For cloud mode, determine when to save to avoid multiple
-    // calls when using slider, etc.
+    this.updateSelectedValue(value, false);
+  }
+
+  /**
+   * Throttles saving updates to remote. Useful to avoid multiple network
+   * calls when using slider, etc.
+   * @param {any} value The new selected value.
+   */
+  throttleUpdate(value: any): void {
+    this.updateSelectedValue(value, true);
+  }
+
+  private updateSelectedValue(value: any, shouldThrottle: boolean): void {
     this._selectedValue = value;
     this.save();
     if (this._initialized) {
       this.executeCallbacks();
     }
+    throttle(() => {
+      Remote.saveVariable(this);
+    }, shouldThrottle ? 100 : 0);
   }
 
   protected _callbacks: IVariableCallback[] = new Array<IVariableCallback>();
@@ -216,7 +232,6 @@ export class Variable implements IVariableParams {
    */
   save(): void {
     remixer.saveVariable(this);
-    Remote.saveVariable(this);
   }
 
   /**

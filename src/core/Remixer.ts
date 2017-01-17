@@ -285,12 +285,17 @@ class Remixer {
   /**
    * Updates the selected value of a given Variable from the Remixer shared instance.
    * @static
-   * @param {Variable} variable      The Variable to update.
-   * @param {any}      selectedValue The new selected value.
+   * @param {Variable} variable        The Variable to update.
+   * @param {any}      selectedValue   The new selected value.
+   * @param {boolean = false} throttle Throttles any network save calls. Defaults to false.
    */
-  static updateVariable(variable: Variable, selectedValue: any): void {
+  static updateVariable(variable: Variable, selectedValue: any, throttle: boolean = false): void {
     if (variable.selectedValue !== selectedValue) {
-      variable.selectedValue = selectedValue;
+      if (throttle) {
+        variable.throttleUpdate(selectedValue);
+      } else {
+        variable.selectedValue = selectedValue;
+      }
     }
   }
 
@@ -300,13 +305,13 @@ class Remixer {
    * @static
    * @param {Variable} variable The variable to clone and update.
    * @param {any} selectedValue The new selected value.
+   * @param {boolean = false}   throttle Throttles any network save calls. Defaults to false.
    */
-  static cloneAndUpdateVariable(variable: Variable, selectedValue: any): void {
-    console.log("cloneAndUpdateVariable");
+  static cloneAndUpdateVariable(variable: Variable, selectedValue: any, throttle: boolean = false): void {
     if (variable.selectedValue !== selectedValue) {
       let clonedVariable = variable.clone();
       this.attachedInstance._variables[variable.key] = clonedVariable;
-      clonedVariable.selectedValue = selectedValue;
+      this.updateVariable(variable, selectedValue, throttle);
     }
   }
 
