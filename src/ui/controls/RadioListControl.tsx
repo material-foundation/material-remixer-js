@@ -40,15 +40,6 @@ export class RadioListControl extends React.Component<IStringControlProps, void>
   }
 
   /** @override */
-  componentDidUpdate() {
-    const { limitedToValues, selectedValue } = this.props.variable;
-    let index = limitedToValues.indexOf(selectedValue);
-    let id = `${CSS.RMX_RADIO_LIST_ITEM}-Theme-${index}`;
-    let materialRadio = this.refs[id]["MaterialRadio"];
-    materialRadio.check();
-  }
-
-  /** @override */
   render() {
     const {
       title,
@@ -63,9 +54,7 @@ export class RadioListControl extends React.Component<IStringControlProps, void>
         <span className={CSS.MDL_PRIMARY}>{title}</span>
         <span className={CSS.MDL_SECONDARY}>
           {limitedToValues.map((value: string, i: number) => (
-            <label
-              ref={`${id}-${i}`}
-              className={`${CSS.RMX_RADIO_LIST_ITEM} mdl-radio mdl-js-radio mdl-js-ripple-effect`}
+            <label className={`${CSS.RMX_RADIO_LIST_ITEM} mdl-radio mdl-js-radio mdl-js-ripple-effect`}
               htmlFor={`${id}-${i}`} key={value}
             >
               <input type="radio" id={`${id}-${i}`}
