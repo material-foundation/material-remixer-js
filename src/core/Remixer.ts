@@ -251,7 +251,7 @@ class Remixer {
         this.saveVariable(variable);
         variable.executeCallbacks();
       }
-      Remote.saveVariable(storedVariable);
+      Remote.saveVariable(variable);
     }
   }
 
@@ -311,7 +311,7 @@ class Remixer {
     if (variable.selectedValue !== selectedValue) {
       let clonedVariable = variable.clone();
       this.attachedInstance._variables[variable.key] = clonedVariable;
-      this.updateVariable(variable, selectedValue, throttle);
+      this.updateVariable(clonedVariable, selectedValue, throttle);
     }
   }
 
