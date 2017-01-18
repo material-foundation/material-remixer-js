@@ -120,7 +120,7 @@ export class RangeVariable extends Variable implements IRangeVariableParams {
    */
   serialize(): ISerializableData {
     let data = super.serialize();
-    data.selectedValue = this.selectedValue.toString();
+    data.selectedValue = this.selectedValue;
     data.minValue = this.minValue;
     data.maxValue = this.maxValue;
     data.increment = this.increment;
@@ -134,7 +134,7 @@ export class RangeVariable extends Variable implements IRangeVariableParams {
    * @return {RangeVariable}          A new initialized RangeVariable.
    */
   static deserialize(data: ISerializableData): Variable {
-    let selectedValue: number = parseFloat(data.selectedValue);
+    let selectedValue: number = data.selectedValue;
     let minValue: number = data.minValue;
     let maxValue: number = data.maxValue;
     let increment: number = data.increment;

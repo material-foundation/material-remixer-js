@@ -30,7 +30,7 @@ export class SliderControl extends React.Component<IRangeControlProps, void> {
   onChange = (event: React.FormEvent<HTMLInputElement>): void => {
     this.props.updateVariable(
       this.props.variable,
-      (event.target as HTMLInputElement).value,
+      parseFloat((event.target as HTMLInputElement).value),
     );
   }
 
