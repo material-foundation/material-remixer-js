@@ -39,7 +39,9 @@ let variables = remixer.attachedInstance.variablesArray;
  * @param {any} selectedValue The new selected value.
  */
 function updateVariable(variable: Variable, selectedValue: any): void {
-  let shouldThrottle = variable.controlType === ControlType.SLIDER;
+  let shouldThrottle =
+    variable.controlType === ControlType.SLIDER ||
+    variable.controlType === ControlType.TEXT_INPUT;
   remixer.cloneAndUpdateVariable(variable, selectedValue, shouldThrottle);
 }
 
