@@ -103,7 +103,7 @@ export class Variable implements IVariableParams {
     let cloned = new Variable(
       this.key,
       this.dataType,
-      this.initialValue,
+      this.selectedValue,
       null,
     );
     cloned.title = this.title;
@@ -186,9 +186,10 @@ export class Variable implements IVariableParams {
     if (this._initialized) {
       this.executeCallbacks();
     }
+
     throttle(() => {
       Remote.saveVariable(this);
-    }, shouldThrottle ? 100 : 0);
+    }, shouldThrottle ? 300 : 0)();
   }
 
   protected _callbacks: IVariableCallback[] = new Array<IVariableCallback>();

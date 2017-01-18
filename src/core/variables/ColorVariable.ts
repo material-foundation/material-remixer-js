@@ -77,7 +77,7 @@ export class ColorVariable extends Variable implements IColorVariableParams {
   clone() {
     let cloned = new ColorVariable(
       this.key,
-      this.initialValue,
+      this.selectedValue,
       this.limitedToValues,
     );
     cloned.title = this.title;

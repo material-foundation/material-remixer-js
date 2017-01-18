@@ -82,7 +82,7 @@ export class RangeVariable extends Variable implements IRangeVariableParams {
   clone() {
     let cloned = new RangeVariable(
       this.key,
-      this.initialValue,
+      this.selectedValue,
       this.minValue,
       this.maxValue,
       this.increment,
