@@ -19,6 +19,7 @@ import * as firebase from "firebase";
 import * as uuid from "uuid";
 
 import { remixer } from "../core/Remixer";
+import { throttle } from "lodash";
 import { Messaging } from "./Messaging";
 import { StorageKey } from "./Constants";
 import { Variable } from "../core/variables/Variable";
@@ -28,7 +29,7 @@ export interface IRemoteParams {
   enabled: boolean;
 }
 
-export class Remote implements IRemoteParams {
+class Remote implements IRemoteParams {
 
   constructor(remoteId?: string) {
     let storedRemoteId = this.retrieveRemoteId();
@@ -45,6 +46,8 @@ export class Remote implements IRemoteParams {
   }
 
   private static _sharedInstance = new Remote();
+
+  private static _throttle: any;
 
   private initializeApp(): void {
     let config = {
@@ -76,8 +79,13 @@ export class Remote implements IRemoteParams {
 
   enabled: boolean = false;
 
-  static share(): void {
+  static startSharing(): void {
+    this._throttle = throttle(this._save, 300);
     this._sharedInstance.enabled = true;
+  }
+
+  static stopSharing(): void {
+    this._throttle.cancel();
   }
 
   storeRemoteId(remoteId: string) {
@@ -101,6 +109,11 @@ export class Remote implements IRemoteParams {
   }
 
   static saveVariable(variable: Variable): void {
+    // Always throttle the save to prevent network jank.
+    this._throttle(variable);
+  }
+
+  private static _save(variable: Variable): void {
     if (this._sharedInstance.enabled) {
       this.stopObservingUpdates(variable.key);
       this._sharedInstance.reference().child(variable.key).set(variable.serialize());
@@ -113,5 +126,7 @@ export class Remote implements IRemoteParams {
       this._sharedInstance.reference().remove();
     }
   }
-
 }
+
+// Export Remote.
+export { Remote as remote };

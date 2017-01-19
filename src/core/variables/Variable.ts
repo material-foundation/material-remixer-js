@@ -14,11 +14,10 @@
  *  under the License.
  */
 
-import { throttle } from "lodash";
 import { remixer } from "../Remixer";
 import { ConstraintType } from "../../lib/Constants";
 import { ISerializableData } from "../../lib/LocalStorage";
-import { Remote } from "../../lib/Remote";
+import { remote } from "../../lib/Remote";
 
 /**
  * Interface for a class that represents a type a Variable.
@@ -33,7 +32,6 @@ export interface IVariableParams {
   initialValue: any;
   selectedValue: any;
   callbacks?: IVariableCallback[];
-  throttleUpdate(value: any): void;
 }
 
 /**
@@ -168,28 +166,11 @@ export class Variable implements IVariableParams {
   }
 
   set selectedValue(value: any) {
-    this.updateSelectedValue(value, false);
-  }
-
-  /**
-   * Throttles saving updates to remote. Useful to avoid multiple network
-   * calls when using slider, etc.
-   * @param {any} value The new selected value.
-   */
-  throttleUpdate(value: any): void {
-    this.updateSelectedValue(value, true);
-  }
-
-  private updateSelectedValue(value: any, shouldThrottle: boolean): void {
     this._selectedValue = value;
     this.save();
     if (this._initialized) {
       this.executeCallbacks();
     }
-
-    throttle(() => {
-      Remote.saveVariable(this);
-    }, shouldThrottle ? 300 : 0)();
   }
 
   protected _callbacks: IVariableCallback[] = new Array<IVariableCallback>();
@@ -233,6 +214,7 @@ export class Variable implements IVariableParams {
    */
   save(): void {
     remixer.saveVariable(this);
+    remote.saveVariable(this);
   }
 
   /**

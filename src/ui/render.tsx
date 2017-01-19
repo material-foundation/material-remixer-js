@@ -19,7 +19,7 @@ import * as ReactDOM from "react-dom";
 import "./styles/overlay.less";
 
 import { remixer } from "../core/Remixer";
-import { ControlType, CSS } from "../lib/Constants";
+import { CSS } from "../lib/Constants";
 import { OverlayController } from "./OverlayController";
 import { Variable } from "../core/variables/Variable";
 
@@ -39,10 +39,7 @@ let variables = remixer.attachedInstance.variablesArray;
  * @param {any} selectedValue The new selected value.
  */
 function updateVariable(variable: Variable, selectedValue: any): void {
-  let shouldThrottle =
-    variable.controlType === ControlType.SLIDER ||
-    variable.controlType === ControlType.TEXT_INPUT;
-  remixer.cloneAndUpdateVariable(variable, selectedValue, shouldThrottle);
+  remixer.cloneAndUpdateVariable(variable, selectedValue);
 }
 
 // Renders the OverlayController component to the overlay wrapper element.

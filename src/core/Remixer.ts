@@ -14,6 +14,7 @@
  *  under the License.
  */
 
+import { remote } from "../lib/Remote";
 import { BooleanVariable } from "./variables/BooleanVariable";
 import { ColorVariable } from "./variables/ColorVariable";
 import { CSS, KeyCode, KeyEvent } from "../lib/Constants";
@@ -22,7 +23,6 @@ import { Messaging } from "../lib/Messaging";
 import { NumberVariable } from "./variables/NumberVariable";
 import { IRangeVariableParams, RangeVariable } from "./variables/RangeVariable";
 import { IVariableCallback, IVariableKeyMap, Variable } from "./variables/Variable";
-import { Remote } from "../lib/Remote";
 import { StringVariable } from "./variables/StringVariable";
 
 import "../ui/styles/iframe.less";
@@ -251,7 +251,7 @@ class Remixer {
         this.saveVariable(variable);
         variable.executeCallbacks();
       }
-      Remote.saveVariable(variable);
+      remote.saveVariable(variable);
     }
   }
 
@@ -287,15 +287,10 @@ class Remixer {
    * @static
    * @param {Variable} variable        The Variable to update.
    * @param {any}      selectedValue   The new selected value.
-   * @param {boolean = false} throttle Throttles any network save calls. Defaults to false.
    */
-  static updateVariable(variable: Variable, selectedValue: any, throttle: boolean = false): void {
+  static updateVariable(variable: Variable, selectedValue: any): void {
     if (variable.selectedValue !== selectedValue) {
-      if (throttle) {
-        variable.throttleUpdate(selectedValue);
-      } else {
-        variable.selectedValue = selectedValue;
-      }
+      variable.selectedValue = selectedValue;
     }
   }
 
@@ -305,13 +300,12 @@ class Remixer {
    * @static
    * @param {Variable} variable The variable to clone and update.
    * @param {any} selectedValue The new selected value.
-   * @param {boolean = false}   throttle Throttles any network save calls. Defaults to false.
    */
-  static cloneAndUpdateVariable(variable: Variable, selectedValue: any, throttle: boolean = false): void {
+  static cloneAndUpdateVariable(variable: Variable, selectedValue: any): void {
     if (variable.selectedValue !== selectedValue) {
       let clonedVariable = variable.clone();
       this.attachedInstance._variables[variable.key] = clonedVariable;
-      this.updateVariable(clonedVariable, selectedValue, throttle);
+      this.updateVariable(clonedVariable, selectedValue);
     }
   }
 
@@ -323,13 +317,13 @@ class Remixer {
     LocalStorage.saveVariable(variable);
   }
 
-  static share(): void {
-    Remote.share();
+  static startSharing(): void {
+    remote.startSharing();
   }
 
-  // static stopRemoteController(): void {
-  //   Remote.stopObservingUpdates();
-  // }
+  static stopSharing(): void {
+    remote.stopSharing();
+  }
 }
 
 // Export Remixer.
