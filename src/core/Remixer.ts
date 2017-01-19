@@ -82,7 +82,7 @@ class Remixer {
     if (!this._frameElement) {
       let frame = document.createElement("IFRAME") as HTMLFrameElement;
       frame.id = CSS.RMX_OVERLAY_FRAME;
-      frame.setAttribute("sandbox", "allow-scripts allow-same-origin");
+      frame.setAttribute("sandbox", "allow-scripts allow-same-origin allow-popups");
       document.getElementsByTagName("body")[0].appendChild(frame);
 
       // Until `srcdoc` is fully compatible with all browsers, lets simply
