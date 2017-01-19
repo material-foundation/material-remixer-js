@@ -320,10 +320,6 @@ class Remixer {
   static startSharing(): void {
     remote.startSharing();
   }
-
-  static stopSharing(): void {
-    remote.stopSharing();
-  }
 }
 
 // Export Remixer.

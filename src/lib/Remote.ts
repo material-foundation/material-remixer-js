@@ -110,7 +110,9 @@ class Remote implements IRemoteParams {
 
   static saveVariable(variable: Variable): void {
     // Always throttle the save to prevent network jank.
-    this._throttle(variable);
+    if (this._sharedInstance.enabled) {
+      this._throttle(variable);
+    }
   }
 
   private static _save(variable: Variable): void {
