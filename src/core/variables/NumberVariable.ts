@@ -80,7 +80,7 @@ export class NumberVariable extends Variable implements INumberVariableParams {
   clone() {
     let cloned = new NumberVariable(
       this.key,
-      this.initialValue,
+      this.selectedValue,
       this.limitedToValues,
     );
     cloned.title = this.title;

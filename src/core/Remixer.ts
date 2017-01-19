@@ -81,7 +81,7 @@ class Remixer {
     if (!this._frameElement) {
       let frame = document.createElement("IFRAME") as HTMLFrameElement;
       frame.id = CSS.RMX_OVERLAY_FRAME;
-      frame.setAttribute("sandbox", "allow-scripts allow-same-origin");
+      frame.setAttribute("sandbox", "allow-scripts allow-same-origin allow-popups");
       document.getElementsByTagName("body")[0].appendChild(frame);
 
       // Until `srcdoc` is fully compatible with all browsers, lets simply
@@ -238,7 +238,7 @@ class Remixer {
     let existingVariable = this.getVariable(key);
     if (existingVariable) {
       // Variable with key already exists, so only add callback.
-      // TODO(cjcox:) Determin what to do if variable key already exists.
+      // TODO(cjcox:) Determine what to do if variable key already exists.
     } else {
       this._sharedInstance._variables[key] = variable;
       let storedVariable = LocalStorage.getVariable(key);
@@ -281,13 +281,31 @@ class Remixer {
   }
 
   /**
-   * Updates the selected value of a given Variable from the Remixer shared instance.
+   * Updates the selected value of a given Variable from the Remixer shared
+   * instance.
    * @static
    * @param {Variable} variable      The Variable to update.
    * @param {any}      selectedValue The new selected value.
    */
   static updateVariable(variable: Variable, selectedValue: any): void {
-    variable.selectedValue = selectedValue;
+    if (variable.selectedValue !== selectedValue) {
+      variable.selectedValue = selectedValue;
+    }
+  }
+
+  /**
+   * Clones and updates the selected value of a given Variable from the Remixer
+   * shared instance. Allows immutability update required for React rendering.
+   * @static
+   * @param {Variable} variable The variable to clone and update.
+   * @param {any} selectedValue The new selected value.
+   */
+  static cloneAndUpdateVariable(variable: Variable, selectedValue: any): void {
+    if (variable.selectedValue !== selectedValue) {
+      let clonedVariable = variable.clone();
+      this.attachedInstance._variables[variable.key] = clonedVariable;
+      this.updateVariable(clonedVariable, selectedValue);
+    }
   }
 
   /**
