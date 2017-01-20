@@ -26,6 +26,12 @@ import { Variable } from "../core/variables/Variable";
 // Get remixer variables from the current instance of remixer.
 let variables = remixer.attachedInstance.variablesArray;
 
+let shareMenuIsVisible: boolean = false;
+
+let shareIsEnabled: boolean = false;
+
+let remoteUrl: string = "https://remix.io/abc";
+
 /**
  * Handles all control updates by setting a new selected value for the
  * variable.
@@ -42,6 +48,16 @@ function updateVariable(variable: Variable, selectedValue: any): void {
   remixer.cloneAndUpdateVariable(variable, selectedValue);
 }
 
+function toggleShareMenu(): void {
+  shareMenuIsVisible = !shareMenuIsVisible;
+  redraw();
+}
+
+function toggleShareEnabled(): void {
+  shareIsEnabled = !shareIsEnabled;
+  redraw();
+}
+
 // Renders the OverlayController component to the overlay wrapper element.
 const overlayWrapper = document.getElementById(CSS.RMX_OVERLAY_WRAPPER);
 function redraw(): void {
@@ -52,6 +68,11 @@ function redraw(): void {
       wrapperElement={overlayWrapper}
       variables={variables}
       updateVariable={updateVariable}
+      shareMenuIsVisible={shareMenuIsVisible}
+      toggleShareMenu={toggleShareMenu}
+      remoteUrl={remoteUrl}
+      shareIsEnabled={shareIsEnabled}
+      toggleShareEnabled={toggleShareEnabled}
     />,
     overlayWrapper,
   );

@@ -18,6 +18,7 @@ import * as React from "react";
 
 import { CSS, KeyCode, KeyEvent } from "../lib/Constants";
 import { Messaging } from "../lib/Messaging";
+import { OverlayShareMenu } from "./OverlayShareMenu";
 import { OverlayVariables } from "./OverlayVariables";
 import { Variable } from "../core/variables/Variable";
 
@@ -29,6 +30,11 @@ interface IControllerProps {
   wrapperElement: HTMLElement;
   variables: Variable[];
   updateVariable(variable: Variable, selectedValue: any): void;
+  shareMenuIsVisible: boolean;
+  toggleShareMenu(): void;
+  remoteUrl: string;
+  shareIsEnabled: boolean;
+  toggleShareEnabled(): void;
 }
 
 /**
@@ -84,16 +90,42 @@ export class OverlayController extends React.Component<IControllerProps, void> {
 
   /** @override */
   render() {
+    const {
+      variables,
+      updateVariable,
+      shareMenuIsVisible,
+      toggleShareMenu,
+      remoteUrl,
+      shareIsEnabled,
+      toggleShareEnabled
+    } = this.props;
+
+
+    let shareIcon: string = shareMenuIsVisible ? "up" : "down";
     return (
       <div className="mdl-card mdl-shadow--6dp">
-        <div className="mdl-card__title" ref="myInput">
+        <div className="mdl-card__title">
           <h2 className="mdl-card__title-text">Remixer</h2>
         </div>
-        <div className="mdl-card__supporting-text mdl-card__actions mdl-card--border">
+        <OverlayShareMenu
+          visible={shareMenuIsVisible}
+          remoteUrl={remoteUrl}
+          isEnabled={shareIsEnabled}
+          toggleEnabled={toggleShareEnabled}
+        />
+        <div className={`mdl-card__actions mdl-card--border`}>
           <OverlayVariables
-            variables={this.props.variables}
-            updateVariable={this.props.updateVariable}
+            variables={variables}
+            updateVariable={updateVariable}
           />
+        </div>
+        <div className="mdl-card__menu">
+          <button
+            className="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"
+            onClick={toggleShareMenu}
+          >
+            <i className="material-icons">{`keyboard_arrow_${shareIcon}`}</i>
+          </button>
         </div>
       </div>
     );
