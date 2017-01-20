@@ -48,6 +48,10 @@ interface ISerializableDataMap {
   [remixer: string]: ISerializableData;
 }
 
+/**
+ * Interface representing serialized preferences.
+ * @interface
+ */
 interface ISerializablePreferences {
   remoteId: string;
 }
@@ -84,15 +88,26 @@ export class LocalStorage {
     this.saveRawData(remixerData);
   }
 
+  /**
+   * Retrieves a preference from local storage.
+   * @param  {string} key The key if the preference to retrieve.
+   * @return {any}        Returns the preference object.
+   */
+  static getPreference(key: string): any {
+    let prefs = this.getRawPreferences();
+    return prefs[key];
+  }
+
+  /**
+   * Saves a preference to local storage.
+   * @static
+   * @param {string} key   The preference key.
+   * @param {any}    value The preference value.
+   */
   static savePreference(key: string, value: any): void {
     let prefs = this.getRawPreferences();
     prefs[key] = value;
     this.saveRawPreferences(prefs);
-  }
-
-  static getPreference(key: string): any {
-    let prefs = this.getRawPreferences();
-    return prefs[key];
   }
 
   /**
@@ -141,11 +156,23 @@ export class LocalStorage {
     localStorage.setItem(StorageKey.REMIXER, JSON.stringify({[StorageKey.KEY_VARIABLES]: data}));
   }
 
+  /**
+   * Retrieves the raw JSON preference data from local storage.
+   * @private
+   * @static
+   * @return {ISerializablePreferences} The preferences from local storage.
+   */
   private static getRawPreferences(): ISerializablePreferences {
     let preferences = JSON.parse(localStorage.getItem(StorageKey.PREFERENCES));
     return preferences || {};
   }
 
+  /**
+   * Saves the raw JSON preferences to local storage.
+   * @private
+   * @static
+   * @param {ISerializablePreferences} preferences The serialized preferences to save.
+   */
   private static saveRawPreferences(preferences: ISerializablePreferences): void {
     localStorage.setItem(StorageKey.PREFERENCES, JSON.stringify(preferences));
   }

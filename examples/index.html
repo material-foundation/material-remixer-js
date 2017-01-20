@@ -54,7 +54,13 @@
   <script>
     // Start Remixer.
     remixer.start();
-    remixer.startSharing();
+
+    // Forward your firebase config credentials to remixer.
+    remixer.inializeRemote({
+      apiKey: "AIzaSyDSpY_SFxddoUybdhh6cc4rEUe7o_6ek8I",
+      authDomain: "remixer-16a0b.firebaseapp.com",
+      databaseURL: "https://remixer-16a0b.firebaseio.com"
+    });
 
     // Add a string variable to generate a text field in the overlay.
     remixer.addStringVariable("Title", "Remixer Demo", null, function(variable) {

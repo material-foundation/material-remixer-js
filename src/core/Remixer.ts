@@ -324,6 +324,10 @@ class Remixer {
   static startSharing(): void {
     Remote.startSharing();
   }
+
+  static inializeRemote(config: {}): void {
+    Remote.initializeRemote(config);
+  }
 }
 
 // Export Remixer.
