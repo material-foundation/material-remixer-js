@@ -283,7 +283,8 @@ class Remixer {
   }
 
   /**
-   * Updates the selected value of a given Variable from the Remixer shared instance.
+   * Updates the selected value of a given Variable from the Remixer shared
+   * instance.
    * @static
    * @param {Variable} variable        The Variable to update.
    * @param {any}      selectedValue   The new selected value.
