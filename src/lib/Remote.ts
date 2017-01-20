@@ -29,7 +29,7 @@ export interface IRemoteParams {
   enabled: boolean;
 }
 
-class Remote implements IRemoteParams {
+export class Remote implements IRemoteParams {
 
   constructor(remoteId?: string) {
     let storedRemoteId = this.retrieveRemoteId();
@@ -108,10 +108,16 @@ class Remote implements IRemoteParams {
     this._sharedInstance.reference().child(variableKey).off();
   }
 
-  static saveVariable(variable: Variable): void {
-    // Always throttle the save to prevent network jank.
+  static saveVariable(variable: Variable, throttle: boolean = true): void {
+    // Throttle by default to prevent network jank when updating a control's
+    // selected values. However, typically we should not throttle when saving
+    // a controls the first time.
     if (this._sharedInstance.enabled) {
-      this._throttle(variable);
+      if (throttle) {
+        this._throttle(variable);
+      } else {
+        this._save(variable);
+      }
     }
   }
 
@@ -129,6 +135,3 @@ class Remote implements IRemoteParams {
     }
   }
 }
-
-// Export Remote.
-export { Remote as remote };

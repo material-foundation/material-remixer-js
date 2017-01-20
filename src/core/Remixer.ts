@@ -14,7 +14,6 @@
  *  under the License.
  */
 
-import { remote } from "../lib/Remote";
 import { BooleanVariable } from "./variables/BooleanVariable";
 import { ColorVariable } from "./variables/ColorVariable";
 import { CSS, KeyCode, KeyEvent } from "../lib/Constants";
@@ -23,6 +22,7 @@ import { Messaging } from "../lib/Messaging";
 import { NumberVariable } from "./variables/NumberVariable";
 import { IRangeVariableParams, RangeVariable } from "./variables/RangeVariable";
 import { IVariableCallback, IVariableKeyMap, Variable } from "./variables/Variable";
+import { Remote } from "../lib/Remote";
 import { StringVariable } from "./variables/StringVariable";
 
 import "../ui/styles/iframe.less";
@@ -251,7 +251,9 @@ class Remixer {
         this.saveVariable(variable);
         variable.executeCallbacks();
       }
-      remote.saveVariable(variable);
+
+      // Save remotely without throttling.
+      Remote.saveVariable(variable, false);
     }
   }
 
@@ -286,8 +288,8 @@ class Remixer {
    * Updates the selected value of a given Variable from the Remixer shared
    * instance.
    * @static
-   * @param {Variable} variable        The Variable to update.
-   * @param {any}      selectedValue   The new selected value.
+   * @param {Variable} variable      The Variable to update.
+   * @param {any}      selectedValue The new selected value.
    */
   static updateVariable(variable: Variable, selectedValue: any): void {
     if (variable.selectedValue !== selectedValue) {
@@ -311,15 +313,16 @@ class Remixer {
   }
 
   /**
-   * Saves the Variable to local storage.
+   * Saves the Variable to both local storage and remote.
    * @param {Variable} variable The Variable to save.
    */
   static saveVariable(variable: Variable): void {
     LocalStorage.saveVariable(variable);
+    Remote.saveVariable(variable, true);
   }
 
   static startSharing(): void {
-    remote.startSharing();
+    Remote.startSharing();
   }
 }
 
