@@ -157,7 +157,7 @@ export class LocalStorage {
   }
 
   /**
-   * Retrieves the raw JSON preference data from local storage.
+   * Retrieves the raw JSON preferences from local storage.
    * @private
    * @static
    * @return {ISerializablePreferences} The preferences from local storage.

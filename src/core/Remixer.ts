@@ -314,6 +314,7 @@ class Remixer {
 
   /**
    * Saves the Variable to both local storage and remote.
+   * @static
    * @param {Variable} variable The Variable to save.
    */
   static saveVariable(variable: Variable): void {
@@ -321,10 +322,14 @@ class Remixer {
     Remote.saveVariable(variable, true);
   }
 
-  static startSharing(): void {
-    Remote.startSharing();
-  }
-
+  /**
+   * Initializes the remote controller.
+   *
+   * A call to this method will allow you to share your Variables to the
+   * remote controller being hosted as per your firebase configuration.
+   * @static
+   * @param {{}} config The firebase credentials.
+   */
   static inializeRemote(config: {}): void {
     Remote.initializeRemote(config);
   }

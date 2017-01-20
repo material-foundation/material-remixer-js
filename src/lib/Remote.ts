@@ -27,7 +27,7 @@ import { Variable } from "../core/variables/Variable";
 /**
  * The Remote class is a singleton class that provides the ability to store
  * and retrieve Variables on a remote controller. It also provides listeners
- * for Variable updates remotely.
+ * for Variable updates done remotely.
  * @class
  */
 export class Remote  {
