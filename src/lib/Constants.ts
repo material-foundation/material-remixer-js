@@ -26,8 +26,10 @@ export const KeyEvent = {
 
 /** Storage keys constants. */
 export const StorageKey = {
+  PREFERENCES: "__remixer_preferences__",
   REMIXER: "__remixer__",
-  REMIXER_REMOTE: "__remixer_remote__",
+  REMOTE_ID: "remoteId",
+  VARIABLES: "variables"
 };
 
 /** Variable data constraints. */

@@ -48,6 +48,10 @@ interface ISerializableDataMap {
   [remixer: string]: ISerializableData;
 }
 
+interface ISerializablePreferences {
+  remoteId: string;
+}
+
 /**
  * A class that provides utilities to interact with browser local storage.
  * @class
@@ -78,6 +82,17 @@ export class LocalStorage {
     let remixerData = this.getRawData();
     remixerData[variable.key] = variable.serialize();
     this.saveRawData(remixerData);
+  }
+
+  static savePreference(key: string, value: any): void {
+    let prefs = this.getRawPreferences();
+    prefs[key] = value;
+    this.saveRawPreferences(prefs);
+  }
+
+  static getPreference(key: string): any {
+    let prefs = this.getRawPreferences();
+    return prefs[key];
   }
 
   /**
@@ -113,7 +128,7 @@ export class LocalStorage {
    */
   private static getRawData(): ISerializableDataMap {
     let data = JSON.parse(localStorage.getItem(StorageKey.REMIXER));
-    return data ? data.variables : {};
+    return data ? data[StorageKey.VARIABLES] : {};
   }
 
   /**
@@ -123,6 +138,15 @@ export class LocalStorage {
    * @param {ISerializableDataMap} data The serialized data to save.
    */
   private static saveRawData(data: ISerializableDataMap): void {
-    localStorage.setItem(StorageKey.REMIXER, JSON.stringify({variables: data}));
+    localStorage.setItem(StorageKey.REMIXER, JSON.stringify({[StorageKey.VARIABLES]: data}));
+  }
+
+  private static getRawPreferences(): ISerializablePreferences {
+    let preferences = JSON.parse(localStorage.getItem(StorageKey.PREFERENCES));
+    return preferences || {};
+  }
+
+  private static saveRawPreferences(preferences: ISerializablePreferences): void {
+    localStorage.setItem(StorageKey.PREFERENCES, JSON.stringify(preferences));
   }
 }

@@ -21,6 +21,7 @@ import * as uuid from "uuid";
 import { remixer } from "../core/Remixer";
 import { throttle } from "lodash";
 import { Messaging } from "./Messaging";
+import { LocalStorage } from "./LocalStorage";
 import { StorageKey } from "./Constants";
 import { Variable } from "../core/variables/Variable";
 
@@ -89,35 +90,41 @@ export class Remote implements IRemoteParams {
   }
 
   storeRemoteId(remoteId: string) {
-    localStorage.setItem(StorageKey.REMIXER_REMOTE, remoteId);
+    LocalStorage.savePreference(StorageKey.REMOTE_ID, remoteId);
   }
 
   retrieveRemoteId(): string | void {
-    return localStorage.getItem(StorageKey.REMIXER_REMOTE);
+    return LocalStorage.getPreference(StorageKey.REMOTE_ID);
   }
 
-  static startObservingUpdates(variableKey: string): void {
-    let reference = this._sharedInstance.reference().child(variableKey);
-    reference.on("child_changed", function(data) {
-      let variable = remixer.getVariable(data.ref.parent.key);
-      remixer.cloneAndUpdateVariable(variable, data.val());
-    });
-  }
 
-  static stopObservingUpdates(variableKey: string): void {
-    this._sharedInstance.reference().child(variableKey).off();
-  }
-
+  /**
+   * [saveVariable description]
+   * @param {Variable}   variable [description]
+   * @param {boolean =        true}        throttle [description]
+   */
   static saveVariable(variable: Variable, throttle: boolean = true): void {
-    // Throttle by default to prevent network jank when updating a control's
-    // selected values. However, typically we should not throttle when saving
-    // a controls the first time.
+    // By default, lets throttle any saves to prevent network jank.
+    //
+    // A control's UI allows very fast updating of the selected value. For
+    // example the quick dragging of a slider, or keyboard input of a textbox.
+    // These selected value updates should be throttled since we only care
+    // about the final selected value and not intermittent changes.
+    //
+    // However adding a new Variable with params should not be throttled in
+    // order to capture many Variables be adding in quick succession.
     if (this._sharedInstance.enabled) {
       if (throttle) {
         this._throttle(variable);
       } else {
         this._save(variable);
       }
+    }
+  }
+
+  static removeAllVariables(): void {
+    if (this._sharedInstance.enabled) {
+      this._sharedInstance.reference().remove();
     }
   }
 
@@ -129,9 +136,15 @@ export class Remote implements IRemoteParams {
     }
   }
 
-  static removeAllVariables(): void {
-    if (this._sharedInstance.enabled) {
-      this._sharedInstance.reference().remove();
-    }
+  private static startObservingUpdates(variableKey: string): void {
+    let reference = this._sharedInstance.reference().child(variableKey);
+    reference.on("child_changed", function(data) {
+      let variable = remixer.getVariable(data.ref.parent.key);
+      remixer.cloneAndUpdateVariable(variable, data.val());
+    });
+  }
+
+  private static stopObservingUpdates(variableKey: string): void {
+    this._sharedInstance.reference().child(variableKey).off();
   }
 }
