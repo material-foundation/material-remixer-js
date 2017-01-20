@@ -58,7 +58,7 @@ export class BooleanVariable extends Variable implements IBooleanVariableParams 
    * @return {BooleanVariable} Returns the cloned variable.
    */
   clone() {
-    let cloned = new BooleanVariable(this.key, this.initialValue, null);
+    let cloned = new BooleanVariable(this.key, this.selectedValue, null);
     cloned.title = this.title;
     cloned._callbacks = this._callbacks.slice();
     return cloned;

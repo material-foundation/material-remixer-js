@@ -80,7 +80,7 @@ export class StringVariable extends Variable implements IStringVariableParams {
   clone() {
     let cloned = new StringVariable(
       this.key,
-      this.initialValue,
+      this.selectedValue,
       this.limitedToValues,
     );
     cloned.title = this.title;

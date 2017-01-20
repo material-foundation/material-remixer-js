@@ -100,7 +100,7 @@ export class Variable implements IVariableParams {
     let cloned = new Variable(
       this.key,
       this.dataType,
-      this.initialValue,
+      this.selectedValue,
       null,
     );
     cloned.title = this.title;
