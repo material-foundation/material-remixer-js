@@ -128,7 +128,7 @@ export class LocalStorage {
    */
   private static getRawData(): ISerializableDataMap {
     let data = JSON.parse(localStorage.getItem(StorageKey.REMIXER));
-    return data ? data[StorageKey.VARIABLES] : {};
+    return data ? data[StorageKey.KEY_VARIABLES] : {};
   }
 
   /**
@@ -138,7 +138,7 @@ export class LocalStorage {
    * @param {ISerializableDataMap} data The serialized data to save.
    */
   private static saveRawData(data: ISerializableDataMap): void {
-    localStorage.setItem(StorageKey.REMIXER, JSON.stringify({[StorageKey.VARIABLES]: data}));
+    localStorage.setItem(StorageKey.REMIXER, JSON.stringify({[StorageKey.KEY_VARIABLES]: data}));
   }
 
   private static getRawPreferences(): ISerializablePreferences {

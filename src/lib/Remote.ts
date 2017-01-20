@@ -90,11 +90,11 @@ export class Remote implements IRemoteParams {
   }
 
   storeRemoteId(remoteId: string) {
-    LocalStorage.savePreference(StorageKey.REMOTE_ID, remoteId);
+    LocalStorage.savePreference(StorageKey.KEY_REMOTE_ID, remoteId);
   }
 
   retrieveRemoteId(): string | void {
-    return LocalStorage.getPreference(StorageKey.REMOTE_ID);
+    return LocalStorage.getPreference(StorageKey.KEY_REMOTE_ID);
   }
 
 
