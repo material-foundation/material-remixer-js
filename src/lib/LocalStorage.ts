@@ -90,7 +90,7 @@ export class LocalStorage {
 
   /**
    * Retrieves a preference from local storage.
-   * @param  {string} key The key if the preference to retrieve.
+   * @param  {string} key The key of the preference to retrieve.
    * @return {any}        Returns the preference object.
    */
   static getPreference(key: string): any {
