@@ -60,7 +60,6 @@
     "less": "^2.7.1",
     "less-loader": "^2.2.3",
     "lesshint": "^2.3.0",
-    "lodash.throttle": "^4.1.1",
     "mkdirp": "^0.5.1",
     "mocha": "^3.1.2",
     "npm-run-all": "^3.1.2",
@@ -77,6 +76,7 @@
   },
   "dependencies": {
     "firebase": "^3.6.5",
+    "lodash.throttle": "^4.1.1",
     "material-design-lite": "^1.2.1",
     "react": "^15.4.0",
     "react-dom": "^15.4.0",
