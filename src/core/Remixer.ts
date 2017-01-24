@@ -22,6 +22,7 @@ import { Messaging } from "../lib/Messaging";
 import { NumberVariable } from "./variables/NumberVariable";
 import { IRangeVariableParams, RangeVariable } from "./variables/RangeVariable";
 import { IVariableCallback, IVariableKeyMap, Variable } from "./variables/Variable";
+import { Remote } from "../lib/Remote";
 import { StringVariable } from "./variables/StringVariable";
 
 import "../ui/styles/iframe.less";
@@ -250,6 +251,10 @@ class Remixer {
         this.saveVariable(variable);
         variable.executeCallbacks();
       }
+
+      // Save remotely without throttling. If remote sharing is disabled,
+      // a call to this method will simply be a no-op.
+      Remote.saveVariable(variable, false);
     }
   }
 
@@ -309,11 +314,25 @@ class Remixer {
   }
 
   /**
-   * Saves the Variable to local storage.
+   * Saves the Variable to both local storage and remote.
+   * @static
    * @param {Variable} variable The Variable to save.
    */
   static saveVariable(variable: Variable): void {
     LocalStorage.saveVariable(variable);
+    Remote.saveVariable(variable, true);
+  }
+
+  /**
+   * Initializes the remote controller.
+   *
+   * A call to this method will allow you to share your Variables to the
+   * remote controller being hosted as per your firebase configuration.
+   * @static
+   * @param {{}} config The firebase credentials.
+   */
+  static inializeRemote(config: {}): void {
+    Remote.initializeRemote(config);
   }
 }
 

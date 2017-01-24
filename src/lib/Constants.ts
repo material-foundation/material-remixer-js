@@ -26,7 +26,11 @@ export const KeyEvent = {
 
 /** Storage keys constants. */
 export const StorageKey = {
+  PREFERENCES: "__remixer_preferences__",
   REMIXER: "__remixer__",
+  KEY_REMIXER: "remixer",
+  KEY_REMOTE_ID: "remoteId",
+  KEY_VARIABLES: "variables"
 };
 
 /** Variable data constraints. */
@@ -73,6 +77,7 @@ export const CSS = {
   RMX_RADIO_LIST:         "rmx-radio-list",
   RMX_RADIO_LIST_ITEM:    "rmx-radio-list-item",
   RMX_SELECTED_VALUE:     "rmx-selected-value",
+  RMX_SHARE_MENU:         "rmx-share-menu",
   RMX_SLIDER:             "rmx-slider",
   RMX_SLIDER_MAX:         "rmx-slider-max-value",
   RMX_SLIDER_MIN:         "rmx-slider-min-value",

@@ -165,8 +165,6 @@ export class Variable implements IVariableParams {
   }
 
   set selectedValue(value: any) {
-    // TODO(cjcox): For cloud mode, determine when to save to avoid multiple
-    // calls when using slider, etc.
     this._selectedValue = value;
     this.save();
     if (this._initialized) {
