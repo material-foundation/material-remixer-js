@@ -162,3 +162,25 @@
     top: 0;
   }
 }
+
+.rmx-share-menu {
+  background-color: #FFFFFF;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  padding: 0 8px;
+  transition: max-height @duration ease-out, opacity @duration linear;
+
+  .mdl-list__item--two-line {
+    height: auto;
+  }
+
+  a, i {
+    color: @colorMdlBlue;
+  }
+}
+
+.rmx-share-menu.active {
+  max-height: 200px;
+  opacity: 1;
+}
