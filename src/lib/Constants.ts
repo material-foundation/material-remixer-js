@@ -28,6 +28,7 @@ export const KeyEvent = {
 export const StorageKey = {
   PREFERENCES: "__remixer_preferences__",
   REMIXER: "__remixer__",
+  KEY_REMIXER: "remixer",
   KEY_REMOTE_ID: "remoteId",
   KEY_VARIABLES: "variables"
 };

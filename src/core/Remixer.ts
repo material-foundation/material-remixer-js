@@ -252,7 +252,8 @@ class Remixer {
         variable.executeCallbacks();
       }
 
-      // Save remotely without throttling.
+      // Save remotely without throttling. If remote sharing is disabled,
+      // a call to this method will simply be a no-op.
       Remote.saveVariable(variable, false);
     }
   }

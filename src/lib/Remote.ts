@@ -24,6 +24,9 @@ import { LocalStorage } from "./LocalStorage";
 import { StorageKey } from "./Constants";
 import { Variable } from "../core/variables/Variable";
 
+// The number of milliseconds to throttle invocations to.
+const THROTTLE_WAIT = 300;
+
 /**
  * The Remote class is a singleton class that provides the ability to store
  * and retrieve Variables on a remote controller. It also provides listeners
@@ -46,7 +49,7 @@ export class Remote  {
    * @static
    * @type {any}
    */
-  private static _throttle: any;
+  private static _throttledSaveVariable: any;
 
   /**
    * The remote ID.
@@ -119,7 +122,7 @@ export class Remote  {
    * @return {firebase.database.Reference} The firebase database reference.
    */
   private dbReference(): firebase.database.Reference {
-    return firebase.database().ref(`remixer/${this.remoteId}`);
+    return firebase.database().ref(`${StorageKey.KEY_REMIXER}/${this.remoteId}`);
   }
 
   /**
@@ -127,7 +130,7 @@ export class Remote  {
    * @static
    */
   static startSharing(): void {
-    this._throttle = throttle(this._save, 300);
+    this._throttledSaveVariable = throttle(this._save, THROTTLE_WAIT);
     this._sharedInstance.enabled = true;
   }
 
@@ -136,7 +139,7 @@ export class Remote  {
    * @static
    */
   static stopSharing(): void {
-    this._throttle.cancel();
+    this._throttledSaveVariable.cancel();
     this._sharedInstance.enabled = false;
   }
 
@@ -159,7 +162,7 @@ export class Remote  {
   static saveVariable(variable: Variable, throttle: boolean = true): void {
     if (this._sharedInstance.enabled) {
       if (throttle) {
-        this._throttle(variable);
+        this._throttledSaveVariable(variable);
       } else {
         this._save(variable);
       }
