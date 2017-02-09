@@ -71,11 +71,6 @@ export class Remote  {
     return this._enabled;
   }
 
-  /**
-   * The remote ID.
-   * @private
-   * @type {string}
-   */
   private _remoteId: string;
 
   /**
@@ -89,6 +84,9 @@ export class Remote  {
 
   /**
    * Returns the remote controller URL.
+   *
+   * Example URL:
+   *   "https://<PROJECT-ID>.firebaseapp.com/<REMOTE-ID>"
    * @readonly
    * @return {string} The remote controller URL.
    */
@@ -252,10 +250,22 @@ export class Remote  {
     }
   }
 
+  /**
+   * Retrieves a preference from local storage.
+   * @private
+   * @param  {string} key The key of the preference to retrieve.
+   * @return {any}        Returns the preference object.
+   */
   private getPreference(key: string): any {
     return LocalStorage.getPreference(key);
   }
 
+  /**
+   * Saves a preference to local storage.
+   * @private
+   * @param {string} key   The preference key.
+   * @param {any}    value The preference value.
+   */
   private savePreference(key: string, value: any): void {
     LocalStorage.savePreference(key, value);
   }
