@@ -19,18 +19,16 @@ import * as ReactDOM from "react-dom";
 import "./styles/overlay.less";
 
 import { remixer } from "../core/Remixer";
-import { CSS } from "../lib/Constants";
+import { CSS, StorageKey } from "../lib/Constants";
 import { OverlayController } from "./OverlayController";
 import { Variable } from "../core/variables/Variable";
 
 // Get remixer variables from the current instance of remixer.
 let variables = remixer.attachedInstance.variablesArray;
 
+let remote = remixer.attachedInstance.remote;
+
 let shareMenuIsVisible: boolean = false;
-
-let shareIsEnabled: boolean = false;
-
-let remoteUrl: string = "https://remix.io/abc";
 
 /**
  * Handles all control updates by setting a new selected value for the
@@ -53,8 +51,12 @@ function toggleShareMenu(): void {
   redraw();
 }
 
-function toggleShareEnabled(): void {
-  shareIsEnabled = !shareIsEnabled;
+function toggleRemoteEnabled(): void {
+  if (remote.isEnabled) {
+    remote.stopSharing();
+  } else {
+    remote.startSharing();
+  }
   redraw();
 }
 
@@ -65,14 +67,13 @@ function redraw(): void {
 
   ReactDOM.render(
     <OverlayController
-      wrapperElement={overlayWrapper}
-      variables={variables}
-      updateVariable={updateVariable}
+      remote={remote}
       shareMenuIsVisible={shareMenuIsVisible}
+      toggleRemoteEnabled={toggleRemoteEnabled}
       toggleShareMenu={toggleShareMenu}
-      remoteUrl={remoteUrl}
-      shareIsEnabled={shareIsEnabled}
-      toggleShareEnabled={toggleShareEnabled}
+      updateVariable={updateVariable}
+      variables={variables}
+      wrapperElement={overlayWrapper}
     />,
     overlayWrapper,
   );

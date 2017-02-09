@@ -20,6 +20,7 @@ import { CSS, KeyCode, KeyEvent } from "../lib/Constants";
 import { Messaging } from "../lib/Messaging";
 import { OverlayShareMenu } from "./OverlayShareMenu";
 import { OverlayVariables } from "./OverlayVariables";
+import { Remote } from "../lib/Remote";
 import { Variable } from "../core/variables/Variable";
 
 /**
@@ -27,14 +28,13 @@ import { Variable } from "../core/variables/Variable";
  * @interface
  */
 interface IControllerProps {
-  wrapperElement: HTMLElement;
-  variables: Variable[];
-  updateVariable(variable: Variable, selectedValue: any): void;
+  remote: Remote;
   shareMenuIsVisible: boolean;
+  updateVariable(variable: Variable, selectedValue: any): void;
+  toggleRemoteEnabled(): void;
   toggleShareMenu(): void;
-  remoteUrl: string;
-  shareIsEnabled: boolean;
-  toggleShareEnabled(): void;
+  variables: Variable[];
+  wrapperElement: HTMLElement;
 }
 
 /**
@@ -91,15 +91,13 @@ export class OverlayController extends React.Component<IControllerProps, void> {
   /** @override */
   render() {
     const {
-      variables,
-      updateVariable,
+      remote,
       shareMenuIsVisible,
+      toggleRemoteEnabled,
       toggleShareMenu,
-      remoteUrl,
-      shareIsEnabled,
-      toggleShareEnabled
+      updateVariable,
+      variables
     } = this.props;
-
 
     let shareIcon: string = shareMenuIsVisible ? "up" : "down";
     return (
@@ -109,9 +107,10 @@ export class OverlayController extends React.Component<IControllerProps, void> {
         </div>
         <OverlayShareMenu
           visible={shareMenuIsVisible}
-          remoteUrl={remoteUrl}
-          isEnabled={shareIsEnabled}
-          toggleEnabled={toggleShareEnabled}
+          remoteId={remote.remoteId}
+          remoteUrl={remote.remoteUrl}
+          isEnabled={remote.isEnabled}
+          toggleRemoteEnabled={toggleRemoteEnabled}
         />
         <div className={`mdl-card__actions mdl-card--border`}>
           <OverlayVariables
@@ -120,6 +119,7 @@ export class OverlayController extends React.Component<IControllerProps, void> {
           />
         </div>
         <div className="mdl-card__menu">
+          {remote.isEnabled ? <a onClick={toggleShareMenu}>SHARED</a> : null}
           <button
             className="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"
             onClick={toggleShareMenu}

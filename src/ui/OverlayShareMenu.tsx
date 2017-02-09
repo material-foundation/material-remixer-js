@@ -25,9 +25,10 @@ import { CSS } from "../lib/Constants";
  */
 export interface IOverlayShareMenuProps {
   visible: boolean;
+  remoteId: string;
   remoteUrl: string;
   isEnabled: boolean;
-  toggleEnabled(): void;
+  toggleRemoteEnabled(): void;
 }
 
 /**
@@ -42,8 +43,9 @@ export class OverlayShareMenu extends React.Component<IOverlayShareMenuProps, vo
   render() {
     const {
       visible,
+      remoteId,
       remoteUrl,
-      isEnabled,
+      isEnabled
     } = this.props;
 
     let showMenu = visible ? "active" : "";
@@ -54,7 +56,7 @@ export class OverlayShareMenu extends React.Component<IOverlayShareMenuProps, vo
         className={`${CSS.RMX_SHARE_MENU} mdl-card__actions ${showMenu}`}
       >
         <div className={CSS.MDL_LIST}>
-          <div className={`${CSS.MDL_LIST_ITEM} ${CSS.MDL_TWO_LINE}`}>
+          <div className={`${CSS.MDL_LIST_ITEM} ${CSS.MDL_TWO_LINE} on`}>
             <span className={CSS.MDL_PRIMARY}>
               <span><strong>{`Sharing is ${status}`}</strong></span>
               <span className="mdl-list__item-sub-title">
@@ -69,16 +71,16 @@ export class OverlayShareMenu extends React.Component<IOverlayShareMenuProps, vo
                 <input
                   id="share-switch" type="checkbox" className="mdl-switch__input"
                   checked={isEnabled}
-                  onChange={this.props.toggleEnabled}
+                  onChange={this.props.toggleRemoteEnabled}
                   />
               </label>
             </span>
           </div>
-          <div className={`${CSS.MDL_LIST_ITEM} ${CSS.MDL_TWO_LINE}`}>
+          <div className={`${CSS.MDL_LIST_ITEM} ${CSS.MDL_TWO_LINE} ${status}`}>
             <span className={CSS.MDL_PRIMARY}>
               <span>Link</span>
               <span className="mdl-list__item-sub-title">
-                <a href={remoteUrl} target="_blank">{remoteUrl}</a>
+                <a href={remoteUrl} target="_blank">{remoteId}</a>
               </span>
             </span>
             <span className={CSS.MDL_SECONDARY}>

@@ -173,6 +173,17 @@
 
   .mdl-list__item--two-line {
     height: auto;
+    opacity: 0.4;
+  }
+
+  .mdl-list__item--two-line.on {
+    opacity: 1;
+  }
+
+  .mdl-list__item--two-line.off {
+    opacity: 0.4;
+    pointer-events: none;
+    cursor: default;
   }
 
   a, i {
@@ -183,4 +194,9 @@
 .rmx-share-menu.active {
   max-height: 200px;
   opacity: 1;
+}
+
+.mdl-card__menu a {
+  color: @colorMdlBlue;
+  font-weight: @fontBoldWeight;
 }
