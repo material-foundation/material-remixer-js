@@ -19,7 +19,7 @@ import * as ReactDOM from "react-dom";
 import "./styles/overlay.less";
 
 import { remixer } from "../core/Remixer";
-import { CSS, StorageKey } from "../lib/Constants";
+import { CSS } from "../lib/Constants";
 import { OverlayController } from "./OverlayController";
 import { Variable } from "../core/variables/Variable";
 
