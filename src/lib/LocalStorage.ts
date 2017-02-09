@@ -57,6 +57,14 @@ interface ISerializablePreferences {
 }
 
 /**
+ * Interface representing serialized preferences.
+ * @interface
+ */
+interface ISerializablePreferences {
+  remoteId: string;
+}
+
+/**
  * A class that provides utilities to interact with browser local storage.
  * @class
  */
@@ -86,6 +94,28 @@ export class LocalStorage {
     let remixerData = this.getRawData();
     remixerData[variable.key] = variable.serialize();
     this.saveRawData(remixerData);
+  }
+
+  /**
+   * Retrieves a preference from local storage.
+   * @param  {string} key The key of the preference to retrieve.
+   * @return {any}        Returns the preference object.
+   */
+  static getPreference(key: string): any {
+    let prefs = this.getRawPreferences();
+    return prefs[key];
+  }
+
+  /**
+   * Saves a preference to local storage.
+   * @static
+   * @param {string} key   The preference key.
+   * @param {any}    value The preference value.
+   */
+  static savePreference(key: string, value: any): void {
+    let prefs = this.getRawPreferences();
+    prefs[key] = value;
+    this.saveRawPreferences(prefs);
   }
 
   /**

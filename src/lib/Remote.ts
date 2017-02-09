@@ -44,26 +44,58 @@ export class Remote  {
   private static _sharedInstance = new Remote();
 
   /**
+   * Provides ability for Remixer HTML iFrame to access this instance of Remote.
+   * @return {Remote} The attached instance of Remote.
+   */
+  static get attachedInstance(): Remote {
+    return this._sharedInstance;
+  }
+
+  /**
    * Throttles network save calls.
    * @private
    * @static
    * @type {any}
    */
-  private static _throttledSaveVariable: any;
+  private _throttledSaveVariable: any;
+
+  private _enabled: boolean;
+
+  /**
+   * Whether the remote controller is enabled.
+   * @static
+   * @readonly
+   * @return {boolean}
+   */
+  get isEnabled(): boolean {
+    return this._enabled;
+  }
 
   /**
    * The remote ID.
    * @private
    * @type {string}
    */
-  private remoteId: string;
+  private _remoteId: string;
 
   /**
-   * Whether the remote controller is enabled.
-   * @private
-   * @type {string}
+   * Returns the remote controller ID.
+   * @readonly
+   * @return {string} The remote controller ID.
    */
-  private enabled: boolean = false;
+  get remoteId(): string {
+    return this._remoteId;
+  }
+
+  /**
+   * Returns the remote controller URL.
+   * @readonly
+   * @return {string} The remote controller URL.
+   */
+  get remoteUrl(): string {
+    let authDomain = firebase.app().options["authDomain"];
+    return `https://${authDomain}/${this._remoteId}`;
+  }
 
   /**
    * Initializes the remote controller.
@@ -76,43 +108,35 @@ export class Remote  {
   static initializeRemote(config: {}): void {
     // Get the locally stored remoteId. If doesn't exist, generate a new one
     // and store it.
-    let storedRemoteId = this.getStoredRemoteId();
+    let instance = this._sharedInstance;
+    let storedRemoteId = instance.getPreference(StorageKey.KEY_REMOTE_ID);
     if (!storedRemoteId) {
-      storedRemoteId = this.storeRemoteId(this.generateRemoteId());
+      storedRemoteId = instance.generateRemoteId();
+      instance.savePreference(StorageKey.KEY_REMOTE_ID, storedRemoteId);
     }
-    this._sharedInstance.remoteId = storedRemoteId;
+    instance._remoteId = storedRemoteId;
+
+    // Check if enabled.
+    let remoteEnabled = instance.getPreference(StorageKey.KEY_REMOTE_ENABLED);
+    if (!remoteEnabled) {
+      remoteEnabled = false;
+      instance.savePreference(StorageKey.KEY_REMOTE_ENABLED, remoteEnabled);
+    }
+    instance._enabled = remoteEnabled;
+
+    if (remoteEnabled) {
+      instance.startSharing();
+    }
+
     firebase.initializeApp(config);
-  }
-
-  /**
-   * Returns the remote id from local storage.
-   * @private
-   * @static
-   * @return {string} Returns the remote id.
-   */
-  private static getStoredRemoteId(): string {
-    return LocalStorage.getPreference(StorageKey.KEY_REMOTE_ID);
-  }
-
-  /**
-   * Stores the remote id to local storage.
-   * @private
-   * @static
-   * @param  {string} remoteId The remote id.
-   * @return {string}          Returns the remote id.
-   */
-  private static storeRemoteId(remoteId: string): string {
-    LocalStorage.savePreference(StorageKey.KEY_REMOTE_ID, remoteId);
-    return remoteId;
   }
 
   /**
    * Generates a unique id consisting of 8 chars.
    * @private
-   * @static
    * @return {string} Returns the new remote id.
    */
-  private static generateRemoteId(): string {
+  private generateRemoteId(): string {
     return uuid().substring(0, 8);
   }
 
@@ -122,25 +146,32 @@ export class Remote  {
    * @return {firebase.database.Reference} The firebase database reference.
    */
   private dbReference(): firebase.database.Reference {
-    return firebase.database().ref(`${StorageKey.KEY_REMIXER}/${this.remoteId}`);
+    return firebase.database().ref(`${StorageKey.KEY_REMIXER}/${this._remoteId}`);
   }
 
   /**
    * Start sharing the variable updates to the remote controller.
-   * @static
    */
-  static startSharing(): void {
+  startSharing(): void {
     this._throttledSaveVariable = throttle(this._save, THROTTLE_WAIT);
-    this._sharedInstance.enabled = true;
+    this._enabled = true;
+    this.savePreference(StorageKey.KEY_REMOTE_ENABLED, true);
+
+    // Save each variable without throttling.
+    for (let variable of remixer.attachedInstance.variablesArray) {
+      Remote.saveVariable(variable, false);
+    }
   }
 
   /**
    * Stops sharing the variable updates to the remote controller.
-   * @static
    */
-  static stopSharing(): void {
+  stopSharing(): void {
     this._throttledSaveVariable.cancel();
-    this._sharedInstance.enabled = false;
+    this.savePreference(StorageKey.KEY_REMOTE_ENABLED, false);
+    this.stopObservingUpdates();
+    Remote.removeAllVariables();
+    this._enabled = false;
   }
 
   /**
@@ -160,20 +191,21 @@ export class Remote  {
    * @param {boolean = true}    Whether to throttle the saves.
    */
   static saveVariable(variable: Variable, throttle: boolean = true): void {
-    if (this._sharedInstance.enabled) {
+    if (this._sharedInstance._enabled) {
       if (throttle) {
-        this._throttledSaveVariable(variable);
+        this._sharedInstance._throttledSaveVariable(variable);
       } else {
-        this._save(variable);
+        this._sharedInstance._save(variable);
       }
     }
   }
 
   /**
    * Removes all variables remotely.
+   * @static
    */
   static removeAllVariables(): void {
-    if (this._sharedInstance.enabled) {
+    if (this._sharedInstance._enabled) {
       this._sharedInstance.dbReference().remove();
     }
   }
@@ -184,13 +216,12 @@ export class Remote  {
    * When saving to remote, we first stop observing updates then restart after
    * the update. This prevents a cyclical error of network and local changes.
    * @private
-   * @static
    * @param {Variable} variable The variable to save.
    */
-  private static _save(variable: Variable): void {
-    if (this._sharedInstance.enabled) {
+  private _save(variable: Variable): void {
+    if (this._enabled) {
       this.stopObservingUpdates(variable.key);
-      this._sharedInstance.dbReference().child(variable.key).set(variable.serialize());
+      this.dbReference().child(variable.key).set(variable.serialize());
       this.startObservingUpdates(variable.key);
     }
   }
@@ -198,11 +229,10 @@ export class Remote  {
   /**
    * Starts a listener for any changes received for a variable.
    * @private
-   * @static
    * @param {string} variableKey The variable key.
    */
-  private static startObservingUpdates(variableKey: string): void {
-    let reference = this._sharedInstance.dbReference().child(variableKey);
+  private startObservingUpdates(variableKey: string): void {
+    let reference = this.dbReference().child(variableKey);
     reference.on("child_changed", function(data) {
       let variable = remixer.getVariable(data.ref.parent.key);
       remixer.cloneAndUpdateVariable(variable, data.val());
@@ -212,10 +242,21 @@ export class Remote  {
   /**
    * Stops all change listeners for a variable.
    * @private
-   * @static
-   * @param {string} variableKey The variable key.
+   * @param {string} variableKey The optional variable key.
    */
-  private static stopObservingUpdates(variableKey: string): void {
-    this._sharedInstance.dbReference().child(variableKey).off();
+  private stopObservingUpdates(variableKey?: string): void {
+    if (variableKey) {
+      this.dbReference().child(variableKey).off();
+    } else {
+      this.dbReference().off();
+    }
+  }
+
+  private getPreference(key: string): any {
+    return LocalStorage.getPreference(key);
+  }
+
+  private savePreference(key: string, value: any): void {
+    LocalStorage.savePreference(key, value);
   }
 }
