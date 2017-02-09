@@ -30,7 +30,6 @@ export const StorageKey = {
   REMIXER: "__remixer__",
   KEY_REMIXER: "remixer",
   KEY_REMOTE_ID: "remoteId",
-  KEY_REMOTE_ENABLED: "remoteEnabled",
   KEY_VARIABLES: "variables"
 };
 

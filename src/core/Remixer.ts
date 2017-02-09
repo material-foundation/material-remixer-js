@@ -111,16 +111,10 @@ class Remixer {
    * Appends the HTML iFrame to body of client app. Attaches key listener to
    * toggle Overlay visibility.
    * @static
-   * @param {{}} remoteConfig The optional firebase configuration. Provide this
-   *                          configuration if you wish to use the remote
-   *                          controller.
    */
-  static start(remoteConfig?: {}): void {
+  static start(): void {
     this._sharedInstance.appendFrameToBody();
     this._sharedInstance.addKeyListener();
-    if (remoteConfig) {
-      Remote.initializeRemote(remoteConfig);
-    }
   }
 
   /**
@@ -257,6 +251,10 @@ class Remixer {
         this.saveVariable(variable);
         variable.executeCallbacks();
       }
+
+      // Save remotely without throttling. If remote sharing is disabled,
+      // a call to this method will simply be a no-op.
+      Remote.saveVariable(variable, false);
     }
   }
 
@@ -322,18 +320,19 @@ class Remixer {
    */
   static saveVariable(variable: Variable): void {
     LocalStorage.saveVariable(variable);
-
-    // Save remotely. If remote sharing is disabled, a call to this method
-    // will simply be a no-op.
-    Remote.saveVariable(variable);
+    Remote.saveVariable(variable, true);
   }
 
   /**
-   * Returns the current Remote controller class.
-   * @return {Remote}
+   * Initializes the remote controller.
+   *
+   * A call to this method will allow you to share your Variables to the
+   * remote controller being hosted as per your firebase configuration.
+   * @static
+   * @param {{}} config The firebase credentials.
    */
-  get remote(): Remote {
-    return Remote.attachedInstance;
+  static inializeRemote(config: {}): void {
+    Remote.initializeRemote(config);
   }
 }
 
