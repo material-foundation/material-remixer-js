@@ -252,6 +252,7 @@ class Remixer {
       if (storedVariable) {
         // Update variable if exists in storage.
         this.updateVariable(variable, storedVariable.selectedValue);
+        Remote.saveVariable(variable, false);
       } else {
         // Save variable first time.
         this.saveVariable(variable);
