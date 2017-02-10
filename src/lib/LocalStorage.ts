@@ -120,28 +120,6 @@ export class LocalStorage {
   }
 
   /**
-   * Retrieves a preference from local storage.
-   * @param  {string} key The key of the preference to retrieve.
-   * @return {any}        Returns the preference object.
-   */
-  static getPreference(key: string): any {
-    let prefs = this.getRawPreferences();
-    return prefs[key];
-  }
-
-  /**
-   * Saves a preference to local storage.
-   * @static
-   * @param {string} key   The preference key.
-   * @param {any}    value The preference value.
-   */
-  static savePreference(key: string, value: any): void {
-    let prefs = this.getRawPreferences();
-    prefs[key] = value;
-    this.saveRawPreferences(prefs);
-  }
-
-  /**
    * Returns an initialized Variable based on the data type.
    * @private
    * @static
