@@ -57,14 +57,6 @@ interface ISerializablePreferences {
 }
 
 /**
- * Interface representing serialized preferences.
- * @interface
- */
-interface ISerializablePreferences {
-  remoteId: string;
-}
-
-/**
  * A class that provides utilities to interact with browser local storage.
  * @class
  */
