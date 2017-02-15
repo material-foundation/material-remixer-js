@@ -36,7 +36,7 @@ module.exports = {
     libraryTarget: 'umd',
     umdNamedDefine: true
   },
-  devtool: IS_DEV ? 'cheap-module-eval-source-map' : 'cheap-module-source-map',
+  devtool: IS_DEV ? 'source-map' : 'cheap-module-source-map',
   devServer: {
     contentBase: "examples",
     inline: true,

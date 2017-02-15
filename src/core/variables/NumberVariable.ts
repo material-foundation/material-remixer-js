@@ -24,7 +24,7 @@ import { IVariableCallback, IVariableListParams, Variable } from "./Variable";
  * @extends IVariableListParams
  */
 interface INumberVariableParams extends IVariableListParams {
-  defaultValue: number;
+  initialValue: number;
   selectedValue: number;
   limitedToValues?: number[];
 }
@@ -41,18 +41,18 @@ export class NumberVariable extends Variable implements INumberVariableParams {
    * Creates an instance of a ColorVariable.
    * @constructor
    * @param  {string}            key            A unique key for the Variable.
-   * @param  {number}            defaultValue   The default value.
+   * @param  {number}            initialValue   The initial selected value.
    * @param  {number[]}          limitedToValues The array of allowed values.
    * @param  {IVariableCallback} callback       The callback to invoke when updated.
    * @return {NumberVariable}
    */
   constructor(
     key: string,
-    defaultValue: number,
+    initialValue: number,
     limitedToValues?: number[],
     callback?: IVariableCallback,
   ) {
-    super(key, DataType.NUMBER, defaultValue, callback);
+    super(key, DataType.NUMBER, initialValue, callback);
     this.limitedToValues = limitedToValues ? limitedToValues : [];
     if (this.limitedToValues.length === 0) {
       this.controlType = ControlType.TEXT_INPUT;
@@ -80,7 +80,7 @@ export class NumberVariable extends Variable implements INumberVariableParams {
   clone() {
     let cloned = new NumberVariable(
       this.key,
-      this.defaultValue,
+      this.selectedValue,
       this.limitedToValues,
     );
     cloned.title = this.title;
@@ -114,10 +114,12 @@ export class NumberVariable extends Variable implements INumberVariableParams {
    * @return {NumberVariable}         A new initialized NumberVariable.
    */
   static deserialize(data: ISerializableData): Variable {
-    return new NumberVariable(
+    let variable = new NumberVariable(
       data.key,
       data.selectedValue,
-      data.limitedToValues,
+      data.limitedToValues
     );
+    variable.title = data.title;
+    return variable;
   }
 }

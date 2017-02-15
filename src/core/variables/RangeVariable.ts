@@ -25,7 +25,7 @@ import { IVariableCallback, IVariableParams, Variable } from "./Variable";
  * @extends IVariableParams
  */
 export interface IRangeVariableParams extends IVariableParams {
-  defaultValue: number;
+  initialValue: number;
   selectedValue: number;
   minValue: number;
   maxValue: number;
@@ -45,7 +45,7 @@ export class RangeVariable extends Variable implements IRangeVariableParams {
    * Creates an instance of a RangeVariable.
    * @constructor
    * @param  {string}            key          A unique key for the Variable.
-   * @param  {number}            defaultValue The default value.
+   * @param  {number}            initialValue The initial selected value.
    * @param  {number}            minValue     The minimum value allowed.
    * @param  {number}            maxValue     The maximum value allowed.
    * @param  {IVariableCallback} callback     The callback to invoke when updated.
@@ -53,13 +53,13 @@ export class RangeVariable extends Variable implements IRangeVariableParams {
    */
   constructor(
     key: string,
-    defaultValue: number,
+    initialValue: number,
     minValue: number,
     maxValue: number,
     increment: number,
     callback?: IVariableCallback,
   ) {
-    super(key, DataType.NUMBER, defaultValue, callback);
+    super(key, DataType.NUMBER, initialValue, callback);
     this.minValue = minValue;
     this.maxValue = maxValue;
     this.increment = increment;
@@ -82,7 +82,7 @@ export class RangeVariable extends Variable implements IRangeVariableParams {
   clone() {
     let cloned = new RangeVariable(
       this.key,
-      this.defaultValue,
+      this.selectedValue,
       this.minValue,
       this.maxValue,
       this.increment,
@@ -120,7 +120,7 @@ export class RangeVariable extends Variable implements IRangeVariableParams {
    */
   serialize(): ISerializableData {
     let data = super.serialize();
-    data.selectedValue = this.selectedValue.toString();
+    data.selectedValue = this.selectedValue;
     data.minValue = this.minValue;
     data.maxValue = this.maxValue;
     data.increment = this.increment;
@@ -134,16 +134,18 @@ export class RangeVariable extends Variable implements IRangeVariableParams {
    * @return {RangeVariable}          A new initialized RangeVariable.
    */
   static deserialize(data: ISerializableData): Variable {
-    let selectedValue: number = parseFloat(data.selectedValue);
+    let selectedValue: number = data.selectedValue;
     let minValue: number = data.minValue;
     let maxValue: number = data.maxValue;
     let increment: number = data.increment;
-    return new RangeVariable(
+    let variable = new RangeVariable(
       data.key,
       selectedValue,
       minValue,
       maxValue,
       increment,
     );
+    variable.title = data.title;
+    return variable;
   }
 }

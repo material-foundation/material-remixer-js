@@ -13,7 +13,7 @@ chai.use(sinonChai);
 describe("StringVariable", () => {
   const key: string = "test variable";
   const sanitizedKey: string = "test_variable";
-  const defaultValue: string = "B";
+  const initialValue: string = "B";
   const limitedToValues: string[] = ["A", "B", "C", "D"];
   let callbackSpy: sinon.SinonSpy;
   let variable: StringVariable;
@@ -22,7 +22,7 @@ describe("StringVariable", () => {
     callbackSpy = sinon.spy();
     variable = remixer.addStringVariable(
       key,
-      defaultValue,
+      initialValue,
       limitedToValues,
       callbackSpy,
     );

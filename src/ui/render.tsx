@@ -39,15 +39,14 @@ let variables = remixer.attachedInstance.variablesArray;
  * @param {any} selectedValue The new selected value.
  */
 function updateVariable(variable: Variable, selectedValue: any): void {
-  const index = variables.indexOf(variable);
-  let clonedVariable = variable.clone();
-  clonedVariable.selectedValue = selectedValue;
-  variables[index] = clonedVariable;
+  remixer.cloneAndUpdateVariable(variable, selectedValue);
 }
 
 // Renders the OverlayController component to the overlay wrapper element.
 const overlayWrapper = document.getElementById(CSS.RMX_OVERLAY_WRAPPER);
 function redraw(): void {
+  variables = remixer.attachedInstance.variablesArray;
+
   ReactDOM.render(
     <OverlayController
       wrapperElement={overlayWrapper}

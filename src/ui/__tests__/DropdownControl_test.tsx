@@ -11,12 +11,12 @@ const expect = chai.expect;
 
 describe("DropdownControl", () => {
   const key: string = "test_variable";
-  const defaultValue: string = "a";
+  const initialValue: string = "a";
   const limitedToValues: string[] = ["a", "b", "c"];
   let variable: Variable;
 
   beforeEach(() => {
-    variable = remixer.addStringVariable(key, defaultValue, limitedToValues);
+    variable = remixer.addStringVariable(key, initialValue, limitedToValues);
     this.component = TestUtils.renderIntoDocument(
       <DropdownControl
         variable={variable}

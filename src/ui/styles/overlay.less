@@ -15,6 +15,7 @@
  */
 @wrapper-width: 320px;
 @wrapper-padding: 10px;
+@colorOffWhite: #F5F5F5;
 @colorMdlBlue: #3f51b5;
 @colorSwatchSize: 40px;
 @colorSwatchIconSize: 24px;
@@ -25,9 +26,14 @@
 @fontBoldWeight: 500;
 
 .mdl-card {
+  background-color: @colorOffWhite;
   font-size: @fontSize;
   overflow: visible;
   width: @wrapper-width;
+}
+
+.mdl-card__title {
+  background-color: #FFFFFF;
 }
 
 .mdl-list {
@@ -155,4 +161,26 @@
     position: absolute;
     top: 0;
   }
+}
+
+.rmx-share-menu {
+  background-color: #FFFFFF;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  padding: 0 8px;
+  transition: max-height @duration ease-out, opacity @duration linear;
+
+  .mdl-list__item--two-line {
+    height: auto;
+  }
+
+  a, i {
+    color: @colorMdlBlue;
+  }
+}
+
+.rmx-share-menu.active {
+  max-height: 200px;
+  opacity: 1;
 }

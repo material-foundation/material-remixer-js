@@ -28,7 +28,7 @@ export interface IVariableParams {
   constraintType: string;
   controlType: string;
   dataType: string;
-  defaultValue: any;
+  initialValue: any;
   selectedValue: any;
   callbacks?: IVariableCallback[];
 }
@@ -71,21 +71,21 @@ export class Variable implements IVariableParams {
    * Creates an instance of a Variable.
    * @param  {string}            key          A unique key for the Variable.
    * @param  {string}            dataType     The data type of this Variable.
-   * @param  {any}               defaultValue The default value.
+   * @param  {any}               initialValue The initial selected value.
    * @param  {IVariableCallback} callback     The callback to invoke when updated.
    * @return {Variable}
    */
   constructor(
     key: string,
     dataType: string,
-    defaultValue: any,
+    initialValue: any,
     callback?: IVariableCallback,
   ) {
     this.key = this.sanitizeKey(key);
     this.title = key;
     this.dataType = dataType;
-    this.defaultValue = defaultValue;
-    this._selectedValue = defaultValue;
+    this.initialValue = initialValue;
+    this._selectedValue = initialValue;
     if (callback) {
       this._callbacks.push(callback);
     }
@@ -100,7 +100,7 @@ export class Variable implements IVariableParams {
     let cloned = new Variable(
       this.key,
       this.dataType,
-      this.defaultValue,
+      this.selectedValue,
       null,
     );
     cloned.title = this.title;
@@ -145,7 +145,7 @@ export class Variable implements IVariableParams {
    * The defalut value for this Variable.
    * @type {any}
    */
-  defaultValue: any;
+  initialValue: any;
 
   /**
    * Whether this Variable has been initialized.
@@ -165,8 +165,6 @@ export class Variable implements IVariableParams {
   }
 
   set selectedValue(value: any) {
-    // TODO(cjcox): For cloud mode, determine when to save to avoid multiple
-    // calls when using slider, etc.
     this._selectedValue = value;
     this.save();
     if (this._initialized) {
@@ -221,7 +219,7 @@ export class Variable implements IVariableParams {
    * Restores the Variable to its default value.
    */
   restore(): void {
-    this.selectedValue = this.defaultValue;
+    this.selectedValue = this.initialValue;
   }
 
   /**
@@ -239,7 +237,7 @@ export class Variable implements IVariableParams {
   }
 
   /**
-   * Subclass should override this method and return a new instance of thei
+   * Subclass should override this method and return a new instance of the
    * Variable class from serialized data.
    * @param  {ISerializableData} data The serialized data.
    * @return {Variable}               A new initialized Variable subclass.

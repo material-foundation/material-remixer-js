@@ -22,6 +22,7 @@ import { Messaging } from "../lib/Messaging";
 import { NumberVariable } from "./variables/NumberVariable";
 import { IRangeVariableParams, RangeVariable } from "./variables/RangeVariable";
 import { IVariableCallback, IVariableKeyMap, Variable } from "./variables/Variable";
+import { Remote } from "../lib/Remote";
 import { StringVariable } from "./variables/StringVariable";
 
 import "../ui/styles/iframe.less";
@@ -81,7 +82,7 @@ class Remixer {
     if (!this._frameElement) {
       let frame = document.createElement("IFRAME") as HTMLFrameElement;
       frame.id = CSS.RMX_OVERLAY_FRAME;
-      frame.setAttribute("sandbox", "allow-scripts allow-same-origin");
+      frame.setAttribute("sandbox", "allow-scripts allow-same-origin allow-popups");
       document.getElementsByTagName("body")[0].appendChild(frame);
 
       // Until `srcdoc` is fully compatible with all browsers, lets simply
@@ -110,10 +111,16 @@ class Remixer {
    * Appends the HTML iFrame to body of client app. Attaches key listener to
    * toggle Overlay visibility.
    * @static
+   * @param {{}} remoteConfig The optional firebase configuration. Provide this
+   *                          configuration if you wish to use the remote
+   *                          controller.
    */
-  static start(): void {
+  static start(remoteConfig?: {}): void {
     this._sharedInstance.appendFrameToBody();
     this._sharedInstance.addKeyListener();
+    if (remoteConfig) {
+      Remote.initializeRemote(remoteConfig);
+    }
   }
 
   /**
@@ -238,13 +245,14 @@ class Remixer {
     let existingVariable = this.getVariable(key);
     if (existingVariable) {
       // Variable with key already exists, so only add callback.
-      // TODO(cjcox:) Determin what to do if variable key already exists.
+      // TODO(cjcox:) Determine what to do if variable key already exists.
     } else {
       this._sharedInstance._variables[key] = variable;
       let storedVariable = LocalStorage.getVariable(key);
       if (storedVariable) {
         // Update variable if exists in storage.
         this.updateVariable(variable, storedVariable.selectedValue);
+        Remote.saveVariable(variable, false);
       } else {
         // Save variable first time.
         this.saveVariable(variable);
@@ -281,21 +289,52 @@ class Remixer {
   }
 
   /**
-   * Updates the selected value of a given Variable from the Remixer shared instance.
+   * Updates the selected value of a given Variable from the Remixer shared
+   * instance.
    * @static
    * @param {Variable} variable      The Variable to update.
    * @param {any}      selectedValue The new selected value.
    */
   static updateVariable(variable: Variable, selectedValue: any): void {
-    variable.selectedValue = selectedValue;
+    if (variable.selectedValue !== selectedValue) {
+      variable.selectedValue = selectedValue;
+    }
   }
 
   /**
-   * Saves the Variable to local storage.
+   * Clones and updates the selected value of a given Variable from the Remixer
+   * shared instance. Allows immutability update required for React rendering.
+   * @static
+   * @param {Variable} variable The variable to clone and update.
+   * @param {any} selectedValue The new selected value.
+   */
+  static cloneAndUpdateVariable(variable: Variable, selectedValue: any): void {
+    if (variable.selectedValue !== selectedValue) {
+      let clonedVariable = variable.clone();
+      this.attachedInstance._variables[variable.key] = clonedVariable;
+      this.updateVariable(clonedVariable, selectedValue);
+    }
+  }
+
+  /**
+   * Saves the Variable to both local storage and remote.
+   * @static
    * @param {Variable} variable The Variable to save.
    */
   static saveVariable(variable: Variable): void {
     LocalStorage.saveVariable(variable);
+
+    // Save remotely. If remote sharing is disabled, a call to this method
+    // will simply be a no-op.
+    Remote.saveVariable(variable);
+  }
+
+  /**
+   * Returns the current remote controller class.
+   * @return {Remote}
+   */
+  get remote(): Remote {
+    return Remote.attachedInstance;
   }
 }
 

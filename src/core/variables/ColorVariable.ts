@@ -26,7 +26,7 @@ import { IVariableCallback, IVariableListParams, Variable } from "./Variable";
  * @extends IVariableListParams
  */
 interface IColorVariableParams extends IVariableListParams {
-  defaultValue: string;
+  initialValue: string;
   selectedValue: string;
   limitedToValues?: string[];
 }
@@ -43,18 +43,18 @@ export class ColorVariable extends Variable implements IColorVariableParams {
    * Creates an instance of a ColorVariable.
    * @constructor
    * @param  {string}            key             A unique key for the Variable.
-   * @param  {string}            defaultValue    The default value.
+   * @param  {string}            initialValue    The initial selected value.
    * @param  {string[]}          limitedToValues The array of allowed values.
    * @param  {IVariableCallback} callback        The callback to invoke when updated.
    * @return {ColorVariable}
    */
   constructor(
     key: string,
-    defaultValue: string,
+    initialValue: string,
     limitedToValues?: string[],
     callback?: IVariableCallback,
   ) {
-    super(key, DataType.COLOR, defaultValue, callback);
+    super(key, DataType.COLOR, initialValue, callback);
     this.limitedToValues = limitedToValues ? limitedToValues : [];
     this.controlType = (this.limitedToValues.length > 0) ?
         ControlType.COLOR_LIST : ControlType.COLOR_INPUT;
@@ -77,7 +77,7 @@ export class ColorVariable extends Variable implements IColorVariableParams {
   clone() {
     let cloned = new ColorVariable(
       this.key,
-      this.defaultValue,
+      this.selectedValue,
       this.limitedToValues,
     );
     cloned.title = this.title;
@@ -117,6 +117,8 @@ export class ColorVariable extends Variable implements IColorVariableParams {
     let limitedToValues = data.limitedToValues.map((color: string) => {
       return TinyColor(color).toHexString();
     });
-    return new ColorVariable(data.key, selectedValue, limitedToValues);
+    let variable = new ColorVariable(data.key, selectedValue, limitedToValues);
+    variable.title = data.title;
+    return variable;
   }
 }
