@@ -26,8 +26,10 @@ import { Variable } from "../core/variables/Variable";
 // Get remixer variables from the current instance of remixer.
 let variables = remixer.attachedInstance.variablesArray;
 
+// The current instance of remixer remote.
 let remote = remixer.attachedInstance.remote;
 
+// Whether the share menu is visible.
 let shareMenuIsVisible: boolean = false;
 
 /**
@@ -46,11 +48,13 @@ function updateVariable(variable: Variable, selectedValue: any): void {
   remixer.cloneAndUpdateVariable(variable, selectedValue);
 }
 
+/** Toggles the share menu visibility. */
 function toggleShareMenu(): void {
   shareMenuIsVisible = !shareMenuIsVisible;
   redraw();
 }
 
+/** Toggles the enabled statis of remote sharing. */
 function toggleRemoteEnabled(): void {
   if (remote.isEnabled) {
     remote.stopSharing();

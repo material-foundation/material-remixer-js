@@ -19,9 +19,8 @@ import * as React from "react";
 import { CSS } from "../lib/Constants";
 
 /**
- * Interface for a React class that requires an array of Variables.
+ * Interface for the overlay share menu properties.
  * @interface
- * @extends IControlUpdateProps
  */
 export interface IOverlayShareMenuProps {
   visible: boolean;
@@ -80,7 +79,7 @@ export class OverlayShareMenu extends React.Component<IOverlayShareMenuProps, vo
             <span className={CSS.MDL_PRIMARY}>
               <span>Link</span>
               <span className="mdl-list__item-sub-title">
-                <a href={remoteUrl} target="_blank">{remoteId}</a>
+                <a href={remoteUrl} target="_blank">{remoteUrl}</a>
               </span>
             </span>
             <span className={CSS.MDL_SECONDARY}>
