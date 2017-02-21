@@ -90,6 +90,7 @@ export class LocalStorage {
 
   /**
    * Retrieves a preference from local storage.
+   * @static
    * @param  {string} key The key of the preference to retrieve.
    * @return {any}        Returns the preference object.
    */
@@ -112,12 +113,11 @@ export class LocalStorage {
 
   /**
    * Returns an initialized Variable based on the data type.
-   * @private
    * @static
    * @param  {ISerializableData} data The serialized data.
    * @return {Variable}
    */
-  private static deserialize(data: ISerializableData): Variable {
+  static deserialize(data: ISerializableData): Variable {
     switch (data.dataType) {
       case DataType.BOOLEAN:
         return BooleanVariable.deserialize(data);
