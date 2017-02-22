@@ -29,12 +29,18 @@ import { Variable } from "../core/variables/Variable";
  */
 interface IControllerProps {
   remote: Remote;
-  shareMenuIsVisible: boolean;
   updateVariable(variable: Variable, selectedValue: any): void;
   toggleRemoteEnabled(): void;
-  toggleShareMenu(): void;
   variables: Variable[];
   wrapperElement: HTMLElement;
+}
+
+/**
+ * Interface for the state assigned to the OverlayController component.
+ * @interface
+ */
+interface IControllerState {
+  shareMenuIsVisible: boolean;
 }
 
 /**
@@ -43,7 +49,12 @@ interface IControllerProps {
  * @class
  * @extends React.Component
  */
-export class OverlayController extends React.Component<IControllerProps, void> {
+export class OverlayController extends React.Component<IControllerProps, IControllerState> {
+
+  constructor(props: IControllerProps) {
+    super(props);
+    this.state = { shareMenuIsVisible: false };
+  }
 
   /** @override */
   componentDidMount() {
@@ -88,16 +99,23 @@ export class OverlayController extends React.Component<IControllerProps, void> {
     this.props.wrapperElement.classList.toggle(CSS.RMX_VISIBLE);
   }
 
+  /** Toggles the share menu visibility. */
+  toggleShareMenu() {
+    this.setState({
+      shareMenuIsVisible: !this.state.shareMenuIsVisible
+    });
+  }
+
   /** @override */
   render() {
     const {
       remote,
-      shareMenuIsVisible,
       toggleRemoteEnabled,
-      toggleShareMenu,
       updateVariable,
       variables
     } = this.props;
+
+    const { shareMenuIsVisible } = this.state;
 
     let shareIcon: string = shareMenuIsVisible ? "up" : "down";
     return (
@@ -119,10 +137,13 @@ export class OverlayController extends React.Component<IControllerProps, void> {
           />
         </div>
         <div className="mdl-card__menu">
-          {remote.isEnabled ? <a onClick={toggleShareMenu}>SHARED</a> : null}
+          {remote.isEnabled ?
+            <a onClick={() => this.toggleShareMenu()}>SHARED</a>
+            : ""
+          }
           <button
             className="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"
-            onClick={toggleShareMenu}
+            onClick={() => this.toggleShareMenu()}
           >
             <i className="material-icons">{`keyboard_arrow_${shareIcon}`}</i>
           </button>

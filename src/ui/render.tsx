@@ -29,9 +29,6 @@ let variables = remixer.attachedInstance.variablesArray;
 // The current instance of remixer remote.
 let remote = remixer.attachedInstance.remote;
 
-// Whether the share menu is visible.
-let shareMenuIsVisible: boolean = false;
-
 /**
  * Handles all control updates by setting a new selected value for the
  * variable.
@@ -48,13 +45,7 @@ function updateVariable(variable: Variable, selectedValue: any): void {
   remixer.cloneAndUpdateVariable(variable, selectedValue);
 }
 
-/** Toggles the share menu visibility. */
-function toggleShareMenu(): void {
-  shareMenuIsVisible = !shareMenuIsVisible;
-  redraw();
-}
-
-/** Toggles the enabled statis of remote sharing. */
+/** Toggles the enabled status of remote sharing. */
 function toggleRemoteEnabled(): void {
   if (remote.isEnabled) {
     remote.stopSharing();
@@ -72,9 +63,7 @@ function redraw(): void {
   ReactDOM.render(
     <OverlayController
       remote={remote}
-      shareMenuIsVisible={shareMenuIsVisible}
       toggleRemoteEnabled={toggleRemoteEnabled}
-      toggleShareMenu={toggleShareMenu}
       updateVariable={updateVariable}
       variables={variables}
       wrapperElement={overlayWrapper}
