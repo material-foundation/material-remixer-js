@@ -100,7 +100,7 @@ export class OverlayController extends React.Component<IControllerProps, IContro
   }
 
   /** Toggles the share menu visibility. */
-  toggleShareMenu() {
+  toggleShareMenu = () => {
     this.setState({
       shareMenuIsVisible: !this.state.shareMenuIsVisible
     });
@@ -138,12 +138,12 @@ export class OverlayController extends React.Component<IControllerProps, IContro
         </div>
         <div className="mdl-card__menu">
           {remote.isEnabled ?
-            <a onClick={() => this.toggleShareMenu()}>SHARED</a>
+            <a onClick={this.toggleShareMenu}>SHARED</a>
             : ""
           }
           <button
             className="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"
-            onClick={() => this.toggleShareMenu()}
+            onClick={this.toggleShareMenu}
           >
             <i className="material-icons">{`keyboard_arrow_${shareIcon}`}</i>
           </button>
