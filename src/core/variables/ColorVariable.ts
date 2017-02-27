@@ -71,6 +71,16 @@ export class ColorVariable extends Variable implements IColorVariableParams {
   }
 
   /**
+   * Updates the selected value.
+   * @override
+   * @param {any} value The selected value.
+   */
+  updateValue(value: any): void {
+    let hexColorValue = TinyColor(value).toHexString();
+    super.updateValue(hexColorValue);
+  }
+
+  /**
    * Clones the variable.
    * @return {ColorVariable} Returns the cloned variable.
    */
