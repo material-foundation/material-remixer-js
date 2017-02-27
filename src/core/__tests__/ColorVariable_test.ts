@@ -74,7 +74,7 @@ describe("ColorVariable", () => {
 
     const updatedVariable = callbackSpy.args[0][0];
     expect(callbackSpy).to.have.been.calledOnce.and.calledWith(variable);
-    expect(updatedVariable.selectedValue).to.equal(newValue);
+    expect(updatedVariable.selectedValue.toLowerCase()).to.equal(newValue.toLowerCase());
   });
 
   it("should clone properly", () => {
