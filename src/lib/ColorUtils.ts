@@ -80,7 +80,6 @@ export class ColorUtils {
     colorList.map((color) => {
       return TinyColor(color);
     });
-
-   return TinyColor.mostReadable(TinyColor(baseColor), colorList).toRgbString();
+    return TinyColor.mostReadable(TinyColor(baseColor), colorList).toRgbString();
   }
 }
