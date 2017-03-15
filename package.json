@@ -75,7 +75,7 @@
     "webpack-dev-server": "^2.2.0"
   },
   "dependencies": {
-    "firebase": "^3.6.5",
+    "firebase": "^3.7.2",
     "lodash.throttle": "^4.1.1",
     "material-design-lite": "^1.2.1",
     "react": "^15.4.0",
