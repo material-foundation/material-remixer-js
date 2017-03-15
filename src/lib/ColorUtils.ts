@@ -72,7 +72,7 @@ export class ColorUtils {
 
   /**
    * Determine a readable color from a base color and list of possible colors.
-   * @param  {any}    baseColor The base color of which ot test a readable color.
+   * @param  {any}    baseColor The base color of which to test for readable color.
    * @param  {any[]}  colorList A list of possible colors.
    * @return {string}           Returns the most readable color.
    */
