@@ -1,15 +1,14 @@
 # <img align="center" src="docs/assets/remixer_logo_32x32.png"> Remixer for JavaScript
 
+<img align="right" src="docs/assets/app_screenshot.png" width="339px">
+
 [![Build Status](https://travis-ci.org/material-foundation/material-remixer-js.svg?branch=develop)](https://travis-ci.org/material-foundation/material-remixer-js) [![codecov](https://codecov.io/gh/material-foundation/material-remixer-js/branch/develop/graph/badge.svg)](https://codecov.io/gh/material-foundation/material-remixer-js) [![npm version](https://badge.fury.io/js/material-remixer.svg)](https://badge.fury.io/js/material-remixer)
 
 Remixer is a framework to iterate quickly on UI changes by allowing you to adjust UI variables without needing to rebuild (or even restart) your app. You can adjust Numbers, Colors, Booleans, and Strings. To see it in action check out the [example app](https://github.com/material-foundation/material-remixer-js/tree/develop/examples).
 
 If you are interested in using Remixer in another platform, you may want to check out the [iOS](https://github.com/material-foundation/material-remixer-ios) and [Android](https://github.com/material-foundation/material-remixer-android) repos. With any of the three platforms you can use the [Remote Controller](https://github.com/material-foundation/material-remixer-remote-web) to change the variables from a web dashboard.
 
-**New to Remixer?** Visit our [main repo](https://github.com/material-foundation/material-remixer) to get a full description of what it is and how it works.
-- - -
-
-## Quickstart
+## Using Remixer in your app
 
 ### 1. Use [`npm`](https://www.npmjs.com/) to install as dependency.
 
