@@ -165,17 +165,6 @@ export class Variable implements IVariableParams {
   }
 
   set selectedValue(value: any) {
-    this.updateValue(value);
-  }
-
-  /**
-   * Updates the selected value, saves, and executes callbacks.
-   *
-   * Subclasses should override this method if any transformations are
-   * required on the selected value.
-   * @param {any} value The selected value.
-   */
-  updateValue(value: any): void {
     this._selectedValue = value;
     this.save();
     if (this._initialized) {
