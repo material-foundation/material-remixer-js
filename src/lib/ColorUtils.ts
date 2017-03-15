@@ -41,7 +41,7 @@ export class ColorUtils {
    */
   static toRgbaString(color: any): string {
     if (typeof color !== "string") {
-      // Convert alpha back from to int[0-255] to [0-1] float.
+      // Convert alpha back from int[0-255] to [0-1] float.
       (color as RgbaColor).a /= 255;
     }
     return TinyColor(color).toRgbString();
