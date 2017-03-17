@@ -22,16 +22,22 @@
 
   <link rel="stylesheet" href="./node_modules/material-design-lite/material.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="src/demo-styles.css">
   <script src="./node_modules/material-design-lite/material.min.js"></script>
 
+  <!-- Fake Date Generator -->
+  <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="./node_modules/handlebars/dist/handlebars.min.js"></script>
+  <script src="src/faker.min.js"></script>
+  <script src="src/demo-app.js"></script>
+
   <!-- Remixer -->
-  <script src="/assets/remixer.js"></script>
+  <!-- <script src="/assets/remixer.js"></script> -->
 
 </head>
 
-<body>
-  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+<body onload="loadTemplate()">
+  <!-- <div class="mdl-layout mdl-js-layout mdl-layout-fixed-header">
     <header class="mdl-layout__header">
       <div class="mdl-layout__header-row">
         <span id="remixer-demo-title" class="mdl-layout-title">Remixer Demo</span>
@@ -47,11 +53,12 @@
     <main class="mdl-layout__content">
       <div class="page-content">
         <div id="box"></div>
+        <div id="target">Loading...</div>
       </div>
     </main>
-  </div>
+  </div> -->
 
-  <script>
+  <!-- <script>
     // Start Remixer.
     remixer.start();
 
@@ -85,7 +92,7 @@
       var color = variable.selectedValue === "Light" ? "white" : "darkGray";
       document.body.style.backgroundColor = color;
     });
-  </script>
+  </script> -->
 </body>
 
 </html>

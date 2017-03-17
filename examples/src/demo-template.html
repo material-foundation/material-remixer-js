@@ -1,0 +1,89 @@
+<!-- demo-template.html -->
+<script id="layout" type="text/x-handlebars-template">
+  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <main class="mdl-layout__content">
+      <div class="page-content">
+        {{> leftPanel}}
+        {{> rightPanel}}
+      </div>
+    </main>
+  </div>
+</script>
+
+<script id="left-panel" type="text/x-handlebars-template">
+  <div class="panel left-panel">
+    <div class="panel-header panel-header-top"><h6>Transactions</h6></div>
+    <div class="panel-header panel-header-bottom"><h5>${{totalAmount}}</h5></div>
+    <div class="panel-content">
+      {{> transactionList}}
+    </div>
+  </div>
+</script>
+
+<script id="right-panel" type="text/x-handlebars-template">
+  <div class="panel right-panel">
+    <div class="panel-header panel-header-top"><h6>{{selectedTransaction.business}}</h6></div>
+    <div class="panel-header panel-header-bottom"><h5>$2,000.33</h5></div>
+    <div class="panel-content">
+      {{> transactionDetails}}
+      {{> transactionOther}}
+    </div>
+  </div>
+</script>
+
+<!-- transaction-details partial -->
+<script id="transaction-details" type="text/x-handlebars-template">
+  <h6>Transaction details</h6>
+  <div class="mdl-list transaction-details">
+    <div class="mdl-list__item">
+      <span class="mdl-list__item-primary-content">Amount</span>
+      <span class="mdl-list__item-secondary-action">${{selectedTransaction.amount}}</span>
+    </div>
+    <div class="mdl-list__item">
+      <span class="mdl-list__item-primary-content">Date</span>
+      <span class="mdl-list__item-secondary-action">{{selectedTransaction.date}}</span>
+    </div>
+    <div class="mdl-list__item">
+      <span class="mdl-list__item-primary-content">Status</span>
+      <span class="mdl-list__item-secondary-action">Pending</span>
+    </div>
+  </div>
+</script>
+
+<!-- transaction-other partial -->
+<script id="transaction-other" type="text/x-handlebars-template">
+  <h6>Other transactions</h6>
+  <div class="mdl-list">
+    {{#selectedTransaction.other}}
+      <div class="mdl-list__item mdl-list__item--two-line">
+        <span class="mdl-list__item-primary-content">
+          <span>{{date}}</span>
+          <span class="mdl-list__item-sub-title">Posted</span>
+        </span>
+        <span class="mdl-list__item-secondary-action amount">
+          ${{amount}}
+        </span>
+      </div>
+    {{/selectedTransaction.other}}
+  </div>
+</script>
+
+<!-- transaction-list partial -->
+<script id="transaction-list" type="text/x-handlebars-template">
+  <h6>Recent transactions</h6>
+  <div class="mdl-list transaction-list">
+    {{#transactions}}
+      <div class="mdl-list__item mdl-list__item--two-line transaction-list-item {{#isSelected}}{{this}}{{/isSelected}}">
+        <span class="mdl-list__item-primary-content">
+          <i class="material-icons mdl-list__item-avatar">store</i>
+          <span>{{business}}</span>
+          <span class="mdl-list__item-sub-title">{{name}}</span>
+        </span>
+        <span class="mdl-list__item-secondary-action">
+          <span class="date">{{date}}</span>
+          <span class="amount">${{amount}}</span>
+        </span>
+      </div>
+    {{/transactions}}
+  </div>
+</script>
