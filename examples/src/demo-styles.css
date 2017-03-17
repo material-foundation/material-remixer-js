@@ -14,15 +14,19 @@
  *  under the License.
  */
 
-h3 { }
-h4 { }
-h5 { }
-h6 { font-weight: 200 }
+h6 {
+  font-weight: 200
+}
 
 .date {
   font-weight: lighter;
   color: rgba(0, 0, 0, 0.5);
-  padding: 0 60px 0 0;
+}
+
+.amount {
+  display: inline-block;
+  min-width: 100px;
+  text-align: right;
 }
 
 .page-content {
@@ -54,14 +58,30 @@ h6 { font-weight: 200 }
   color: white;
 }
 
-.panel-content { padding: 20px 40px; }
+.panel-content {
+  padding: 20px 40px;
+}
 
-.left-panel .panel-header-top { background-color: #3375BE; }
-.left-panel .panel-header-bottom { background-color: #3369B1; }
-.right-panel .panel-header-top { background-color: #EBA938; }
-.right-panel .panel-header-bottom { background-color: #CA8B24; }
+.left-panel .panel-header-top {
+  background-color: #3375BE;
+}
 
-.mdl-list__item { padding: 0 10px; border-radius: 6px; }
+.left-panel .panel-header-bottom {
+  background-color: #3369B1;
+}
+
+.right-panel .panel-header-top {
+  background-color: #EBA938;
+}
+
+.right-panel .panel-header-bottom {
+  background-color: #CA8B24;
+}
+
+.mdl-list__item {
+  padding: 0 10px;
+  border-radius: 6px;
+}
 
 .transaction-list .material-icons {
   color: #3369B1;
@@ -71,8 +91,13 @@ h6 { font-weight: 200 }
   font-size: 24px;
 }
 
-.transaction-list-item:hover { background-color: rgba(235, 169, 56, 0.1); }
-.transaction-list-item.selected { background-color: rgba(235, 169, 56, 0.4); }
+.transaction-list-item:hover {
+  background-color: rgba(235, 169, 56, 0.1);
+}
+
+.transaction-list-item.selected {
+  background-color: rgba(235, 169, 56, 0.4);
+}
 
 .transaction-details .mdl-list__item {
   padding: 0;
