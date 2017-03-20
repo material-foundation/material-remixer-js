@@ -30,10 +30,11 @@
 <script id="left-panel" type="text/x-handlebars-template">
   <div class="panel left-panel">
     <div class="panel-header panel-header-top">
-      <h6>Transactions</h6>
+      <h2>Transactions</h2>
     </div>
     <div class="panel-header panel-header-bottom">
-      <h5>${{totalAmount}}</h5>
+      <h4>${{totalAmount}}</h4>
+      <h6>This Month</h6>
     </div>
     <div class="panel-content">
       {{> transactionList}}
@@ -45,17 +46,17 @@
 <script id="right-panel" type="text/x-handlebars-template">
   <div class="panel right-panel">
     <div class="panel-header panel-header-top">
-      <h6>{{selectedTransaction.business}}</h6>
+      <h2>{{selectedTransaction.business}}</h2>
     </div>
     <div class="panel-header panel-header-bottom">
-      <!-- <div>
-        <span><h5>$2,000.33</h5></sp
-        <div class="caption">This month</div>
+      <div>
+        <h4>${{#monthlyTotal}}{{this}}{{/monthlyTotal}}</h4>
+        <h6>This Month</h6>
       </div>
       <div>
-        <span><h5>$2,000.33</h5></sp
-        <div class="caption">This month</div>
-      </div> -->
+        <h4>${{#yearlyTotal}}{{this}}{{/yearlyTotal}}</h4>
+        <h6>This Year</h6>
+      </div>
     </div>
     <div class="panel-content">
       {{> transactionDetails}}
@@ -66,7 +67,7 @@
 
 <!-- partial: transaction-details -->
 <script id="transaction-details" type="text/x-handlebars-template">
-  <h6>Transaction details</h6>
+  <h3>Transaction details</h3>
   <div class="mdl-list transaction-details">
     <div class="mdl-list__item">
       <span class="mdl-list__item-primary-content">Amount</span>
@@ -89,7 +90,7 @@
 
 <!-- partial: transaction-other -->
 <script id="transaction-other" type="text/x-handlebars-template">
-  <h6>Other transactions</h6>
+  <h3>Other transactions</h3>
   <div class="mdl-list">
     {{#selectedTransaction.other}}
       <div class="mdl-list__item mdl-list__item--two-line">
@@ -107,7 +108,7 @@
 
 <!-- partial: transaction-list -->
 <script id="transaction-list" type="text/x-handlebars-template">
-  <h6>Recent transactions</h6>
+  <h3>Recent transactions</h3>
   <div class="mdl-list transaction-list">
     {{#transactions}}
       <div class="mdl-list__item mdl-list__item--two-line transaction-list-item

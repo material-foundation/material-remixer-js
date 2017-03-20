@@ -48,12 +48,10 @@ function generateData() {
 
     transactions.push(transaction);
   }
+
   view.transactions = transactions.sort(compare);
   view.selectedTransaction = transactions[0];
-
-  // Format currency
-  view.totalAmount =
-    totalAmount.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString();
+  view.totalAmount = toCurrency(totalAmount);
 }
 
 function compare(a, b) {
@@ -67,6 +65,10 @@ function compare(a, b) {
   }
   return 0;
 };
+
+function toCurrency(value) {
+  return value.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString();
+}
 
 function getDate() {
   var date = faker.date.between('2017-01-01', new Date());
@@ -91,6 +93,18 @@ function render() {
       (this.business === view.selectedTransaction.business) ?
       "selected" : "";
     return options.fn(resp);
+  });
+
+  // Returns fake detail monthly total.
+  Handlebars.registerHelper('monthlyTotal', function(options) {
+    var total = toCurrency(parseFloat(this.selectedTransaction.amount) * 12);
+    return options.fn(total);
+  });
+
+  // Returns fake detail yearly total.
+  Handlebars.registerHelper('yearlyTotal', function(options) {
+    var total = toCurrency(parseFloat(this.selectedTransaction.amount) * 40);
+    return options.fn(total);
   });
 
   var html = compiler(view);
