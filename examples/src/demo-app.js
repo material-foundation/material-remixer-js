@@ -20,9 +20,14 @@ var view = {};
 function loadTemplate() {
   generateData();
 
-  $.get('src/demo-template.html', function(response) {
-    template = response;
-    render();
+  return new Promise(function(resolve, reject) {
+    $.get('src/demo-template.html', function(response) {
+      template = response;
+      render();
+      resolve();
+    }).fail(function() {
+      reject();
+    });
   });
 }
 
@@ -108,7 +113,7 @@ function render() {
   });
 
   var html = compiler(view);
-  $("body").html(html);
+  $("#demo-app").html(html);
 
   addClickHandler();
 }
