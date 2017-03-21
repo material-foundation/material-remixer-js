@@ -1,0 +1,152 @@
+/** @license
+ *  Copyright 2016 Google Inc. All Rights Reserved.
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ *  use this file except in compliance with the License. You may obtain a copy
+ *  of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ *  WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ *  License for the specific language governing permissions and limitations
+ *  under the License.
+ */
+
+h2 {
+  font-weight: 200;
+  font-size: 20px;
+  letter-spacing: .04em;
+}
+
+h3 {
+  font-weight: 400;
+  font-size: 16px;
+  letter-spacing: .04em;
+  color: rgba(0, 0, 0, 0.4);
+  margin: 10px;
+}
+
+h4 {
+  font-weight: 200;
+  font-size: 28px;
+  line-height: 40px;
+  letter-spacing: .04em;
+  margin: 0;
+}
+
+h6 {
+  font-weight: 200;
+  font-size: 10px;
+  letter-spacing: .04em;
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.date {
+  font-weight: lighter;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.amount {
+  display: inline-block;
+  min-width: 100px;
+  text-align: right;
+}
+
+.page-content {
+  background-color: #ccc;
+  display: flex;
+  flex-direction: row;
+  padding: 15px;
+}
+
+.left-panel {
+  overflow: hidden;
+  background-color: white;
+  border-top-left-radius: 10px;
+  flex-grow: 2;
+}
+
+.right-panel {
+  overflow: hidden;
+  background-color: #f9f9f9;
+  border-top-right-radius: 10px;
+  flex-grow: 1;
+}
+
+.panel-header {
+  padding: 10px;
+  overflow: hidden;
+  text-align: center;
+  color: white;
+}
+
+.panel-content {
+  padding: 20px 40px;
+}
+
+.left-panel .panel-header-top {
+  background-color: #3375BE;
+}
+
+.left-panel .panel-header-bottom {
+  background-color: #3369B1;
+}
+
+.right-panel .panel-header-top {
+  background-color: #EBA938;
+}
+
+.right-panel .panel-header-bottom {
+  background-color: #CA8B24;
+  display: flex;
+  flex-direction: row;
+}
+
+.right-panel .panel-header-bottom h4 {
+  font-size: 24px;
+}
+
+.right-panel .panel-header-bottom div {
+  flex-grow: 1;
+}
+
+.mdl-list__item {
+  padding: 0 10px;
+  border-radius: 6px;
+}
+
+.transaction-list .material-icons {
+  color: #3369B1;
+  background-color: inherit;
+  height: 24px;
+  width: 24px;
+  font-size: 24px;
+}
+
+.transaction-list-item:hover {
+  background-color: #f1f1f1;
+}
+
+.transaction-list-item.selected {
+  background-color: rgba(235, 169, 56, 0.4);
+}
+
+.transaction-details .mdl-list__item {
+  padding: 0 10px;
+  min-height: 40px;
+}
+
+.transaction-details .mdl-list__item-primary-content {
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.transaction-details .mdl-list__item:not(:last-child) {
+  border-bottom: 1px solid #ddd;
+}

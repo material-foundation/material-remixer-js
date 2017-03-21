@@ -1,0 +1,128 @@
+<!--
+  Copyright 2016 Google Inc. All rights reserved.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      https://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License
+-->
+
+<!-- demo-template.html -->
+<script id="layout" type="text/x-handlebars-template">
+  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <main class="mdl-layout__content">
+      <div class="page-content">
+        {{> leftPanel}}
+        {{> rightPanel}}
+      </div>
+    </main>
+  </div>
+</script>
+
+<!-- partial: left-panel -->
+<script id="left-panel" type="text/x-handlebars-template">
+  <div class="left-panel">
+    <div class="panel-header panel-header-top">
+      <h2>Transactions</h2>
+    </div>
+    <div class="panel-header panel-header-bottom">
+      <h4>${{totalAmount}}</h4>
+      <h6>This Month</h6>
+    </div>
+    <div class="panel-content">
+      {{> transactionList}}
+    </div>
+  </div>
+</script>
+
+<!-- partial: right-panel -->
+<script id="right-panel" type="text/x-handlebars-template">
+  <div class="right-panel">
+    <div class="panel-header panel-header-top">
+      <h2>{{selectedTransaction.business}}</h2>
+    </div>
+    <div class="panel-header panel-header-bottom">
+      <div>
+        <h4>${{#monthlyTotal}}{{this}}{{/monthlyTotal}}</h4>
+        <h6>This Month</h6>
+      </div>
+      <div>
+        <h4>${{#yearlyTotal}}{{this}}{{/yearlyTotal}}</h4>
+        <h6>This Year</h6>
+      </div>
+    </div>
+    <div class="panel-content">
+      {{> transactionDetails}}
+      {{> transactionOther}}
+    </div>
+  </div>
+</script>
+
+<!-- partial: transaction-details -->
+<script id="transaction-details" type="text/x-handlebars-template">
+  <h3>Transaction details</h3>
+  <div class="mdl-list transaction-details">
+    <div class="mdl-list__item">
+      <span class="mdl-list__item-primary-content">Amount</span>
+      <span class="mdl-list__item-secondary-action">
+        ${{selectedTransaction.amount}}
+      </span>
+    </div>
+    <div class="mdl-list__item">
+      <span class="mdl-list__item-primary-content">Date</span>
+      <span class="mdl-list__item-secondary-action">
+        {{selectedTransaction.date}}
+      </span>
+    </div>
+    <div class="mdl-list__item">
+      <span class="mdl-list__item-primary-content">Status</span>
+      <span class="mdl-list__item-secondary-action">Pending</span>
+    </div>
+  </div>
+</script>
+
+<!-- partial: transaction-other -->
+<script id="transaction-other" type="text/x-handlebars-template">
+  <h3>Other transactions</h3>
+  <div class="mdl-list">
+    {{#selectedTransaction.other}}
+      <div class="mdl-list__item mdl-list__item--two-line">
+        <span class="mdl-list__item-primary-content">
+          <span>{{date}}</span>
+          <span class="mdl-list__item-sub-title">Posted</span>
+        </span>
+        <span class="mdl-list__item-secondary-action amount">
+          ${{amount}}
+        </span>
+      </div>
+    {{/selectedTransaction.other}}
+  </div>
+</script>
+
+<!-- partial: transaction-list -->
+<script id="transaction-list" type="text/x-handlebars-template">
+  <h3>Recent transactions</h3>
+  <div class="mdl-list transaction-list">
+    {{#transactions}}
+      <div class="mdl-list__item mdl-list__item--two-line transaction-list-item
+                  {{#isSelected}}{{this}}{{/isSelected}}">
+        <span class="mdl-list__item-primary-content">
+            <i class="material-icons mdl-list__item-avatar">store</i>
+            <span>{{business}}</span>
+        <span class="mdl-list__item-sub-title">{{name}}</span>
+        </span>
+        <span class="mdl-list__item-secondary-action">
+          <span class="date">{{date}}</span>
+          <span class="amount">${{amount}}</span>
+        </span>
+      </div>
+    {{/transactions}}
+  </div>
+</script>
