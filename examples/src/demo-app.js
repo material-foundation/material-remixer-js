@@ -15,12 +15,18 @@
  */
 
 var template;
-var view = {};
+var vi
 
+/**
+ * Loads the demo template.
+ * @return {Promise} Returns promise of template load as successfull/failure.
+ */
 function loadTemplate() {
   generateData();
 
   return new Promise(function(resolve, reject) {
+
+    // Load handlebars page template.
     $.get('src/demo-template.html', function(response) {
       template = response;
       render();
@@ -31,6 +37,7 @@ function loadTemplate() {
   });
 }
 
+/** Generates fake data using faker.js script. */
 function generateData() {
   var totalTransactions = 20;
   var totalAmount = 0;
@@ -59,6 +66,7 @@ function generateData() {
   view.totalAmount = toCurrency(totalAmount);
 }
 
+/** Sorts by date. */
 function compare(a, b) {
   var date1 = new Date(a.date);
   var date2 = new Date(b.date);
@@ -71,15 +79,18 @@ function compare(a, b) {
   return 0;
 };
 
+/** Returns a currency string for given value. */
 function toCurrency(value) {
   return value.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString();
 }
 
+/** Returns a random date between Jan 1st, 2017 and now. */
 function getDate() {
   var date = faker.date.between('2017-01-01', new Date());
   return date.toLocaleDateString();
 }
 
+/** Renders the tempate to the #demo-app div. */
 function render() {
   var content = $($.parseHTML(template));
   var compiler = Handlebars.compile(content.filter("#layout").html());
@@ -118,6 +129,7 @@ function render() {
   addClickHandler();
 }
 
+// Adds a click listener for transaction list items.
 function addClickHandler() {
   $('.transaction-list-item').click(function() {
     var index = $('.transaction-list-item').index(this);
