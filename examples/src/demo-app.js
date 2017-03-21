@@ -14,12 +14,15 @@
  *  under the License.
  */
 
+/** The handlebars page template. */
 var template;
-var vi
+
+/** The data view structure. */
+var dataView = {};
 
 /**
  * Loads the demo template.
- * @return {Promise} Returns promise of template load as successfull/failure.
+ * @return {Promise} Returns promise for loading template as successful/failure.
  */
 function loadTemplate() {
   generateData();
@@ -61,9 +64,9 @@ function generateData() {
     transactions.push(transaction);
   }
 
-  view.transactions = transactions.sort(compare);
-  view.selectedTransaction = transactions[0];
-  view.totalAmount = toCurrency(totalAmount);
+  dataView.transactions = transactions.sort(compare);
+  dataView.selectedTransaction = transactions[0];
+  dataView.totalAmount = toCurrency(totalAmount);
 }
 
 /** Sorts by date. */
@@ -106,7 +109,7 @@ function render() {
   // Adds selected class to selected transaction item.
   Handlebars.registerHelper('isSelected', function(options) {
     var resp =
-      (this.business === view.selectedTransaction.business) ?
+      (this.business === dataView.selectedTransaction.business) ?
       "selected" : "";
     return options.fn(resp);
   });
@@ -123,7 +126,7 @@ function render() {
     return options.fn(total);
   });
 
-  var html = compiler(view);
+  var html = compiler(dataView);
   $("#demo-app").html(html);
 
   addClickHandler();
@@ -133,7 +136,7 @@ function render() {
 function addClickHandler() {
   $('.transaction-list-item').click(function() {
     var index = $('.transaction-list-item').index(this);
-    view.selectedTransaction = view.transactions[index];
+    dataView.selectedTransaction = dataView.transactions[index];
     render();
   });
 }
