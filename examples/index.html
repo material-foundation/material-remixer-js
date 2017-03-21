@@ -18,8 +18,8 @@
 
 <head>
   <meta charset="UTF-8" />
-  <title>Remixer Examples</title>
-
+  <title>Remixer Example</title>
+  <link rel="icon" href="src/favicon.ico">
   <link rel="stylesheet" href="./node_modules/material-design-lite/material.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="src/demo-styles.css">
@@ -40,7 +40,6 @@
   <div id="demo-app"></div>
 
   <script>
-
     // Start Remixer.
     remixer.start();
 
@@ -53,7 +52,6 @@
       // Add a string variable to generate a text field in the overlay.
       remixer.addStringVariable("Title", "Transactions", null, function(variable) {
         $(".left-panel .panel-header-top h2").text(variable.selectedValue);
-        // document.getElementById("remixer-demo-title").innerText = variable.selectedValue;
       });
 
       // Add a boolean variable to generate a toggle switch in the overlay.
@@ -61,7 +59,6 @@
         $(".mdl-list__item-sub-title").css("display", variable.selectedValue ? "block" : "none");
         $(".transaction-list-item").toggleClass("mdl-list__item--two-line", variable.selectedValue);
       });
-
 
       remixer.addBooleanVariable("Show transaction date", true, function(variable) {
         $(".transaction-list-item .date").css("display", variable.selectedValue ? "inline-block" : "none");
@@ -71,23 +68,13 @@
       remixer.addRangeVariable("Icon Size", 24, 20, 40, 2, function(variable) {
         $(".mdl-list__item-avatar").css("fontSize", variable.selectedValue + "px")
       });
-      //
-      // // Add a string variable with 3+ possible values to generate a dropdown selector in the overlay.
-      // remixer.addStringVariable("Box width", "200px", ["200px", "300px", "400px", "600px"], function(variable) {
-      //   // document.getElementById("box").style.width = variable.selectedValue;
-      // });
-      //
-      // // Add an item list variable with colors to generate a color picker in the overlay.
-      // remixer.addColorVariable("Box Color", "#4285F4", ["#4285F4", "#0F9D58", "#DB4437"], function(variable) {
-      //   // document.getElementById("box").style.backgroundColor = variable.selectedValue;
-      // });
-      //
-      // // Add a string variable with 2 possible values to generate a radio selector in the overlay.
-      // remixer.addStringVariable("Theme", "Light", ["Light", "Dark"], function(variable) {
-      //   // var color = variable.selectedValue === "Light" ? "white" : "darkGray";
-      //   // document.body.style.backgroundColor = color;
-      // });
-      //
+
+      // Add an item list variable with colors to generate a color picker in the overlay.
+      remixer.addColorVariable("Selected Color", "#ffe3b4", ["#ffe3b4", "#bddbfb", "#f78a81", "#eaded9"], function(variable) {
+        var color = variable.selectedValue;
+        var cssRule = $("<style> .transaction-list-item.selected {background-color: " + color + ";} </style>");
+        $('html > head').append(cssRule);
+      });
     }
   </script>
 </body>

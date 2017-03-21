@@ -63,19 +63,18 @@ h6 {
   padding: 15px;
 }
 
-.panel {
-  overflow: hidden;
-  flex-grow: 1;
-}
-
 .left-panel {
+  overflow: hidden;
   background-color: white;
   border-top-left-radius: 10px;
+  flex-grow: 2;
 }
 
 .right-panel {
+  overflow: hidden;
   background-color: #f9f9f9;
   border-top-right-radius: 10px;
+  flex-grow: 1;
 }
 
 .panel-header {
@@ -129,7 +128,7 @@ h6 {
 }
 
 .transaction-list-item:hover {
-  background-color: rgba(235, 169, 56, 0.1);
+  background-color: #f1f1f1;
 }
 
 .transaction-list-item.selected {
