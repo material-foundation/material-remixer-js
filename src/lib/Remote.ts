@@ -95,6 +95,17 @@ export class Remote  {
     return `https://${authDomain}/${this._remoteId}`;
   }
 
+  private _initialized: boolean = false;
+
+  /**
+   * Returns whether the remote has been initialized with Firebase credentials.
+   * @readonly
+   * @return {boolean} Returns true if has Firebase credentials.
+   */
+  get initialized(): boolean {
+    return this._initialized;
+  }
+
   /**
    * Initializes the remote controller.
    *
@@ -127,6 +138,7 @@ export class Remote  {
     }
 
     firebase.initializeApp(config);
+    instance._initialized = Object.keys(config).length !== 0;
   }
 
   /**
