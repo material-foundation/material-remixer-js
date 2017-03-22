@@ -1,3 +1,22 @@
+## 0.6.0
+
+### Bug Fixes
+
+* [Fixes colorVariable bug when changed remotely.](https://github.com/material-foundation/material-remixer-js/commit/3aa44628a3aa1e48d0c737ec369e777ccf6ab54e)
+* [Fixes colorVariable test](https://github.com/material-foundation/material-remixer-js/commit/177bdb59616ba446faa00208237b2d9b2989a63d)
+* [Updates firebase to prevent uninitialized app error.](https://github.com/material-foundation/material-remixer-js/commit/27c95fcf3d850a5b9a63cec37cdf9f49dd265a0b)
+
+
+### New Features
+
+* [Updates npm package dependencies](https://github.com/material-foundation/material-remixer-js/commit/f80b5858023345a6a9c36b1145c8c5378e5d1719)
+* [Adds the share menu.](https://github.com/material-foundation/material-remixer-js/commit/13c59095de01c7e4e394758b795f06fddeecff71)
+* [Adds remixer logo icon.](https://github.com/material-foundation/material-remixer-js/commit/e9d005ced3a8528abbb2c08a9cdd915e766f6658)
+* [Adds new ColorUtils class to handle color alpha conversions.](https://github.com/material-foundation/material-remixer-js/commit/aaf59ee4cd9447b738e1f07424df62f61703c2c9)
+* [Adds app screenshot.](https://github.com/material-foundation/material-remixer-js/commit/ec4b998216be5240b9bec84243e5535ff4c3eb76)
+* [Adds new demo app.](https://github.com/material-foundation/material-remixer-js/commit/095254e86bf770091d53fb10cebc3f71820658bf)
+* [Adds Firebase configuration documentation.](https://github.com/material-foundation/material-remixer-js/commit/da41011993fc684b4bddb353a92ae3bf6bb5f405)
+
 ## 0.5.8
 
 ### Bug Fixes
