@@ -28,7 +28,28 @@ This will install the Remixer files in your project's `node_modules` folder.
 remixer.start();
 ```
 
-### 4. Add variables.
+### 4. (Optional) Configure the Web Remote Controller
+
+This **optional** step is only needed if you wish to use the Web Remote Controller. If so, follow these guidelines:
+
+  - Set up a new or existing [Firebase](https://firebase.google.com/) account as detailed in the [Web Remote Controller](https://github.com/material-foundation/material-remixer-remote-web) repository.
+  - Add your Firebase account credentials to your app, and forward the param to the `remixer.start()` method.
+  
+    ```javascript
+    // Replace with your project's Firebase info.
+    var config = {
+      apiKey: "<API_KEY>",
+      authDomain: "<PROJECT_ID>.firebaseapp.com",
+      databaseURL: "https://<DATABASE_NAME>.firebaseio.com",
+    };
+
+    // Pass the config params to Remixer start method.
+    remixer.start(config);
+    ```
+
+  - You can then toggle on/off sharing to the remote controller from within the Remixer overlay.
+
+### 5. Add variables.
 Now you can add any desired variables and use the callback method to assign the `selectedValue` property.
 
 ```javascript
