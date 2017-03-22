@@ -1,6 +1,6 @@
-# <img align="center" src="docs/assets/remixer_logo_32x32.png"> Remixer for JavaScript
+# <img align="center" src="https://github.com/material-foundation/material-remixer-js/blob/develop/docs/assets/remixer_logo_32x32.png"> Remixer for JavaScript
 
-<img align="right" src="docs/assets/app_screenshot.png" width="339px">
+<img align="right" src="https://github.com/material-foundation/material-remixer-js/blob/develop/docs/assets/app_screenshot.png" width="339px">
 
 [![Build Status](https://travis-ci.org/material-foundation/material-remixer-js.svg?branch=develop)](https://travis-ci.org/material-foundation/material-remixer-js) [![codecov](https://codecov.io/gh/material-foundation/material-remixer-js/branch/develop/graph/badge.svg)](https://codecov.io/gh/material-foundation/material-remixer-js) [![npm version](https://badge.fury.io/js/material-remixer.svg)](https://badge.fury.io/js/material-remixer)
 
