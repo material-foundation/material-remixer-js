@@ -1,6 +1,6 @@
 {
   "name": "material-remixer",
-  "version": "0.5.8",
+  "version": "0.6.0",
   "description": "A set of libraries and protocols to allow the sharing of design values and live refinement of apps during the development process.",
   "homepage": "https://github.com/material-foundation/material-remixer",
   "author": "The Material Remixer Authors (see AUTHORS)",
