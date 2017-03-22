@@ -1,6 +1,6 @@
 {
   "name": "material-remixer",
-  "version": "0.5.8",
+  "version": "0.6.0",
   "description": "A set of libraries and protocols to allow the sharing of design values and live refinement of apps during the development process.",
   "homepage": "https://github.com/material-foundation/material-remixer",
   "author": "The Material Remixer Authors (see AUTHORS)",
@@ -56,7 +56,7 @@
     "karma-phantomjs-launcher": "^1.0.2",
     "karma-safari-launcher": "^1.0.0",
     "karma-sourcemap-loader": "^0.3.7",
-    "karma-webpack": "^1.8.0",
+    "karma-webpack": "^2.0.2",
     "less": "^2.7.1",
     "less-loader": "^2.2.3",
     "lesshint": "^2.3.0",
@@ -70,12 +70,12 @@
     "style-loader": "^0.13.1",
     "ts-loader": "^1.2.2",
     "tslint": "^4.0.2",
-    "typescript": "^2.0.10",
-    "webpack": "^2.2.0-rc.3",
-    "webpack-dev-server": "^2.2.0-rc.0"
+    "typescript": "^2.1.6",
+    "webpack": "^2.2.0",
+    "webpack-dev-server": "^2.2.0"
   },
   "dependencies": {
-    "firebase": "^3.6.5",
+    "firebase": "^3.7.2",
     "lodash.throttle": "^4.1.1",
     "material-design-lite": "^1.2.1",
     "react": "^15.4.0",

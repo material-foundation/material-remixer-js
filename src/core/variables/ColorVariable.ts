@@ -14,8 +14,7 @@
  *  under the License.
  */
 
-import * as TinyColor from "tinycolor2";
-
+import { ColorUtils, RgbaColor } from "../../lib/ColorUtils";
 import { ConstraintType, ControlType, DataType } from "../../lib/Constants";
 import { ISerializableData } from "../../lib/LocalStorage";
 import { IVariableCallback, IVariableListParams, Variable } from "./Variable";
@@ -99,9 +98,9 @@ export class ColorVariable extends Variable implements IColorVariableParams {
    */
   serialize(): ISerializableData {
     let data = super.serialize();
-    data.selectedValue = TinyColor(this.selectedValue).toRgb();
+    data.selectedValue = ColorUtils.toRgba(this.selectedValue);
     data.limitedToValues = this.limitedToValues.map((value: any) => {
-      return TinyColor(value).toRgb();
+      return ColorUtils.toRgba(value);
     });
     return data;
   }
@@ -113,9 +112,9 @@ export class ColorVariable extends Variable implements IColorVariableParams {
    * @return {ColorVariable}          A new initialized ColorVariable.
    */
   static deserialize(data: ISerializableData): Variable {
-    let selectedValue = TinyColor(data.selectedValue).toHexString();
-    let limitedToValues = data.limitedToValues.map((color: string) => {
-      return TinyColor(color).toHexString();
+    let selectedValue = ColorUtils.toRgbaString(data.selectedValue);
+    let limitedToValues = data.limitedToValues.map((color: RgbaColor) => {
+      return ColorUtils.toRgbaString(color);
     });
     let variable = new ColorVariable(data.key, selectedValue, limitedToValues);
     variable.title = data.title;

@@ -4,6 +4,7 @@ import * as chai from "chai";
 
 import { remixer } from "../../core/Remixer";
 import { ColorSwatchControl } from "../controls/ColorSwatchControl";
+import { ColorUtils } from "../../lib/ColorUtils";
 import { CSS } from "../../lib/Constants";
 import { Variable } from "../../core/variables/Variable";
 
@@ -42,7 +43,7 @@ describe("ColorSwatchControl", () => {
 
     for (let i = 0; i < list.children.length; i++) {
       let element = list.children[i] as HTMLElement;
-      expect(element.dataset["value"]).to.equal(limitedToValues[i]);
+      expect(element.dataset["value"]).to.equal(ColorUtils.toRgbaString(limitedToValues[i]));
     }
   });
 });

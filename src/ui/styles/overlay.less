@@ -172,7 +172,22 @@
   transition: max-height @duration ease-out, opacity @duration linear;
 
   .mdl-list__item--two-line {
+    overflow: hidden;
+    transition: max-height @duration ease-out, min-height @duration ease-out, opacity @duration linear;
+  }
+
+  .mdl-list__item--two-line.on {
+    opacity: 1;
     height: auto;
+    max-height: 200px;
+  }
+
+  .mdl-list__item--two-line.off {
+    padding: 0 16px;
+    height: 0;
+    min-height: 0;
+    max-height: 0;
+    opacity: 0;
   }
 
   a, i {
@@ -183,4 +198,9 @@
 .rmx-share-menu.active {
   max-height: 200px;
   opacity: 1;
+}
+
+.mdl-card__menu a {
+  color: @colorMdlBlue;
+  font-weight: @fontBoldWeight;
 }

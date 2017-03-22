@@ -15,8 +15,8 @@
  */
 
 import * as React from "react";
-import * as TinyColor from "tinycolor2";
 
+import { ColorUtils } from "../../lib/ColorUtils";
 import { CSS } from "../../lib/Constants";
 import { IColorControlProps } from "./controlProps";
 
@@ -30,10 +30,10 @@ export class ColorSwatchControl extends React.Component<IColorControlProps, void
 
   /** Handles the update event for this control. */
   onClick = (event: React.FormEvent<HTMLElement>): void => {
-    this.props.updateVariable(
-      this.props.variable,
-      (event.target as HTMLElement).dataset["value"],
-    );
+    let value = (event.target as HTMLElement).dataset["value"];
+    if (value) {
+      this.props.updateVariable(this.props.variable, value);
+    }
   }
 
   /** @override */
@@ -48,22 +48,20 @@ export class ColorSwatchControl extends React.Component<IColorControlProps, void
       limitedToValues,
       selectedValue,
     } = this.props.variable;
-
     return (
       <div className={`${CSS.RMX_COLOR_SWATCH} ${CSS.MDL_LIST_ITEM} ${CSS.MDL_TWO_LINE}`}>
         <span className={CSS.MDL_PRIMARY}>
           <span>{title}
             <span className={CSS.RMX_SELECTED_VALUE}>
-              {TinyColor(selectedValue).toString()}
+              {ColorUtils.toRgbaString(selectedValue)}
             </span>
           </span>
           <span className={CSS.MDL_SECONDARY}>
             {limitedToValues.map((value: string) => (
-              <ColorSwatch color={value} key={value}
-                isSelected={
-                  TinyColor(selectedValue).toRgbString() ===
-                    TinyColor(value).toRgbString()
-                }
+              <ColorSwatch
+                color={ColorUtils.toRgbaString(value)}
+                key={value}
+                isSelected={ColorUtils.areEqual(selectedValue, value)}
                 onClick={this.onClick}
               />
             ))}
@@ -94,10 +92,10 @@ function ColorSwatch(props: IColorSwatchProps) {
     isSelected,
     onClick,
   } = props;
+
   // Determine a readable color to prevent a white checkmark on a light
   // color swatch.
-  let readableCheckColors = [TinyColor("white"), TinyColor("gray")];
-  let checkColor = TinyColor.mostReadable(TinyColor(color), readableCheckColors);
+  let checkColor = ColorUtils.mostReadable(color, ["white", "gray"]);
   return (
     <div
       className={CSS.RMX_COLOR_SWATCH_ITEM}

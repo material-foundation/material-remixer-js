@@ -18,7 +18,9 @@ import * as React from "react";
 
 import { CSS, KeyCode, KeyEvent } from "../lib/Constants";
 import { Messaging } from "../lib/Messaging";
+import { OverlayShareMenu } from "./OverlayShareMenu";
 import { OverlayVariables } from "./OverlayVariables";
+import { Remote } from "../lib/Remote";
 import { Variable } from "../core/variables/Variable";
 
 /**
@@ -26,9 +28,19 @@ import { Variable } from "../core/variables/Variable";
  * @interface
  */
 interface IControllerProps {
-  wrapperElement: HTMLElement;
-  variables: Variable[];
+  remote: Remote;
   updateVariable(variable: Variable, selectedValue: any): void;
+  toggleRemoteEnabled(): void;
+  variables: Variable[];
+  wrapperElement: HTMLElement;
+}
+
+/**
+ * Interface for the state assigned to the OverlayController component.
+ * @interface
+ */
+interface IControllerState {
+  shareMenuIsVisible: boolean;
 }
 
 /**
@@ -37,7 +49,12 @@ interface IControllerProps {
  * @class
  * @extends React.Component
  */
-export class OverlayController extends React.Component<IControllerProps, void> {
+export class OverlayController extends React.Component<IControllerProps, IControllerState> {
+
+  constructor(props: IControllerProps) {
+    super(props);
+    this.state = { shareMenuIsVisible: false };
+  }
 
   /** @override */
   componentDidMount() {
@@ -82,18 +99,54 @@ export class OverlayController extends React.Component<IControllerProps, void> {
     this.props.wrapperElement.classList.toggle(CSS.RMX_VISIBLE);
   }
 
+  /** Toggles the share menu visibility. */
+  toggleShareMenu = () => {
+    this.setState({
+      shareMenuIsVisible: !this.state.shareMenuIsVisible
+    });
+  }
+
   /** @override */
   render() {
+    const {
+      remote,
+      toggleRemoteEnabled,
+      updateVariable,
+      variables
+    } = this.props;
+
+    const { shareMenuIsVisible } = this.state;
+
+    let shareIcon: string = shareMenuIsVisible ? "up" : "down";
     return (
       <div className="mdl-card mdl-shadow--6dp">
-        <div className="mdl-card__title" ref="myInput">
+        <div className="mdl-card__title">
           <h2 className="mdl-card__title-text">Remixer</h2>
         </div>
-        <div className="mdl-card__supporting-text mdl-card__actions mdl-card--border">
+        <OverlayShareMenu
+          visible={shareMenuIsVisible}
+          remoteId={remote.remoteId}
+          remoteUrl={remote.remoteUrl}
+          isEnabled={remote.isEnabled}
+          toggleRemoteEnabled={toggleRemoteEnabled}
+        />
+        <div className={`mdl-card__actions mdl-card--border`}>
           <OverlayVariables
-            variables={this.props.variables}
-            updateVariable={this.props.updateVariable}
+            variables={variables}
+            updateVariable={updateVariable}
           />
+        </div>
+        <div className="mdl-card__menu">
+          {remote.isEnabled ?
+            <a onClick={this.toggleShareMenu}>SHARED</a>
+            : ""
+          }
+          <button
+            className="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"
+            onClick={this.toggleShareMenu}
+          >
+            <i className="material-icons">{`keyboard_arrow_${shareIcon}`}</i>
+          </button>
         </div>
       </div>
     );

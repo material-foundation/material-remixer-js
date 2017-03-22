@@ -115,12 +115,10 @@ class Remixer {
    *                          configuration if you wish to use the remote
    *                          controller.
    */
-  static start(remoteConfig?: {}): void {
+  static start(remoteConfig: {} = {}): void {
     this._sharedInstance.appendFrameToBody();
     this._sharedInstance.addKeyListener();
-    if (remoteConfig) {
-      Remote.initializeRemote(remoteConfig);
-    }
+    Remote.initializeRemote(remoteConfig);
   }
 
   /**

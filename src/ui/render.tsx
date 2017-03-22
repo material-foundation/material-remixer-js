@@ -26,6 +26,9 @@ import { Variable } from "../core/variables/Variable";
 // Get remixer variables from the current instance of remixer.
 let variables = remixer.attachedInstance.variablesArray;
 
+// The current instance of remixer remote.
+let remote = remixer.attachedInstance.remote;
+
 /**
  * Handles all control updates by setting a new selected value for the
  * variable.
@@ -42,6 +45,16 @@ function updateVariable(variable: Variable, selectedValue: any): void {
   remixer.cloneAndUpdateVariable(variable, selectedValue);
 }
 
+/** Toggles the enabled status of remote sharing. */
+function toggleRemoteEnabled(): void {
+  if (remote.isEnabled) {
+    remote.stopSharing();
+  } else {
+    remote.startSharing();
+  }
+  redraw();
+}
+
 // Renders the OverlayController component to the overlay wrapper element.
 const overlayWrapper = document.getElementById(CSS.RMX_OVERLAY_WRAPPER);
 function redraw(): void {
@@ -49,9 +62,11 @@ function redraw(): void {
 
   ReactDOM.render(
     <OverlayController
-      wrapperElement={overlayWrapper}
-      variables={variables}
+      remote={remote}
+      toggleRemoteEnabled={toggleRemoteEnabled}
       updateVariable={updateVariable}
+      variables={variables}
+      wrapperElement={overlayWrapper}
     />,
     overlayWrapper,
   );
