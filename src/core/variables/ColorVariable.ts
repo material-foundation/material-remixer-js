@@ -120,4 +120,17 @@ export class ColorVariable extends Variable implements IColorVariableParams {
     variable.title = data.title;
     return variable;
   }
+
+  /**
+   * Returns color value formatted as string if not already.
+   * @override
+   * @param  {any} value The value that should be formatted.
+   * @return {string}    Return the original string or formatted string value.
+   */
+  formatValue(value: any): string {
+    if (typeof value === "object") {
+      return ColorUtils.toRgbaString(value);
+    }
+    return value;
+  }
 }

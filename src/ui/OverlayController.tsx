@@ -28,7 +28,7 @@ import { Variable } from "../core/variables/Variable";
  * @interface
  */
 interface IControllerProps {
-  remote: Remote;
+  remote?: Remote;
   updateVariable(variable: Variable, selectedValue: any): void;
   toggleRemoteEnabled(): void;
   variables: Variable[];
@@ -114,8 +114,8 @@ export class OverlayController extends React.Component<IControllerProps, IContro
       updateVariable,
       variables
     } = this.props;
-
     const { shareMenuIsVisible } = this.state;
+    const remoteInitialized = remote ? remote.initialized : false;
 
     let shareIcon: string = shareMenuIsVisible ? "up" : "down";
     return (
@@ -123,31 +123,37 @@ export class OverlayController extends React.Component<IControllerProps, IContro
         <div className="mdl-card__title">
           <h2 className="mdl-card__title-text">Remixer</h2>
         </div>
-        <OverlayShareMenu
-          visible={shareMenuIsVisible}
-          remoteId={remote.remoteId}
-          remoteUrl={remote.remoteUrl}
-          isEnabled={remote.isEnabled}
-          toggleRemoteEnabled={toggleRemoteEnabled}
-        />
+        {remoteInitialized ?
+          <OverlayShareMenu
+            visible={shareMenuIsVisible}
+            remoteId={remote.remoteId}
+            remoteUrl={remote.remoteUrl}
+            isEnabled={remote.isEnabled}
+            toggleRemoteEnabled={toggleRemoteEnabled}
+          />
+          : ""
+        }
         <div className={`mdl-card__actions mdl-card--border`}>
           <OverlayVariables
             variables={variables}
             updateVariable={updateVariable}
           />
         </div>
-        <div className="mdl-card__menu">
-          {remote.isEnabled ?
-            <a onClick={this.toggleShareMenu}>SHARED</a>
-            : ""
-          }
-          <button
-            className="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"
-            onClick={this.toggleShareMenu}
-          >
-            <i className="material-icons">{`keyboard_arrow_${shareIcon}`}</i>
-          </button>
-        </div>
+        {remoteInitialized ?
+          <div className="mdl-card__menu">
+            {remote.isEnabled ?
+              <a onClick={this.toggleShareMenu}>SHARED</a>
+              : ""
+            }
+            <button
+              className="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"
+              onClick={this.toggleShareMenu}
+            >
+              <i className="material-icons">{`keyboard_arrow_${shareIcon}`}</i>
+            </button>
+          </div>
+          : ""
+        }
       </div>
     );
   }

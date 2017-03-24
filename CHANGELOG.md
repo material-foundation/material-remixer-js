@@ -1,3 +1,11 @@
+## 0.6.4
+
+### Bug Fixes
+
+* [Shows share menu only if firebase has been initialized properly.](https://github.com/material-foundation/material-remixer-js/commit/8ef2372332dba476f859652d1d7437cbcd103bc0)
+* [Requires remote to be initialized when checking if enabled.](https://github.com/material-foundation/material-remixer-js/commit/6612a2fddf1c50e42131ac09e10878cc6de7e620)
+* [Fixes color formatting bug.](https://github.com/material-foundation/material-remixer-js/commit/fe62f83238d94ec1f26b7b4d550c0b2ff1be655d)
+
 ## 0.6.0
 
 ### Bug Fixes
