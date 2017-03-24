@@ -122,7 +122,7 @@ export class ColorVariable extends Variable implements IColorVariableParams {
   }
 
   /**
-   * Returns color string of value.
+   * Returns color value formatted as string if not already.
    * @override
    * @param  {any} value The value that should be formatted.
    * @return {any}       Return either the original or formatted value.
