@@ -125,7 +125,7 @@ export class ColorVariable extends Variable implements IColorVariableParams {
    * Returns color value formatted as string if not already.
    * @override
    * @param  {any} value The value that should be formatted.
-   * @return {any}       Return either the original or formatted value.
+   * @return {string}    Return the original string or formatted string value.
    */
   formatValue(value: any): string {
     if (typeof value === "object") {
