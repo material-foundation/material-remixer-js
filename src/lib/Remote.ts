@@ -68,7 +68,7 @@ export class Remote  {
    * @return {boolean}
    */
   get isEnabled(): boolean {
-    return this._enabled;
+    return this._initialized && this._enabled;
   }
 
   private _remoteId: string;
@@ -201,7 +201,7 @@ export class Remote  {
    * @param {boolean = true}    Whether to throttle the saves.
    */
   static saveVariable(variable: Variable, throttle: boolean = true): void {
-    if (this._sharedInstance._enabled) {
+    if (this._sharedInstance.isEnabled) {
       if (throttle) {
         this._sharedInstance._throttledSaveVariable(variable);
       } else {
@@ -215,7 +215,7 @@ export class Remote  {
    * @static
    */
   static removeAllVariables(): void {
-    if (this._sharedInstance._enabled) {
+    if (this._sharedInstance.isEnabled) {
       this._sharedInstance.dbReference().remove();
     }
   }
@@ -229,7 +229,7 @@ export class Remote  {
    * @param {Variable} variable The variable to save.
    */
   private _save(variable: Variable): void {
-    if (this._enabled) {
+    if (this.isEnabled) {
       this.stopObservingUpdates(variable.key);
       this.dbReference().child(variable.key).set(variable.serialize());
       this.startObservingUpdates(variable.key);
