@@ -254,4 +254,15 @@ export class Variable implements IVariableParams {
   private sanitizeKey(key: string): string {
     return key.split(" ").join("_");
   }
+
+  /**
+   * Subclass should override this method and return a properly formatted value.
+   * For example, a ColorVariable may choose to return an rgba string when
+   * provided an RgbaColor object.
+   * @param  {any} value The value that should be formatted.
+   * @return {any}       Return either the original or formatted value.
+   */
+  formatValue(value: any): any {
+    return value;
+  }
 }
