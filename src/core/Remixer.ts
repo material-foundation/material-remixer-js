@@ -307,6 +307,9 @@ class Remixer {
    * @param {any} selectedValue The new selected value.
    */
   static cloneAndUpdateVariable(variable: Variable, selectedValue: any): void {
+    // First make sure selected value is in proper format.
+    selectedValue = variable.formatValue(selectedValue);
+
     if (variable.selectedValue !== selectedValue) {
       let clonedVariable = variable.clone();
       this.attachedInstance._variables[variable.key] = clonedVariable;
