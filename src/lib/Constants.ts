@@ -85,4 +85,6 @@ export const CSS = {
   RMX_SWITCH:             "rmx-switch",
   RMX_TEXTFIELD:          "rmx-textfield",
   RMX_VISIBLE:            "rmx-visible",
+
+  RMX_LIST_ITEM:          "rmx-list-item",
 };

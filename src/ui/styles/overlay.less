@@ -24,6 +24,7 @@
 @fontSizeSmall: 12px;
 @fontLightWeight: 200;
 @fontBoldWeight: 500;
+@fontFamily: "Roboto", "Helvetica", "Arial", sans-serif;
 
 .mdl-card {
   background-color: @colorOffWhite;
@@ -43,6 +44,7 @@
 .mdl-list__item {
   font-size: @fontSize;
   font-weight: @fontLightWeight;
+  border: 1px solid #000;
 }
 
 .mdl-list__item--two-line {
@@ -70,6 +72,34 @@
   opacity: 1;
   transform: translateX(0);
 }
+
+.rmx-list-item {
+  font-family: @fontFamily;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid red;
+}
+
+.rmx-list-item .meta {
+  display: flex;
+  flex-direction: row;
+}
+
+.rmx-list-item .title {
+  font-size: @fontSize;
+  font-weight: @fontLightWeight;
+}
+
+.rmx-list-item .subtitle {
+  color: @colorMdlBlue;
+  font-weight: @fontBoldWeight;
+  margin-left: 5px;
+}
+
+.rmx-list-item .control {
+  // flex: 0 0 100%;
+}
+
 
 .rmx-selected-value {
   color: @colorMdlBlue;
