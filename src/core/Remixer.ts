@@ -311,13 +311,14 @@ class Remixer {
     // First make sure selected value is in proper format.
     selectedValue = variable.formatValue(selectedValue);
 
-    if (variable.selectedValue !== selectedValue) {
-      let clonedVariable = variable.clone();
-      this.attachedInstance._variables[variable.key] = clonedVariable;
-      this.updateVariable(clonedVariable, selectedValue);
-      return clonedVariable;
+    if (variable.selectedValue === selectedValue) {
+      return variable;
     }
-    return variable;
+
+    let clonedVariable = variable.clone();
+    this.attachedInstance._variables[variable.key] = clonedVariable;
+    this.updateVariable(clonedVariable, selectedValue);
+    return clonedVariable;
   }
 
   /**
