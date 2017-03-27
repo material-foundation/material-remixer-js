@@ -15,7 +15,7 @@ describe("SwitchControl", () => {
   let variable: Variable;
 
   beforeEach(() => {
-    variable = remixer.addBooleanVariable(key, initialValue,);
+    variable = remixer.addBooleanVariable(key, initialValue);
     this.component = TestUtils.renderIntoDocument(
       <SwitchControl
         variable={variable}
