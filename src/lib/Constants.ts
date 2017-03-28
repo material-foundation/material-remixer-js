@@ -73,6 +73,7 @@ export const CSS = {
   RMX_COLOR_SWATCH:       "rmx-color-swatch",
   RMX_COLOR_SWATCH_ITEM:  "rmx-color-swatch-item",
   RMX_DROPDOWN:           "rmx-dropdown",
+  RMX_LIST_ITEM:          "rmx-list-item",
   RMX_OVERLAY_FRAME:      "__remixer-overlay-frame__",
   RMX_OVERLAY_WRAPPER:    "rmx-overlay-wrapper",
   RMX_RADIO_LIST:         "rmx-radio-list",
@@ -85,6 +86,4 @@ export const CSS = {
   RMX_SWITCH:             "rmx-switch",
   RMX_TEXTFIELD:          "rmx-textfield",
   RMX_VISIBLE:            "rmx-visible",
-
-  RMX_LIST_ITEM:          "rmx-list-item",
 };
