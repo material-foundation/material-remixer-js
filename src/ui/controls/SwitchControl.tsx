@@ -76,23 +76,6 @@ export class SwitchControl extends React.Component<IBooleanControlProps, void> {
         }
       >
       </ListItem>
-      // <div className={`${CSS.RMX_SWITCH} ${CSS.MDL_LIST_ITEM}`}>
-      //   <span className={CSS.MDL_PRIMARY}>{title}</span>
-      //   <span className={CSS.MDL_SECONDARY}>
-      //     <label
-      //       ref={item => this.switchControl = item}
-      //       className="mdl-switch mdl-js-switch mdl-js-ripple-effect"
-      //       htmlFor={id}
-      //     >
-      //       <input
-      //         id={id} type="checkbox" className="mdl-switch__input"
-      //         checked={selectedValue}
-      //         onChange={this.onChange}
-      //       />
-      //       <span className="mdl-switch__label" />
-      //     </label>
-      //   </span>
-      // </div>
     );
   }
 }
