@@ -79,7 +79,6 @@ export const CSS = {
   RMX_OVERLAY_WRAPPER:    "rmx-overlay-wrapper",
   RMX_RADIO_LIST:         "rmx-radio-list",
   RMX_RADIO_LIST_ITEM:    "rmx-radio-list-item",
-  RMX_SELECTED_VALUE:     "rmx-selected-value",
   RMX_SHARE_MENU:         "rmx-share-menu",
   RMX_SLIDER:             "rmx-slider",
   RMX_SLIDER_MAX:         "rmx-slider-max-value",
