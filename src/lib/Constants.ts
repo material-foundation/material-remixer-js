@@ -64,6 +64,7 @@ export const DataType = {
 
 /** CSS class and id constants. */
 export const CSS = {
+  // TODO(cjcox): Refactor out these MDL classes in favor of flexbox.
   MDL_LIST:               "mdl-list",
   MDL_LIST_ITEM:          "mdl-list__item",
   MDL_PRIMARY:            "mdl-list__item-primary-content",
