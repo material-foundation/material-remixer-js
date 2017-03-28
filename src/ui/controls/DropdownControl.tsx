@@ -18,6 +18,7 @@ import * as React from "react";
 
 import { CSS } from "../../lib/Constants";
 import { IStringControlProps } from "./controlProps";
+import { ListItem } from "../ListItem";
 
 /**
  * A dropdown control.
@@ -50,27 +51,32 @@ export class DropdownControl extends React.Component<IStringControlProps, void> 
     const id = `${CSS.RMX_DROPDOWN}-${key}`;
 
     return (
-      <div className={`${CSS.RMX_DROPDOWN} ${CSS.MDL_LIST_ITEM}`}>
-        <span className={CSS.MDL_PRIMARY}>{title}</span>
-        <span className={CSS.MDL_SECONDARY}>
-          <button id={id} className="mdl-button mdl-js-button">
-            <span>
-              {selectedValue}<i className="material-icons">arrow_drop_down</i>
-            </span>
-          </button>
-          <ul
-            className="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
-            htmlFor={id}
-          >
-            {limitedToValues.map((value: string) => (
-              <li className="mdl-menu__item" key={value}
-                onClick={this.onClick}
-                data-value={value}>{value}
-              </li>
-            ))}
-          </ul>
-        </span>
-      </div>
+      <ListItem
+        controlClass={CSS.RMX_DROPDOWN}
+        title={title}
+        inlineControl={true}
+        control={
+          <div>
+            <button id={id} className="mdl-button mdl-js-button">
+              <span>
+                {selectedValue}<i className="material-icons">arrow_drop_down</i>
+              </span>
+            </button>
+            <ul
+              className="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+              htmlFor={id}
+            >
+              {limitedToValues.map((value: string) => (
+                <li className="mdl-menu__item" key={value}
+                  onClick={this.onClick}
+                  data-value={value}>{value}
+                </li>
+              ))}
+            </ul>
+          </div>
+        }
+      >
+      </ListItem>
     );
   }
 }

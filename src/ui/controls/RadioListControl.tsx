@@ -18,6 +18,7 @@ import * as React from "react";
 
 import { CSS } from "../../lib/Constants";
 import { IStringControlProps } from "./controlProps";
+import { ListItem } from "../ListItem";
 
 /**
  * A radio list control.
@@ -60,10 +61,12 @@ export class RadioListControl extends React.Component<IStringControlProps, void>
     const id = `${CSS.RMX_RADIO_LIST_ITEM}-${key}`;
 
     return (
-      <div className={`${CSS.RMX_RADIO_LIST} ${CSS.MDL_LIST_ITEM}`}>
-        <span className={CSS.MDL_PRIMARY}>{title}</span>
-        <span className={CSS.MDL_SECONDARY}>
-          {limitedToValues.map((value: string, i: number) => (
+      <ListItem
+        controlClass={CSS.RMX_RADIO_LIST}
+        title={title}
+        inlineControl={true}
+        control={
+          limitedToValues.map((value: string, i: number) => (
             <label
               ref={item => this.radioItems[i] = item}
               className={`${CSS.RMX_RADIO_LIST_ITEM} mdl-radio mdl-js-radio mdl-js-ripple-effect`}
@@ -77,9 +80,10 @@ export class RadioListControl extends React.Component<IStringControlProps, void>
               />
               <span className="mdl-radio__label">{value}</span>
             </label>
-          ))}
-        </span>
-      </div>
+          ))
+        }
+      >
+      </ListItem>
     );
   }
 }
