@@ -32,8 +32,9 @@ interface IListItemProps {
 
 /** Returns a stateless page layout template. */
 export function ListItem(props: IListItemProps) {
+  let inline = props.inlineControl ? "inline" : "";
   return (
-    <div className={`${CSS.RMX_LIST_ITEM} ${props.controlClass}`}>
+    <div className={`${CSS.RMX_LIST_ITEM} ${props.controlClass} ${inline}`}>
       <div className="meta">
         <div className="title">{props.title}</div>
         <div className="subtitle">{props.subtitle}</div>

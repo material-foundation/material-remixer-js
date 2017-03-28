@@ -18,6 +18,7 @@ import * as React from "react";
 
 import { CSS } from "../../lib/Constants";
 import { IBooleanControlProps } from "./controlProps";
+import { ListItem } from "../ListItem";
 
 /**
  * A switch control.
@@ -55,9 +56,11 @@ export class SwitchControl extends React.Component<IBooleanControlProps, void> {
     const id = `${CSS.RMX_SWITCH}-${key}`;
 
     return (
-      <div className={`${CSS.RMX_SWITCH} ${CSS.MDL_LIST_ITEM}`}>
-        <span className={CSS.MDL_PRIMARY}>{title}</span>
-        <span className={CSS.MDL_SECONDARY}>
+      <ListItem
+        controlClass={CSS.RMX_SWITCH}
+        title={title}
+        inlineControl={true}
+        control={
           <label
             ref={item => this.switchControl = item}
             className="mdl-switch mdl-js-switch mdl-js-ripple-effect"
@@ -70,8 +73,26 @@ export class SwitchControl extends React.Component<IBooleanControlProps, void> {
             />
             <span className="mdl-switch__label" />
           </label>
-        </span>
-      </div>
+        }
+      >
+      </ListItem>
+      // <div className={`${CSS.RMX_SWITCH} ${CSS.MDL_LIST_ITEM}`}>
+      //   <span className={CSS.MDL_PRIMARY}>{title}</span>
+      //   <span className={CSS.MDL_SECONDARY}>
+      //     <label
+      //       ref={item => this.switchControl = item}
+      //       className="mdl-switch mdl-js-switch mdl-js-ripple-effect"
+      //       htmlFor={id}
+      //     >
+      //       <input
+      //         id={id} type="checkbox" className="mdl-switch__input"
+      //         checked={selectedValue}
+      //         onChange={this.onChange}
+      //       />
+      //       <span className="mdl-switch__label" />
+      //     </label>
+      //   </span>
+      // </div>
     );
   }
 }

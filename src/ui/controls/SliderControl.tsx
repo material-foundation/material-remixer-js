@@ -18,6 +18,7 @@ import * as React from "react";
 
 import { CSS } from "../../lib/Constants";
 import { IRangeControlProps } from "./controlProps";
+import { ListItem } from "../ListItem";
 
 /**
  * A slider control.
@@ -52,12 +53,13 @@ export class SliderControl extends React.Component<IRangeControlProps, void> {
     const id = `${CSS.RMX_SLIDER}-${key}`;
 
     return (
-      <div className={`${CSS.RMX_SLIDER} ${CSS.MDL_LIST_ITEM} ${CSS.MDL_TWO_LINE}`}>
-        <span className={CSS.MDL_PRIMARY}>
-          <span>{title}
-            <span className={CSS.RMX_SELECTED_VALUE}>{selectedValue}</span>
-          </span>
-          <span className={CSS.MDL_SECONDARY}>
+      <ListItem
+        controlClass={CSS.RMX_SLIDER}
+        title={title}
+        subtitle={selectedValue}
+        inlineControl={false}
+        control={
+          <div>
             <span className={CSS.RMX_SLIDER_MIN}>{minValue}</span>
             <input id={id} type="range" className="mdl-slider mdl-js-slider"
               min={minValue} max={maxValue} step={increment}
@@ -65,9 +67,26 @@ export class SliderControl extends React.Component<IRangeControlProps, void> {
               onChange={this.onChange}
             />
             <span className={CSS.RMX_SLIDER_MAX}>{maxValue}</span>
-          </span>
-        </span>
-      </div>
+          </div>
+        }
+      >
+      </ListItem>
+      // <div className={`${CSS.RMX_SLIDER} ${CSS.MDL_LIST_ITEM} ${CSS.MDL_TWO_LINE}`}>
+      //   <span className={CSS.MDL_PRIMARY}>
+      //     <span>{title}
+      //       <span className={CSS.RMX_SELECTED_VALUE}>{selectedValue}</span>
+      //     </span>
+      //     <span className={CSS.MDL_SECONDARY}>
+      //       <span className={CSS.RMX_SLIDER_MIN}>{minValue}</span>
+      //       <input id={id} type="range" className="mdl-slider mdl-js-slider"
+      //         min={minValue} max={maxValue} step={increment}
+      //         value={selectedValue}
+      //         onChange={this.onChange}
+      //       />
+      //       <span className={CSS.RMX_SLIDER_MAX}>{maxValue}</span>
+      //     </span>
+      //   </span>
+      // </div>
     );
   }
 }

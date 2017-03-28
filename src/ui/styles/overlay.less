@@ -77,12 +77,24 @@
   font-family: @fontFamily;
   display: flex;
   flex-direction: column;
-  border: 1px solid red;
+  padding: 10px 20px;
+}
+
+.rmx-list-item.inline  {
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .rmx-list-item .meta {
   display: flex;
   flex-direction: row;
+  align-items: baseline;
+  padding-bottom: 10px;
+}
+
+.rmx-list-item.inline .meta {
+  padding-bottom: 0;
+  align-items: center;
 }
 
 .rmx-list-item .title {
@@ -97,7 +109,7 @@
 }
 
 .rmx-list-item .control {
-  // flex: 0 0 100%;
+  position: relative;
 }
 
 
