@@ -58,35 +58,31 @@ export class OverlayShareMenu extends React.Component<IOverlayShareMenuProps, vo
           title={`Sharing is ${status}`}
           subtitle="These values can be adjusted by anyone with the link."
           inlineControl={true}
-          control={
-            <label
-              className="mdl-switch mdl-js-switch mdl-js-ripple-effect"
-              htmlFor="share-switch"
-            >
-              <input
-                id="share-switch" type="checkbox" className="mdl-switch__input"
-                checked={isEnabled}
-                onChange={this.props.toggleRemoteEnabled}
-                />
-            </label>
-          }
         >
+          <label
+            className="mdl-switch mdl-js-switch mdl-js-ripple-effect"
+            htmlFor="share-switch"
+          >
+            <input
+              id="share-switch" type="checkbox" className="mdl-switch__input"
+              checked={isEnabled}
+              onChange={this.props.toggleRemoteEnabled}
+              />
+          </label>
         </ListItem>
         <ListItem
           controlClass={`${CSS.RMX_SHARE_LINK} ${status}`}
           title="Link"
           inlineControl={false}
-          control={
-            <div>
-              <div><a href={remoteUrl} target="_blank">{remoteUrl}</a></div>
-              <div>
-                <a href={remoteUrl} target="_blank">
-                  <i className="material-icons">share</i>
-                </a>
-              </div>
-            </div>
-          }
         >
+          <div>
+            <div><a href={remoteUrl} target="_blank">{remoteUrl}</a></div>
+            <div>
+              <a href={remoteUrl} target="_blank">
+                <i className="material-icons">share</i>
+              </a>
+            </div>
+          </div>
         </ListItem>
       </div>
     );
