@@ -17,6 +17,7 @@
 import * as React from "react";
 
 import { CSS } from "../lib/Constants";
+import { ListItem } from "./ListItem";
 
 /**
  * Interface for the overlay share menu properties.
@@ -51,44 +52,38 @@ export class OverlayShareMenu extends React.Component<IOverlayShareMenuProps, vo
     let status = isEnabled ? "on" : "off";
 
     return (
-      <div
-        className={`${CSS.RMX_SHARE_MENU} mdl-card__actions ${showMenu}`}
-      >
-        <div className={CSS.MDL_LIST}>
-          <div className={`${CSS.MDL_LIST_ITEM} ${CSS.MDL_TWO_LINE} on`}>
-            <span className={CSS.MDL_PRIMARY}>
-              <span><strong>{`Sharing is ${status}`}</strong></span>
-              <span className="mdl-list__item-sub-title">
-                These values can be adjusted by anyone with the link.
-              </span>
-            </span>
-            <span className={CSS.MDL_SECONDARY}>
-              <label
-                className="mdl-switch mdl-js-switch mdl-js-ripple-effect"
-                htmlFor="share-switch"
-              >
-                <input
-                  id="share-switch" type="checkbox" className="mdl-switch__input"
-                  checked={isEnabled}
-                  onChange={this.props.toggleRemoteEnabled}
-                  />
-              </label>
-            </span>
-          </div>
-          <div className={`${CSS.MDL_LIST_ITEM} ${CSS.MDL_TWO_LINE} ${status}`}>
-            <span className={CSS.MDL_PRIMARY}>
-              <span>Link</span>
-              <span className="mdl-list__item-sub-title">
-                <a href={remoteUrl} target="_blank">{remoteUrl}</a>
-              </span>
-            </span>
-            <span className={CSS.MDL_SECONDARY}>
+      <div className={`${CSS.RMX_SHARE_MENU} ${showMenu}`}>
+        <ListItem
+          controlClass={CSS.RMX_SHARE_STATUS}
+          title={`Sharing is ${status}`}
+          subtitle="These values can be adjusted by anyone with the link."
+          inlineControl={true}
+        >
+          <label
+            className="mdl-switch mdl-js-switch mdl-js-ripple-effect"
+            htmlFor="share-switch"
+          >
+            <input
+              id="share-switch" type="checkbox" className="mdl-switch__input"
+              checked={isEnabled}
+              onChange={this.props.toggleRemoteEnabled}
+              />
+          </label>
+        </ListItem>
+        <ListItem
+          controlClass={`${CSS.RMX_SHARE_LINK} ${status}`}
+          title="Link"
+          inlineControl={false}
+        >
+          <div>
+            <div><a href={remoteUrl} target="_blank">{remoteUrl}</a></div>
+            <div>
               <a href={remoteUrl} target="_blank">
                 <i className="material-icons">share</i>
               </a>
-            </span>
+            </div>
           </div>
-        </div>
+        </ListItem>
       </div>
     );
   }
