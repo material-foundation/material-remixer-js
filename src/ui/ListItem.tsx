@@ -27,7 +27,7 @@ interface IListItemProps {
   subtitle?: string;
   inlineControl: boolean;
   controlClass?: string;
-  control: any;
+  children?: any;
 }
 
 /** Returns a stateless page layout template. */
@@ -39,7 +39,7 @@ export function ListItem(props: IListItemProps) {
         <div className="title">{props.title}</div>
         <div className="subtitle">{props.subtitle}</div>
       </div>
-      <div className="control">{props.control}</div>
+      <div className="control">{props.children}</div>
     </div>
   );
 }

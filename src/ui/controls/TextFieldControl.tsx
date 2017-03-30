@@ -57,21 +57,19 @@ export class TextFieldControl extends React.Component<IStringControlProps, void>
         controlClass={CSS.RMX_TEXTFIELD}
         title={title}
         inlineControl={false}
-        control={
-          <span className="mdl-textfield mdl-js-textfield">
-            <input className="mdl-textfield__input" type="text"
-              id={id}
-              pattern={pattern}
-              value={selectedValue}
-              onChange={this.onChange}
-            />
-            <label className="mdl-textfield__label" htmlFor={id}>
-              {`Enter ${isNumber ? "number" : "text"}...`}
-            </label>
-            <span className="mdl-textfield__error">Input is not a number!</span>
-          </span>
-        }
       >
+        <span className="mdl-textfield mdl-js-textfield">
+          <input className="mdl-textfield__input" type="text"
+            id={id}
+            pattern={pattern}
+            value={selectedValue}
+            onChange={this.onChange}
+          />
+          <label className="mdl-textfield__label" htmlFor={id}>
+            {`Enter ${isNumber ? "number" : "text"}...`}
+          </label>
+          <span className="mdl-textfield__error">Input is not a number!</span>
+        </span>
       </ListItem>
     );
   }

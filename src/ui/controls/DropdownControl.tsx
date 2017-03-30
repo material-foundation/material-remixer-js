@@ -55,27 +55,25 @@ export class DropdownControl extends React.Component<IStringControlProps, void> 
         controlClass={CSS.RMX_DROPDOWN}
         title={title}
         inlineControl={true}
-        control={
-          <div>
-            <button id={id} className="mdl-button mdl-js-button">
-              <span>
-                {selectedValue}<i className="material-icons">arrow_drop_down</i>
-              </span>
-            </button>
-            <ul
-              className="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
-              htmlFor={id}
-            >
-              {limitedToValues.map((value: string) => (
-                <li className="mdl-menu__item" key={value}
-                  onClick={this.onClick}
-                  data-value={value}>{value}
-                </li>
-              ))}
-            </ul>
-          </div>
-        }
       >
+        <div>
+          <button id={id} className="mdl-button mdl-js-button">
+            <span>
+              {selectedValue}<i className="material-icons">arrow_drop_down</i>
+            </span>
+          </button>
+          <ul
+            className="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+            htmlFor={id}
+          >
+            {limitedToValues.map((value: string) => (
+              <li className="mdl-menu__item" key={value}
+                onClick={this.onClick}
+                data-value={value}>{value}
+              </li>
+            ))}
+          </ul>
+        </div>
       </ListItem>
     );
   }
