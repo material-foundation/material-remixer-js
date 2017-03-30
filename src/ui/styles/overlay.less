@@ -24,6 +24,7 @@
 @fontSizeSmall: 12px;
 @fontLightWeight: 200;
 @fontBoldWeight: 500;
+@fontFamily: "Roboto", "Helvetica", "Arial", sans-serif;
 
 .mdl-card {
   background-color: @colorOffWhite;
@@ -36,24 +37,9 @@
   background-color: #FFFFFF;
 }
 
-.mdl-list {
-  margin: 0;
-}
-
-.mdl-list__item {
-  font-size: @fontSize;
-  font-weight: @fontLightWeight;
-}
-
-.mdl-list__item--two-line {
-  .mdl-list__item-primary-content {
-    height: inherit;
-  }
-
-  .mdl-list__item-secondary-content {
-    margin: 10px 0 0;
-    position: relative;
-  }
+.mdl-card__menu a {
+  color: @colorMdlBlue;
+  font-weight: @fontBoldWeight;
 }
 
 #rmx-overlay-wrapper {
@@ -71,17 +57,48 @@
   transform: translateX(0);
 }
 
-.rmx-selected-value {
-  color: @colorMdlBlue;
-  font-weight: @fontBoldWeight;
-  margin-left: 5px;
+.rmx-list-item {
+  font-family: @fontFamily;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 20px;
+}
+
+.rmx-list-item.inline {
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.rmx-list-item {
+  .meta {
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 4px;
+  }
+
+  .title {
+    font-size: @fontSize;
+    font-weight: @fontLightWeight;
+    padding-right: 5px;
+  }
+
+  .subtitle {
+    color: @colorMdlBlue;
+    font-size: @fontSize;
+    font-weight: @fontBoldWeight;
+  }
+
+  .control {
+    position: relative;
+  }
+}
+
+.rmx-list-item.inline .meta {
+  padding-bottom: 0;
+  align-items: center;
 }
 
 .rmx-color-swatch {
-  .mdl-list__item-secondary-content {
-    flex-flow: inherit;
-  }
-
   .rmx-color-swatch-item {
     border-radius: @colorSwatchSize / 2;
     float: left;
@@ -98,17 +115,11 @@
   }
 }
 
-.rmx-radio-list {
-  .mdl-list__item-secondary-content {
-    flex-flow: inherit;
-  }
-
-  .rmx-radio-list-item {
-    font-size: @fontSize;
-    font-weight: @fontBoldWeight;
-    margin-left: 20px;
-    width: inherit;
-  }
+.rmx-radio-list-item {
+  font-size: @fontSize;
+  font-weight: @fontBoldWeight;
+  margin-left: 20px;
+  width: inherit;
 }
 
 .rmx-dropdown button {
@@ -171,36 +182,49 @@
   padding: 0 8px;
   transition: max-height @duration ease-out, opacity @duration linear;
 
-  .mdl-list__item--two-line {
-    overflow: hidden;
-    transition: max-height @duration ease-out, min-height @duration ease-out, opacity @duration linear;
+  .rmx-list-item.inline .meta {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
-  .mdl-list__item--two-line.on {
-    opacity: 1;
-    height: auto;
-    max-height: 200px;
+  .rmx-share-status {
+    .title {
+      font-weight: @fontBoldWeight;
+    }
+
+    .subtitle {
+      color: inherit;
+      font-weight: @fontLightWeight;
+    }
   }
 
-  .mdl-list__item--two-line.off {
-    padding: 0 16px;
-    height: 0;
-    min-height: 0;
-    max-height: 0;
-    opacity: 0;
-  }
+  .rmx-share-link {
+    transition: max-height @duration ease-out, padding @duration ease-out, opacity @duration linear;
 
-  a, i {
-    color: @colorMdlBlue;
+    &.on {
+      max-height: 200px;
+    }
+
+    &.off {
+      padding: 0 20px;
+      max-height: 0;
+      opacity: 0;
+    }
+
+    div:first-child {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+
+    a,
+    i {
+      color: @colorMdlBlue;
+    }
   }
 }
 
 .rmx-share-menu.active {
   max-height: 200px;
   opacity: 1;
-}
-
-.mdl-card__menu a {
-  color: @colorMdlBlue;
-  font-weight: @fontBoldWeight;
 }

@@ -19,6 +19,7 @@ import * as React from "react";
 import { ColorUtils } from "../../lib/ColorUtils";
 import { CSS } from "../../lib/Constants";
 import { IColorControlProps } from "./controlProps";
+import { ListItem } from "../ListItem";
 
 /**
  * A color swatch picker control consisting of a single color swatch for each
@@ -49,25 +50,21 @@ export class ColorSwatchControl extends React.Component<IColorControlProps, void
       selectedValue,
     } = this.props.variable;
     return (
-      <div className={`${CSS.RMX_COLOR_SWATCH} ${CSS.MDL_LIST_ITEM} ${CSS.MDL_TWO_LINE}`}>
-        <span className={CSS.MDL_PRIMARY}>
-          <span>{title}
-            <span className={CSS.RMX_SELECTED_VALUE}>
-              {ColorUtils.toRgbaString(selectedValue)}
-            </span>
-          </span>
-          <span className={CSS.MDL_SECONDARY}>
-            {limitedToValues.map((value: string) => (
-              <ColorSwatch
-                color={ColorUtils.toRgbaString(value)}
-                key={value}
-                isSelected={ColorUtils.areEqual(selectedValue, value)}
-                onClick={this.onClick}
-              />
-            ))}
-          </span>
-        </span>
-      </div>
+      <ListItem
+        controlClass={CSS.RMX_COLOR_SWATCH}
+        title={title}
+        subtitle={ColorUtils.toRgbaString(selectedValue)}
+        inlineControl={false}
+      >
+        {limitedToValues.map((value: string) => (
+          <ColorSwatch
+            color={ColorUtils.toRgbaString(value)}
+            key={value}
+            isSelected={ColorUtils.areEqual(selectedValue, value)}
+            onClick={this.onClick}
+          />
+        ))}
+      </ListItem>
     );
   }
 }

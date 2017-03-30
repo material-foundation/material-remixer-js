@@ -3,6 +3,7 @@ import * as sinon from "sinon";
 import * as sinonChai from "sinon-chai";
 
 import { remixer } from "../Remixer";
+import { ColorUtils } from "../../lib/ColorUtils";
 import { ColorVariable } from "../variables/ColorVariable";
 import { ConstraintType, ControlType, DataType } from "../../lib/Constants";
 import { Variable } from "../variables/Variable";
@@ -80,5 +81,14 @@ describe("ColorVariable", () => {
   it("should clone properly", () => {
     let clone = variable.clone();
     expect(JSON.stringify(clone)).to.equal(JSON.stringify(variable));
+  });
+
+  it("should return string color value after format", () => {
+    let color = "rgba(1, 1, 1, 0.8)";
+    let rgbaColor = ColorUtils.toRgba(color);
+    let formattedColor = variable.formatValue(rgbaColor);
+
+    expect(color).to.equal(formattedColor);
+    expect(color).to.not.equal(rgbaColor);
   });
 });

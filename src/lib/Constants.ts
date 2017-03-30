@@ -64,21 +64,17 @@ export const DataType = {
 
 /** CSS class and id constants. */
 export const CSS = {
-  MDL_LIST:               "mdl-list",
-  MDL_LIST_ITEM:          "mdl-list__item",
-  MDL_PRIMARY:            "mdl-list__item-primary-content",
-  MDL_SECONDARY:          "mdl-list__item-secondary-content",
-  MDL_TWO_LINE:           "mdl-list__item--two-line",
-
   RMX_COLOR_SWATCH:       "rmx-color-swatch",
   RMX_COLOR_SWATCH_ITEM:  "rmx-color-swatch-item",
   RMX_DROPDOWN:           "rmx-dropdown",
+  RMX_LIST_ITEM:          "rmx-list-item",
   RMX_OVERLAY_FRAME:      "__remixer-overlay-frame__",
   RMX_OVERLAY_WRAPPER:    "rmx-overlay-wrapper",
   RMX_RADIO_LIST:         "rmx-radio-list",
   RMX_RADIO_LIST_ITEM:    "rmx-radio-list-item",
-  RMX_SELECTED_VALUE:     "rmx-selected-value",
   RMX_SHARE_MENU:         "rmx-share-menu",
+  RMX_SHARE_STATUS:       "rmx-share-status",
+  RMX_SHARE_LINK:         "rmx-share-link",
   RMX_SLIDER:             "rmx-slider",
   RMX_SLIDER_MAX:         "rmx-slider-max-value",
   RMX_SLIDER_MIN:         "rmx-slider-min-value",

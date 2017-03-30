@@ -10,25 +10,25 @@ If you are interested in using Remixer in another platform, you may want to chec
 
 ## Using Remixer in your app
 
-### 1. Use [`npm`](https://www.npmjs.com/) to install as dependency.
+#### 1. Use [`npm`](https://www.npmjs.com/) to install as dependency.
 
 `npm install material-remixer --save`
 
 This will install the Remixer files in your project's `node_modules` folder.
 
-### 2. Include the `remixer.js` script in your app.
+#### 2. Include the `remixer.js` script in your app.
 
 ```html
 <script src="./node_modules/material-remixer/dist/remixer.js"></script>
 ```
 
-### 3. Begin by starting Remixer.
+#### 3. Begin by starting Remixer.
 
 ```javascript
 remixer.start();
 ```
 
-### 4. (Optional) Configure the Web Remote Controller
+#### 4. (Optional) Configure the Web Remote Controller
 
 This **optional** step is only needed if you wish to use the Web Remote Controller. If so, follow these guidelines:
 
@@ -49,7 +49,7 @@ This **optional** step is only needed if you wish to use the Web Remote Controll
 
   - You can then toggle on/off sharing to the remote controller from within the Remixer overlay.
 
-### 5. Add variables.
+#### 5. Add variables.
 Now you can add any desired variables and use the callback method to assign the `selectedValue` property.
 
 ```javascript
