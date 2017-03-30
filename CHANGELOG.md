@@ -1,3 +1,12 @@
+## 0.7.0
+
+### New Features
+
+* [Updates to latest dependencies.](https://github.com/material-foundation/material-remixer-js/commit/939b781618071ccac2da844d46cfbc742ad1df5a)
+* [Adds return value to remixer.cloneAndUpdateVariable(). Adds tests.](https://github.com/material-foundation/material-remixer-js/commit/673bc718305a5e94aba3a838dfdef26a435d830d)
+* [Updates from mdl-list to flexbox for display of variable controls.](https://github.com/material-foundation/material-remixer-js/commit/540a1a6ee9bea212a1d6b9e60d953722ad539236)
+* [Updates share menu to flexbox.](https://github.com/material-foundation/material-remixer-js/commit/ea7811b89392caa78e514d2ba87d08b3dc3388db)
+
 ## 0.6.4
 
 ### Bug Fixes
@@ -13,7 +22,6 @@
 * [Fixes colorVariable bug when changed remotely.](https://github.com/material-foundation/material-remixer-js/commit/3aa44628a3aa1e48d0c737ec369e777ccf6ab54e)
 * [Fixes colorVariable test](https://github.com/material-foundation/material-remixer-js/commit/177bdb59616ba446faa00208237b2d9b2989a63d)
 * [Updates firebase to prevent uninitialized app error.](https://github.com/material-foundation/material-remixer-js/commit/27c95fcf3d850a5b9a63cec37cdf9f49dd265a0b)
-
 
 ### New Features
 
