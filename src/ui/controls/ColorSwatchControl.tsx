@@ -55,17 +55,15 @@ export class ColorSwatchControl extends React.Component<IColorControlProps, void
         title={title}
         subtitle={ColorUtils.toRgbaString(selectedValue)}
         inlineControl={false}
-        control={
-          limitedToValues.map((value: string) => (
-            <ColorSwatch
-              color={ColorUtils.toRgbaString(value)}
-              key={value}
-              isSelected={ColorUtils.areEqual(selectedValue, value)}
-              onClick={this.onClick}
-            />
-          ))
-        }
       >
+        {limitedToValues.map((value: string) => (
+          <ColorSwatch
+            color={ColorUtils.toRgbaString(value)}
+            key={value}
+            isSelected={ColorUtils.areEqual(selectedValue, value)}
+            onClick={this.onClick}
+          />
+        ))}
       </ListItem>
     );
   }

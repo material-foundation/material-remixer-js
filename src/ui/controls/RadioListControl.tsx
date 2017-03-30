@@ -65,24 +65,22 @@ export class RadioListControl extends React.Component<IStringControlProps, void>
         controlClass={CSS.RMX_RADIO_LIST}
         title={title}
         inlineControl={true}
-        control={
-          limitedToValues.map((value: string, i: number) => (
-            <label
-              ref={item => this.radioItems[i] = item}
-              className={`${CSS.RMX_RADIO_LIST_ITEM} mdl-radio mdl-js-radio mdl-js-ripple-effect`}
-              htmlFor={`${id}-${i}`} key={value}
-            >
-              <input type="radio" id={`${id}-${i}`}
-                className="mdl-radio__button"
-                name="options" value={value}
-                checked={selectedValue === value}
-                onChange={this.onChange}
-              />
-              <span className="mdl-radio__label">{value}</span>
-            </label>
-          ))
-        }
       >
+        {limitedToValues.map((value: string, i: number) => (
+          <label
+            ref={item => this.radioItems[i] = item}
+            className={`${CSS.RMX_RADIO_LIST_ITEM} mdl-radio mdl-js-radio mdl-js-ripple-effect`}
+            htmlFor={`${id}-${i}`} key={value}
+          >
+            <input type="radio" id={`${id}-${i}`}
+              className="mdl-radio__button"
+              name="options" value={value}
+              checked={selectedValue === value}
+              onChange={this.onChange}
+            />
+            <span className="mdl-radio__label">{value}</span>
+          </label>
+        ))}
       </ListItem>
     );
   }
