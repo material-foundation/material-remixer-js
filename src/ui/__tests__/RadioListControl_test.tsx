@@ -35,7 +35,7 @@ describe("RadioListControl", () => {
 
   it("have correct number of children with proper data values", () => {
     let list = TestUtils.findRenderedDOMComponentWithClass(
-      this.component, CSS.MDL_SECONDARY
+      this.component, "control"
     );
 
     expect(list.children.length).to.equal(2);

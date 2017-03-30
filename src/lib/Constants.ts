@@ -64,6 +64,7 @@ export const DataType = {
 
 /** CSS class and id constants. */
 export const CSS = {
+  // TODO(cjcox): Refactor out these MDL classes in favor of flexbox.
   MDL_LIST:               "mdl-list",
   MDL_LIST_ITEM:          "mdl-list__item",
   MDL_PRIMARY:            "mdl-list__item-primary-content",
@@ -73,11 +74,11 @@ export const CSS = {
   RMX_COLOR_SWATCH:       "rmx-color-swatch",
   RMX_COLOR_SWATCH_ITEM:  "rmx-color-swatch-item",
   RMX_DROPDOWN:           "rmx-dropdown",
+  RMX_LIST_ITEM:          "rmx-list-item",
   RMX_OVERLAY_FRAME:      "__remixer-overlay-frame__",
   RMX_OVERLAY_WRAPPER:    "rmx-overlay-wrapper",
   RMX_RADIO_LIST:         "rmx-radio-list",
   RMX_RADIO_LIST_ITEM:    "rmx-radio-list-item",
-  RMX_SELECTED_VALUE:     "rmx-selected-value",
   RMX_SHARE_MENU:         "rmx-share-menu",
   RMX_SLIDER:             "rmx-slider",
   RMX_SLIDER_MAX:         "rmx-slider-max-value",

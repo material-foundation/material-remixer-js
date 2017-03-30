@@ -24,6 +24,7 @@
 @fontSizeSmall: 12px;
 @fontLightWeight: 200;
 @fontBoldWeight: 500;
+@fontFamily: "Roboto", "Helvetica", "Arial", sans-serif;
 
 .mdl-card {
   background-color: @colorOffWhite;
@@ -71,17 +72,48 @@
   transform: translateX(0);
 }
 
-.rmx-selected-value {
-  color: @colorMdlBlue;
-  font-weight: @fontBoldWeight;
-  margin-left: 5px;
+.rmx-list-item {
+  font-family: @fontFamily;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 20px;
+}
+
+.rmx-list-item.inline {
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.rmx-list-item {
+  .meta {
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 4px;
+  }
+
+  .title {
+    font-size: @fontSize;
+    font-weight: @fontLightWeight;
+  }
+
+  .subtitle {
+    color: @colorMdlBlue;
+    font-size: @fontSize;
+    font-weight: @fontBoldWeight;
+    margin-left: 5px;
+  }
+
+  .control {
+    position: relative;
+  }
+}
+
+.rmx-list-item.inline .meta {
+  padding-bottom: 0;
+  align-items: center;
 }
 
 .rmx-color-swatch {
-  .mdl-list__item-secondary-content {
-    flex-flow: inherit;
-  }
-
   .rmx-color-swatch-item {
     border-radius: @colorSwatchSize / 2;
     float: left;
@@ -98,17 +130,11 @@
   }
 }
 
-.rmx-radio-list {
-  .mdl-list__item-secondary-content {
-    flex-flow: inherit;
-  }
-
-  .rmx-radio-list-item {
-    font-size: @fontSize;
-    font-weight: @fontBoldWeight;
-    margin-left: 20px;
-    width: inherit;
-  }
+.rmx-radio-list-item {
+  font-size: @fontSize;
+  font-weight: @fontBoldWeight;
+  margin-left: 20px;
+  width: inherit;
 }
 
 .rmx-dropdown button {
@@ -190,7 +216,8 @@
     opacity: 0;
   }
 
-  a, i {
+  a,
+  i {
     color: @colorMdlBlue;
   }
 }

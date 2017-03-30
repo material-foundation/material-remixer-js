@@ -47,7 +47,7 @@ export class OverlayVariables extends React.Component<IOverlayVariableProps, voi
   /** @override */
   render() {
     return (
-      <div className={CSS.MDL_LIST}>
+      <div>
         {this.props.variables.map((variable) => {
           const Control = this.controlForVariable(variable);
           if (Control) {
