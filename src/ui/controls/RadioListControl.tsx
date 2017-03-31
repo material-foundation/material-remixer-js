@@ -70,11 +70,15 @@ export class RadioListControl extends React.Component<IStringControlProps, void>
           <label
             ref={(item) => this.radioItems[i] = item}
             className={`${CSS.RMX_RADIO_LIST_ITEM} mdl-radio mdl-js-radio mdl-js-ripple-effect`}
-            htmlFor={`${id}-${i}`} key={value}
+            htmlFor={`${id}-${i}`}
+            key={value}
           >
-            <input type="radio" id={`${id}-${i}`}
+            <input
+              type="radio"
+              id={`${id}-${i}`}
               className="mdl-radio__button"
-              name="options" value={value}
+              name="options"
+              value={value}
               checked={selectedValue === value}
               onChange={this.onChange}
             />

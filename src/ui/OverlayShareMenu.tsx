@@ -64,10 +64,12 @@ export class OverlayShareMenu extends React.Component<IOverlayShareMenuProps, vo
             htmlFor="share-switch"
           >
             <input
-              id="share-switch" type="checkbox" className="mdl-switch__input"
+              id="share-switch"
+              type="checkbox"
+              className="mdl-switch__input"
               checked={isEnabled}
               onChange={this.props.toggleRemoteEnabled}
-              />
+            />
           </label>
         </ListItem>
         <ListItem

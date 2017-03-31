@@ -67,9 +67,13 @@ export class DropdownControl extends React.Component<IStringControlProps, void> 
             htmlFor={id}
           >
             {limitedToValues.map((value: string) => (
-              <li className="mdl-menu__item" key={value}
+              <li
+                className="mdl-menu__item"
+                key={value}
                 onClick={this.onClick}
-                data-value={value}>{value}
+                data-value={value}
+              >
+                {value}
               </li>
             ))}
           </ul>

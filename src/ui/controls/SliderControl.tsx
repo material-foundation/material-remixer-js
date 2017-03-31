@@ -61,8 +61,13 @@ export class SliderControl extends React.Component<IRangeControlProps, void> {
       >
         <div>
           <span className={CSS.RMX_SLIDER_MIN}>{minValue}</span>
-          <input id={id} type="range" className="mdl-slider mdl-js-slider"
-            min={minValue} max={maxValue} step={increment}
+          <input
+            id={id}
+            type="range"
+            className="mdl-slider mdl-js-slider"
+            min={minValue}
+            max={maxValue}
+            step={increment}
             value={selectedValue}
             onChange={this.onChange}
           />

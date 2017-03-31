@@ -67,7 +67,9 @@ export class SwitchControl extends React.Component<IBooleanControlProps, void> {
           htmlFor={id}
         >
           <input
-            id={id} type="checkbox" className="mdl-switch__input"
+            id={id}
+            type="checkbox"
+            className="mdl-switch__input"
             checked={selectedValue}
             onChange={this.onChange}
           />

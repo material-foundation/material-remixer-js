@@ -59,7 +59,9 @@ export class TextFieldControl extends React.Component<IStringControlProps, void>
         inlineControl={false}
       >
         <span className="mdl-textfield mdl-js-textfield">
-          <input className="mdl-textfield__input" type="text"
+          <input
+            className="mdl-textfield__input"
+            type="text"
             id={id}
             pattern={pattern}
             value={selectedValue}
