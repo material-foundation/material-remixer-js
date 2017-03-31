@@ -31,7 +31,7 @@ export class DropdownControl extends React.Component<IStringControlProps, void> 
   onClick = (event: React.FormEvent<HTMLElement>): void => {
     this.props.updateVariable(
       this.props.variable,
-      (event.target as HTMLElement).dataset["value"],
+      (event.target as HTMLElement).dataset.value,
     );
   }
 

@@ -31,7 +31,7 @@ export class ColorSwatchControl extends React.Component<IColorControlProps, void
 
   /** Handles the update event for this control. */
   onClick = (event: React.FormEvent<HTMLElement>): void => {
-    const value = (event.target as HTMLElement).dataset["value"];
+    const value = (event.target as HTMLElement).dataset.value;
     if (value) {
       this.props.updateVariable(this.props.variable, value);
     }

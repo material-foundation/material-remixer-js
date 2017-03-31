@@ -42,7 +42,7 @@ describe("DropdownControl", () => {
 
     for (let i = 0; i < list.children.length; i++) {
       const element = list.children[i] as HTMLElement;
-      expect(element.dataset["value"]).to.equal(limitedToValues[i]);
+      expect(element.dataset.value).to.equal(limitedToValues[i]);
     }
   });
 });

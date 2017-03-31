@@ -43,7 +43,7 @@ describe("ColorSwatchControl", () => {
 
     for (let i = 0; i < list.children.length; i++) {
       const element = list.children[i] as HTMLElement;
-      expect(element.dataset["value"]).to.equal(ColorUtils.toRgbaString(limitedToValues[i]));
+      expect(element.dataset.value).to.equal(ColorUtils.toRgbaString(limitedToValues[i]));
     }
   });
 });
