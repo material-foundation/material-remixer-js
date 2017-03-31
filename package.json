@@ -25,7 +25,7 @@
     "dev": "npm run clean && npm run build && cross-env RMX_ENV=development webpack-dev-server",
     "dist": "npm run clean && npm run build && copyFiles -f build/*.* dist",
     "lint:ts": "tslint --fix --force 'src/**/*.ts?(x)'",
-    "lint:css": "lesshint src/ui/styles/*.less examples/*.css",
+    "lint:css": "lesshint src/ui/styles/*.less examples/src/*.css",
     "lint": "npm-run-all --parallel lint:*",
     "test": "karma start"
   },
