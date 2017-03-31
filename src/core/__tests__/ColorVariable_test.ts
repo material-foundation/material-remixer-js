@@ -53,7 +53,7 @@ describe("ColorVariable", () => {
     expect(variable.controlType).to.equal(ControlType.COLOR_LIST);
 
     // Input control.
-    let var1 = remixer.addColorVariable("test_key", "#4285F4");
+    const var1 = remixer.addColorVariable("test_key", "#4285F4");
     expect(var1.controlType).to.equal(ControlType.COLOR_INPUT);
   });
 
@@ -79,14 +79,14 @@ describe("ColorVariable", () => {
   });
 
   it("should clone properly", () => {
-    let clone = variable.clone();
+    const clone = variable.clone();
     expect(JSON.stringify(clone)).to.equal(JSON.stringify(variable));
   });
 
   it("should return string color value after format", () => {
-    let color = "rgba(1, 1, 1, 0.8)";
-    let rgbaColor = ColorUtils.toRgba(color);
-    let formattedColor = variable.formatValue(rgbaColor);
+    const color = "rgba(1, 1, 1, 0.8)";
+    const rgbaColor = ColorUtils.toRgba(color);
+    const formattedColor = variable.formatValue(rgbaColor);
 
     expect(color).to.equal(formattedColor);
     expect(color).to.not.equal(rgbaColor);

@@ -48,11 +48,11 @@ describe("StringVariable", () => {
     expect(variable.controlType).to.equal(ControlType.TEXT_LIST);
 
     // Segmented control.
-    let var1 = remixer.addStringVariable("test_key1", "a", ["a", "b"]);
+    const var1 = remixer.addStringVariable("test_key1", "a", ["a", "b"]);
     expect(var1.controlType).to.equal(ControlType.SEGMENTED);
 
     // Text input control.
-    let var2 = remixer.addStringVariable("test_key2", "a");
+    const var2 = remixer.addStringVariable("test_key2", "a");
     expect(var2.controlType).to.equal(ControlType.TEXT_INPUT);
   });
 
@@ -78,7 +78,7 @@ describe("StringVariable", () => {
   });
 
   it("should clone properly", () => {
-    let clone = variable.clone();
+    const clone = variable.clone();
     expect(JSON.stringify(clone)).to.equal(JSON.stringify(variable));
   });
 });

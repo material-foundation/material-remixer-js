@@ -117,7 +117,7 @@ export class OverlayController extends React.Component<IControllerProps, IContro
     const { shareMenuIsVisible } = this.state;
     const remoteInitialized = remote ? remote.initialized : false;
 
-    let shareIcon: string = shareMenuIsVisible ? "up" : "down";
+    const shareIcon: string = shareMenuIsVisible ? "up" : "down";
     return (
       <div className="mdl-card mdl-shadow--6dp">
         <div className="mdl-card__title">

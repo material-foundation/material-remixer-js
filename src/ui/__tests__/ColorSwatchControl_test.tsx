@@ -27,7 +27,7 @@ describe("ColorSwatchControl", () => {
   });
 
   it("should render with proper class name", () => {
-    let control = TestUtils.findRenderedDOMComponentWithClass(
+    const control = TestUtils.findRenderedDOMComponentWithClass(
       this.component, CSS.RMX_COLOR_SWATCH,
     );
 
@@ -35,14 +35,14 @@ describe("ColorSwatchControl", () => {
   });
 
   it("have correct number of children with proper data values", () => {
-    let list = TestUtils.findRenderedDOMComponentWithClass(
+    const list = TestUtils.findRenderedDOMComponentWithClass(
       this.component, "control",
     );
 
     expect(list.children.length).to.equal(3);
 
     for (let i = 0; i < list.children.length; i++) {
-      let element = list.children[i] as HTMLElement;
+      const element = list.children[i] as HTMLElement;
       expect(element.dataset["value"]).to.equal(ColorUtils.toRgbaString(limitedToValues[i]));
     }
   });

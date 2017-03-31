@@ -69,8 +69,8 @@ export class LocalStorage {
    * @return {Variable}
    */
   static getVariable(key: string): Variable {
-    let remixerData = this.getRawData();
-    let variableData = remixerData[key] as ISerializableData;
+    const remixerData = this.getRawData();
+    const variableData = remixerData[key] as ISerializableData;
     if (variableData) {
       return this.deserialize(variableData);
     }
@@ -83,7 +83,7 @@ export class LocalStorage {
    * @param {Variable} variable The variable to save.
    */
   static saveVariable(variable: Variable): void {
-    let remixerData = this.getRawData();
+    const remixerData = this.getRawData();
     remixerData[variable.key] = variable.serialize();
     this.saveRawData(remixerData);
   }
@@ -95,7 +95,7 @@ export class LocalStorage {
    * @return {any}        Returns the preference object.
    */
   static getPreference(key: string): any {
-    let prefs = this.getRawPreferences();
+    const prefs = this.getRawPreferences();
     return prefs[key];
   }
 
@@ -106,7 +106,7 @@ export class LocalStorage {
    * @param {any}    value The preference value.
    */
   static savePreference(key: string, value: any): void {
-    let prefs = this.getRawPreferences();
+    const prefs = this.getRawPreferences();
     prefs[key] = value;
     this.saveRawPreferences(prefs);
   }
@@ -142,7 +142,7 @@ export class LocalStorage {
    * @return {ISerializableDataMap} The json data from local storage.
    */
   private static getRawData(): ISerializableDataMap {
-    let data = JSON.parse(localStorage.getItem(StorageKey.REMIXER));
+    const data = JSON.parse(localStorage.getItem(StorageKey.REMIXER));
     return data ? data[StorageKey.KEY_VARIABLES] : {};
   }
 
@@ -163,7 +163,7 @@ export class LocalStorage {
    * @return {ISerializablePreferences} The preferences from local storage.
    */
   private static getRawPreferences(): ISerializablePreferences {
-    let preferences = JSON.parse(localStorage.getItem(StorageKey.PREFERENCES));
+    const preferences = JSON.parse(localStorage.getItem(StorageKey.PREFERENCES));
     return preferences || {};
   }
 

@@ -97,7 +97,7 @@ export class Variable implements IVariableParams {
    * @return {Variable} Returns the cloned variable.
    */
   clone() {
-    let cloned = new Variable(
+    const cloned = new Variable(
       this.key,
       this.dataType,
       this.selectedValue,
@@ -194,7 +194,7 @@ export class Variable implements IVariableParams {
    * Invokes each of the callback methods.
    */
   executeCallbacks(): void {
-    for (let callback of this.callbacks) {
+    for (const callback of this.callbacks) {
       callback(this);
     }
   }
@@ -227,7 +227,7 @@ export class Variable implements IVariableParams {
    * @return {ISerializableData} The serialized data.
    */
   serialize(): ISerializableData {
-    let data = <ISerializableData>{};
+    const data = {} as ISerializableData;
     data.key = this.key;
     data.constraintType = this.constraintType;
     data.controlType = this.controlType;

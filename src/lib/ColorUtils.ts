@@ -54,7 +54,7 @@ export class ColorUtils {
    * @return {RgbaColor}       Returns the RgbaColor.
    */
   static toRgba(color: string): RgbaColor {
-    let rgba = TinyColor(color).toRgb();
+    const rgba = TinyColor(color).toRgb();
     // Convert alpha from float to int[0-255].
     rgba.a = Math.round(rgba.a * 255);
     return rgba;

@@ -28,7 +28,7 @@ describe("SliderControl", () => {
   });
 
   it("should render with proper class name", () => {
-    let control = TestUtils.findRenderedDOMComponentWithClass(
+    const control = TestUtils.findRenderedDOMComponentWithClass(
       this.component, CSS.RMX_SLIDER,
     );
 
@@ -36,7 +36,7 @@ describe("SliderControl", () => {
   });
 
   it("have correct min label", () => {
-    let label = TestUtils.findRenderedDOMComponentWithClass(
+    const label = TestUtils.findRenderedDOMComponentWithClass(
       this.component, CSS.RMX_SLIDER_MIN,
     );
 
@@ -44,7 +44,7 @@ describe("SliderControl", () => {
   });
 
   it("have correct max label", () => {
-    let label = TestUtils.findRenderedDOMComponentWithClass(
+    const label = TestUtils.findRenderedDOMComponentWithClass(
       this.component, CSS.RMX_SLIDER_MAX,
     );
 
@@ -52,7 +52,7 @@ describe("SliderControl", () => {
   });
 
   it("have correct slider input value and attributes", () => {
-    let slider = TestUtils.findRenderedDOMComponentWithClass(
+    const slider = TestUtils.findRenderedDOMComponentWithClass(
       this.component, "mdl-slider",
     ) as HTMLInputElement;
 

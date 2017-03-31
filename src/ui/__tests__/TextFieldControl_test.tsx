@@ -26,7 +26,7 @@ describe("TextFieldControl", () => {
   });
 
   it("should render with proper class name", () => {
-    let control = TestUtils.findRenderedDOMComponentWithClass(
+    const control = TestUtils.findRenderedDOMComponentWithClass(
       this.component, CSS.RMX_TEXTFIELD,
     );
 
@@ -34,7 +34,7 @@ describe("TextFieldControl", () => {
   });
 
   it("have correct innertext checked value", () => {
-    let textField = TestUtils.findRenderedDOMComponentWithClass(
+    const textField = TestUtils.findRenderedDOMComponentWithClass(
       this.component, "mdl-textfield__input",
     ) as HTMLInputElement;
 

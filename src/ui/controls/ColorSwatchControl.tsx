@@ -31,7 +31,7 @@ export class ColorSwatchControl extends React.Component<IColorControlProps, void
 
   /** Handles the update event for this control. */
   onClick = (event: React.FormEvent<HTMLElement>): void => {
-    let value = (event.target as HTMLElement).dataset["value"];
+    const value = (event.target as HTMLElement).dataset["value"];
     if (value) {
       this.props.updateVariable(this.props.variable, value);
     }
@@ -92,7 +92,7 @@ function ColorSwatch(props: IColorSwatchProps) {
 
   // Determine a readable color to prevent a white checkmark on a light
   // color swatch.
-  let checkColor = ColorUtils.mostReadable(color, ["white", "gray"]);
+  const checkColor = ColorUtils.mostReadable(color, ["white", "gray"]);
   return (
     <div
       className={CSS.RMX_COLOR_SWATCH_ITEM}

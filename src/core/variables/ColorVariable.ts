@@ -74,7 +74,7 @@ export class ColorVariable extends Variable implements IColorVariableParams {
    * @return {ColorVariable} Returns the cloned variable.
    */
   clone() {
-    let cloned = new ColorVariable(
+    const cloned = new ColorVariable(
       this.key,
       this.selectedValue,
       this.limitedToValues,
@@ -97,7 +97,7 @@ export class ColorVariable extends Variable implements IColorVariableParams {
    * @return {ISerializableData} The serialized data.
    */
   serialize(): ISerializableData {
-    let data = super.serialize();
+    const data = super.serialize();
     data.selectedValue = ColorUtils.toRgba(this.selectedValue);
     data.limitedToValues = this.limitedToValues.map((value: any) => {
       return ColorUtils.toRgba(value);
@@ -112,11 +112,11 @@ export class ColorVariable extends Variable implements IColorVariableParams {
    * @return {ColorVariable}          A new initialized ColorVariable.
    */
   static deserialize(data: ISerializableData): Variable {
-    let selectedValue = ColorUtils.toRgbaString(data.selectedValue);
-    let limitedToValues = data.limitedToValues.map((color: RgbaColor) => {
+    const selectedValue = ColorUtils.toRgbaString(data.selectedValue);
+    const limitedToValues = data.limitedToValues.map((color: RgbaColor) => {
       return ColorUtils.toRgbaString(color);
     });
-    let variable = new ColorVariable(data.key, selectedValue, limitedToValues);
+    const variable = new ColorVariable(data.key, selectedValue, limitedToValues);
     variable.title = data.title;
     return variable;
   }

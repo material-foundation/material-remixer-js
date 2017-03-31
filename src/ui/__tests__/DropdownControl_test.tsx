@@ -26,7 +26,7 @@ describe("DropdownControl", () => {
   });
 
   it("should render with proper class name", () => {
-    let control = TestUtils.findRenderedDOMComponentWithClass(
+    const control = TestUtils.findRenderedDOMComponentWithClass(
       this.component, CSS.RMX_DROPDOWN,
     );
 
@@ -34,14 +34,14 @@ describe("DropdownControl", () => {
   });
 
   it("have correct number of children with proper data values", () => {
-    let list = TestUtils.findRenderedDOMComponentWithTag(
+    const list = TestUtils.findRenderedDOMComponentWithTag(
       this.component, "ul",
     );
 
     expect(list.children.length).to.equal(3);
 
     for (let i = 0; i < list.children.length; i++) {
-      let element = list.children[i] as HTMLElement;
+      const element = list.children[i] as HTMLElement;
       expect(element.dataset["value"]).to.equal(limitedToValues[i]);
     }
   });

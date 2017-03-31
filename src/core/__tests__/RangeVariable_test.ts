@@ -72,7 +72,7 @@ describe("RangeVariable", () => {
   });
 
   it("should clone properly", () => {
-    let clone = variable.clone();
+    const clone = variable.clone();
     expect(JSON.stringify(clone)).to.equal(JSON.stringify(variable));
   });
 });

@@ -55,7 +55,7 @@ class Remixer {
    * @return {Remixer} The attached instance of Remixer.
    */
   static get attachedInstance(): Remixer {
-    let parentRemixer = window.parent["remixer"];
+    const parentRemixer = window.parent["remixer"];
     if (parentRemixer) {
       return parentRemixer._sharedInstance as Remixer;
     }
@@ -80,7 +80,7 @@ class Remixer {
    */
   private appendFrameToBody(): void {
     if (!this._frameElement) {
-      let frame = document.createElement("IFRAME") as HTMLFrameElement;
+      const frame = document.createElement("IFRAME") as HTMLFrameElement;
       frame.id = CSS.RMX_OVERLAY_FRAME;
       frame.setAttribute("sandbox", "allow-scripts allow-same-origin allow-popups");
       document.getElementsByTagName("body")[0].appendChild(frame);
@@ -142,7 +142,7 @@ class Remixer {
     defaultValue: boolean,
     callback?: IVariableCallback,
   ): BooleanVariable {
-    let variable = new BooleanVariable(key, defaultValue, callback);
+    const variable = new BooleanVariable(key, defaultValue, callback);
     this.addVariable(variable);
     return variable;
   }
@@ -166,7 +166,7 @@ class Remixer {
     increment: number,
     callback?: IVariableCallback,
   ): RangeVariable {
-    let variable = new RangeVariable(key, defaultValue, minValue, maxValue, increment, callback);
+    const variable = new RangeVariable(key, defaultValue, minValue, maxValue, increment, callback);
     this.addVariable(variable);
     return variable;
   }
@@ -186,7 +186,7 @@ class Remixer {
     limitedToValues?: string[],
     callback?: IVariableCallback,
   ): StringVariable {
-    let variable = new StringVariable(key, defaultValue, limitedToValues, callback);
+    const variable = new StringVariable(key, defaultValue, limitedToValues, callback);
     this.addVariable(variable);
     return variable;
   }
@@ -206,7 +206,7 @@ class Remixer {
     limitedToValues?: number[],
     callback?: IVariableCallback,
   ): NumberVariable {
-    let variable = new NumberVariable(key, defaultValue, limitedToValues, callback);
+    const variable = new NumberVariable(key, defaultValue, limitedToValues, callback);
     this.addVariable(variable);
     return variable;
   }
@@ -226,7 +226,7 @@ class Remixer {
     limitedToValues?: string[],
     callback?: IVariableCallback,
   ): ColorVariable {
-    let variable = new ColorVariable(key, defaultValue, limitedToValues, callback);
+    const variable = new ColorVariable(key, defaultValue, limitedToValues, callback);
     this.addVariable(variable);
     return variable;
   }
@@ -239,14 +239,14 @@ class Remixer {
    * @param {Variable} variable The variable to add.
    */
   private static addVariable(variable: Variable): void {
-    let key: string = variable.key;
-    let existingVariable = this.getVariable(key);
+    const key: string = variable.key;
+    const existingVariable = this.getVariable(key);
     if (existingVariable) {
       // Variable with key already exists, so only add callback.
       // TODO(cjcox:) Determine what to do if variable key already exists.
     } else {
       this._sharedInstance._variables[key] = variable;
-      let storedVariable = LocalStorage.getVariable(key);
+      const storedVariable = LocalStorage.getVariable(key);
       if (storedVariable) {
         // Update variable if exists in storage.
         this.updateVariable(variable, storedVariable.selectedValue);
@@ -315,7 +315,7 @@ class Remixer {
       return variable;
     }
 
-    let clonedVariable = variable.clone();
+    const clonedVariable = variable.clone();
     this.attachedInstance._variables[variable.key] = clonedVariable;
     this.updateVariable(clonedVariable, selectedValue);
     return clonedVariable;

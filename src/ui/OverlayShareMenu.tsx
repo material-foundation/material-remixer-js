@@ -48,8 +48,8 @@ export class OverlayShareMenu extends React.Component<IOverlayShareMenuProps, vo
       isEnabled,
     } = this.props;
 
-    let showMenu = visible ? "active" : "";
-    let status = isEnabled ? "on" : "off";
+    const showMenu = visible ? "active" : "";
+    const status = isEnabled ? "on" : "off";
 
     return (
       <div className={`${CSS.RMX_SHARE_MENU} ${showMenu}`}>

@@ -91,7 +91,7 @@ export class Remote  {
    * @return {string} The remote controller URL.
    */
   get remoteUrl(): string {
-    let authDomain = firebase.app().options["authDomain"];
+    const authDomain = firebase.app().options["authDomain"];
     return `https://${authDomain}/${this._remoteId}`;
   }
 
@@ -117,7 +117,7 @@ export class Remote  {
   static initializeRemote(config: {}): void {
     // Get the locally stored remoteId. If doesn't exist, generate a new one
     // and store it.
-    let instance = this._sharedInstance;
+    const instance = this._sharedInstance;
     let storedRemoteId = instance.getPreference(StorageKey.KEY_REMOTE_ID);
     if (!storedRemoteId) {
       storedRemoteId = instance.generateRemoteId();
@@ -168,7 +168,7 @@ export class Remote  {
     this.savePreference(StorageKey.KEY_REMOTE_ENABLED, true);
 
     // Save each variable without throttling.
-    for (let variable of remixer.attachedInstance.variablesArray) {
+    for (const variable of remixer.attachedInstance.variablesArray) {
       Remote.saveVariable(variable, false);
     }
   }
@@ -242,9 +242,9 @@ export class Remote  {
    * @param {string} variableKey The variable key.
    */
   private startObservingUpdates(variableKey: string): void {
-    let reference = this.dbReference().child(variableKey);
+    const reference = this.dbReference().child(variableKey);
     reference.on("child_changed", (data) => {
-      let variable = remixer.getVariable(data.ref.parent.key);
+      const variable = remixer.getVariable(data.ref.parent.key);
       remixer.cloneAndUpdateVariable(variable, data.val());
     });
   }

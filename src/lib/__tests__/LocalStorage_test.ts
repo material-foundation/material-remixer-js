@@ -18,7 +18,7 @@ describe("LocalStorage", () => {
   }
 
   it("should call saveVariable method", () => {
-    let callbackSpy = sinon.spy(LocalStorage, "saveVariable");
+    const callbackSpy = sinon.spy(LocalStorage, "saveVariable");
     localStorage.clear();
     addVariables();
 
@@ -27,7 +27,7 @@ describe("LocalStorage", () => {
 
   it("should retrieve correct variable from storage", () => {
     addVariables();
-    let stringVariable = LocalStorage.getVariable("test_key2");
+    const stringVariable = LocalStorage.getVariable("test_key2");
 
     expect(stringVariable.dataType).to.equal(DataType.STRING);
     expect(stringVariable.constraintType).to.equal(ConstraintType.NONE);

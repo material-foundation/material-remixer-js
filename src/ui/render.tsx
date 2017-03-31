@@ -27,7 +27,7 @@ import { OverlayController } from "./OverlayController";
 let variables = remixer.attachedInstance.variablesArray;
 
 // The current instance of remixer remote.
-let remote = remixer.attachedInstance.remote;
+const remote = remixer.attachedInstance.remote;
 
 /**
  * Handles all control updates by setting a new selected value for the

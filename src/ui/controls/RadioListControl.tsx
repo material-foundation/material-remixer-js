@@ -45,8 +45,8 @@ export class RadioListControl extends React.Component<IStringControlProps, void>
 
   componentDidUpdate() {
     const { limitedToValues, selectedValue } = this.props.variable;
-    let index = limitedToValues.indexOf(selectedValue);
-    let materialRadio = this.radioItems[index]["MaterialRadio"];
+    const index = limitedToValues.indexOf(selectedValue);
+    const materialRadio = this.radioItems[index]["MaterialRadio"];
     materialRadio.check();
   }
 

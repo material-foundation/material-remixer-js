@@ -80,7 +80,7 @@ export class RangeVariable extends Variable implements IRangeVariableParams {
    * @return {RangeVariable} Returns the cloned variable.
    */
   clone() {
-    let cloned = new RangeVariable(
+    const cloned = new RangeVariable(
       this.key,
       this.selectedValue,
       this.minValue,
@@ -119,7 +119,7 @@ export class RangeVariable extends Variable implements IRangeVariableParams {
    * @return {ISerializableData} The serialized data.
    */
   serialize(): ISerializableData {
-    let data = super.serialize();
+    const data = super.serialize();
     data.selectedValue = this.selectedValue;
     data.minValue = this.minValue;
     data.maxValue = this.maxValue;
@@ -134,11 +134,11 @@ export class RangeVariable extends Variable implements IRangeVariableParams {
    * @return {RangeVariable}          A new initialized RangeVariable.
    */
   static deserialize(data: ISerializableData): Variable {
-    let selectedValue: number = data.selectedValue;
-    let minValue: number = data.minValue;
-    let maxValue: number = data.maxValue;
-    let increment: number = data.increment;
-    let variable = new RangeVariable(
+    const selectedValue: number = data.selectedValue;
+    const minValue: number = data.minValue;
+    const maxValue: number = data.maxValue;
+    const increment: number = data.increment;
+    const variable = new RangeVariable(
       data.key,
       selectedValue,
       minValue,

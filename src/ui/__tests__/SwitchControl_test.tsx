@@ -25,7 +25,7 @@ describe("SwitchControl", () => {
   });
 
   it("should render with proper class name", () => {
-    let control = TestUtils.findRenderedDOMComponentWithClass(
+    const control = TestUtils.findRenderedDOMComponentWithClass(
       this.component, CSS.RMX_SWITCH,
     );
 
@@ -33,7 +33,7 @@ describe("SwitchControl", () => {
   });
 
   it("have correct switch checked value", () => {
-    let control = TestUtils.findRenderedDOMComponentWithClass(
+    const control = TestUtils.findRenderedDOMComponentWithClass(
       this.component, "mdl-switch__input",
     ) as HTMLInputElement;
 

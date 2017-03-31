@@ -42,7 +42,7 @@ export class SwitchControl extends React.Component<IBooleanControlProps, void> {
   }
 
   componentDidUpdate() {
-    let materialSwitch = this.switchControl["MaterialSwitch"];
+    const materialSwitch = this.switchControl["MaterialSwitch"];
     this.props.variable.selectedValue ? materialSwitch.on() : materialSwitch.off();
   }
 

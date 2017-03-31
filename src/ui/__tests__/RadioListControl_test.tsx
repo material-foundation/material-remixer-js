@@ -26,7 +26,7 @@ describe("RadioListControl", () => {
   });
 
   it("should render with proper class name", () => {
-    let control = TestUtils.findRenderedDOMComponentWithClass(
+    const control = TestUtils.findRenderedDOMComponentWithClass(
       this.component, CSS.RMX_RADIO_LIST,
     );
 
@@ -34,13 +34,13 @@ describe("RadioListControl", () => {
   });
 
   it("have correct number of children with proper data values", () => {
-    let list = TestUtils.findRenderedDOMComponentWithClass(
+    const list = TestUtils.findRenderedDOMComponentWithClass(
       this.component, "control",
     );
 
     expect(list.children.length).to.equal(2);
 
-    let elements = TestUtils.scryRenderedDOMComponentsWithClass(
+    const elements = TestUtils.scryRenderedDOMComponentsWithClass(
       this.component, "mdl-radio__button",
     ) as HTMLInputElement[];
 

@@ -16,13 +16,13 @@ describe("ColorUtils", () => {
   });
 
   it("should create proper rgba string from RgbaColor object", () => {
-    let redRgbaColor = ColorUtils.toRgba("red");
+    const redRgbaColor = ColorUtils.toRgba("red");
     expect(ColorUtils.toRgbaString(redRgbaColor)).to.equal(redRgbString);
 
-    let alpgaRgbaColor = ColorUtils.toRgba(alphaRgbaString);
+    const alpgaRgbaColor = ColorUtils.toRgba(alphaRgbaString);
     expect(ColorUtils.toRgbaString(alpgaRgbaColor)).to.equal(alphaRgbaString);
 
-    let blueRgbaColor = ColorUtils.toRgba("blue");
+    const blueRgbaColor = ColorUtils.toRgba("blue");
     expect(ColorUtils.toRgbaString(blueRgbaColor)).to.not.equal(redRgbString);
   });
 
@@ -32,7 +32,7 @@ describe("ColorUtils", () => {
   });
 
   it("should properly choose most readable color", () => {
-    let readableColor = ColorUtils.mostReadable("black", ["white", "black"]);
+    const readableColor = ColorUtils.mostReadable("black", ["white", "black"]);
     expect(readableColor).to.equal(ColorUtils.toRgbaString("white"));
   });
 });
