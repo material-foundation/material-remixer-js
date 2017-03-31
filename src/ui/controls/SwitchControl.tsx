@@ -62,7 +62,6 @@ export class SwitchControl extends React.Component<IBooleanControlProps, void> {
         inlineControl={true}
       >
         <label
-          ref={(item) => this.switchControl = item}
           className="mdl-switch mdl-js-switch mdl-js-ripple-effect"
           htmlFor={id}
         >

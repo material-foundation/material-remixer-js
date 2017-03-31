@@ -68,7 +68,6 @@ export class RadioListControl extends React.Component<IStringControlProps, void>
       >
         {limitedToValues.map((value: string, i: number) => (
           <label
-            ref={(item) => this.radioItems[i] = item}
             className={`${CSS.RMX_RADIO_LIST_ITEM} mdl-radio mdl-js-radio mdl-js-ripple-effect`}
             htmlFor={`${id}-${i}`}
             key={value}

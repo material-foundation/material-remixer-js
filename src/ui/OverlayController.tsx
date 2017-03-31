@@ -123,14 +123,14 @@ export class OverlayController extends React.Component<IControllerProps, IContro
         <div className="mdl-card__title">
           <h2 className="mdl-card__title-text">Remixer</h2>
         </div>
-        {remoteInitialized ?
+        {remoteInitialized ? (
           <OverlayShareMenu
             visible={shareMenuIsVisible}
             remoteId={remote.remoteId}
             remoteUrl={remote.remoteUrl}
             isEnabled={remote.isEnabled}
             toggleRemoteEnabled={toggleRemoteEnabled}
-          />
+          />)
           : ""
         }
         <div className={`mdl-card__actions mdl-card--border`}>
@@ -139,7 +139,7 @@ export class OverlayController extends React.Component<IControllerProps, IContro
             updateVariable={updateVariable}
           />
         </div>
-        {remoteInitialized ?
+        {remoteInitialized ? (
           <div className="mdl-card__menu">
             {remote.isEnabled ?
               <a onClick={this.toggleShareMenu}>SHARED</a>
@@ -151,7 +151,7 @@ export class OverlayController extends React.Component<IControllerProps, IContro
             >
               <i className="material-icons">{`keyboard_arrow_${shareIcon}`}</i>
             </button>
-          </div>
+          </div>)
           : ""
         }
       </div>
