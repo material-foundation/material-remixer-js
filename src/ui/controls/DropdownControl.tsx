@@ -17,8 +17,8 @@
 import * as React from "react";
 
 import { CSS } from "../../lib/Constants";
-import { IStringControlProps } from "./controlProps";
 import { ListItem } from "../ListItem";
+import { IStringControlProps } from "./controlProps";
 
 /**
  * A dropdown control.

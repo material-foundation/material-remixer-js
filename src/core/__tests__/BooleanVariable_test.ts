@@ -2,9 +2,9 @@ import * as chai from "chai";
 import * as sinon from "sinon";
 import * as sinonChai from "sinon-chai";
 
+import { ConstraintType, ControlType, DataType } from "../../lib/Constants";
 import { remixer } from "../Remixer";
 import { BooleanVariable } from "../variables/BooleanVariable";
-import { ConstraintType, ControlType, DataType } from "../../lib/Constants";
 import { Variable } from "../variables/Variable";
 
 const expect = chai.expect;

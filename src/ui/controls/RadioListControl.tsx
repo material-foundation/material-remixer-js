@@ -17,8 +17,8 @@
 import * as React from "react";
 
 import { CSS } from "../../lib/Constants";
-import { IStringControlProps } from "./controlProps";
 import { ListItem } from "../ListItem";
+import { IStringControlProps } from "./controlProps";
 
 /**
  * A radio list control.
@@ -68,7 +68,7 @@ export class RadioListControl extends React.Component<IStringControlProps, void>
       >
         {limitedToValues.map((value: string, i: number) => (
           <label
-            ref={item => this.radioItems[i] = item}
+            ref={(item) => this.radioItems[i] = item}
             className={`${CSS.RMX_RADIO_LIST_ITEM} mdl-radio mdl-js-radio mdl-js-ripple-effect`}
             htmlFor={`${id}-${i}`} key={value}
           >

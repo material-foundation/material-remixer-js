@@ -18,8 +18,8 @@ import * as React from "react";
 
 import { ColorUtils } from "../../lib/ColorUtils";
 import { CSS } from "../../lib/Constants";
-import { IColorControlProps } from "./controlProps";
 import { ListItem } from "../ListItem";
+import { IColorControlProps } from "./controlProps";
 
 /**
  * A color swatch picker control consisting of a single color swatch for each
@@ -100,9 +100,7 @@ function ColorSwatch(props: IColorSwatchProps) {
       data-value={color}
       onClick={onClick}
     >
-      {
-        isSelected ? <i className="material-icons" style={{color: checkColor}}>check</i> : ""
-      }
+      {isSelected ? <i className="material-icons" style={{color: checkColor}}>check</i> : ""}
     </div>
   );
 }

@@ -1,11 +1,11 @@
+import * as chai from "chai";
 import * as React from "react";
 import * as TestUtils from "react-addons-test-utils";
-import * as chai from "chai";
 
 import { remixer } from "../../core/Remixer";
+import { Variable } from "../../core/variables/Variable";
 import { CSS } from "../../lib/Constants";
 import { TextFieldControl } from "../controls/TextFieldControl";
-import { Variable } from "../../core/variables/Variable";
 
 const expect = chai.expect;
 
@@ -21,13 +21,13 @@ describe("TextFieldControl", () => {
       <TextFieldControl
         variable={variable}
         updateVariable={null}
-      />
+      />,
     );
   });
 
   it("should render with proper class name", () => {
     let control = TestUtils.findRenderedDOMComponentWithClass(
-      this.component, CSS.RMX_TEXTFIELD
+      this.component, CSS.RMX_TEXTFIELD,
     );
 
     expect(TestUtils.isDOMComponent(control)).to.be.true;
@@ -35,7 +35,7 @@ describe("TextFieldControl", () => {
 
   it("have correct innertext checked value", () => {
     let textField = TestUtils.findRenderedDOMComponentWithClass(
-      this.component, "mdl-textfield__input"
+      this.component, "mdl-textfield__input",
     ) as HTMLInputElement;
 
     expect(textField.value).to.equal(initialValue);

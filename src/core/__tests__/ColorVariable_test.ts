@@ -2,10 +2,10 @@ import * as chai from "chai";
 import * as sinon from "sinon";
 import * as sinonChai from "sinon-chai";
 
-import { remixer } from "../Remixer";
 import { ColorUtils } from "../../lib/ColorUtils";
-import { ColorVariable } from "../variables/ColorVariable";
 import { ConstraintType, ControlType, DataType } from "../../lib/Constants";
+import { remixer } from "../Remixer";
+import { ColorVariable } from "../variables/ColorVariable";
 import { Variable } from "../variables/Variable";
 
 const expect = chai.expect;

@@ -1,11 +1,11 @@
+import * as chai from "chai";
 import * as React from "react";
 import * as TestUtils from "react-addons-test-utils";
-import * as chai from "chai";
 
 import { remixer } from "../../core/Remixer";
+import { Variable } from "../../core/variables/Variable";
 import { CSS } from "../../lib/Constants";
 import { RadioListControl } from "../controls/RadioListControl";
-import { Variable } from "../../core/variables/Variable";
 
 const expect = chai.expect;
 
@@ -21,13 +21,13 @@ describe("RadioListControl", () => {
       <RadioListControl
         variable={variable}
         updateVariable={null}
-      />
+      />,
     );
   });
 
   it("should render with proper class name", () => {
     let control = TestUtils.findRenderedDOMComponentWithClass(
-      this.component, CSS.RMX_RADIO_LIST
+      this.component, CSS.RMX_RADIO_LIST,
     );
 
     expect(TestUtils.isDOMComponent(control)).to.be.true;
@@ -35,13 +35,13 @@ describe("RadioListControl", () => {
 
   it("have correct number of children with proper data values", () => {
     let list = TestUtils.findRenderedDOMComponentWithClass(
-      this.component, "control"
+      this.component, "control",
     );
 
     expect(list.children.length).to.equal(2);
 
     let elements = TestUtils.scryRenderedDOMComponentsWithClass(
-      this.component, "mdl-radio__button"
+      this.component, "mdl-radio__button",
     ) as HTMLInputElement[];
 
     for (let i = 0; i < elements.length; i++) {

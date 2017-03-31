@@ -16,16 +16,16 @@
 
 import * as React from "react";
 
-import { CSS, ControlType } from "../lib/Constants";
+import { StringVariable } from "../core/variables/StringVariable";
+import { Variable } from "../core/variables/Variable";
+import { ControlType, CSS } from "../lib/Constants";
 import { ColorSwatchControl } from "./controls/ColorSwatchControl";
-import { DropdownControl } from "./controls/DropdownControl";
 import { IControlUpdateProps } from "./controls/controlProps";
+import { DropdownControl } from "./controls/DropdownControl";
 import { RadioListControl } from "./controls/RadioListControl";
 import { SliderControl } from "./controls/SliderControl";
-import { StringVariable } from "../core/variables/StringVariable";
 import { SwitchControl } from "./controls/SwitchControl";
 import { TextFieldControl } from "./controls/TextFieldControl";
-import { Variable } from "../core/variables/Variable";
 
 /**
  * Interface for a React class that requires an array of Variables.

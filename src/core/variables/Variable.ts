@@ -14,9 +14,9 @@
  *  under the License.
  */
 
-import { remixer } from "../Remixer";
 import { ConstraintType } from "../../lib/Constants";
 import { ISerializableData } from "../../lib/LocalStorage";
+import { remixer } from "../Remixer";
 
 /**
  * Interface for a class that represents a type a Variable.

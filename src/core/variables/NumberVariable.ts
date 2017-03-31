@@ -117,7 +117,7 @@ export class NumberVariable extends Variable implements INumberVariableParams {
     let variable = new NumberVariable(
       data.key,
       data.selectedValue,
-      data.limitedToValues
+      data.limitedToValues,
     );
     variable.title = data.title;
     return variable;

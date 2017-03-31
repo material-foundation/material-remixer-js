@@ -16,12 +16,12 @@
 
 import * as React from "react";
 
+import { Variable } from "../core/variables/Variable";
 import { CSS, KeyCode, KeyEvent } from "../lib/Constants";
 import { Messaging } from "../lib/Messaging";
+import { Remote } from "../lib/Remote";
 import { OverlayShareMenu } from "./OverlayShareMenu";
 import { OverlayVariables } from "./OverlayVariables";
-import { Remote } from "../lib/Remote";
-import { Variable } from "../core/variables/Variable";
 
 /**
  * Interface for the properties assigned to the OverlayController component.
@@ -102,7 +102,7 @@ export class OverlayController extends React.Component<IControllerProps, IContro
   /** Toggles the share menu visibility. */
   toggleShareMenu = () => {
     this.setState({
-      shareMenuIsVisible: !this.state.shareMenuIsVisible
+      shareMenuIsVisible: !this.state.shareMenuIsVisible,
     });
   }
 
@@ -112,7 +112,7 @@ export class OverlayController extends React.Component<IControllerProps, IContro
       remote,
       toggleRemoteEnabled,
       updateVariable,
-      variables
+      variables,
     } = this.props;
     const { shareMenuIsVisible } = this.state;
     const remoteInitialized = remote ? remote.initialized : false;

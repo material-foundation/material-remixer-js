@@ -17,8 +17,8 @@
 import * as React from "react";
 
 import { CSS } from "../../lib/Constants";
-import { IRangeControlProps } from "./controlProps";
 import { ListItem } from "../ListItem";
+import { IRangeControlProps } from "./controlProps";
 
 /**
  * A slider control.

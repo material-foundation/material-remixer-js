@@ -17,12 +17,12 @@
 import * as firebase from "firebase";
 import * as uuid from "uuid";
 
-import { remixer } from "../core/Remixer";
 import { throttle } from "lodash";
-import { Messaging } from "./Messaging";
-import { LocalStorage } from "./LocalStorage";
-import { StorageKey } from "./Constants";
+import { remixer } from "../core/Remixer";
 import { Variable } from "../core/variables/Variable";
+import { StorageKey } from "./Constants";
+import { LocalStorage } from "./LocalStorage";
+import { Messaging } from "./Messaging";
 
 // The number of milliseconds to throttle invocations to.
 const THROTTLE_WAIT = 300;
@@ -243,7 +243,7 @@ export class Remote  {
    */
   private startObservingUpdates(variableKey: string): void {
     let reference = this.dbReference().child(variableKey);
-    reference.on("child_changed", function(data) {
+    reference.on("child_changed", (data) => {
       let variable = remixer.getVariable(data.ref.parent.key);
       remixer.cloneAndUpdateVariable(variable, data.val());
     });

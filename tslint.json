@@ -1,4 +1,5 @@
 {
+  "extends": ["tslint:recommended", "tslint-react"],
   "rules": {
     "class-name": true,
     "comment-format": [
@@ -9,9 +10,13 @@
       true,
       "spaces"
     ],
+    "interface-name": false,
+    "member-access": false,
+    "member-ordering": false,
     "no-duplicate-variable": true,
     "no-eval": true,
     "no-internal-module": true,
+    "no-string-literal": false,
     "no-trailing-whitespace": true,
     "no-unsafe-finally": true,
     "no-var-keyword": true,

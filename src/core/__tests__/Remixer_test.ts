@@ -2,8 +2,8 @@ import * as chai from "chai";
 import * as sinon from "sinon";
 import * as sinonChai from "sinon-chai";
 
-import { remixer } from "../Remixer";
 import { DataType } from "../../lib/Constants";
+import { remixer } from "../Remixer";
 
 const expect = chai.expect;
 chai.use(sinonChai);

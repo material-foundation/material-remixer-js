@@ -14,16 +14,16 @@
  *  under the License.
  */
 
-import { BooleanVariable } from "./variables/BooleanVariable";
-import { ColorVariable } from "./variables/ColorVariable";
 import { CSS, KeyCode, KeyEvent } from "../lib/Constants";
 import { LocalStorage } from "../lib/LocalStorage";
 import { Messaging } from "../lib/Messaging";
+import { Remote } from "../lib/Remote";
+import { BooleanVariable } from "./variables/BooleanVariable";
+import { ColorVariable } from "./variables/ColorVariable";
 import { NumberVariable } from "./variables/NumberVariable";
 import { IRangeVariableParams, RangeVariable } from "./variables/RangeVariable";
-import { IVariableCallback, IVariableKeyMap, Variable } from "./variables/Variable";
-import { Remote } from "../lib/Remote";
 import { StringVariable } from "./variables/StringVariable";
+import { IVariableCallback, IVariableKeyMap, Variable } from "./variables/Variable";
 
 import "../ui/styles/iframe.less";
 
