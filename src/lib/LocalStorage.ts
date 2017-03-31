@@ -14,13 +14,13 @@
  *  under the License.
  */
 
-import { BooleanVariable } from "../core/variables/BooleanVariable";
-import { ColorVariable } from "../core/variables/ColorVariable";
-import { NumberVariable } from "../core/variables/NumberVariable";
-import { RangeVariable } from "../core/variables/RangeVariable";
-import { StringVariable } from "../core/variables/StringVariable";
-import { Variable } from "../core/variables/Variable";
-import { ConstraintType, DataType, StorageKey } from "../lib/Constants";
+import { BooleanVariable } from '../core/variables/BooleanVariable';
+import { ColorVariable } from '../core/variables/ColorVariable';
+import { NumberVariable } from '../core/variables/NumberVariable';
+import { RangeVariable } from '../core/variables/RangeVariable';
+import { StringVariable } from '../core/variables/StringVariable';
+import { Variable } from '../core/variables/Variable';
+import { ConstraintType, DataType, StorageKey } from '../lib/Constants';
 
 /**
  * Interface for a class that represents serialized data.

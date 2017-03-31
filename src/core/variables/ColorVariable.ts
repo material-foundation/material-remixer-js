@@ -14,10 +14,10 @@
  *  under the License.
  */
 
-import { ColorUtils, RgbaColor } from "../../lib/ColorUtils";
-import { ConstraintType, ControlType, DataType } from "../../lib/Constants";
-import { ISerializableData } from "../../lib/LocalStorage";
-import { IVariableCallback, IVariableListParams, Variable } from "./Variable";
+import { ColorUtils, RgbaColor } from '../../lib/ColorUtils';
+import { ConstraintType, ControlType, DataType } from '../../lib/Constants';
+import { ISerializableData } from '../../lib/LocalStorage';
+import { IVariableCallback, IVariableListParams, Variable } from './Variable';
 
 /**
  * Interface for a class that represents a type of Variable for color values.
@@ -128,7 +128,7 @@ export class ColorVariable extends Variable implements IColorVariableParams {
    * @return {string}    Return the original string or formatted string value.
    */
   formatValue(value: any): string {
-    if (typeof value === "object") {
+    if (typeof value === 'object') {
       return ColorUtils.toRgbaString(value);
     }
     return value;

@@ -14,14 +14,14 @@
  *  under the License.
  */
 
-import * as React from "react";
-import * as ReactDOM from "react-dom";
-import "./styles/overlay.less";
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
+import './styles/overlay.less';
 
-import { remixer } from "../core/Remixer";
-import { Variable } from "../core/variables/Variable";
-import { CSS } from "../lib/Constants";
-import { OverlayController } from "./OverlayController";
+import { remixer } from '../core/Remixer';
+import { Variable } from '../core/variables/Variable';
+import { CSS } from '../lib/Constants';
+import { OverlayController } from './OverlayController';
 
 // Get remixer variables from the current instance of remixer.
 let variables = remixer.attachedInstance.variablesArray;

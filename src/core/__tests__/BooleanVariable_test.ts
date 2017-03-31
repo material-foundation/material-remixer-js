@@ -1,18 +1,18 @@
-import * as chai from "chai";
-import * as sinon from "sinon";
-import * as sinonChai from "sinon-chai";
+import * as chai from 'chai';
+import * as sinon from 'sinon';
+import * as sinonChai from 'sinon-chai';
 
-import { ConstraintType, ControlType, DataType } from "../../lib/Constants";
-import { remixer } from "../Remixer";
-import { BooleanVariable } from "../variables/BooleanVariable";
-import { Variable } from "../variables/Variable";
+import { ConstraintType, ControlType, DataType } from '../../lib/Constants';
+import { remixer } from '../Remixer';
+import { BooleanVariable } from '../variables/BooleanVariable';
+import { Variable } from '../variables/Variable';
 
 const expect = chai.expect;
 chai.use(sinonChai);
 
-describe("BooleanVariable", () => {
-  const key: string = "test variable";
-  const sanitizedKey: string = "test_variable";
+describe('BooleanVariable', () => {
+  const key: string = 'test variable';
+  const sanitizedKey: string = 'test_variable';
   const initialValue: boolean = true;
   let callbackSpy: sinon.SinonSpy;
   let variable: BooleanVariable;
@@ -22,31 +22,31 @@ describe("BooleanVariable", () => {
     variable = remixer.addBooleanVariable(key, initialValue, callbackSpy);
   });
 
-  it("should create a new variable", () => {
+  it('should create a new variable', () => {
     expect(variable).to.be.instanceof(Variable).and.instanceof(BooleanVariable);
   });
 
-  it("have the correct datatype", () => {
+  it('have the correct datatype', () => {
     expect(variable.dataType).to.equal(DataType.BOOLEAN);
   });
 
-  it("have the correct contraintType", () => {
+  it('have the correct contraintType', () => {
     expect(variable.constraintType).to.equal(ConstraintType.NONE);
   });
 
-  it("have the correct controlType", () => {
+  it('have the correct controlType', () => {
     expect(variable.controlType).to.equal(ControlType.SWITCH);
   });
 
-  it("have the correct title", () => {
+  it('have the correct title', () => {
     expect(variable.title).to.equal(key);
   });
 
-  it("have the correct sanitized key", () => {
+  it('have the correct sanitized key', () => {
     expect(variable.key).to.equal(sanitizedKey);
   });
 
-  it("should trigger callback when selected value of variable changes", () => {
+  it('should trigger callback when selected value of variable changes', () => {
     const newValue = !variable.selectedValue;
     variable.selectedValue = newValue;
 
@@ -55,7 +55,7 @@ describe("BooleanVariable", () => {
     expect(updatedVariable.selectedValue).to.equal(newValue);
   });
 
-  it("should clone properly", () => {
+  it('should clone properly', () => {
     const clone = variable.clone();
     expect(JSON.stringify(clone)).to.equal(JSON.stringify(variable));
   });

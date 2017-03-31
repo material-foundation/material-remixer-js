@@ -14,18 +14,18 @@
  *  under the License.
  */
 
-import { CSS, KeyCode, KeyEvent } from "../lib/Constants";
-import { LocalStorage } from "../lib/LocalStorage";
-import { Messaging } from "../lib/Messaging";
-import { Remote } from "../lib/Remote";
-import { BooleanVariable } from "./variables/BooleanVariable";
-import { ColorVariable } from "./variables/ColorVariable";
-import { NumberVariable } from "./variables/NumberVariable";
-import { IRangeVariableParams, RangeVariable } from "./variables/RangeVariable";
-import { StringVariable } from "./variables/StringVariable";
-import { IVariableCallback, IVariableKeyMap, Variable } from "./variables/Variable";
+import { CSS, KeyCode, KeyEvent } from '../lib/Constants';
+import { LocalStorage } from '../lib/LocalStorage';
+import { Messaging } from '../lib/Messaging';
+import { Remote } from '../lib/Remote';
+import { BooleanVariable } from './variables/BooleanVariable';
+import { ColorVariable } from './variables/ColorVariable';
+import { NumberVariable } from './variables/NumberVariable';
+import { IRangeVariableParams, RangeVariable } from './variables/RangeVariable';
+import { StringVariable } from './variables/StringVariable';
+import { IVariableCallback, IVariableKeyMap, Variable } from './variables/Variable';
 
-import "../ui/styles/iframe.less";
+import '../ui/styles/iframe.less';
 
 /**
  * A declaration used for the webpack `html-loader` module to load string
@@ -55,7 +55,7 @@ class Remixer {
    * @return {Remixer} The attached instance of Remixer.
    */
   static get attachedInstance(): Remixer {
-    const parentRemixer = window.parent["remixer"];
+    const parentRemixer = window.parent['remixer'];
     if (parentRemixer) {
       return parentRemixer._sharedInstance as Remixer;
     }
@@ -80,14 +80,14 @@ class Remixer {
    */
   private appendFrameToBody(): void {
     if (!this._frameElement) {
-      const frame = document.createElement("IFRAME") as HTMLFrameElement;
+      const frame = document.createElement('IFRAME') as HTMLFrameElement;
       frame.id = CSS.RMX_OVERLAY_FRAME;
-      frame.setAttribute("sandbox", "allow-scripts allow-same-origin allow-popups");
-      document.getElementsByTagName("body")[0].appendChild(frame);
+      frame.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-popups');
+      document.getElementsByTagName('body')[0].appendChild(frame);
 
       // Until `srcdoc` is fully compatible with all browsers, lets simply
       // write the overlay html content to the iframe content window.
-      const iframeContent: string = require("../ui/templates/overlay_iframe.html");
+      const iframeContent: string = require('../ui/templates/overlay_iframe.html');
       frame.contentWindow.document.open();
       frame.contentWindow.document.write(iframeContent);
       frame.contentWindow.document.close();

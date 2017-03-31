@@ -14,9 +14,9 @@
  *  under the License.
  */
 
-import { ConstraintType, ControlType, DataType } from "../../lib/Constants";
-import { ISerializableData } from "../../lib/LocalStorage";
-import { IVariableCallback, IVariableParams, Variable } from "./Variable";
+import { ConstraintType, ControlType, DataType } from '../../lib/Constants';
+import { ISerializableData } from '../../lib/LocalStorage';
+import { IVariableCallback, IVariableParams, Variable } from './Variable';
 
 /**
  * Interface for a class that represents a type of Variable for a range

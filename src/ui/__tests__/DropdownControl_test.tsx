@@ -1,18 +1,18 @@
-import * as chai from "chai";
-import * as React from "react";
-import * as TestUtils from "react-addons-test-utils";
+import * as chai from 'chai';
+import * as React from 'react';
+import * as TestUtils from 'react-addons-test-utils';
 
-import { remixer } from "../../core/Remixer";
-import { Variable } from "../../core/variables/Variable";
-import { CSS } from "../../lib/Constants";
-import { DropdownControl } from "../controls/DropdownControl";
+import { remixer } from '../../core/Remixer';
+import { Variable } from '../../core/variables/Variable';
+import { CSS } from '../../lib/Constants';
+import { DropdownControl } from '../controls/DropdownControl';
 
 const expect = chai.expect;
 
-describe("DropdownControl", () => {
-  const key: string = "test_variable";
-  const initialValue: string = "a";
-  const limitedToValues: string[] = ["a", "b", "c"];
+describe('DropdownControl', () => {
+  const key: string = 'test_variable';
+  const initialValue: string = 'a';
+  const limitedToValues: string[] = ['a', 'b', 'c'];
   let variable: Variable;
 
   beforeEach(() => {
@@ -25,7 +25,7 @@ describe("DropdownControl", () => {
     );
   });
 
-  it("should render with proper class name", () => {
+  it('should render with proper class name', () => {
     const control = TestUtils.findRenderedDOMComponentWithClass(
       this.component, CSS.RMX_DROPDOWN,
     );
@@ -33,9 +33,9 @@ describe("DropdownControl", () => {
     expect(TestUtils.isDOMComponent(control)).to.be.true;
   });
 
-  it("have correct number of children with proper data values", () => {
+  it('have correct number of children with proper data values', () => {
     const list = TestUtils.findRenderedDOMComponentWithTag(
-      this.component, "ul",
+      this.component, 'ul',
     );
 
     expect(list.children.length).to.equal(3);

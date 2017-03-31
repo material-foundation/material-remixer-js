@@ -14,11 +14,11 @@
  *  under the License.
  */
 
-import * as React from "react";
+import * as React from 'react';
 
-import { CSS } from "../../lib/Constants";
-import { ListItem } from "../ListItem";
-import { IRangeControlProps } from "./controlProps";
+import { CSS } from '../../lib/Constants';
+import { ListItem } from '../ListItem';
+import { IRangeControlProps } from './controlProps';
 
 /**
  * A slider control.
@@ -63,8 +63,8 @@ export class SliderControl extends React.Component<IRangeControlProps, void> {
           <span className={CSS.RMX_SLIDER_MIN}>{minValue}</span>
           <input
             id={id}
-            type="range"
-            className="mdl-slider mdl-js-slider"
+            type='range'
+            className='mdl-slider mdl-js-slider'
             min={minValue}
             max={maxValue}
             step={increment}

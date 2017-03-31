@@ -1,16 +1,16 @@
-import * as chai from "chai";
-import * as React from "react";
-import * as TestUtils from "react-addons-test-utils";
+import * as chai from 'chai';
+import * as React from 'react';
+import * as TestUtils from 'react-addons-test-utils';
 
-import { remixer } from "../../core/Remixer";
-import { Variable } from "../../core/variables/Variable";
-import { CSS } from "../../lib/Constants";
-import { SwitchControl } from "../controls/SwitchControl";
+import { remixer } from '../../core/Remixer';
+import { Variable } from '../../core/variables/Variable';
+import { CSS } from '../../lib/Constants';
+import { SwitchControl } from '../controls/SwitchControl';
 
 const expect = chai.expect;
 
-describe("SwitchControl", () => {
-  const key: string = "test_variable";
+describe('SwitchControl', () => {
+  const key: string = 'test_variable';
   const initialValue: boolean = true;
   let variable: Variable;
 
@@ -24,7 +24,7 @@ describe("SwitchControl", () => {
     );
   });
 
-  it("should render with proper class name", () => {
+  it('should render with proper class name', () => {
     const control = TestUtils.findRenderedDOMComponentWithClass(
       this.component, CSS.RMX_SWITCH,
     );
@@ -32,9 +32,9 @@ describe("SwitchControl", () => {
     expect(TestUtils.isDOMComponent(control)).to.be.true;
   });
 
-  it("have correct switch checked value", () => {
+  it('have correct switch checked value', () => {
     const control = TestUtils.findRenderedDOMComponentWithClass(
-      this.component, "mdl-switch__input",
+      this.component, 'mdl-switch__input',
     ) as HTMLInputElement;
 
     expect(control.checked).to.equal(initialValue);

@@ -14,12 +14,12 @@
  *  under the License.
  */
 
-import * as React from "react";
+import * as React from 'react';
 
-import { ColorUtils } from "../../lib/ColorUtils";
-import { CSS } from "../../lib/Constants";
-import { ListItem } from "../ListItem";
-import { IColorControlProps } from "./controlProps";
+import { ColorUtils } from '../../lib/ColorUtils';
+import { CSS } from '../../lib/Constants';
+import { ListItem } from '../ListItem';
+import { IColorControlProps } from './controlProps';
 
 /**
  * A color swatch picker control consisting of a single color swatch for each
@@ -92,7 +92,7 @@ function ColorSwatch(props: IColorSwatchProps) {
 
   // Determine a readable color to prevent a white checkmark on a light
   // color swatch.
-  const checkColor = ColorUtils.mostReadable(color, ["white", "gray"]);
+  const checkColor = ColorUtils.mostReadable(color, ['white', 'gray']);
   return (
     <div
       className={CSS.RMX_COLOR_SWATCH_ITEM}
@@ -100,7 +100,7 @@ function ColorSwatch(props: IColorSwatchProps) {
       data-value={color}
       onClick={onClick}
     >
-      {isSelected ? <i className="material-icons" style={{color: checkColor}}>check</i> : ""}
+      {isSelected ? <i className='material-icons' style={{color: checkColor}}>check</i> : ''}
     </div>
   );
 }

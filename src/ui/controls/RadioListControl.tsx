@@ -14,11 +14,11 @@
  *  under the License.
  */
 
-import * as React from "react";
+import * as React from 'react';
 
-import { CSS } from "../../lib/Constants";
-import { ListItem } from "../ListItem";
-import { IStringControlProps } from "./controlProps";
+import { CSS } from '../../lib/Constants';
+import { ListItem } from '../ListItem';
+import { IStringControlProps } from './controlProps';
 
 /**
  * A radio list control.
@@ -46,7 +46,7 @@ export class RadioListControl extends React.Component<IStringControlProps, void>
   componentDidUpdate() {
     const { limitedToValues, selectedValue } = this.props.variable;
     const index = limitedToValues.indexOf(selectedValue);
-    const materialRadio = this.radioItems[index]["MaterialRadio"];
+    const materialRadio = this.radioItems[index]['MaterialRadio'];
     materialRadio.check();
   }
 
@@ -73,15 +73,15 @@ export class RadioListControl extends React.Component<IStringControlProps, void>
             key={value}
           >
             <input
-              type="radio"
+              type='radio'
               id={`${id}-${i}`}
-              className="mdl-radio__button"
-              name="options"
+              className='mdl-radio__button'
+              name='options'
               value={value}
               checked={selectedValue === value}
               onChange={this.onChange}
             />
-            <span className="mdl-radio__label">{value}</span>
+            <span className='mdl-radio__label'>{value}</span>
           </label>
         ))}
       </ListItem>

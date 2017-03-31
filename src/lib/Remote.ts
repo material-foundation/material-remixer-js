@@ -14,15 +14,15 @@
  *  under the License.
  */
 
-import * as firebase from "firebase";
-import * as uuid from "uuid";
+import * as firebase from 'firebase';
+import * as uuid from 'uuid';
 
-import { throttle } from "lodash";
-import { remixer } from "../core/Remixer";
-import { Variable } from "../core/variables/Variable";
-import { StorageKey } from "./Constants";
-import { LocalStorage } from "./LocalStorage";
-import { Messaging } from "./Messaging";
+import { throttle } from 'lodash';
+import { remixer } from '../core/Remixer';
+import { Variable } from '../core/variables/Variable';
+import { StorageKey } from './Constants';
+import { LocalStorage } from './LocalStorage';
+import { Messaging } from './Messaging';
 
 // The number of milliseconds to throttle invocations to.
 const THROTTLE_WAIT = 300;
@@ -91,7 +91,7 @@ export class Remote  {
    * @return {string} The remote controller URL.
    */
   get remoteUrl(): string {
-    const authDomain = firebase.app().options["authDomain"];
+    const authDomain = firebase.app().options['authDomain'];
     return `https://${authDomain}/${this._remoteId}`;
   }
 
@@ -243,7 +243,7 @@ export class Remote  {
    */
   private startObservingUpdates(variableKey: string): void {
     const reference = this.dbReference().child(variableKey);
-    reference.on("child_changed", (data) => {
+    reference.on('child_changed', (data) => {
       const variable = remixer.getVariable(data.ref.parent.key);
       remixer.cloneAndUpdateVariable(variable, data.val());
     });

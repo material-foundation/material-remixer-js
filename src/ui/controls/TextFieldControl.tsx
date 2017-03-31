@@ -14,11 +14,11 @@
  *  under the License.
  */
 
-import * as React from "react";
+import * as React from 'react';
 
-import { CSS, DataType } from "../../lib/Constants";
-import { ListItem } from "../ListItem";
-import { IStringControlProps } from "./controlProps";
+import { CSS, DataType } from '../../lib/Constants';
+import { ListItem } from '../ListItem';
+import { IStringControlProps } from './controlProps';
 
 /**
  * A textfield control.
@@ -50,7 +50,7 @@ export class TextFieldControl extends React.Component<IStringControlProps, void>
     } = this.props.variable;
     const id = `${CSS.RMX_TEXTFIELD}-${key}`;
     const isNumber: boolean = dataType === DataType.NUMBER;
-    const pattern = isNumber ? "-?[0-9]*(\.[0-9]+)?" : ".*";
+    const pattern = isNumber ? '-?[0-9]*(\.[0-9]+)?' : '.*';
 
     return (
       <ListItem
@@ -58,19 +58,19 @@ export class TextFieldControl extends React.Component<IStringControlProps, void>
         title={title}
         inlineControl={false}
       >
-        <span className="mdl-textfield mdl-js-textfield">
+        <span className='mdl-textfield mdl-js-textfield'>
           <input
-            className="mdl-textfield__input"
-            type="text"
+            className='mdl-textfield__input'
+            type='text'
             id={id}
             pattern={pattern}
             value={selectedValue}
             onChange={this.onChange}
           />
-          <label className="mdl-textfield__label" htmlFor={id}>
-            {`Enter ${isNumber ? "number" : "text"}...`}
+          <label className='mdl-textfield__label' htmlFor={id}>
+            {`Enter ${isNumber ? 'number' : 'text'}...`}
           </label>
-          <span className="mdl-textfield__error">Input is not a number!</span>
+          <span className='mdl-textfield__error'>Input is not a number!</span>
         </span>
       </ListItem>
     );
