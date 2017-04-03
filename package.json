@@ -23,6 +23,7 @@
     "codecov": "cat coverage/*/lcov.info | codecov",
     "clean": "del-cli build/** dist/**",
     "dev": "npm run clean && npm run build && cross-env RMX_ENV=development webpack-dev-server",
+    "docs": "typedoc --out docs/api --readme none --exclude '**/+(__tests__|node_modules)/**/*.ts?(x)' ",
     "dist": "npm run clean && npm run build && copyFiles -f build/*.* dist",
     "lint:ts": "tslint --fix --force 'src/**/*.ts?(x)'",
     "lint:css": "lesshint src/ui/styles/*.less examples/src/*.css",
@@ -71,6 +72,7 @@
     "ts-loader": "^2.0.3",
     "tslint": "^4.0.2",
     "tslint-react": "^2.5.0",
+    "typedoc": "^0.5.9",
     "typescript": "^2.1.6",
     "webpack": "^2.3.2",
     "webpack-dev-server": "^2.4.2"
