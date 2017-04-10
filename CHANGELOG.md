@@ -1,3 +1,7 @@
+## 1.0.0
+
+Remixer v1.0.0 Release.
+
 ## 0.7.0
 
 ### New Features
