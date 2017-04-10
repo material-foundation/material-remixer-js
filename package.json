@@ -28,7 +28,8 @@
     "lint:ts": "tslint --fix --force 'src/**/*.ts?(x)'",
     "lint:css": "lesshint src/ui/styles/*.less examples/src/*.css",
     "lint": "npm-run-all --parallel lint:*",
-    "test": "karma start"
+    "test": "karma start",
+    "test:watch": "karma start --no-single-run"
   },
   "devDependencies": {
     "@types/chai": "^3.4.34",
