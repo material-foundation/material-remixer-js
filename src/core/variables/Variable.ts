@@ -14,9 +14,9 @@
  *  under the License.
  */
 
-import { remixer } from "../Remixer";
-import { ConstraintType } from "../../lib/Constants";
-import { ISerializableData } from "../../lib/LocalStorage";
+import { ConstraintType } from '../../lib/Constants';
+import { ISerializableData } from '../../lib/LocalStorage';
+import { remixer } from '../Remixer';
 
 /**
  * Interface for a class that represents a type a Variable.
@@ -97,7 +97,7 @@ export class Variable implements IVariableParams {
    * @return {Variable} Returns the cloned variable.
    */
   clone() {
-    let cloned = new Variable(
+    const cloned = new Variable(
       this.key,
       this.dataType,
       this.selectedValue,
@@ -194,7 +194,7 @@ export class Variable implements IVariableParams {
    * Invokes each of the callback methods.
    */
   executeCallbacks(): void {
-    for (let callback of this.callbacks) {
+    for (const callback of this.callbacks) {
       callback(this);
     }
   }
@@ -227,7 +227,7 @@ export class Variable implements IVariableParams {
    * @return {ISerializableData} The serialized data.
    */
   serialize(): ISerializableData {
-    let data = <ISerializableData>{};
+    const data = {} as ISerializableData;
     data.key = this.key;
     data.constraintType = this.constraintType;
     data.controlType = this.controlType;
@@ -252,7 +252,7 @@ export class Variable implements IVariableParams {
    * @return {string}     The formatted key.
    */
   private sanitizeKey(key: string): string {
-    return key.split(" ").join("_");
+    return key.split(' ').join('_');
   }
 
   /**

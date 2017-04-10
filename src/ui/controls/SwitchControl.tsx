@@ -14,11 +14,11 @@
  *  under the License.
  */
 
-import * as React from "react";
+import * as React from 'react';
 
-import { CSS } from "../../lib/Constants";
-import { IBooleanControlProps } from "./controlProps";
-import { ListItem } from "../ListItem";
+import { CSS } from '../../lib/Constants';
+import { ListItem } from '../ListItem';
+import { IBooleanControlProps } from './controlProps';
 
 /**
  * A switch control.
@@ -42,7 +42,7 @@ export class SwitchControl extends React.Component<IBooleanControlProps, void> {
   }
 
   componentDidUpdate() {
-    let materialSwitch = this.switchControl["MaterialSwitch"];
+    const materialSwitch = this.switchControl['MaterialSwitch'];
     this.props.variable.selectedValue ? materialSwitch.on() : materialSwitch.off();
   }
 
@@ -62,16 +62,17 @@ export class SwitchControl extends React.Component<IBooleanControlProps, void> {
         inlineControl={true}
       >
         <label
-          ref={item => this.switchControl = item}
-          className="mdl-switch mdl-js-switch mdl-js-ripple-effect"
+          className='mdl-switch mdl-js-switch mdl-js-ripple-effect'
           htmlFor={id}
         >
           <input
-            id={id} type="checkbox" className="mdl-switch__input"
+            id={id}
+            type='checkbox'
+            className='mdl-switch__input'
             checked={selectedValue}
             onChange={this.onChange}
           />
-          <span className="mdl-switch__label" />
+          <span className='mdl-switch__label' />
         </label>
       </ListItem>
     );

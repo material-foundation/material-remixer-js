@@ -14,7 +14,7 @@
  *  under the License.
  */
 
-import { CSS } from "../lib/Constants";
+import { CSS } from '../lib/Constants';
 
 /**
  * Available messaging types.
@@ -47,7 +47,7 @@ export class Messaging {
    * @param {Function} callback A callback to invoke after registration.
    */
   static register(callback?: Function): void {
-    window.addEventListener("message", (e: MessageEvent) => {
+    window.addEventListener('message', (e: MessageEvent) => {
       if (callback) {
         callback(e);
       }
@@ -60,7 +60,7 @@ export class Messaging {
    * @param {Function} callback A callback to invoke after unregistration.
    */
   static unregister(callback?: Function): void {
-    window.removeEventListener("message", (e: MessageEvent) => {
+    window.removeEventListener('message', (e: MessageEvent) => {
       if (callback) {
         callback(e);
       }
@@ -73,6 +73,6 @@ export class Messaging {
    */
   static postToFrame(message: MessagingType): void {
     const frame = document.getElementById(CSS.RMX_OVERLAY_FRAME) as HTMLFrameElement;
-    frame.contentWindow.postMessage(message, "*");
+    frame.contentWindow.postMessage(message, '*');
   }
 }

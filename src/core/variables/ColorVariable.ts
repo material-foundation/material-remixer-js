@@ -14,10 +14,10 @@
  *  under the License.
  */
 
-import { ColorUtils, RgbaColor } from "../../lib/ColorUtils";
-import { ConstraintType, ControlType, DataType } from "../../lib/Constants";
-import { ISerializableData } from "../../lib/LocalStorage";
-import { IVariableCallback, IVariableListParams, Variable } from "./Variable";
+import { ColorUtils, RgbaColor } from '../../lib/ColorUtils';
+import { ConstraintType, ControlType, DataType } from '../../lib/Constants';
+import { ISerializableData } from '../../lib/LocalStorage';
+import { IVariableCallback, IVariableListParams, Variable } from './Variable';
 
 /**
  * Interface for a class that represents a type of Variable for color values.
@@ -74,7 +74,7 @@ export class ColorVariable extends Variable implements IColorVariableParams {
    * @return {ColorVariable} Returns the cloned variable.
    */
   clone() {
-    let cloned = new ColorVariable(
+    const cloned = new ColorVariable(
       this.key,
       this.selectedValue,
       this.limitedToValues,
@@ -97,7 +97,7 @@ export class ColorVariable extends Variable implements IColorVariableParams {
    * @return {ISerializableData} The serialized data.
    */
   serialize(): ISerializableData {
-    let data = super.serialize();
+    const data = super.serialize();
     data.selectedValue = ColorUtils.toRgba(this.selectedValue);
     data.limitedToValues = this.limitedToValues.map((value: any) => {
       return ColorUtils.toRgba(value);
@@ -112,11 +112,11 @@ export class ColorVariable extends Variable implements IColorVariableParams {
    * @return {ColorVariable}          A new initialized ColorVariable.
    */
   static deserialize(data: ISerializableData): Variable {
-    let selectedValue = ColorUtils.toRgbaString(data.selectedValue);
-    let limitedToValues = data.limitedToValues.map((color: RgbaColor) => {
+    const selectedValue = ColorUtils.toRgbaString(data.selectedValue);
+    const limitedToValues = data.limitedToValues.map((color: RgbaColor) => {
       return ColorUtils.toRgbaString(color);
     });
-    let variable = new ColorVariable(data.key, selectedValue, limitedToValues);
+    const variable = new ColorVariable(data.key, selectedValue, limitedToValues);
     variable.title = data.title;
     return variable;
   }
@@ -128,7 +128,7 @@ export class ColorVariable extends Variable implements IColorVariableParams {
    * @return {string}    Return the original string or formatted string value.
    */
   formatValue(value: any): string {
-    if (typeof value === "object") {
+    if (typeof value === 'object') {
       return ColorUtils.toRgbaString(value);
     }
     return value;

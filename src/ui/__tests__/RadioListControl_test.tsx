@@ -1,18 +1,18 @@
-import * as React from "react";
-import * as TestUtils from "react-addons-test-utils";
-import * as chai from "chai";
+import * as chai from 'chai';
+import * as React from 'react';
+import * as TestUtils from 'react-addons-test-utils';
 
-import { remixer } from "../../core/Remixer";
-import { CSS } from "../../lib/Constants";
-import { RadioListControl } from "../controls/RadioListControl";
-import { Variable } from "../../core/variables/Variable";
+import { remixer } from '../../core/Remixer';
+import { Variable } from '../../core/variables/Variable';
+import { CSS } from '../../lib/Constants';
+import { RadioListControl } from '../controls/RadioListControl';
 
 const expect = chai.expect;
 
-describe("RadioListControl", () => {
-  const key: string = "test_variable";
-  const initialValue: string = "a";
-  const limitedToValues: string[] = ["a", "b"];
+describe('RadioListControl', () => {
+  const key: string = 'test_variable';
+  const initialValue: string = 'a';
+  const limitedToValues: string[] = ['a', 'b'];
   let variable: Variable;
 
   beforeEach(() => {
@@ -21,27 +21,27 @@ describe("RadioListControl", () => {
       <RadioListControl
         variable={variable}
         updateVariable={null}
-      />
+      />,
     );
   });
 
-  it("should render with proper class name", () => {
-    let control = TestUtils.findRenderedDOMComponentWithClass(
-      this.component, CSS.RMX_RADIO_LIST
+  it('should render with proper class name', () => {
+    const control = TestUtils.findRenderedDOMComponentWithClass(
+      this.component, CSS.RMX_RADIO_LIST,
     );
 
     expect(TestUtils.isDOMComponent(control)).to.be.true;
   });
 
-  it("have correct number of children with proper data values", () => {
-    let list = TestUtils.findRenderedDOMComponentWithClass(
-      this.component, "control"
+  it('have correct number of children with proper data values', () => {
+    const list = TestUtils.findRenderedDOMComponentWithClass(
+      this.component, 'control',
     );
 
     expect(list.children.length).to.equal(2);
 
-    let elements = TestUtils.scryRenderedDOMComponentsWithClass(
-      this.component, "mdl-radio__button"
+    const elements = TestUtils.scryRenderedDOMComponentsWithClass(
+      this.component, 'mdl-radio__button',
     ) as HTMLInputElement[];
 
     for (let i = 0; i < elements.length; i++) {

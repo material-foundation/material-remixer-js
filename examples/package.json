@@ -1,6 +1,6 @@
 {
   "name": "material-remixer-examples",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Example app demonstrating usage of Remixer.",
   "author": "The Material Remixer Authors (see AUTHORS)",
   "license": "Apache-2.0",
@@ -16,6 +16,6 @@
     "handlebars": "^4.0.6",
     "jquery": "^3.1.1",
     "material-design-lite": "^1.2.1",
-    "material-remixer": "^0.6.4"
+    "material-remixer": "^1.0.0"
   }
 }

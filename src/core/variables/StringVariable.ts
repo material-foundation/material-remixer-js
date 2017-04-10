@@ -14,9 +14,9 @@
  *  under the License.
  */
 
-import { ConstraintType, ControlType, DataType } from "../../lib/Constants";
-import { ISerializableData } from "../../lib/LocalStorage";
-import { IVariableCallback, IVariableListParams, Variable } from "./Variable";
+import { ConstraintType, ControlType, DataType } from '../../lib/Constants';
+import { ISerializableData } from '../../lib/LocalStorage';
+import { IVariableCallback, IVariableListParams, Variable } from './Variable';
 
 /**
  * Interface for a class that represents a type of Variable for string values.
@@ -78,7 +78,7 @@ export class StringVariable extends Variable implements IStringVariableParams {
    * @return {StringVariable} Returns the cloned variable.
    */
   clone() {
-    let cloned = new StringVariable(
+    const cloned = new StringVariable(
       this.key,
       this.selectedValue,
       this.limitedToValues,
@@ -101,7 +101,7 @@ export class StringVariable extends Variable implements IStringVariableParams {
    * @return {ISerializableData} The serialized data.
    */
   serialize(): ISerializableData {
-    let data = super.serialize();
+    const data = super.serialize();
     data.selectedValue = this.selectedValue;
     data.limitedToValues = this.limitedToValues;
     return data;
@@ -114,7 +114,7 @@ export class StringVariable extends Variable implements IStringVariableParams {
    * @return {StringVariable}         A new initialized StringVariable.
    */
   static deserialize(data: ISerializableData): StringVariable {
-    let variable = new StringVariable(
+    const variable = new StringVariable(
       data.key,
       data.selectedValue,
       data.limitedToValues,

@@ -14,10 +14,10 @@
  *  under the License.
  */
 
-import * as React from "react";
+import * as React from 'react';
 
-import { CSS } from "../lib/Constants";
-import { ListItem } from "./ListItem";
+import { CSS } from '../lib/Constants';
+import { ListItem } from './ListItem';
 
 /**
  * Interface for the overlay share menu properties.
@@ -45,41 +45,43 @@ export class OverlayShareMenu extends React.Component<IOverlayShareMenuProps, vo
       visible,
       remoteId,
       remoteUrl,
-      isEnabled
+      isEnabled,
     } = this.props;
 
-    let showMenu = visible ? "active" : "";
-    let status = isEnabled ? "on" : "off";
+    const showMenu = visible ? 'active' : '';
+    const status = isEnabled ? 'on' : 'off';
 
     return (
       <div className={`${CSS.RMX_SHARE_MENU} ${showMenu}`}>
         <ListItem
           controlClass={CSS.RMX_SHARE_STATUS}
           title={`Sharing is ${status}`}
-          subtitle="These values can be adjusted by anyone with the link."
+          subtitle='These values can be adjusted by anyone with the link.'
           inlineControl={true}
         >
           <label
-            className="mdl-switch mdl-js-switch mdl-js-ripple-effect"
-            htmlFor="share-switch"
+            className='mdl-switch mdl-js-switch mdl-js-ripple-effect'
+            htmlFor='share-switch'
           >
             <input
-              id="share-switch" type="checkbox" className="mdl-switch__input"
+              id='share-switch'
+              type='checkbox'
+              className='mdl-switch__input'
               checked={isEnabled}
               onChange={this.props.toggleRemoteEnabled}
-              />
+            />
           </label>
         </ListItem>
         <ListItem
           controlClass={`${CSS.RMX_SHARE_LINK} ${status}`}
-          title="Link"
+          title='Link'
           inlineControl={false}
         >
           <div>
-            <div><a href={remoteUrl} target="_blank">{remoteUrl}</a></div>
+            <div><a href={remoteUrl} target='_blank'>{remoteUrl}</a></div>
             <div>
-              <a href={remoteUrl} target="_blank">
-                <i className="material-icons">share</i>
+              <a href={remoteUrl} target='_blank'>
+                <i className='material-icons'>share</i>
               </a>
             </div>
           </div>

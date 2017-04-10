@@ -14,7 +14,7 @@
  *  under the License.
  */
 
-import * as TinyColor from "tinycolor2";
+import * as TinyColor from 'tinycolor2';
 
 /**
  * A representation of RGBA color.
@@ -40,7 +40,7 @@ export class ColorUtils {
    * @return {string}       Returns the RGBA string.
    */
   static toRgbaString(color: any): string {
-    if (typeof color !== "string") {
+    if (typeof color !== 'string') {
       // Convert alpha back from int[0-255] to [0-1] float.
       (color as RgbaColor).a /= 255;
     }
@@ -54,7 +54,7 @@ export class ColorUtils {
    * @return {RgbaColor}       Returns the RgbaColor.
    */
   static toRgba(color: string): RgbaColor {
-    let rgba = TinyColor(color).toRgb();
+    const rgba = TinyColor(color).toRgb();
     // Convert alpha from float to int[0-255].
     rgba.a = Math.round(rgba.a * 255);
     return rgba;

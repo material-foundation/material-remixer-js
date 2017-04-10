@@ -21,64 +21,64 @@ export const KeyCode = {
 
 /** Key event constants. */
 export const KeyEvent = {
-  DOWN: "keydown",
+  DOWN: 'keydown',
 };
 
 /** Storage keys constants. */
 export const StorageKey = {
-  PREFERENCES: "__remixer_preferences__",
-  REMIXER: "__remixer__",
-  KEY_REMIXER: "remixer",
-  KEY_REMOTE_ID: "remoteId",
-  KEY_REMOTE_ENABLED: "remoteEnabled",
-  KEY_VARIABLES: "variables"
+  KEY_REMIXER: 'remixer',
+  KEY_REMOTE_ENABLED: 'remoteEnabled',
+  KEY_REMOTE_ID: 'remoteId',
+  KEY_VARIABLES: 'variables',
+  PREFERENCES: '__remixer_preferences__',
+  REMIXER: '__remixer__',
 };
 
 /** Variable data constraints. */
 export const ConstraintType = {
-  NONE: "__ConstraintTypeNone__",
-  LIST: "__ConstraintTypeList__",
-  RANGE: "__ConstraintTypeRange__",
+  LIST: '__ConstraintTypeList__',
+  NONE: '__ConstraintTypeNone__',
+  RANGE: '__ConstraintTypeRange__',
 };
 
 /** Rendered variable control types. */
 export const ControlType = {
-  BUTTON: "__ControlTypeButton__",
-  COLOR_INPUT: "__ControlTypeColorInput__",
-  COLOR_LIST: "__ControlTypeColorList__",
-  SEGMENTED: "__ControlTypeSegmented__",
-  SLIDER: "__ControlTypeSlider__",
-  STEPPER: "__ControlTypeStepper__",
-  SWITCH: "__ControlTypeSwitch__",
-  TEXT_INPUT: "__ControlTypeTextInput__",
-  TEXT_LIST: "__ControlTypeTextList__",
+  BUTTON: '__ControlTypeButton__',
+  COLOR_INPUT: '__ControlTypeColorInput__',
+  COLOR_LIST: '__ControlTypeColorList__',
+  SEGMENTED: '__ControlTypeSegmented__',
+  SLIDER: '__ControlTypeSlider__',
+  STEPPER: '__ControlTypeStepper__',
+  SWITCH: '__ControlTypeSwitch__',
+  TEXT_INPUT: '__ControlTypeTextInput__',
+  TEXT_LIST: '__ControlTypeTextList__',
 };
 
 /** Variable data types. */
 export const DataType = {
-  BOOLEAN: "__DataTypeBoolean__",
-  COLOR: "__DataTypeColor__",
-  NUMBER: "__DataTypeNumber__",
-  STRING: "__DataTypeString__",
+  BOOLEAN: '__DataTypeBoolean__',
+  COLOR: '__DataTypeColor__',
+  NUMBER: '__DataTypeNumber__',
+  STRING: '__DataTypeString__',
 };
 
 /** CSS class and id constants. */
 export const CSS = {
-  RMX_COLOR_SWATCH:       "rmx-color-swatch",
-  RMX_COLOR_SWATCH_ITEM:  "rmx-color-swatch-item",
-  RMX_DROPDOWN:           "rmx-dropdown",
-  RMX_LIST_ITEM:          "rmx-list-item",
-  RMX_OVERLAY_FRAME:      "__remixer-overlay-frame__",
-  RMX_OVERLAY_WRAPPER:    "rmx-overlay-wrapper",
-  RMX_RADIO_LIST:         "rmx-radio-list",
-  RMX_RADIO_LIST_ITEM:    "rmx-radio-list-item",
-  RMX_SHARE_MENU:         "rmx-share-menu",
-  RMX_SHARE_STATUS:       "rmx-share-status",
-  RMX_SHARE_LINK:         "rmx-share-link",
-  RMX_SLIDER:             "rmx-slider",
-  RMX_SLIDER_MAX:         "rmx-slider-max-value",
-  RMX_SLIDER_MIN:         "rmx-slider-min-value",
-  RMX_SWITCH:             "rmx-switch",
-  RMX_TEXTFIELD:          "rmx-textfield",
-  RMX_VISIBLE:            "rmx-visible",
+  RMX_COLOR_SWATCH: 'rmx-color-swatch',
+  RMX_COLOR_SWATCH_ITEM: 'rmx-color-swatch-item',
+  RMX_DROPDOWN: 'rmx-dropdown',
+  RMX_LIST_ITEM: 'rmx-list-item',
+  RMX_OVERLAY_FRAME: '__remixer-overlay-frame__',
+  RMX_OVERLAY_WRAPPER: 'rmx-overlay-wrapper',
+  RMX_RADIO_LIST: 'rmx-radio-list',
+  RMX_RADIO_LIST_ITEM: 'rmx-radio-list-item',
+  RMX_SHARE_LINK: 'rmx-share-link',
+  RMX_SHARE_MENU: 'rmx-share-menu',
+  RMX_SHARE_STATUS: 'rmx-share-status',
+  RMX_SLIDER: 'rmx-slider',
+  RMX_SLIDER_MAX: 'rmx-slider-max-value',
+  RMX_SLIDER_MIN: 'rmx-slider-min-value',
+  RMX_SWITCH: 'rmx-switch',
+  RMX_TEXTFIELD: 'rmx-textfield',
+  RMX_VISIBLE: 'rmx-visible',
 };

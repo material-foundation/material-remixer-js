@@ -14,11 +14,11 @@
  *  under the License.
  */
 
-import * as React from "react";
+import * as React from 'react';
 
-import { CSS } from "../../lib/Constants";
-import { IStringControlProps } from "./controlProps";
-import { ListItem } from "../ListItem";
+import { CSS } from '../../lib/Constants';
+import { ListItem } from '../ListItem';
+import { IStringControlProps } from './controlProps';
 
 /**
  * A dropdown control.
@@ -31,7 +31,7 @@ export class DropdownControl extends React.Component<IStringControlProps, void> 
   onClick = (event: React.FormEvent<HTMLElement>): void => {
     this.props.updateVariable(
       this.props.variable,
-      (event.target as HTMLElement).dataset["value"],
+      (event.target as HTMLElement).dataset.value,
     );
   }
 
@@ -57,19 +57,23 @@ export class DropdownControl extends React.Component<IStringControlProps, void> 
         inlineControl={true}
       >
         <div>
-          <button id={id} className="mdl-button mdl-js-button">
+          <button id={id} className='mdl-button mdl-js-button'>
             <span>
-              {selectedValue}<i className="material-icons">arrow_drop_down</i>
+              {selectedValue}<i className='material-icons'>arrow_drop_down</i>
             </span>
           </button>
           <ul
-            className="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+            className='mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect'
             htmlFor={id}
           >
             {limitedToValues.map((value: string) => (
-              <li className="mdl-menu__item" key={value}
+              <li
+                className='mdl-menu__item'
+                key={value}
                 onClick={this.onClick}
-                data-value={value}>{value}
+                data-value={value}
+              >
+                {value}
               </li>
             ))}
           </ul>

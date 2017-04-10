@@ -59,13 +59,21 @@ remixer.addBooleanVariable("show", true, function(variable) {
 });
 ```
 
+## API Documentation
+
+- Use these [common static methods](https://github.com/material-foundation/material-remixer-js/blob/develop/docs/remixer-api.md) to enable Remixer in your app.
+- Or refer to the full [API documentation](https://material-foundation.github.io/material-remixer-js/docs) for more information.
+
+## Contributing to Remixer
+
+We're excited you want to contribute to the project! Please read these docs so we can get your contributions submitted quickly.
+
+- [Contribution policy and guidelines](https://github.com/material-foundation/material-remixer-js/blob/develop/CONTRIBUTING.md)
+- [Developing Remixer](https://github.com/material-foundation/material-remixer-js/blob/develop/docs/developing.md)
+
 ## Is material-foundation affiliated with Google?
 
 Yes, the [material-foundation](https://github.com/material-foundation) organization is one of Google's new homes for tools and frameworks related to our [Material Design](https://material.io) system. Please check out our blog post [Design is Never Done](https://design.google.com/articles/design-is-never-done/) for more information regarding Material Design and how Remixer integrates with the system.
-
-## Contributing
-
-We gladly welcome contributions! If you have found a bug, have questions, or wish to contribute, please follow our [Contributing Guidelines](https://github.com/material-foundation/material-remixer-js/blob/develop/CONTRIBUTING.md).
 
 ## License
 

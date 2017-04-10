@@ -14,11 +14,11 @@
  *  under the License.
  */
 
-import * as React from "react";
+import * as React from 'react';
 
-import { CSS } from "../../lib/Constants";
-import { IStringControlProps } from "./controlProps";
-import { ListItem } from "../ListItem";
+import { CSS } from '../../lib/Constants';
+import { ListItem } from '../ListItem';
+import { IStringControlProps } from './controlProps';
 
 /**
  * A radio list control.
@@ -45,8 +45,8 @@ export class RadioListControl extends React.Component<IStringControlProps, void>
 
   componentDidUpdate() {
     const { limitedToValues, selectedValue } = this.props.variable;
-    let index = limitedToValues.indexOf(selectedValue);
-    let materialRadio = this.radioItems[index]["MaterialRadio"];
+    const index = limitedToValues.indexOf(selectedValue);
+    const materialRadio = this.radioItems[index]['MaterialRadio'];
     materialRadio.check();
   }
 
@@ -68,17 +68,20 @@ export class RadioListControl extends React.Component<IStringControlProps, void>
       >
         {limitedToValues.map((value: string, i: number) => (
           <label
-            ref={item => this.radioItems[i] = item}
             className={`${CSS.RMX_RADIO_LIST_ITEM} mdl-radio mdl-js-radio mdl-js-ripple-effect`}
-            htmlFor={`${id}-${i}`} key={value}
+            htmlFor={`${id}-${i}`}
+            key={value}
           >
-            <input type="radio" id={`${id}-${i}`}
-              className="mdl-radio__button"
-              name="options" value={value}
+            <input
+              type='radio'
+              id={`${id}-${i}`}
+              className='mdl-radio__button'
+              name='options'
+              value={value}
               checked={selectedValue === value}
               onChange={this.onChange}
             />
-            <span className="mdl-radio__label">{value}</span>
+            <span className='mdl-radio__label'>{value}</span>
           </label>
         ))}
       </ListItem>

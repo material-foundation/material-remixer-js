@@ -1,16 +1,16 @@
-import * as React from "react";
-import * as TestUtils from "react-addons-test-utils";
-import * as chai from "chai";
+import * as chai from 'chai';
+import * as React from 'react';
+import * as TestUtils from 'react-addons-test-utils';
 
-import { remixer } from "../../core/Remixer";
-import { CSS } from "../../lib/Constants";
-import { RangeVariable } from "../../core/variables/RangeVariable";
-import { SliderControl } from "../controls/SliderControl";
+import { remixer } from '../../core/Remixer';
+import { RangeVariable } from '../../core/variables/RangeVariable';
+import { CSS } from '../../lib/Constants';
+import { SliderControl } from '../controls/SliderControl';
 
 const expect = chai.expect;
 
-describe("SliderControl", () => {
-  const key: string = "test_variable";
+describe('SliderControl', () => {
+  const key: string = 'test_variable';
   const initialValue: number = 0.5;
   const minValue: number = 0;
   const maxValue: number = 1;
@@ -23,37 +23,37 @@ describe("SliderControl", () => {
       <SliderControl
         variable={variable}
         updateVariable={null}
-      />
+      />,
     );
   });
 
-  it("should render with proper class name", () => {
-    let control = TestUtils.findRenderedDOMComponentWithClass(
-      this.component, CSS.RMX_SLIDER
+  it('should render with proper class name', () => {
+    const control = TestUtils.findRenderedDOMComponentWithClass(
+      this.component, CSS.RMX_SLIDER,
     );
 
     expect(TestUtils.isDOMComponent(control)).to.be.true;
   });
 
-  it("have correct min label", () => {
-    let label = TestUtils.findRenderedDOMComponentWithClass(
-      this.component, CSS.RMX_SLIDER_MIN
+  it('have correct min label', () => {
+    const label = TestUtils.findRenderedDOMComponentWithClass(
+      this.component, CSS.RMX_SLIDER_MIN,
     );
 
     expect(Number(label.textContent)).to.equal(minValue);
   });
 
-  it("have correct max label", () => {
-    let label = TestUtils.findRenderedDOMComponentWithClass(
-      this.component, CSS.RMX_SLIDER_MAX
+  it('have correct max label', () => {
+    const label = TestUtils.findRenderedDOMComponentWithClass(
+      this.component, CSS.RMX_SLIDER_MAX,
     );
 
     expect(Number(label.textContent)).to.equal(maxValue);
   });
 
-  it("have correct slider input value and attributes", () => {
-    let slider = TestUtils.findRenderedDOMComponentWithClass(
-      this.component, "mdl-slider"
+  it('have correct slider input value and attributes', () => {
+    const slider = TestUtils.findRenderedDOMComponentWithClass(
+      this.component, 'mdl-slider',
     ) as HTMLInputElement;
 
     expect(Number(slider.min)).to.equal(minValue);

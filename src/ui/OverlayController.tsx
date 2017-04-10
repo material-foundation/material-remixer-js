@@ -14,14 +14,14 @@
  *  under the License.
  */
 
-import * as React from "react";
+import * as React from 'react';
 
-import { CSS, KeyCode, KeyEvent } from "../lib/Constants";
-import { Messaging } from "../lib/Messaging";
-import { OverlayShareMenu } from "./OverlayShareMenu";
-import { OverlayVariables } from "./OverlayVariables";
-import { Remote } from "../lib/Remote";
-import { Variable } from "../core/variables/Variable";
+import { Variable } from '../core/variables/Variable';
+import { CSS, KeyCode, KeyEvent } from '../lib/Constants';
+import { Messaging } from '../lib/Messaging';
+import { Remote } from '../lib/Remote';
+import { OverlayShareMenu } from './OverlayShareMenu';
+import { OverlayVariables } from './OverlayVariables';
 
 /**
  * Interface for the properties assigned to the OverlayController component.
@@ -102,7 +102,7 @@ export class OverlayController extends React.Component<IControllerProps, IContro
   /** Toggles the share menu visibility. */
   toggleShareMenu = () => {
     this.setState({
-      shareMenuIsVisible: !this.state.shareMenuIsVisible
+      shareMenuIsVisible: !this.state.shareMenuIsVisible,
     });
   }
 
@@ -112,26 +112,26 @@ export class OverlayController extends React.Component<IControllerProps, IContro
       remote,
       toggleRemoteEnabled,
       updateVariable,
-      variables
+      variables,
     } = this.props;
     const { shareMenuIsVisible } = this.state;
     const remoteInitialized = remote ? remote.initialized : false;
 
-    let shareIcon: string = shareMenuIsVisible ? "up" : "down";
+    const shareIcon: string = shareMenuIsVisible ? 'up' : 'down';
     return (
-      <div className="mdl-card mdl-shadow--6dp">
-        <div className="mdl-card__title">
-          <h2 className="mdl-card__title-text">Remixer</h2>
+      <div className='mdl-card mdl-shadow--6dp'>
+        <div className='mdl-card__title'>
+          <h2 className='mdl-card__title-text'>Remixer</h2>
         </div>
-        {remoteInitialized ?
+        {remoteInitialized ? (
           <OverlayShareMenu
             visible={shareMenuIsVisible}
             remoteId={remote.remoteId}
             remoteUrl={remote.remoteUrl}
             isEnabled={remote.isEnabled}
             toggleRemoteEnabled={toggleRemoteEnabled}
-          />
-          : ""
+          />)
+          : ''
         }
         <div className={`mdl-card__actions mdl-card--border`}>
           <OverlayVariables
@@ -139,20 +139,20 @@ export class OverlayController extends React.Component<IControllerProps, IContro
             updateVariable={updateVariable}
           />
         </div>
-        {remoteInitialized ?
-          <div className="mdl-card__menu">
+        {remoteInitialized ? (
+          <div className='mdl-card__menu'>
             {remote.isEnabled ?
               <a onClick={this.toggleShareMenu}>SHARED</a>
-              : ""
+              : ''
             }
             <button
-              className="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"
+              className='mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect'
               onClick={this.toggleShareMenu}
             >
-              <i className="material-icons">{`keyboard_arrow_${shareIcon}`}</i>
+              <i className='material-icons'>{`keyboard_arrow_${shareIcon}`}</i>
             </button>
-          </div>
-          : ""
+          </div>)
+          : ''
         }
       </div>
     );

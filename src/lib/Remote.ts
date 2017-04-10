@@ -14,15 +14,15 @@
  *  under the License.
  */
 
-import * as firebase from "firebase";
-import * as uuid from "uuid";
+import * as firebase from 'firebase';
+import * as uuid from 'uuid';
 
-import { remixer } from "../core/Remixer";
-import { throttle } from "lodash";
-import { Messaging } from "./Messaging";
-import { LocalStorage } from "./LocalStorage";
-import { StorageKey } from "./Constants";
-import { Variable } from "../core/variables/Variable";
+import { throttle } from 'lodash';
+import { remixer } from '../core/Remixer';
+import { Variable } from '../core/variables/Variable';
+import { StorageKey } from './Constants';
+import { LocalStorage } from './LocalStorage';
+import { Messaging } from './Messaging';
 
 // The number of milliseconds to throttle invocations to.
 const THROTTLE_WAIT = 300;
@@ -91,7 +91,7 @@ export class Remote  {
    * @return {string} The remote controller URL.
    */
   get remoteUrl(): string {
-    let authDomain = firebase.app().options["authDomain"];
+    const authDomain = firebase.app().options['authDomain'];
     return `https://${authDomain}/${this._remoteId}`;
   }
 
@@ -117,7 +117,7 @@ export class Remote  {
   static initializeRemote(config: {}): void {
     // Get the locally stored remoteId. If doesn't exist, generate a new one
     // and store it.
-    let instance = this._sharedInstance;
+    const instance = this._sharedInstance;
     let storedRemoteId = instance.getPreference(StorageKey.KEY_REMOTE_ID);
     if (!storedRemoteId) {
       storedRemoteId = instance.generateRemoteId();
@@ -168,7 +168,7 @@ export class Remote  {
     this.savePreference(StorageKey.KEY_REMOTE_ENABLED, true);
 
     // Save each variable without throttling.
-    for (let variable of remixer.attachedInstance.variablesArray) {
+    for (const variable of remixer.attachedInstance.variablesArray) {
       Remote.saveVariable(variable, false);
     }
   }
@@ -242,9 +242,9 @@ export class Remote  {
    * @param {string} variableKey The variable key.
    */
   private startObservingUpdates(variableKey: string): void {
-    let reference = this.dbReference().child(variableKey);
-    reference.on("child_changed", function(data) {
-      let variable = remixer.getVariable(data.ref.parent.key);
+    const reference = this.dbReference().child(variableKey);
+    reference.on('child_changed', (data) => {
+      const variable = remixer.getVariable(data.ref.parent.key);
       remixer.cloneAndUpdateVariable(variable, data.val());
     });
   }

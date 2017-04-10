@@ -14,9 +14,9 @@
  *  under the License.
  */
 
-import { ConstraintType, ControlType, DataType } from "../../lib/Constants";
-import { ISerializableData } from "../../lib/LocalStorage";
-import { IVariableCallback, IVariableListParams, Variable } from "./Variable";
+import { ConstraintType, ControlType, DataType } from '../../lib/Constants';
+import { ISerializableData } from '../../lib/LocalStorage';
+import { IVariableCallback, IVariableListParams, Variable } from './Variable';
 
 /**
  * Interface for a class that represents a type of Variable for number values.
@@ -78,7 +78,7 @@ export class NumberVariable extends Variable implements INumberVariableParams {
    * @return {NumberVariable} Returns the cloned variable.
    */
   clone() {
-    let cloned = new NumberVariable(
+    const cloned = new NumberVariable(
       this.key,
       this.selectedValue,
       this.limitedToValues,
@@ -101,7 +101,7 @@ export class NumberVariable extends Variable implements INumberVariableParams {
    * @return {ISerializableData} The serialized data.
    */
   serialize(): ISerializableData {
-    let data = super.serialize();
+    const data = super.serialize();
     data.selectedValue = this.selectedValue;
     data.limitedToValues = this.limitedToValues;
     return data;
@@ -114,10 +114,10 @@ export class NumberVariable extends Variable implements INumberVariableParams {
    * @return {NumberVariable}         A new initialized NumberVariable.
    */
   static deserialize(data: ISerializableData): Variable {
-    let variable = new NumberVariable(
+    const variable = new NumberVariable(
       data.key,
       data.selectedValue,
-      data.limitedToValues
+      data.limitedToValues,
     );
     variable.title = data.title;
     return variable;

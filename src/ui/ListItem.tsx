@@ -14,9 +14,9 @@
  *  under the License.
  */
 
-import * as React from "react";
+import * as React from 'react';
 
-import { CSS } from "../lib/Constants";
+import { CSS } from '../lib/Constants';
 
 /**
  * Interface for the properties assigned to the ListItem component.
@@ -32,14 +32,14 @@ interface IListItemProps {
 
 /** Returns a stateless page layout template. */
 export function ListItem(props: IListItemProps) {
-  let inline = props.inlineControl ? "inline" : "";
+  const inline = props.inlineControl ? 'inline' : '';
   return (
     <div className={`${CSS.RMX_LIST_ITEM} ${props.controlClass} ${inline}`}>
-      <div className="meta">
-        <div className="title">{props.title}</div>
-        <div className="subtitle">{props.subtitle}</div>
+      <div className='meta'>
+        <div className='title'>{props.title}</div>
+        <div className='subtitle'>{props.subtitle}</div>
       </div>
-      <div className="control">{props.children}</div>
+      <div className='control'>{props.children}</div>
     </div>
   );
 }

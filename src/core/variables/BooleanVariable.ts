@@ -14,9 +14,9 @@
  *  under the License.
  */
 
-import { ControlType, DataType } from "../../lib/Constants";
-import { ISerializableData } from "../../lib/LocalStorage";
-import { IVariableCallback, IVariableParams, Variable } from "./Variable";
+import { ControlType, DataType } from '../../lib/Constants';
+import { ISerializableData } from '../../lib/LocalStorage';
+import { IVariableCallback, IVariableParams, Variable } from './Variable';
 
 /**
  * Interface for a class that represents a type of Variable for boolean values.
@@ -58,7 +58,7 @@ export class BooleanVariable extends Variable implements IBooleanVariableParams 
    * @return {BooleanVariable} Returns the cloned variable.
    */
   clone() {
-    let cloned = new BooleanVariable(this.key, this.selectedValue, null);
+    const cloned = new BooleanVariable(this.key, this.selectedValue, null);
     cloned.title = this.title;
     cloned._callbacks = this._callbacks.slice();
     return cloned;
@@ -70,7 +70,7 @@ export class BooleanVariable extends Variable implements IBooleanVariableParams 
    * @return {ISerializableData} The serialized data.
    */
   serialize(): ISerializableData {
-    let data = super.serialize();
+    const data = super.serialize();
     data.selectedValue = this.selectedValue;
     return data;
   }
@@ -82,7 +82,7 @@ export class BooleanVariable extends Variable implements IBooleanVariableParams 
    * @return {BooleanVariable}        A new initialized BooleanVariable.
    */
   static deserialize(data: ISerializableData): BooleanVariable {
-    let variable = new BooleanVariable(data.key, data.selectedValue);
+    const variable = new BooleanVariable(data.key, data.selectedValue);
     variable.title = data.title;
     return variable;
   }

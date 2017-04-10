@@ -14,12 +14,12 @@
  *  under the License.
  */
 
-import { BooleanVariable } from "../../core/variables/BooleanVariable";
-import { ColorVariable } from "../../core/variables/ColorVariable";
-import { NumberVariable } from "../../core/variables/NumberVariable";
-import { RangeVariable } from "../../core/variables/RangeVariable";
-import { StringVariable } from "../../core/variables/StringVariable";
-import { Variable } from "../../core/variables/Variable";
+import { BooleanVariable } from '../../core/variables/BooleanVariable';
+import { ColorVariable } from '../../core/variables/ColorVariable';
+import { NumberVariable } from '../../core/variables/NumberVariable';
+import { RangeVariable } from '../../core/variables/RangeVariable';
+import { StringVariable } from '../../core/variables/StringVariable';
+import { Variable } from '../../core/variables/Variable';
 
 /**
  * Interface for variable controls properties and state.
