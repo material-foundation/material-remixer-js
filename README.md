@@ -62,7 +62,7 @@ remixer.addBooleanVariable("show", true, function(variable) {
 ## API Documentation
 
 - Use these [common static methods](https://github.com/material-foundation/material-remixer-js/blob/develop/docs/remixer-api.md) to enable Remixer in your app.
-- Or refer to the full [API documention](https://material-foundation.github.io/material-remixer-js/docs) for more information.
+- Or refer to the full [API documentation](https://material-foundation.github.io/material-remixer-js/docs) for more information.
 
 ## Contributing to Remixer
 
