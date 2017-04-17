@@ -1,3 +1,7 @@
+## 1.0.1
+
+Adds license blocks to tests.
+
 ## 1.0.0
 
 Remixer v1.0.0 Release.
