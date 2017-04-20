@@ -28,6 +28,7 @@
     "lint:ts": "tslint --fix --force 'src/**/*.ts?(x)'",
     "lint:css": "lesshint src/ui/styles/*.less examples/src/*.css",
     "lint": "npm-run-all --parallel lint:*",
+    "postinstall": "cd examples && npm install",
     "test": "karma start",
     "test:watch": "karma start --no-single-run"
   },
